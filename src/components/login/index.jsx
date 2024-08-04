@@ -1,12 +1,17 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Header from "../home/header/Header";
 import Footer from "../home/footer/Footer";
 import { Link, useNavigate } from "react-router-dom";
 import UseApi from "../../hooks/useApi";
 import { apiMethods, apiUrls } from "../../constants/constant";
+import { path } from "../../constants/routesConstant";
+import { toast } from "react-toastify";
+import { logInSuccess } from "../../redux/auth";
+import { useDispatch } from "react-redux";
 
 const Login = () => {
   const navigate = useNavigate();
+  const dispatch=useDispatch()
   const [disable, setDisable] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const [passwordType, setPasswordType] = useState("password");
@@ -40,7 +45,8 @@ const Login = () => {
     setDisable(false);
   }, [loginData]);
 
-  const handleLogin = async () => {
+  const handleLogin = async (e) => {
+    e.preventDefault();
     if (areAllFieldsFilled(loginData)) {
       setIsLoading(true);
       try {
@@ -57,9 +63,7 @@ const Login = () => {
             userInfo: response?.data?.userInfo,
           };
           dispatch(logInSuccess(userData));
-          const redirectPath =
-            sessionStorage.getItem("redirectAfterLogin") || "/my-profile";
-          navigate(redirectPath);
+          navigate(path.dashboard);
           setIsLoading(false);
           toast.success(response?.data?.message);
           return;
@@ -148,7 +152,7 @@ const Login = () => {
                   <button
                     className="btn btn-primary w-100 login-btn"
                     type="submit"
-                    onClick={handleLogin}
+                    onClick={(e)=>handleLogin(e)}
                     disabled={disable}
                   >
                     Sign in

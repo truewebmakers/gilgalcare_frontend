@@ -5,27 +5,91 @@ import Header from "../home/header/Header";
 import Footer from "../home/footer/Footer";
 import UserHeader from "./Userheader";
 import UserMenu from "./UserMenu";
-
-
+import { ChangePassword } from "./changePassword";
+import { useSelector } from "react-redux";
+import UseApi from "../../hooks/useApi";
+import { apiMethods, apiUrls } from "../../constants/constant";
+import { toast } from "react-toastify";
 
 const Profile = () => {
-    const [passwordType, setPasswordType] = useState("password");
-  const [passwordInput, setPasswordInput] = useState("");
-  const handlePasswordChange =(evnt)=>{
-    setPasswordInput(evnt.target.value);
-}
+    const [profileDetails, setProfileDetails] = useState({
+        name: "",
+        phone: "",
+        email: "",
+        notes: "",
+        fb_link: "",
+        twitter_link: "",
+        googleplus_link: "",
+        insta_link: ""
+    });
+    const { user, profileData } = useSelector((state) => state.auth);
+    const [selectedImage, setSelectedImage] = useState(null);
+    const [uploadPic, setUploadedPic] = useState(null);
+    const [isLoading, setIsLoading] = useState(false);
 
-const togglePassword =()=>{
-  if(passwordType==="password")
-  {
-   setPasswordType("text")
-   return;
-  }
-  setPasswordType("password")
-}
+    const handleImageChange = (event) => {
+        const file = event.target.files[0];
+        setUploadedPic(file); // Store the File object directly, this will be sent to api
+        if (file) {
+            const reader = new FileReader();
+            reader.onload = function (event) {
+                setSelectedImage(event.target.result); // This image will be shown on the ui
+            };
+            reader.readAsDataURL(file);
+        }
+    };
+
+    const handleOnChange = (e) => {
+        const { value, name } = e.target;
+        setProfileDetails({ ...profileDetails, [name]: value });
+    };
+
+    const handleSave = async (e) => {
+        e.preventDefault()
+        setIsLoading(true);
+        try {
+            // set headers
+            const headers = {
+                "Content-Type": "multipart/form-data",
+                Authorization: `Bearer ${user?.token}`,
+            };
+            // set body
+            const bodyData = {
+                name: profileDetails?.name,
+                phone: profileDetails?.phone,
+                email: profileDetails?.email,
+                notes: profileDetails?.notes,
+                fb_link: profileDetails?.fb_link,
+                twitter_link: profileDetails?.twitter_link,
+                googleplus_link: profileDetails?.googleplus_link,
+                insta_link: profileDetails?.insta_link,
+                profile_pic: uploadPic,
+
+            };
+            // Call signup API
+            const response = await UseApi(
+                apiUrls.updateProfile + user?.userInfo?.id,
+                apiMethods.POST,
+                bodyData,
+                headers
+            );
+            if (response?.status == 200 || response?.status == 201) {
+                toast.success(response?.data?.message);
+                setIsLoading(false);
+                return;
+            } else {
+                toast.error(response?.data?.message);
+                setIsLoading(false);
+            }
+        } catch (err) {
+            toast.error(err);
+            setIsLoading(false);
+        }
+    };
+
     return (
         <>
-        <UserHeader/>
+            <UserHeader />
             {/* Breadscrumb Section */}
             <div className="breadcrumb-bar">
                 <div className="container">
@@ -50,7 +114,7 @@ const togglePassword =()=>{
             {/* Profile Content */}
             <div className="dashboard-content">
                 <div className="container">
-                <UserMenu activeUrl='profile' />
+                    <UserMenu activeUrl='profile' />
                     <div className="profile-content">
                         <div className="row dashboard-info">
                             <div className="col-lg-9">
@@ -62,12 +126,17 @@ const togglePassword =()=>{
                                         <div className="profile-photo">
                                             <div className="profile-img">
                                                 <div className="settings-upload-img">
-                                                    <img src={profile_img} alt="profile" />
+                                                    <img src={
+                                                        selectedImage
+                                                            ? selectedImage
+                                                            : profile_img
+                                                    } alt="profile" />
                                                 </div>
                                                 <div className="settings-upload-btn">
                                                     <input
                                                         type="file"
-                                                        accept="image/*"
+                                                        accept=".png, .jpg, .jpeg"
+                                                        onChange={handleImageChange}
                                                         name="image"
                                                         className="hide-input image-upload"
                                                         id="file"
@@ -78,9 +147,10 @@ const togglePassword =()=>{
                                                 </div>
                                                 <span>Max file size: 10 MB</span>
                                             </div>
-                                            <Link to="#" className="profile-img-del">
+                                            <div className="profile-img-del" onClick={() => setSelectedImage(null)}
+                                            >
                                                 <i className="feather-trash-2" />
-                                            </Link>
+                                            </div>
                                         </div>
                                         <div className="profile-form">
                                             <form>
@@ -93,8 +163,10 @@ const togglePassword =()=>{
                                                         <input
                                                             type="text"
                                                             className="form-control"
-                                                            defaultValue="John Doe"
-                                                        />
+                                                            name="name"
+                                                            placeholder="Enter Your Name"
+                                                            value={profileDetails?.name}
+                                                            onChange={handleOnChange} />
                                                     </div>
                                                 </div>
                                                 <div className="row">
@@ -108,8 +180,12 @@ const togglePassword =()=>{
                                                                 <input
                                                                     type="tel"
                                                                     className="form-control"
-                                                                    defaultValue="+44 215346 1223"
+                                                                    name="phone"
+                                                                    placeholder="Enter Your Phone No."
+                                                                    value={profileDetails?.phone}
+                                                                    onChange={handleOnChange}
                                                                 />
+
                                                             </div>
                                                         </div>
                                                     </div>
@@ -123,8 +199,12 @@ const togglePassword =()=>{
                                                                 <input
                                                                     type="text"
                                                                     className="form-control"
-                                                                    defaultValue="johndoe@email.com"
+                                                                    name="email"
+                                                                    placeholder="Enter Your Email"
+                                                                    value={profileDetails?.email}
+                                                                    onChange={handleOnChange}
                                                                 />
+
                                                             </div>
                                                         </div>
                                                     </div>
@@ -135,9 +215,11 @@ const togglePassword =()=>{
                                                         <textarea
                                                             rows={4}
                                                             className="form-control"
-                                                            defaultValue={
-                                                                "Mauris vestibulum lorem a condimentum vulputate. Integer vitae turpis turpis. Cras at tincidunt urna. Aenean leo justo, congue et felis a, elementum rutrum felis. Fusce rutrum ipsum eu pretium faucibus. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia curae; Aenean leo justo, congue et felis a.  Aenean leo justo, congue et felis a.\t"
-                                                            }
+                                                            name="notes"
+                                                            placeholder="Enter Notes Here"
+                                                            value={profileDetails?.notes}
+                                                            onChange={handleOnChange}
+
                                                         />
                                                     </div>
                                                 </div>
@@ -152,7 +234,11 @@ const togglePassword =()=>{
                                                                 <input
                                                                     type="text"
                                                                     className="form-control"
-                                                                    defaultValue="https://www.facebook.com/"
+                                                                    name="fb_link"
+                                                                    placeholder="Enter Facebook Link"
+                                                                    value={profileDetails?.fb_link}
+                                                                    onChange={handleOnChange}
+
                                                                 />
                                                             </div>
                                                         </div>
@@ -167,7 +253,11 @@ const togglePassword =()=>{
                                                                 <input
                                                                     type="text"
                                                                     className="form-control"
-                                                                    defaultValue="https://twitter.com/"
+                                                                    name="twitter_link"
+                                                                    placeholder="Enter Twitter Link"
+                                                                    value={profileDetails?.twitter_link}
+                                                                    onChange={handleOnChange}
+
                                                                 />
                                                             </div>
                                                         </div>
@@ -184,7 +274,11 @@ const togglePassword =()=>{
                                                                 <input
                                                                     type="text"
                                                                     className="form-control"
-                                                                    defaultValue="https://www.google.com/"
+                                                                    name="googleplus_link"
+                                                                    placeholder="Enter Google+ Link"
+                                                                    value={profileDetails?.googleplus_link}
+                                                                    onChange={handleOnChange}
+
                                                                 />
                                                             </div>
                                                         </div>
@@ -198,8 +292,12 @@ const togglePassword =()=>{
                                                                 </span>
                                                                 <input
                                                                     type="text"
+                                                                    name="insta_link"
                                                                     className="form-control"
-                                                                    defaultValue="https://www.instagram.com/"
+                                                                    placeholder="Enter Instagram Link"
+                                                                    value={profileDetails?.insta_link}
+                                                                    onChange={handleOnChange}
+
                                                                 />
                                                             </div>
                                                         </div>
@@ -210,76 +308,17 @@ const togglePassword =()=>{
                                     </div>
                                 </div>
                             </div>
-                            <div className="col-lg-3">
-                                <div className="profile-sidebar">
-                                    <div className="card">
-                                        <div className="card-header">
-                                            <h4>Change Password</h4>
-                                        </div>
-                                        <div className="card-body">
-                                            <form>
-                                                <div className="form-group">
-                                                    <label className="col-form-label">Current Password</label>
-                                                    <div className="pass-group group-img">
-                                                        <span className="lock-icon">
-                                                            <i className="feather-lock" />
-                                                        </span>
-                                                        <input
-                                                            type="password"
-                                                            className="form-control pass-input"
-                                                            placeholder="Password"
-                                                        />
-                                                    </div>
-                                                </div>
-                                                <div className="form-group">
-                                                    <label className="col-form-label">New Password</label>
-                                                    <div className="pass-group group-img">
-                                                        <span className="lock-icon">
-                                                            <i className="feather-lock" />
-                                                        </span>
-                                                        <input
-                                                            type={passwordType}
-                                                            className="form-control pass-input"
-                                                            defaultValue=".............."
-                                                            onChange={handlePasswordChange}
-                                                            
-                                                        />
-                                                        <span className={`toggle-password  ${ passwordType==="password"? "feather-eye":"feather-eye-off" } `} onClick={togglePassword} />
-                                                    </div>
-                                                </div>
-                                                <div className="form-group">
-                                                    <label className="col-form-label">
-                                                        Confirm New Password
-                                                    </label>
-                                                    <div className="pass-group group-img">
-                                                        <span className="lock-icon">
-                                                            <i className="feather-lock" />
-                                                        </span>
-                                                        <input
-                                                            type={passwordType}
-                                                            className="form-control pass-input"
-                                                            defaultValue=".............."
-                                                            onChange={handlePasswordChange}
-                                                            
-                                                        />
-                                                        <span className={`toggle-password  ${ passwordType==="password"? "feather-eye":"feather-eye-off" } `} onClick={togglePassword} />
-                                                    </div>
-                                                </div>
-                                                <button className="btn btn-primary" type="submit">
-                                                    {" "}
-                                                    Change Password
-                                                </button>
-                                            </form>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
+                            <ChangePassword />
                         </div>
                     </div>
                 </div>
+                <button className="btn btn-primary" type="submit" onClick={(e) => handleSave(e)}>
+                    {" "}
+                    Update Profile
+                </button>
             </div>
             {/* /Profile Content */}
-            <Footer/>
+            <Footer />
         </>
 
     );

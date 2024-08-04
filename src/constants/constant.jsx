@@ -1,6 +1,8 @@
 export const apiUrls = {
     signup: "/signup",
     login: "/login",
+    changePassword:'/admin/update/password/',
+    updateProfile:'/admin/update/profile/'
   };
 
   export const env = {
