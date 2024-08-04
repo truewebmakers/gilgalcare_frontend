@@ -6,11 +6,16 @@ import MyListe from "../components/userPages/mylisting";
 import Message from "../components/userPages/mesage";
 import Review from "../components/userPages/review";
 import AddLisiting from "../components/userPages/AddLisiting";
+import AddCategory from "../components/userPages/addCategory";
 
 export const AdminRoutes = [
     {
         path:'dashboard',
         element: <Dashboard/> 
+    },
+    {
+        path:'add-category',
+        element: <AddCategory/> 
     },
     {
         path:'profile',

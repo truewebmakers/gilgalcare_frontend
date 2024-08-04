@@ -489,6 +489,7 @@ ul {
 .form-group {
   margin-bottom: 1rem;
 }
+
 label {
   display: inline-block;
   margin-bottom: 0.5rem;
@@ -20942,4 +20943,12 @@ section.advertisement {
 }
 .footer-logo img {
   height: 50px;
+}
+
+.updateProfileButton{
+  margin-top: 10px;
+}
+
+.addCategoryName {
+  margin-top: 10px !important
 }

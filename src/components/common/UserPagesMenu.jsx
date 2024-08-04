@@ -1,11 +1,14 @@
 import React from "react";
 import { useState } from "react";
+import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 
 const UserPagesMenu = ({ activesMenu }) => {
   const [menu4, setMenu4] = useState(false);
+  const { user } = useSelector((state) => state.auth);
+
   return (
-    <li className={activesMenu=== "/dashboard" || activesMenu=== "/profile" || activesMenu=== "/add-listing" || activesMenu=== "/reviews" || activesMenu=== "/messages" || activesMenu=== "/my-listing" || activesMenu=== "/bookmarks" ? "has-submenu active" : "has-submenu"}>
+    <li className={activesMenu === "/dashboard" || activesMenu === "/add-category" || activesMenu === "/profile" || activesMenu === "/add-listing" || activesMenu === "/reviews" || activesMenu === "/messages" || activesMenu === "/my-listing" || activesMenu === "/bookmarks" ? "has-submenu active" : "has-submenu"}>
       <Link to="" className={menu4 ? 'submenu' : ""}>
         User Pages <i className="fas fa-chevron-down" onClick={() => setMenu4(!menu4)}></i>
       </Link>
@@ -13,6 +16,10 @@ const UserPagesMenu = ({ activesMenu }) => {
         <li className={activesMenu === "/dashboard" ? "active" : ""}>
           <Link to="/dashboard">Dashboard</Link>
         </li>
+        {user?.userInfo?.user_type === 'admin' &&
+          <li className={activesMenu === "/add-category" ? "active" : ""}>
+            <Link to="/add-category">Add Category</Link>
+          </li>}
         <li className={activesMenu === "/profile" ? "active" : ""}>
           <Link to="/profile">Profile</Link>
         </li>

@@ -7,6 +7,7 @@ import UseApi from "../../hooks/useApi";
 import { apiMethods, apiUrls } from "../../constants/constant";
 import { toast } from "react-toastify";
 import { handleValidations } from "../../utils/validations";
+import { path } from "../../constants/routesConstant";
 
 const SignUp = () => {
   const navigate = useNavigate();
@@ -86,7 +87,7 @@ const SignUp = () => {
         );
         if (response?.status == 201 || response?.status == 200) {
           toast.success(response?.data?.message);
-          navigate("/login");
+          navigate(path.login);
           setIsLoading(false);
           return;
         } else {

@@ -310,12 +310,14 @@ const Profile = () => {
                             </div>
                             <ChangePassword />
                         </div>
+                        
                     </div>
-                </div>
-                <button className="btn btn-primary" type="submit" onClick={(e) => handleSave(e)}>
+                    <button className="btn btn-primary updateProfileButton" type="submit" onClick={(e) => handleSave(e)}>
                     {" "}
                     Update Profile
                 </button>
+                </div>
+               
             </div>
             {/* /Profile Content */}
             <Footer />

@@ -6,6 +6,7 @@ import { Link } from "react-router-dom";
 // import PagesMenu from "../../common/PagesMenu";
 // import UserPagesMenu from "../../common/UserPagesMenu";
 import { LogoBGR } from "../../imagepath";
+import { path } from "../../../constants/routesConstant";
 
 const Header = () => {
   return (
@@ -66,7 +67,7 @@ const Header = () => {
           <ul className="nav header-navbar-rht nav">
             <li className="nav-item">
               <div className="cta-btn">
-                <Link to="/login" className="btn">
+                <Link to={path.login} className="btn">
                   <i className="feather-user"></i> sign in /
                 </Link>
                 <Link to="/signup" className="btn ms-1">
