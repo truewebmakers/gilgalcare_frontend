@@ -2,6 +2,8 @@ import React, { useState } from "react";
 import Header from "../home/header/Header";
 import Footer from "../home/footer/Footer";
 import { Link, useNavigate } from "react-router-dom";
+import UseApi from "../../hooks/useApi";
+import { apiMethods, apiUrls } from "../../constants/constant";
 
 const Login = () => {
   const navigate = useNavigate();
@@ -26,7 +28,51 @@ const Login = () => {
     setPasswordType("password");
   };
 
-  const handleLogin = () => {};
+  const areAllFieldsFilled = (data) => {
+    return Object.values(data)?.every((field) => field);
+  };
+
+  useEffect(() => {
+    if (!areAllFieldsFilled(loginData)) {
+      setDisable(true);
+      return;
+    }
+    setDisable(false);
+  }, [loginData]);
+
+  const handleLogin = async () => {
+    if (areAllFieldsFilled(loginData)) {
+      setIsLoading(true);
+      try {
+        // Prepare data for signup API
+        const bodyData = {
+          email: loginData.email,
+          password: loginData.passwordInput,
+        };
+        // Call signup API
+        const response = await UseApi(apiUrls.login, apiMethods.POST, bodyData);
+        if (response?.status == 200 || response?.status == 201) {
+          const userData = {
+            token: response?.data?.token,
+            userInfo: response?.data?.userInfo,
+          };
+          dispatch(logInSuccess(userData));
+          const redirectPath =
+            sessionStorage.getItem("redirectAfterLogin") || "/my-profile";
+          navigate(redirectPath);
+          setIsLoading(false);
+          toast.success(response?.data?.message);
+          return;
+        } else {
+          toast.error(response?.data?.message);
+          setIsLoading(false);
+        }
+      } catch (err) {
+        toast.error(err);
+        setIsLoading(false);
+      }
+    }
+  };
 
   return (
     <>

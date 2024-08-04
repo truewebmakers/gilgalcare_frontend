@@ -25,10 +25,10 @@ const SelectCommon = ({ options }) => {
     menuList: (base) => ({ ...base, padding: "0" }),
     option: (provided, state) => ({
       ...provided,
-      backgroundColor: state.isSelected ? "#c10037" : "white",
+      backgroundColor: state.isSelected ? "#d54a38" : "white",
       fontSize: "14px",
       "&:hover": {
-        backgroundColor: "#c10037",
+        backgroundColor: "#d54a38",
       },
     }),
     valueContainer: (base) => ({ ...base, paddingLeft: 0 }),
