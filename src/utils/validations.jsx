@@ -51,10 +51,6 @@ export const passwordValidations = (name, value) => {
       if (value === "") {
         newErr[name] = "Enter password";
         break;
-      } else if (!passwordRegex.test(value)) {
-        newErr[name] =
-          "Your password must be at least 8 characters long including a lowercase letter, an uppercase letter,a number and a special symbol";
-        break;
       } else {
         newErr[name] = "";
         break;

@@ -10,6 +10,7 @@ import { useSelector } from "react-redux";
 import UseApi from "../../hooks/useApi";
 import { apiMethods, apiUrls } from "../../constants/constant";
 import { toast } from "react-toastify";
+import Loader from "../common/Loader";
 
 const Profile = () => {
     const [profileDetails, setProfileDetails] = useState({
@@ -75,15 +76,14 @@ const Profile = () => {
             );
             if (response?.status == 200 || response?.status == 201) {
                 toast.success(response?.data?.message);
-                setIsLoading(false);
                 return;
             } else {
                 toast.error(response?.data?.message);
-                setIsLoading(false);
             }
         } catch (err) {
-            toast.error(err);
-            setIsLoading(false);
+            toast.error(err?.message);
+        } finally {
+            setIsLoading(false)
         }
     };
 
@@ -310,14 +310,20 @@ const Profile = () => {
                             </div>
                             <ChangePassword />
                         </div>
-                        
+
                     </div>
                     <button className="btn btn-primary updateProfileButton" type="submit" onClick={(e) => handleSave(e)}>
-                    {" "}
-                    Update Profile
-                </button>
+                        {" "}
+                        {isLoading ? (
+                            <>
+                                &nbsp;&nbsp; <Loader />
+                            </>
+                        ) : (
+                            `Update Profile`
+                        )}
+                    </button>
                 </div>
-               
+
             </div>
             {/* /Profile Content */}
             <Footer />

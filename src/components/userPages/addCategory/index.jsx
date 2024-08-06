@@ -30,7 +30,7 @@ const [uploadPic, setUploadedPic] = useState(null);
         <>
         <UserHeader parms={parms}/>
             {/* Breadscrumb Section */}
-            <UserBreadCrumb path="Home" pageName={'Add Listing'} />
+            <UserBreadCrumb path="Home" pageName={'Add Category'} />
             
             {/* /Breadscrumb Section */}
             {/* Profile Content */}
@@ -94,16 +94,16 @@ const [uploadPic, setUploadedPic] = useState(null);
                                             defaultValue={""}
                                         />
                                     </div>
-                                    <div className="form-group">
-                                        <label className="col-form-label">
+                                    <div className="filter-content form-group">
+                                    <label className="col-form-label">
                                            Status <span>*</span>
                                         </label>
-                                        <input
-                                            className="form-control pass-input"
-                                            placeholder="Status"
-                                            defaultValue={""}
-                                        />
-                                    </div>
+                                                <select className="form-control select category-select">
+                                                    <option value="">Status</option>
+                                                    <option>Published</option>
+                                                    <option>Unpublished</option>
+                                                </select>
+                                            </div>
                                     <div className="form-group">
                                             <label className="col-form-label">
                                             Details <span>*</span>

@@ -72,7 +72,7 @@ const Login = () => {
           setIsLoading(false);
         }
       } catch (err) {
-        toast.error(err);
+        toast.error(err?.message);
         setIsLoading(false);
       }
     }

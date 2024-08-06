@@ -43,7 +43,7 @@ export const ChangePassword = () => {
         }
         setDisable(false);
     }, [error]);
-console.log(user,'userrr');
+
     // onclick handlers
     const handleChangePassword = async (e) => {
         e.preventDefault();
@@ -119,6 +119,9 @@ console.log(user,'userrr');
                                         value={pass?.oldPassword}
                                         onChange={handleOnChange}
                                     />
+                                    {error?.oldPassword && (
+                                        <p style={{ color: "red" }}>{error?.oldPassword}</p>
+                                    )}
                                 </div>
                             </div>
                             <div className="form-group">
@@ -136,6 +139,9 @@ console.log(user,'userrr');
                                         onChange={handleOnChange}
 
                                     />
+                                     {error?.newPassword && (
+                                        <p style={{ color: "red" }}>{error?.newPassword}</p>
+                                    )}
                                     {/* <span className={`toggle-password  ${ passwordType==="password"? "feather-eye":"feather-eye-off" } `} onClick={togglePassword} /> */}
                                 </div>
                             </div>
@@ -156,6 +162,9 @@ console.log(user,'userrr');
                                         onChange={handleOnChange}
 
                                     />
+                                     {error?.confirmPassword && (
+                                        <p style={{ color: "red" }}>{error?.confirmPassword}</p>
+                                    )}
                                     {/* <span className={`toggle-password  ${ passwordType==="password"? "feather-eye":"feather-eye-off" } `} onClick={togglePassword} /> */}
                                 </div>
                             </div>
