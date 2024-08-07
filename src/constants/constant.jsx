@@ -2,7 +2,8 @@ export const apiUrls = {
     signup: "/signup",
     login: "/login",
     changePassword:'/admin/update/password/',
-    updateProfile:'/admin/update/profile/'
+    updateProfile:'/admin/update/profile/',
+    getProfile:'/admin/getProfile/'
   };
 
   export const env = {

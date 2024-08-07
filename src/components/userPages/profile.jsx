@@ -1,7 +1,6 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { profile_img } from "../imagepath";
-import Header from "../home/header/Header";
 import Footer from "../home/footer/Footer";
 import UserHeader from "./Userheader";
 import UserMenu from "./UserMenu";
@@ -23,10 +22,50 @@ const Profile = () => {
         googleplus_link: "",
         insta_link: ""
     });
-    const { user, profileData } = useSelector((state) => state.auth);
+    const { user } = useSelector((state) => state.auth);
     const [selectedImage, setSelectedImage] = useState(null);
     const [uploadPic, setUploadedPic] = useState(null);
     const [isLoading, setIsLoading] = useState(false);
+
+    const getProfile = async () => {
+        try {
+            // set headers
+            const headers = {
+                "Content-Type": "multipart/form-data",
+                Authorization: `Bearer ${user?.token}`,
+            };
+            // Call signup API
+            const response = await UseApi(
+                apiUrls.getProfile + user?.userInfo?.id,
+                apiMethods.GET,
+                null,
+                headers
+            );
+            if (response?.status == 200 || response?.status == 201) {
+                const data = response?.data?.user
+                setProfileDetails({
+                    name: data?.name, 
+                    email: data?.email, 
+                    phone: data?.phone,
+                    notes: data?.notes,
+                    fb_link: data?.fb_link,
+                    twitter_link: data?.twitter_link,
+                    googleplus_link: data?.googleplus_link,
+                    insta_link: data?.insta_link
+                })
+                return;
+            } else {
+                toast.error(response?.data?.message);
+            }
+        } catch (err) {
+            toast.error(err?.message);
+        }
+
+    }
+
+    useEffect(() => {
+        getProfile()
+    }, [])
 
     const handleImageChange = (event) => {
         const file = event.target.files[0];
@@ -200,9 +239,9 @@ const Profile = () => {
                                                                     type="text"
                                                                     className="form-control"
                                                                     name="email"
+                                                                    readOnly={true}
                                                                     placeholder="Enter Your Email"
                                                                     value={profileDetails?.email}
-                                                                    onChange={handleOnChange}
                                                                 />
 
                                                             </div>

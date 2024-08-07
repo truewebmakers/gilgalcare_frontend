@@ -8,6 +8,7 @@ import { apiMethods, apiUrls } from "../../constants/constant";
 import { toast } from "react-toastify";
 import { handleValidations } from "../../utils/validations";
 import { path } from "../../constants/routesConstant";
+import Loader from "../common/Loader";
 
 const SignUp = () => {
   const navigate = useNavigate();
@@ -204,7 +205,14 @@ const SignUp = () => {
                     disabled={disable}
                     onClick={(e)=>handleSignUp(e)}
                   >
-                    Create Account
+                     {isLoading ? (
+                            <>
+                                &nbsp;&nbsp; <Loader />
+                            </>
+                        ) : (
+                          `Create Account`
+                        )}
+                   
                   </button>
                   <div className="register-link text-center">
                     <p>

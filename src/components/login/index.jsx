@@ -8,6 +8,7 @@ import { path } from "../../constants/routesConstant";
 import { toast } from "react-toastify";
 import { logInSuccess } from "../../redux/auth";
 import { useDispatch } from "react-redux";
+import Loader from "../common/Loader";
 
 const Login = () => {
   const navigate = useNavigate();
@@ -155,7 +156,13 @@ const Login = () => {
                     onClick={(e)=>handleLogin(e)}
                     disabled={disable}
                   >
-                    Sign in
+                    {isLoading ? (
+                            <>
+                                &nbsp;&nbsp; <Loader />
+                            </>
+                        ) : (
+                          `Log In`
+                        )} 
                   </button>
                   <div className="register-link text-center">
                     <p>
