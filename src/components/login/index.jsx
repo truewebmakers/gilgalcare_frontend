@@ -9,6 +9,7 @@ import { toast } from "react-toastify";
 import { logInSuccess } from "../../redux/auth";
 import { useDispatch } from "react-redux";
 import Loader from "../common/Loader";
+import { customToast } from "../common/Toast";
 
 const Login = () => {
   const navigate = useNavigate();
@@ -66,14 +67,14 @@ const Login = () => {
           dispatch(logInSuccess(userData));
           navigate(path.dashboard);
           setIsLoading(false);
-          toast.success(response?.data?.message);
+          customToast.success('Logged In Successfully');
           return;
         } else {
-          toast.error(response?.data?.message);
+          customToast.error(response?.data?.error);
           setIsLoading(false);
         }
       } catch (err) {
-        toast.error(err?.message);
+        customToast.error('err?.message');
         setIsLoading(false);
       }
     }
