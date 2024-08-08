@@ -19,6 +19,7 @@ export const ChangePassword = () => {
     });
     const { user } = useSelector((state) => state.auth);
     const [isLoading, setIsLoading] = useState(false);
+    const [passwordType, setPasswordType] = useState("password");
 
     const handleOnChange = (e) => {
         const { name, value } = e.target;
@@ -53,6 +54,7 @@ export const ChangePassword = () => {
         }
         setError(newErr);
         if (!hasErrors(error) && areAllFieldsFilled(pass)) {
+            // call change password api
             handleUpdatePasswords();
         }
     };
@@ -94,6 +96,14 @@ export const ChangePassword = () => {
             toast.error(err);
             setIsLoading(false);
         }
+    };
+
+    const togglePassword = () => {
+        if (passwordType === "password") {
+            setPasswordType("text");
+            return;
+        }
+        setPasswordType("password");
     };
 
     return (
@@ -139,11 +149,12 @@ export const ChangePassword = () => {
                                         onChange={handleOnChange}
 
                                     />
-                                     {error?.newPassword && (
-                                        <p style={{ color: "red" }}>{error?.newPassword}</p>
-                                    )}
-                                    {/* <span className={`toggle-password  ${ passwordType==="password"? "feather-eye":"feather-eye-off" } `} onClick={togglePassword} /> */}
+
+                                    <span className={`toggle-password  ${passwordType === "password" ? "feather-eye" : "feather-eye-off"} `} onClick={togglePassword} />
                                 </div>
+                                {error?.newPassword && (
+                                    <p style={{ color: "red" }}>{error?.newPassword}</p>
+                                )}
                             </div>
                             <div className="form-group">
                                 <label className="col-form-label">
@@ -162,11 +173,12 @@ export const ChangePassword = () => {
                                         onChange={handleOnChange}
 
                                     />
-                                     {error?.confirmPassword && (
-                                        <p style={{ color: "red" }}>{error?.confirmPassword}</p>
-                                    )}
-                                    {/* <span className={`toggle-password  ${ passwordType==="password"? "feather-eye":"feather-eye-off" } `} onClick={togglePassword} /> */}
+
+                                    <span className={`toggle-password  ${passwordType === "password" ? "feather-eye" : "feather-eye-off"} `} onClick={togglePassword} />
                                 </div>
+                                {error?.confirmPassword && (
+                                    <p style={{ color: "red" }}>{error?.confirmPassword}</p>
+                                )}
                             </div>
                             <button className="btn btn-primary" type="submit" onClick={(e) => handleChangePassword(e)}>
                                 {" "}

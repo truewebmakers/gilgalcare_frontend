@@ -85,3 +85,48 @@ export const passwordValidations = (name, value) => {
 
   return newErr;
 };
+
+export const addCategoryValidation = (name, value) => {
+  let newErr = {};
+
+  switch (name) {
+    case "name":
+      if (value === "") {
+        newErr[name] = "Name cannot be empty";
+      } else if (value.length < 2) {
+        newErr[name] = "Name is too short";
+      } else {
+        newErr[name] = "";
+      }
+      break;
+
+    case "details":
+      if (value === "") {
+        newErr[name] = "Details cannot be empty";
+      } else {
+        newErr[name] = "";
+      }
+      break;
+
+    case "location":
+      if (value === "") {
+        newErr[name] = "Location cannot be empty";
+      } else {
+        newErr[name] = "";
+      }
+      break;
+
+    case "status":
+      if (value === "") {
+        newErr[name] = "Status cannot be empty";
+      } else {
+        newErr[name] = "";
+      }
+      break;
+
+    default:
+      break;
+  }
+
+  return newErr;
+};

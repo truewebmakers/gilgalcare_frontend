@@ -69,7 +69,7 @@ const SignUp = () => {
     }
     setError(newErr);
     if (
-      !hasErrors(error) && areAllFieldsFilled(signupData)
+      !hasErrors(newErr) && areAllFieldsFilled(signupData)
     ) {
       setIsLoading(true);
       try {
@@ -194,10 +194,10 @@ const SignUp = () => {
                         } `}
                         onClick={togglePassword}
                       ></span>
-                       {error?.passwordInput && (
+                    </div>
+                    {error?.passwordInput && (
                     <p style={{ color: "red" }}>{error?.passwordInput}</p>
                   )}
-                    </div>
                   </div>
                   <button
                     className="btn btn-primary w-100 login-btn"

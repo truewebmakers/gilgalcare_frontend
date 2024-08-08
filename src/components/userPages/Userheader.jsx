@@ -1,15 +1,43 @@
-import React, { useState } from "react";
-import HomeMenu from "../common/HomeMenu";
-import ListingMenu from "../common/ListingMenu";
-import PagesMenu from "../common/PagesMenu";
-import UserPagesMenu from "../common/UserPagesMenu";
-import BlogMenu from "../common/BlogMenu";
-import { LogoSvg, profile_img } from "../imagepath";
-import { Link } from "react-router-dom";
+import React, { useEffect, useState } from "react";
+import { profile_img } from "../imagepath";
+import { Link, useNavigate } from "react-router-dom";
 import { LogoBGR } from "../imagepath";
+import { useDispatch, useSelector } from "react-redux";
+import { getProfileDetails, logOutSuccess } from "../../redux/auth";
+import { getProfile, logoutHandler } from "../../utils/commonApis";
 
-const UserHeader = ({ parms }) => {
+const UserHeader = () => {
   const [drops, setDrops] = useState(false);
+  const [profileData, setProfileData] = useState({})
+  const { user } = useSelector((state) => state.auth);
+  const dispatch = useDispatch()
+const navigate=useNavigate();
+
+  useEffect(() => {
+    const fetchProfile = async () => {
+      try {
+        const res = await getProfile(user);
+        if (res) {
+          setProfileData(res)
+          dispatch(getProfileDetails(res));
+        }
+      } catch (err) {
+        return err
+      }
+
+    }
+    fetchProfile()
+  }, [user?.token])
+
+
+  const handleLogout=async()=>{
+const res=await logoutHandler(user)
+if(res===true){
+  dispatch(logOutSuccess());
+  navigate("/login");
+} 
+}
+
   return (
     <>
       {/* Header */}
@@ -74,18 +102,17 @@ const UserHeader = ({ parms }) => {
               <li className="nav-item dropdown has-arrow logged-item">
                 <Link
                   to="#"
-                  className={`${
-                    drops === true
-                      ? "dropdown-toggle profile-userlink show "
-                      : "dropdown-toggle profile-userlink"
-                  }`}
+                  className={`${drops === true
+                    ? "dropdown-toggle profile-userlink show "
+                    : "dropdown-toggle profile-userlink"
+                    }`}
                   data-bs-toggle="dropdown"
                   aria-expanded="false"
                   onClick={() => setDrops(!drops)}
-                  // className={`${change1===true ? 'dropdown-menu dropdown-menu-end show' : "dropdown-menu dropdown-menu-end"}`}
+                // className={`${change1===true ? 'dropdown-menu dropdown-menu-end show' : "dropdown-menu dropdown-menu-end"}`}
                 >
-                  <img src={profile_img} alt="" />
-                  <span>John Doe</span>
+                  <img src={profileData?.profile_pic || profile_img} alt="" />
+                  <span>{profileData?.name ? profileData?.name : null}</span>
                 </Link>
                 <div className="dropdown-menu dropdown-menu-end">
                   <Link className="dropdown-item" to="/dashboard">
@@ -94,7 +121,7 @@ const UserHeader = ({ parms }) => {
                   <Link className="dropdown-item" to="/profile">
                     Profile Settings
                   </Link>
-                  <Link className="dropdown-item" to="/login">
+                  <Link className="dropdown-item"  onClick={handleLogout}>
                     Logout
                   </Link>
                 </div>
