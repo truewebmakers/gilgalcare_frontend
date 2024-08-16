@@ -5,7 +5,6 @@ import ServiceDetails from "../components/Listings/serviceDetails/serviceDetails
 import ListingMap from "../components/Listings/listingMap";
 import GridSidebar from "../components/Listings/LisitingGridSidebar";
 import ListSidebar from "../components/Listings/LisitingListSidebar";
-import GridMap from "../components/Listings/GridMap";
 import About from "../components/pages/about";
 import Pricing from "../components/pages/about/pricing";
 import Faq from "../components/pages/faq";
@@ -22,9 +21,6 @@ import BlogGrid from "../components/blog/BlogList/BlogGrid";
 import BlogListSideBar from "../components/blog/BlogList/blogListSidebar";
 import BlogGridSidebar from "../components/blog/BlogList/blogGridSidebar";
 import Contract from "../components/contract";
-import SignUp from "../components/signUp";
-import Login from "../components/login";
-import ForgotPassword from "../components/forgotPassword";
 
 export const FrontendRoute = [
     {
@@ -118,18 +114,6 @@ export const FrontendRoute = [
     {
         path: 'contact',
         element: <Contract/>
-    },
-    {
-        path: 'signup',
-        element: <SignUp/>
-    },
-    {
-        path: 'login',
-        element: <Login/>
-    },
-    {
-        path: 'forgot-password',
-        element: <ForgotPassword/>
     }
 ];
 
