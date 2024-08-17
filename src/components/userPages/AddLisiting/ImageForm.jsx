@@ -1,35 +1,7 @@
 import React from "react";
 import { mediaimg_1, mediaimg_2 } from "../../imagepath";
 
-export const ImageForm = ({
-  selectedImage,
-  setSelectedImage,
-  setUploadedPic,
-  error,
-}) => {
-  const handleImageChange = (event) => {
-    const { name, files } = event.target;
-    const file = files[0];
-
-    if (file) {
-      // Update the uploadPic state with the File object
-      setUploadedPic((prevState) => ({
-        ...prevState,
-        [name]: file,
-      }));
-
-      const reader = new FileReader();
-      reader.onload = function (loadEvent) {
-        // Update the selectedImage state with the Data URL
-        setSelectedImage((prevState) => ({
-          ...prevState,
-          [name]: loadEvent.target.result,
-        }));
-      };
-      reader.readAsDataURL(file);
-    }
-  };
-
+export const ImageForm = ({ selectedImage, error, handleChange }) => {
   return (
     <div className="card media-section">
       <div className="card-header">
@@ -53,7 +25,8 @@ export const ImageForm = ({
                 className="hide-input image-upload"
                 id="file"
                 name="featuredImage"
-                onChange={handleImageChange}
+                onChange={handleChange}
+                data-handler="imageInfo"
               />
               {error?.featuredImage && (
                 <p style={{ color: "red" }}>{error?.featuredImage}</p>
@@ -79,7 +52,8 @@ export const ImageForm = ({
                 className="hide-input image-upload"
                 id="file1"
                 name="logo"
-                onChange={handleImageChange}
+                onChange={handleChange}
+                data-handler="imageInfo"
               />
               {error?.logo && <p style={{ color: "red" }}>{error?.logo}</p>}
               <label htmlFor="file1" className="file-upload">

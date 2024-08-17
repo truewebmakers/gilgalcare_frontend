@@ -1,14 +1,6 @@
 import React from "react";
 
-export const SocialMediaForm = ({ socialMedia, setSocialMedia, error }) => {
-  const handleChange = (e) => {
-    const { name, value } = e.target;
-    setSocialMedia((prevState) => ({
-      ...prevState,
-      [name]: value,
-    }));
-  };
-
+export const SocialMediaForm = ({ socialMedia, error, handleChange }) => {
   return (
     <div className="card">
       <div className="card-header">
@@ -31,6 +23,7 @@ export const SocialMediaForm = ({ socialMedia, setSocialMedia, error }) => {
                   value={socialMedia?.facebook}
                   onChange={handleChange}
                   autoComplete="off"
+                  data-handler="socialMediaInfo"
                 />
                 {error?.facebook && (
                   <p style={{ color: "red" }}>{error?.facebook}</p>
@@ -53,6 +46,7 @@ export const SocialMediaForm = ({ socialMedia, setSocialMedia, error }) => {
                   value={socialMedia?.twitter}
                   onChange={handleChange}
                   autoComplete="off"
+                  data-handler="socialMediaInfo"
                 />
                 {error?.twitter && (
                   <p style={{ color: "red" }}>{error?.twitter}</p>
@@ -77,6 +71,7 @@ export const SocialMediaForm = ({ socialMedia, setSocialMedia, error }) => {
                   value={socialMedia?.googlePlus}
                   onChange={handleChange}
                   autoComplete="off"
+                  data-handler="socialMediaInfo"
                 />
                 {error?.googlePlus && (
                   <p style={{ color: "red" }}>{error?.googlePlus}</p>
@@ -99,6 +94,7 @@ export const SocialMediaForm = ({ socialMedia, setSocialMedia, error }) => {
                   value={socialMedia?.instagram}
                   onChange={handleChange}
                   autoComplete="off"
+                  data-handler="socialMediaInfo"
                 />
                 {error?.instagram && (
                   <p style={{ color: "red" }}>{error?.instagram}</p>

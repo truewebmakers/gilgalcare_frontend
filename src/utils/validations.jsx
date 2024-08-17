@@ -134,172 +134,131 @@ export const addCategoryValidation = (name, value) => {
 export const validateListingFields = (name, value, basicInfo2) => {
   let newErr = {};
 
+  // Define regex patterns
+  const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+  const urlRegex = /^(https?:\/\/)?([\w\d-]+\.){1,}[\w\d-]+(\/.+)?$/;
+  const phoneRegex = /^[0-9]{10,15}$/;
+
   switch (name) {
     case "listingTitle":
-      if (value === "") {
-        newErr[name] = "Listing title cannot be empty";
-      } else if (value?.length < 5) {
-        newErr[name] = "Listing title is too short";
-      } else {
-        newErr[name] = "";
-      }
+      newErr[name] =
+        value === ""
+          ? "Listing title cannot be empty"
+          : value?.length < 5
+          ? "Listing title is too short"
+          : "";
       break;
 
     case "listingDiscription":
-      if (value === "") {
-        newErr[name] = "Listing description cannot be empty";
-      } else if (value?.length < 20) {
-        newErr[name] = "Listing description is too short";
-      } else {
-        newErr[name] = "";
-      }
+      newErr[name] =
+        value === ""
+          ? "Listing description cannot be empty"
+          : value?.length < 20
+          ? "Listing description is too short"
+          : "";
       break;
 
     case "categoryId":
-      if (value === "") {
-        newErr[name] = "Category cannot be empty";
-      } else {
-        newErr[name] = "";
-      }
+      newErr[name] = value === "" ? "Category cannot be empty" : "";
       break;
 
     case "tagline":
-      if (value === "") {
-        newErr[name] = "Tagline cannot be empty";
-      } else {
-        newErr[name] = "";
-      }
+      newErr[name] = value === "" ? "Tagline cannot be empty" : "";
       break;
 
     case "priceRange":
-      if (value === "") {
-        newErr[name] = "Price range cannot be empty";
-      } else {
-        newErr[name] = "";
-      }
+      newErr[name] = value === "" ? "Price range cannot be empty" : "";
       break;
 
     case "priceFrom":
-      if (value <= 0) {
-        newErr[name] = "Price from cannot be negative";
-      } else {
-        newErr[name] = "";
-      }
+      newErr[name] = value <= 0 ? "Price from cannot be negative" : "";
       break;
 
     case "priceTo":
-      if (value <= 0) {
-        newErr[name] = "Price to cannot be negative";
-      } else if (value < basicInfo2?.priceFrom) {
-        newErr[name] = "Price to cannot be less than price from";
-      } else {
-        newErr[name] = "";
-      }
+      newErr[name] =
+        value <= 0
+          ? "Price to cannot be negative"
+          : value < basicInfo2?.priceFrom
+          ? "Price to cannot be less than price from"
+          : "";
       break;
 
     case "featuresInformation":
-      if (value === "") {
-        newErr[name] = "Features information cannot be empty";
-      } else {
-        newErr[name] = "";
-      }
+      // If featuresInformation is required, ensure it's not empty
+      newErr[name] = value ? "" : "Features information cannot be empty";
       break;
 
     case "location":
-      if (value === "") {
-        newErr[name] = "Location cannot be empty";
-      } else {
-        newErr[name] = "";
-      }
+      newErr[name] = value === "" ? "Location cannot be empty" : "";
       break;
 
     case "address":
-      if (value === "") {
-        newErr[name] = "Address cannot be empty";
-      } else {
-        newErr[name] = "";
-      }
+      newErr[name] = value === "" ? "Address cannot be empty" : "";
       break;
 
     case "mapLat":
-      if (value === "") {
-        newErr[name] = "Latitude cannot be empty";
-      } else if (isNaN(value)) {
-        newErr[name] = "Latitude must be a number";
-      } else {
-        newErr[name] = "";
-      }
+      newErr[name] =
+        value === ""
+          ? "Latitude cannot be empty"
+          : isNaN(value)
+          ? "Latitude must be a number"
+          : "";
       break;
 
     case "mapLong":
-      if (value === "") {
-        newErr[name] = "Longitude cannot be empty";
-      } else if (isNaN(value)) {
-        newErr[name] = "Longitude must be a number";
-      } else {
-        newErr[name] = "";
-      }
+      newErr[name] =
+        value === ""
+          ? "Longitude cannot be empty"
+          : isNaN(value)
+          ? "Longitude must be a number"
+          : "";
       break;
 
     case "email":
-      const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-      if (value === "") {
-        newErr[name] = "Email cannot be empty";
-      } else if (!emailRegex.test(value)) {
-        newErr[name] = "Email is not valid";
-      } else {
-        newErr[name] = "";
-      }
+      newErr[name] =
+        value === ""
+          ? "Email cannot be empty"
+          : !emailRegex.test(value)
+          ? "Email is not valid"
+          : "";
       break;
 
     case "website":
-      const urlRegex = /^(https?:\/\/)?([\w\d-]+\.){1,}[\w\d-]+(\/.+)?$/;
-      if (value === "") {
-        newErr[name] = "Website cannot be empty";
-      } else if (!urlRegex.test(value)) {
-        newErr[name] = "Website URL is not valid";
-      } else {
-        newErr[name] = "";
-      }
+      newErr[name] =
+        value === ""
+          ? "Website cannot be empty"
+          : !urlRegex.test(value)
+          ? "Website URL is not valid"
+          : "";
       break;
 
     case "phone":
-      const phoneRegex = /^[0-9]{10,15}$/;
-      if (value === "") {
-        newErr[name] = "Phone number cannot be empty";
-      } else if (!phoneRegex.test(value)) {
-        newErr[name] = "Phone number is not valid";
-      } else {
-        newErr[name] = "";
-      }
+      newErr[name] =
+        value === ""
+          ? "Phone number cannot be empty"
+          : !phoneRegex.test(value)
+          ? "Phone number is not valid"
+          : "";
       break;
 
     case "facebook":
     case "twitter":
     case "googlePlus":
     case "instagram":
-      if (value && !urlRegex.test(value)) {
-        newErr[name] = "Social media URL is not valid";
-      } else {
-        newErr[name] = "";
-      }
+      newErr[name] =
+        value && !urlRegex.test(value) ? "Social media URL is not valid" : "";
       break;
 
     case "featuredImage":
-      if (value === "" || value === null) {
-        newErr[name] = "Featured image cannot be empty";
-      } else {
-        newErr[name] = "";
-      }
+      newErr[name] =
+        value === "" || value === null ? "Featured image cannot be empty" : "";
       break;
 
     case "logo":
-      if (value === "" || value === null) {
-        newErr[name] = "Logo cannot be empty";
-      } else {
-        newErr[name] = "";
-      }
+      newErr[name] =
+        value === "" || value === null ? "Logo cannot be empty" : "";
       break;
+
     default:
       break;
   }

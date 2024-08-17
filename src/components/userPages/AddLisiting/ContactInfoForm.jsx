@@ -1,13 +1,6 @@
 import React from "react";
 
-export const ContactInfoForm = ({ contactInfo, setContactInfo, error }) => {
-  const handleChange = (e) => {
-    const { name, value } = e.target;
-    setContactInfo((prevState) => ({
-      ...prevState,
-      [name]: value,
-    }));
-  };
+export const ContactInfoForm = ({ contactInfo, error, handleChange }) => {
   return (
     <div className="card">
       <div className="card-header">
@@ -24,6 +17,7 @@ export const ContactInfoForm = ({ contactInfo, setContactInfo, error }) => {
             value={contactInfo?.email}
             onChange={handleChange}
             autoComplete="off"
+            data-handler="contactInfo"
           />
           {error?.email && <p style={{ color: "red" }}>{error?.email}</p>}
         </div>
@@ -37,6 +31,7 @@ export const ContactInfoForm = ({ contactInfo, setContactInfo, error }) => {
             value={contactInfo?.website}
             onChange={handleChange}
             autoComplete="off"
+            data-handler="contactInfo"
           />
           {error?.website && <p style={{ color: "red" }}>{error?.website}</p>}
         </div>
@@ -50,6 +45,7 @@ export const ContactInfoForm = ({ contactInfo, setContactInfo, error }) => {
             value={contactInfo?.phone}
             onChange={handleChange}
             autoComplete="off"
+            data-handler="contactInfo"
           />
           {error?.phone && <p style={{ color: "red" }}>{error?.phone}</p>}
         </div>

@@ -11,12 +11,14 @@ const defaultCenter = {
   lng: -80.26548188573862,
 };
 
-export const LocationForm = ({ locationInfo, setLocation, error }) => {
-  const [markerPosition, setMarkerPosition] = useState({
-    lat: parseFloat(locationInfo?.mapLat) || defaultCenter.lat,
-    lng: parseFloat(locationInfo?.mapLong) || defaultCenter.lng,
-  });
-
+export const LocationForm = ({
+  locationInfo,
+  setLocation,
+  error,
+  handleChange,
+  markerPosition,
+  setMarkerPosition,
+}) => {
   const handleMapClick = (event) => {
     const lat = event.latLng.lat();
     const lng = event.latLng.lng();
@@ -26,22 +28,6 @@ export const LocationForm = ({ locationInfo, setLocation, error }) => {
       mapLat: lat.toString(),
       mapLong: lng.toString(),
     }));
-  };
-
-  const handleInputChange = (e) => {
-    const { name, value } = e.target;
-    const updatedLocationInfo = {
-      ...locationInfo,
-      [name]: value,
-    };
-
-    setLocation(updatedLocationInfo);
-
-    if (name === "mapLat" || name === "mapLong") {
-      const lat = parseFloat(updatedLocationInfo.mapLat) || markerPosition.lat;
-      const lng = parseFloat(updatedLocationInfo.mapLong) || markerPosition.lng;
-      setMarkerPosition({ lat, lng });
-    }
   };
 
   return (
@@ -57,8 +43,8 @@ export const LocationForm = ({ locationInfo, setLocation, error }) => {
             className="form-control"
             name="location"
             value={locationInfo?.location}
-            onChange={handleInputChange}
-            data-set="locationInfo"
+            onChange={handleChange}
+            data-handler="locationInfo"
             autoComplete="off"
           />
           {error?.location && <p style={{ color: "red" }}>{error?.location}</p>}
@@ -70,8 +56,8 @@ export const LocationForm = ({ locationInfo, setLocation, error }) => {
             className="form-control"
             name="address"
             value={locationInfo?.address}
-            onChange={handleInputChange}
-            data-set="locationInfo"
+            onChange={handleChange}
+            data-handler="locationInfo"
             autoComplete="off"
           />
           {error?.address && <p style={{ color: "red" }}>{error?.address}</p>}
@@ -97,8 +83,8 @@ export const LocationForm = ({ locationInfo, setLocation, error }) => {
                 className="form-control"
                 name="mapLat"
                 value={locationInfo?.mapLat}
-                onChange={handleInputChange}
-                data-set="locationInfo"
+                onChange={handleChange}
+                data-handler="locationInfo"
                 autoComplete="off"
               />
               {error?.mapLat && <p style={{ color: "red" }}>{error?.mapLat}</p>}
@@ -112,8 +98,8 @@ export const LocationForm = ({ locationInfo, setLocation, error }) => {
                 className="form-control"
                 name="mapLong"
                 value={locationInfo?.mapLong}
-                onChange={handleInputChange}
-                data-set="locationInfo"
+                onChange={handleChange}
+                data-handler="locationInfo"
                 autoComplete="off"
               />
               {error?.mapLong && (

@@ -34,7 +34,7 @@ import LatestAds from "./slider/LatestAds";
 import Testimonial5 from "./slider/Testimonial5";
 import Trending5 from "./slider/Trending5";
 import AOS from "aos";
-import "aos/dist/aos.css"; 
+import "aos/dist/aos.css";
 import { LatestBlogs } from "./blog/LatestBlog";
 import { StayTuned } from "./stayTuned/StayTuned";
 import { PricingPlan } from "./pricingPlan/PricingPlan";
@@ -42,11 +42,17 @@ import { BestPlace } from "./bestPlace/BestPlace";
 import { Space } from "./space/Space";
 import { Category } from "./category/Category";
 import { Banner } from "./banner/Banner";
+import { useSelector } from "react-redux";
+import UseApi from "../../hooks/useApi";
+import { apiMethods, apiUrls } from "../../constants/constant";
+
 const Home5 = () => {
+  const [categories, setCategories] = useState([]);
 
   useEffect(() => {
     AOS.init({ duration: 1000, once: true });
   }, []);
+
   useEffect(() => {
     const handleSwitchClick = () => {
       if ($("body").hasClass("light")) {
@@ -62,7 +68,7 @@ const Home5 = () => {
       const t = e.getTotalLength();
       const o = window.scrollY;
       const r = document.body.clientHeight - window.innerHeight;
-      const i = t - o * t / r;
+      const i = t - (o * t) / r;
       e.style.strokeDashoffset = i;
 
       if ($(window).scrollTop() > 50) {
@@ -88,25 +94,54 @@ const Home5 = () => {
       $(".progress-wrap").off("click");
     };
   }, []);
+
+  const fetchAllCategories = async () => {
+    try {
+      const headers = {
+        "Content-Type": "multipart/form-data",
+      };
+      const response = await UseApi(
+        apiUrls.getAllCategoriesPublic,
+        apiMethods.GET,
+        null,
+        headers
+      );
+      if (response?.data) {
+        const formattedCategories = response?.data?.map((category) => ({
+          label: category?.name,
+          value: category?.id,
+          image: category?.feature_image,
+          location: category?.location,
+        }));
+        setCategories(formattedCategories);
+      }
+    } catch (err) {
+      return err;
+    }
+  };
+
+  useEffect(() => {
+    fetchAllCategories();
+  }, []);
   return (
     <>
-    <div className="main-wrapper">
-      <Header />
+      <div className="main-wrapper">
+        <Header />
 
-      {/* Banner */}
-      <Banner/>
-      {/* Banner */}
+        {/* Banner */}
+        <Banner categories={categories} />
+        {/* Banner */}
 
-      {/* Category */}
-      <Category/>
-      {/* Category */}
+        {/* Category */}
+        <Category categories={categories} />
+        {/* Category */}
 
-      {/* Business */}
-      <Trending5 />
-      {/* Business */}
+        {/* Business */}
+        <Trending5 />
+        {/* Business */}
 
-      {/* Featured Cities */}
-      {/* <section className="feature-section">
+        {/* Featured Cities */}
+        {/* <section className="feature-section">
         <div className="container">
           <div className="row">
             <div className="col-md-12">
@@ -238,58 +273,58 @@ const Home5 = () => {
           </div>
         </div>
       </section> */}
-      {/* Cities */}
+        {/* Cities */}
 
-      {/* Space */}
-      <Space/>
-      {/* Space */}
+        {/* Space */}
+        <Space />
+        {/* Space */}
 
-      {/*--------- Best place -------------*/}
-      {/* <BestPlace/> */}
-      {/*------ Best place --------*/}
+        {/*--------- Best place -------------*/}
+        {/* <BestPlace/> */}
+        {/*------ Best place --------*/}
 
-      {/* Latest Ads */}
-      <LatestAds />
-      {/* Latest Ads */}
+        {/* Latest Ads */}
+        <LatestAds />
+        {/* Latest Ads */}
 
-      {/* Pricing Plan */}
-      <PricingPlan/>
-      {/* Pricing Plan */}
+        {/* Pricing Plan */}
+        <PricingPlan />
+        {/* Pricing Plan */}
 
-      {/* Testimonial */}
-      <Testimonial5 />
-      {/* Testimonial */}
+        {/* Testimonial */}
+        <Testimonial5 />
+        {/* Testimonial */}
 
-      {/* Our Latest Blog */}
-      <LatestBlogs/>
-      {/* Our Latest Blog */}
+        {/* Our Latest Blog */}
+        <LatestBlogs />
+        {/* Our Latest Blog */}
 
-      {/* Stay Tuned */}
-     <StayTuned/>
-      {/* Stay Tuned */}
+        {/* Stay Tuned */}
+        <StayTuned />
+        {/* Stay Tuned */}
 
-      <Footer />
-    </div>
-    {/* scrollToTop start */}
-    <div className="progress-wrap active-progress">
-    <svg
-      className="progress-circle svg-content"
-      width="100%"
-      height="100%"
-      viewBox="-1 -1 102 102"
-    >
-      <path
-        d="M50,1 a49,49 0 0,1 0,98 a49,49 0 0,1 0,-98"
-        style={{
-          transition: "stroke-dashoffset 10ms linear 0s",
-          strokeDasharray: "307.919px, 307.919px",
-          strokeDashoffset: "228.265px"
-        }}
-      />
-    </svg>
-  </div>
-  {/* scrollToTop end */}
-  </>
+        <Footer />
+      </div>
+      {/* scrollToTop start */}
+      <div className="progress-wrap active-progress">
+        <svg
+          className="progress-circle svg-content"
+          width="100%"
+          height="100%"
+          viewBox="-1 -1 102 102"
+        >
+          <path
+            d="M50,1 a49,49 0 0,1 0,98 a49,49 0 0,1 0,-98"
+            style={{
+              transition: "stroke-dashoffset 10ms linear 0s",
+              strokeDasharray: "307.919px, 307.919px",
+              strokeDashoffset: "228.265px",
+            }}
+          />
+        </svg>
+      </div>
+      {/* scrollToTop end */}
+    </>
   );
 };
 

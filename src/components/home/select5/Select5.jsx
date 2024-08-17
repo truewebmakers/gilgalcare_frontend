@@ -48,7 +48,7 @@ const Select5 = ({ options }) => {
       //   isSearchable
       className="form-control prl0 select category-select selectHeight"
       options={options}
-      value={options.value}
+      value={options?.value}
       defaultValue={options[0]}
       onChange={setValue}
       styles={style}

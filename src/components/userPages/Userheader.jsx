@@ -8,35 +8,33 @@ import { getProfile, logoutHandler } from "../../utils/commonApis";
 
 const UserHeader = () => {
   const [drops, setDrops] = useState(false);
-  const [profileData, setProfileData] = useState({})
+  const [profileData, setProfileData] = useState({});
   const { user } = useSelector((state) => state.auth);
-  const dispatch = useDispatch()
-const navigate=useNavigate();
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   useEffect(() => {
     const fetchProfile = async () => {
       try {
         const res = await getProfile(user);
         if (res) {
-          setProfileData(res)
+          setProfileData(res);
           dispatch(getProfileDetails(res));
         }
       } catch (err) {
-        return err
+        return err;
       }
+    };
+    fetchProfile();
+  }, [user?.token]);
 
+  const handleLogout = async () => {
+    const res = await logoutHandler(user);
+    if (res === true) {
+      dispatch(logOutSuccess());
+      navigate("/login");
     }
-    fetchProfile()
-  }, [user?.token])
-
-
-  const handleLogout=async()=>{
-const res=await logoutHandler(user)
-if(res===true){
-  dispatch(logOutSuccess());
-  navigate("/login");
-} 
-}
+  };
 
   return (
     <>
@@ -77,16 +75,12 @@ if(res===true){
                 <li>
                   <Link to="/about">About Us</Link>
                 </li>
-
                 {/* <ListingMenu /> */}
                 {/* <PagesMenu /> */}
                 {/* <UserPagesMenu /> */}
                 {/* <BlogMenu /> */}
                 <li>
                   <Link to="/contact">Contact</Link>
-                </li>
-                <li className="login-link">
-                  <Link to="/signup">Sign Up</Link>
                 </li>
               </ul>
             </div>
@@ -102,14 +96,15 @@ if(res===true){
               <li className="nav-item dropdown has-arrow logged-item">
                 <Link
                   to="#"
-                  className={`${drops === true
-                    ? "dropdown-toggle profile-userlink show "
-                    : "dropdown-toggle profile-userlink"
-                    }`}
+                  className={`${
+                    drops === true
+                      ? "dropdown-toggle profile-userlink show "
+                      : "dropdown-toggle profile-userlink"
+                  }`}
                   data-bs-toggle="dropdown"
                   aria-expanded="false"
                   onClick={() => setDrops(!drops)}
-                // className={`${change1===true ? 'dropdown-menu dropdown-menu-end show' : "dropdown-menu dropdown-menu-end"}`}
+                  // className={`${change1===true ? 'dropdown-menu dropdown-menu-end show' : "dropdown-menu dropdown-menu-end"}`}
                 >
                   <img src={profileData?.profile_pic || profile_img} alt="" />
                   <span>{profileData?.name ? profileData?.name : null}</span>
@@ -121,7 +116,7 @@ if(res===true){
                   <Link className="dropdown-item" to="/profile">
                     Profile Settings
                   </Link>
-                  <Link className="dropdown-item"  onClick={handleLogout}>
+                  <Link className="dropdown-item" onClick={handleLogout}>
                     Logout
                   </Link>
                 </div>

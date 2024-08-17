@@ -7,6 +7,7 @@ export const apiUrls = {
   getProfile: "/admin/getProfile/",
   addCategory: "/categories/store",
   getAllCategoriesList: "/categories/get/all",
+  getAllCategoriesPublic: "/get-pb/all",
   addListing: "/listing/store",
 };
 
@@ -24,9 +25,9 @@ export const apiMethods = {
 export const cateogoryOptions = [
   {
     label: "Accommodation/Tenancy Assistance",
-    value: "Accommodation/Tenancy Assistance",
+    name: "Accommodation/Tenancy Assistance",
   },
-  { label: "Assistance Animals", value: "Assistance Animals" },
+  { label: "Assistance Animals", name: "Assistance Animals" },
   {
     label: "Assistance for Employment or Education",
     value: "Assistance for Employment or Education",
