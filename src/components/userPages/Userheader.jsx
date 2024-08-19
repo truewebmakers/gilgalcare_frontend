@@ -70,7 +70,7 @@ const UserHeader = () => {
                 </li>
                 {/* <HomeMenu activeMenu={"Business"} /> */}
                 <li>
-                  <Link to="/listingmap-grid">Listing</Link>
+                  <Link to="/listing-grid-sidebar">Listing</Link>
                 </li>
                 <li>
                   <Link to="/about">About Us</Link>

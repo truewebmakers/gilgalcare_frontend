@@ -166,6 +166,10 @@ export const validateListingFields = (name, value, basicInfo2) => {
       newErr[name] = value === "" ? "Tagline cannot be empty" : "";
       break;
 
+    case "status":
+      newErr[name] = value === "" ? "Choose status" : "";
+      break;
+
     case "priceRange":
       newErr[name] = value === "" ? "Price range cannot be empty" : "";
       break;

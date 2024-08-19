@@ -11,6 +11,7 @@ export const apiUrls = {
   addListing: "/listing/store",
   getAllListingPublic: "/listing/get-pb/all",
   searching: "/listing/search",
+  getMyListing: "/listing/get/",
 };
 
 export const env = {

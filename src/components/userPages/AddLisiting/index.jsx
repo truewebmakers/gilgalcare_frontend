@@ -32,6 +32,7 @@ const AddLisiting = () => {
     listingDiscription: "",
     categoryId: "", //for now only 1 category is allowed
     tagline: "",
+    status: "",
   });
   const [basicInfo2, setBasicInfo2] = useState({
     priceRange: "",
@@ -152,6 +153,7 @@ const AddLisiting = () => {
           listing_description: basicInfo1?.listingDiscription,
           category_id: basicInfo1?.categoryId,
           tagline: basicInfo1?.tagline,
+          status: basicInfo1?.status,
           price_range: basicInfo2?.priceRange,
           price_from: basicInfo2?.priceFrom,
           price_to: basicInfo2?.priceTo,

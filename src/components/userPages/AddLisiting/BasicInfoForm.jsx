@@ -44,6 +44,24 @@ export const BasicInfoForm = ({
           <p style={{ color: "red" }}>{error?.listingDiscription}</p>
         )}
       </div>
+      <div className="filter-content form-group">
+        <label className="col-form-label">
+          Status <span>*</span>
+        </label>
+        <select
+          className="form-control select category-select"
+          value={basicInfo1?.status}
+          data-handler="basicInfo1"
+          name="status"
+          onChange={handleChange}
+        >
+          <option value="">Status</option>
+          <option>Draft</option>
+          <option>Published</option>
+          <option>Unpublished</option>
+        </select>
+        {error?.status && <p style={{ color: "red" }}>{error?.status}</p>}
+      </div>
       <div className="form-group">
         <label className="col-form-label label-heading">Category </label>
         <div className="row category-listing">

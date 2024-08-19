@@ -8,22 +8,37 @@ const UserPagesMenu = ({ activesMenu }) => {
   const { user } = useSelector((state) => state.auth);
 
   return (
-    <li className={activesMenu === "/dashboard" || activesMenu === "/add-category" || activesMenu === "/profile" || activesMenu === "/add-listing" || activesMenu === "/reviews" || activesMenu === "/messages" || activesMenu === "/my-listing" || activesMenu === "/bookmarks" ? "has-submenu active" : "has-submenu"}>
-      <Link to="" className={menu4 ? 'submenu' : ""}>
-        User Pages <i className="fas fa-chevron-down" onClick={() => setMenu4(!menu4)}></i>
+    <li
+      className={
+        activesMenu === "/dashboard" ||
+        activesMenu === "/add-category" ||
+        activesMenu === "/profile" ||
+        activesMenu === "/add-listing" ||
+        activesMenu === "/reviews" ||
+        activesMenu === "/messages" ||
+        activesMenu === "/my-listing" ||
+        activesMenu === "/bookmarks"
+          ? "has-submenu active"
+          : "has-submenu"
+      }
+    >
+      <Link to="" className={menu4 ? "submenu" : ""}>
+        User Pages{" "}
+        <i className="fas fa-chevron-down" onClick={() => setMenu4(!menu4)}></i>
       </Link>
       <ul className={menu4 ? "submenu d-block" : "submenu"}>
         <li className={activesMenu === "/dashboard" ? "active" : ""}>
           <Link to="/dashboard">Dashboard</Link>
         </li>
-        {user?.userInfo?.user_type === 'admin' &&
+        {user?.userInfo?.user_type === "admin" && (
           <li className={activesMenu === "/add-category" ? "active" : ""}>
             <Link to="/add-category">Add Category</Link>
-          </li>}
+          </li>
+        )}
         <li className={activesMenu === "/profile" ? "active" : ""}>
           <Link to="/profile">Profile</Link>
         </li>
-        <li className={activesMenu === "/my-listing" ? "active" : ""}>
+        <li className={activesMenu == "/my-listing" ? "active" : ""}>
           <Link to="/my-listing">My Listing</Link>
         </li>
         <li className={activesMenu === "/bookmarks" ? "active" : ""}>
