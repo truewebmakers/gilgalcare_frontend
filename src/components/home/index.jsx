@@ -114,6 +114,7 @@ const Home5 = () => {
           location: category?.location,
         }));
         setCategories(formattedCategories);
+        localStorage.setItem("categories", JSON.stringify(response?.data));
       }
     } catch (err) {
       return err;
@@ -140,152 +141,9 @@ const Home5 = () => {
         <Trending5 />
         {/* Business */}
 
-        {/* Featured Cities */}
-        {/* <section className="feature-section">
-        <div className="container">
-          <div className="row">
-            <div className="col-md-12">
-              <div
-                className="section-heading heading-five aos"
-                data-aos="fade-up"
-              >
-                <h2>Featured Cities</h2>
-              </div>
-            </div>
-          </div>
-          <div className="row">
-            <div className="col-md-3">
-              <div className="city-box aos" data-aos="fade-up">
-                <div className="citi-img">
-                  <Link to="#">
-                    <img src={City1} className="img-fluid" alt="img" />
-                  </Link>
-                </div>
-                <div className="city-overlay">
-                  <div className="city-name">
-                    <h5>New York</h5>
-                    <ul>
-                      <li>
-                        <i className="feather-map-pin"></i> 10 Cities
-                      </li>
-                      <li>
-                        <i className="feather-map"></i> 30+ Listing
-                      </li>
-                    </ul>
-                  </div>
-                  <div className="rating d-flex">
-                    <i className="fas fa-star filled"></i>
-                    <i className="fas fa-star filled"></i>
-                    <i className="fas fa-star filled"></i>
-                    <i className="fas fa-star filled"></i>
-                    <i className="fas fa-star"></i>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div className="col-md-3">
-              <div className="city-box aos" data-aos="fade-up">
-                <div className="citi-img">
-                  <Link to="#">
-                    <img src={City2} className="img-fluid" alt="img" />
-                  </Link>
-                </div>
-                <div className="city-overlay">
-                  <div className="city-name">
-                    <h5>London</h5>
-                    <ul>
-                      <li>
-                        <i className="feather-map-pin"></i> 15 Cities
-                      </li>
-                      <li>
-                        <i className="feather-map"></i> 23+ Listing
-                      </li>
-                    </ul>
-                  </div>
-                  <div className="rating d-flex">
-                    <i className="fas fa-star filled"></i>
-                    <i className="fas fa-star filled"></i>
-                    <i className="fas fa-star filled"></i>
-                    <i className="fas fa-star filled"></i>
-                    <i className="fas fa-star"></i>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div className="col-md-3">
-              <div className="city-box aos" data-aos="fade-up">
-                <div className="citi-img">
-                  <Link to="#">
-                    <img src={City3} className="img-fluid" alt="img" />
-                  </Link>
-                </div>
-                <div className="city-overlay">
-                  <div className="city-name">
-                    <h5>Korea</h5>
-                    <ul>
-                      <li>
-                        <i className="feather-map-pin"></i> 12 Cities
-                      </li>
-                      <li>
-                        <i className="feather-map"></i> 32+ Listing
-                      </li>
-                    </ul>
-                  </div>
-                  <div className="rating d-flex">
-                    <i className="fas fa-star filled"></i>
-                    <i className="fas fa-star filled"></i>
-                    <i className="fas fa-star filled"></i>
-                    <i className="fas fa-star filled"></i>
-                    <i className="fas fa-star"></i>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div className="col-md-3">
-              <div className="city-box aos" data-aos="fade-up">
-                <div className="citi-img">
-                  <Link to="#">
-                    <img src={City4} className="img-fluid" alt="img" />
-                  </Link>
-                </div>
-                <div className="city-overlay">
-                  <div className="city-name">
-                    <h5>Malaysia</h5>
-                    <ul>
-                      <li>
-                        <i className="feather-map-pin"></i> 18 Cities
-                      </li>
-                      <li>
-                        <i className="feather-map"></i> 24+ Listing
-                      </li>
-                    </ul>
-                  </div>
-                  <div className="rating d-flex">
-                    <i className="fas fa-star filled"></i>
-                    <i className="fas fa-star filled"></i>
-                    <i className="fas fa-star filled"></i>
-                    <i className="fas fa-star filled"></i>
-                    <i className="fas fa-star"></i>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section> */}
-        {/* Cities */}
-
         {/* Space */}
         <Space />
         {/* Space */}
-
-        {/*--------- Best place -------------*/}
-        {/* <BestPlace/> */}
-        {/*------ Best place --------*/}
-
-        {/* Latest Ads */}
-        <LatestAds />
-        {/* Latest Ads */}
 
         {/* Pricing Plan */}
         <PricingPlan />

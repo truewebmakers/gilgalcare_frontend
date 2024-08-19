@@ -7,8 +7,10 @@ export const apiUrls = {
   getProfile: "/admin/getProfile/",
   addCategory: "/categories/store",
   getAllCategoriesList: "/categories/get/all",
-  getAllCategoriesPublic: "/get-pb/all",
+  getAllCategoriesPublic: "/categories/get-pb/all",
   addListing: "/listing/store",
+  getAllListingPublic: "/listing/get-pb/all",
+  searching: "/listing/search",
 };
 
 export const env = {
