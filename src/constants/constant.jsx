@@ -1,17 +1,22 @@
 export const apiUrls = {
+  // auth
   signup: "/signup",
   login: "/login",
   logout: "/admin/logout",
   changePassword: "/admin/update/password/",
   updateProfile: "/admin/update/profile/",
   getProfile: "/admin/getProfile/",
+  // categories
   addCategory: "/categories/store",
   getAllCategoriesList: "/categories/get/all",
   getAllCategoriesPublic: "/categories/get-pb/all",
+  // listings
   addListing: "/listing/store",
   getAllListingPublic: "/listing/get-pb/all",
   searching: "/listing/search",
+  getUserSpecificListing: "/listing/get/all/",
   getMyListing: "/listing/get/",
+  deleteListing: "/listing/delete/",
 };
 
 export const env = {

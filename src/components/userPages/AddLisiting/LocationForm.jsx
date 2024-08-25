@@ -63,7 +63,7 @@ export const LocationForm = ({
           {error?.address && <p style={{ color: "red" }}>{error?.address}</p>}
         </div>
         <div className="listing-map">
-          <LoadScript googleMapsApiKey="YOUR_GOOGLE_MAPS_API_KEY">
+          <LoadScript googleMapsApiKey="AIzaSyDk_TbPERImCZCd7YmCzYacT6wGayV-Lmk">
             <GoogleMap
               mapContainerStyle={mapContainerStyle}
               center={markerPosition}

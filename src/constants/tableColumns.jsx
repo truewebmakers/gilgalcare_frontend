@@ -1,75 +1,55 @@
-export const myListingColumns = [
+import React from "react";
+import { Link } from "react-router-dom";
+import { CapitalizeFirstLetter } from "../utils/commonFunctions";
+export const myListingColumns = (handleDeleteListing) => [
   {
-    title: "Image",
-    dataIndex: "image",
-    render: (text, record, data) => (
-      <div className="listingtable-img">
+    title: "Title",
+    dataIndex: "listing_title",
+    render: (text) => (
+      <div className="listingtable-rate">
         {" "}
-        <Link to="/service-details">
-          <img className="img-fluid avatar-img" src={text} alt="" />
-        </Link>
+        <Link to="/service-details">{text ? text : "-"}</Link>
       </div>
     ),
-    sorter: (a, b) => {
-      a.image.length - b.image.length;
-    },
   },
   {
-    title: "Details",
-    dataIndex: "content",
-    render: (text, record, data) => (
+    title: "Category",
+    render: (text) => (
       <>
-        <h6>
-          <Link to="/service-details">{text}</Link>
-        </h6>
         <div className="listingtable-rate">
-          <Link to="#" className="cat-icon">
-            <i className="fa-regular fa-circle-stop" /> Electronics
+          <Link to="/service-details" className="cat-icon">
+            {text?.category ? text?.category?.name : "-"}
           </Link>{" "}
-          <span className="discount-amt">$350000.00</span>
-          <span className="fixed-amt">$40000</span>
         </div>
-        <p>Mauris vestibulum lorem a condimentum vulputate.</p>
       </>
     ),
-    sorter: (a, b) => {
-      a.content.length - b.content.length;
-    },
   },
   {
     title: "Status",
     dataIndex: "status",
-    render: (text, record, data) => <span className={record.bg}>{text}</span>,
-    sorter: (a, b) => {
-      a.status.length - b.status.length;
-    },
+    render: (text) => (
+      <span className="">{text ? CapitalizeFirstLetter(text) : "-"}</span>
+    ),
   },
   {
-    title: "Views",
-    dataIndex: "numbers",
-    render: (text, record, data) => <span>{text}</span>,
-    sorter: (a, b) => {
-      a.numbers.length - b.numbers.length;
-    },
+    title: "Location",
+    dataIndex: "location",
+    render: (text) => <span>{text ? CapitalizeFirstLetter(text) : "-"}</span>,
   },
   {
     title: "Action",
-    dataIndex: "class",
-    render: (text, record, data) => (
-      <div className={text}>
-        <Link to="#" className="action-btn btn-view">
-          <i className="feather-eye" />
-        </Link>
-        <Link to="#" className="action-btn btn-edit">
+    render: (text) => (
+      <div className="listingtable-rate">
+        {/* <Link to="#" className="action-btn btn-edit">
           <i className="feather-edit-3" />
-        </Link>
-        <Link to="#" className="action-btn btn-trash">
+        </Link> */}
+        <span
+          className="action-btn btn-trash"
+          onClick={(e) => handleDeleteListing(e, text?.id)}
+        >
           <i className="feather-trash-2" />
-        </Link>
+        </span>
       </div>
     ),
-    sorter: (a, b) => {
-      a.class.length - b.class.length;
-    },
   },
 ];

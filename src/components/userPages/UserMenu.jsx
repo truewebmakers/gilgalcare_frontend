@@ -1,9 +1,21 @@
 import React from "react";
-import { useSelector } from "react-redux";
-import { Link } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import { Link, useNavigate } from "react-router-dom";
+import { logoutHandler } from "../../utils/commonApis";
+import { logOutSuccess } from "../../redux/auth";
 
 export default function UserMenu({ activeUrl }) {
   const { user } = useSelector((state) => state.auth);
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+
+  const handleLogout = async () => {
+    const res = await logoutHandler(user);
+    if (res === true) {
+      dispatch(logOutSuccess());
+      navigate("/login");
+    }
+  };
 
   return (
     <div className="">
@@ -36,10 +48,10 @@ export default function UserMenu({ activeUrl }) {
           </Link>
         </li>
         <li>
-          <Link to="/login">
+          <span onClick={handleLogout} style={{ cursor: "pointer" }}>
             <i className="fas fa-light fa-circle-arrow-left" />{" "}
             <span>Logout</span>
-          </Link>
+          </span>
         </li>
       </ul>
     </div>

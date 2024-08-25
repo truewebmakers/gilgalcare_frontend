@@ -7,40 +7,43 @@ import Message from "../components/userPages/mesage";
 import Review from "../components/userPages/review";
 import AddLisiting from "../components/userPages/AddLisiting";
 import AddCategory from "../components/userPages/addCategory";
+import ServiceDetails from "../components/Listings/serviceDetails/serviceDetails";
 
 export const AdminRoutes = [
-    {
-        path:'dashboard',
-        element: <Dashboard/> 
-    },
-    {
-        path:'add-category',
-        element: <AddCategory/> 
-    },
-    {
-        path:'profile',
-        element: <Profile/> 
-    },
-    {
-        path:'my-listing',
-        element: <MyListe/> 
-    },
-    {
-        path:'bookmarks',
-        element: <Bookmarks/> 
-    },
-    {
-        path:'reviews',
-        element: <Review/> 
-    },
-    {
-        path:'messages',
-        element: <Message/> 
-    },
-    {
-        path:'add-listing',
-        element: <AddLisiting/> 
-    }
+  {
+    path: "dashboard",
+    element: <Dashboard />,
+  },
+  {
+    path: "add-category",
+    element: <AddCategory />,
+  },
+  {
+    path: "profile",
+    element: <Profile />,
+  },
+  {
+    path: "my-listing",
+    element: <MyListe />,
+  },
+  {
+    path: "bookmarks",
+    element: <Bookmarks />,
+  },
+  {
+    path: "reviews",
+    element: <Review />,
+  },
+  {
+    path: "messages",
+    element: <Message />,
+  },
+  {
+    path: "add-listing",
+    element: <AddLisiting />,
+  },
+  {
+    path: "service-details/:id",
+    element: <ServiceDetails />,
+  },
 ];
-
- 

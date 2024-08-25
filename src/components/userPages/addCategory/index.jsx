@@ -80,13 +80,14 @@ const AddCategory = () => {
 
   const handleAddCategory = async (e) => {
     e.preventDefault();
-    setIsLoading(true);
     let newErr = {};
     for (let key in addCategory) {
       newErr = { ...newErr, ...addCategoryValidation(key, addCategory[key]) };
     }
     setError(newErr);
     if (!hasErrors(newErr) && areAllFieldsFilled(addCategory)) {
+      setIsLoading(true);
+
       // call add category api
       try {
         // set headers

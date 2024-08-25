@@ -1,7 +1,6 @@
 import React from "react";
 import Home5 from "../components/home";
 import Listing_Grid from "../components/Listings/ListingGrid";
-import ServiceDetails from "../components/Listings/serviceDetails/serviceDetails";
 import ListingMap from "../components/Listings/listingMap";
 import GridSidebar from "../components/Listings/LisitingGridSidebar";
 import ListSidebar from "../components/Listings/LisitingListSidebar";
@@ -34,10 +33,6 @@ export const FrontendRoute = [
   {
     path: "listing-grid",
     element: <Listing_Grid />,
-  },
-  {
-    path: "service-details/:id",
-    element: <ServiceDetails />,
   },
   {
     path: "listingmap-list",
