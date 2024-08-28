@@ -8,6 +8,7 @@ import Review from "../components/userPages/review";
 import AddLisiting from "../components/userPages/AddLisiting";
 import AddCategory from "../components/userPages/addCategory";
 import ServiceDetails from "../components/Listings/serviceDetails/serviceDetails";
+import EditLisiting from "../components/userPages/editListing";
 
 export const AdminRoutes = [
   {
@@ -41,6 +42,10 @@ export const AdminRoutes = [
   {
     path: "add-listing",
     element: <AddLisiting />,
+  },
+  {
+    path: "edit-listing/:id",
+    element: <EditLisiting />,
   },
   {
     path: "service-details/:id",

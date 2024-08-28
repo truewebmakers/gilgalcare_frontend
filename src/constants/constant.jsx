@@ -15,8 +15,12 @@ export const apiUrls = {
   getAllListingPublic: "/listing/get-pb/all",
   searching: "/listing/search",
   getUserSpecificListing: "/listing/get/all/",
-  getMyListing: "/listing/get/",
   deleteListing: "/listing/delete/",
+  getListingDetail: "/listing/get/",
+
+  // Reviews
+  getListingSpecificReviews: "/feedback/business/",
+  addReview: "/feedback/store",
 };
 
 export const env = {

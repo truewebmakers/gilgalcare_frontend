@@ -33,6 +33,7 @@ import {
   gallery_6_jpg,
   gallery_8_jpg,
   galleryicon,
+  profile_img,
   statistic_icon,
   website,
 } from "../../imagepath";
@@ -51,6 +52,16 @@ import { apiMethods, apiUrls } from "../../../constants/constant";
 import { useSelector } from "react-redux";
 import UseApi from "../../../hooks/useApi";
 import { customToast } from "../../common/Toast";
+import mailIcon from "../../../assets/svg/mail.svg";
+import location from "../../../assets/svg/map-pin.svg";
+import eye from "../../../assets/svg/eye.svg";
+import locationBig from "../../../assets/svg/locationBig.svg";
+import calendar from "../../../assets/svg/calendar.svg";
+
+import { CapitalizeFirstLetter } from "../../../utils/commonFunctions";
+import { Review } from "./Review";
+import { Ratings } from "./Ratingsx";
+import { ListDetails } from "./listDetails";
 
 const ServiceDetails = () => {
   const [showFancyBox, setBox] = useState(false);
@@ -64,8 +75,11 @@ const ServiceDetails = () => {
   ];
 
   const parms = useLocation()?.pathname;
-  const { user } = useSelector((state) => state.auth);
-  console.log(parms?.split("/")[2]);
+  const { user, profileData } = useSelector((state) => state.auth);
+  const [listingDetail, setListingDetail] = useState({});
+  const [features, setFeatures] = useState([]);
+
+  const id = parms?.split("/")[2];
 
   const getListingDetail = async () => {
     try {
@@ -77,24 +91,32 @@ const ServiceDetails = () => {
         };
         // Call signup API
         const response = await UseApi(
-          apiUrls.getListingDetail + parms?.split("/")[2],
+          apiUrls.getListingDetail + id,
           apiMethods.GET,
           null,
           headers
         );
         if (response?.status == 200 || response?.status == 201) {
-          const data = response?.data?.user;
-          return data;
+          setListingDetail(response?.data?.data);
+          return;
         }
       }
     } catch (err) {
       customToast.error(err?.message);
+      return;
     }
   };
 
+  console.log(listingDetail, "response");
+
   useEffect(() => {
     getListingDetail();
-  }, []);
+  }, [id]);
+
+  useEffect(() => {
+    const listFeatures = listingDetail?.features_information?.split(",");
+    setFeatures(listFeatures);
+  }, [listingDetail]);
 
   return (
     <>
@@ -102,16 +124,7 @@ const ServiceDetails = () => {
       {/*Galler Slider Section*/}
       <div className="bannergallery-section">
         <div className="gallery-slider d-flex">
-          <Rooms />
-          <div className="showphotos">
-            <Link
-              // to={gallery_3_jpg}
-              data-fancybox="gallery1"
-              onClick={() => setBox(true)}
-            >
-              ... Show Photos
-            </Link>
-          </div>
+          <Rooms img={listingDetail?.featured_image} />
           {showFancyBox && <PhotoAlbum photos={imagess} layout="rows" />}
         </div>
       </div>
@@ -122,44 +135,56 @@ const ServiceDetails = () => {
           <div className="about-details">
             <div className="about-headings">
               <div className="author-img">
-                <img src={ProfileAvatar10} alt="authorimg" />
+                <img src={listingDetail?.logo || profile_img} alt="authorimg" />
               </div>
               <div className="authordetails">
-                <h5>Sleep In a Room in Apartment</h5>
-                <p>Luxury hotel in the heart of Blommsbury</p>
+                <h5>
+                  {listingDetail?.listing_title
+                    ? listingDetail?.listing_title
+                    : "-"}
+                </h5>
                 <div className="rating">
-                  <i className="fas fa-star filled" />
-                  <i className="fas fa-star filled" />
-                  <i className="fas fa-star filled" />
-                  <i className="fas fa-star filled" />
-                  <i className="fa-regular fa-star rating-color" />
-                  <span className="d-inline-block average-rating"> 4.5 </span>
+                  <img src={eye} alt="" />
+                  <span className="d-inline-block average-rating">
+                    {" "}
+                    {listingDetail?.page_views
+                      ? listingDetail?.page_views
+                      : "0"}{" "}
+                  </span>
                 </div>
               </div>
             </div>
-            <div className="rate-details">
-              <h2>$350</h2>
-              <p>Fixed</p>
-            </div>
+            {listingDetail?.price_from && listingDetail?.price_to ? (
+              <div className="rate-details">
+                <h4>
+                  ${listingDetail?.price_from} - ${listingDetail?.price_to}
+                </h4>
+                <p>Fixed</p>
+              </div>
+            ) : (
+              <div className="rate-details">
+                <p>Price</p>
+                <h6>Not-Disclosed</h6>
+              </div>
+            )}
           </div>
           <div className="descriptionlinks">
             <div className="row">
               <div className="col-lg-9">
                 <ul>
                   <li>
-                    <Link to="#">
-                      <i className="feather-map" /> Get Directions
-                    </Link>
+                    <span>
+                      <img src={location} alt="" />
+                      {listingDetail?.location ? listingDetail?.location : "-"}
+                    </span>
                   </li>
                   <li>
-                    <Link to="#">
+                    <Link
+                      to={listingDetail?.website ? listingDetail?.website : "#"}
+                      target="_blank"
+                    >
                       <img src={website} alt="website" />
-                      Website
-                    </Link>
-                  </li>
-                  <li>
-                    <Link to="#">
-                      <i className="feather-share-2" /> share
+                      {listingDetail?.website ? listingDetail?.website : "-"}
                     </Link>
                   </li>
                   <li>
@@ -169,23 +194,18 @@ const ServiceDetails = () => {
                     </Link>
                   </li>
                   <li>
-                    <Link to="#">
-                      <i className="feather-flag" /> report
-                    </Link>
-                  </li>
-                  <li>
-                    <Link to="#">
-                      <i className="feather-heart" /> Save
-                    </Link>
+                    <img src={mailIcon} alt="" />{" "}
+                    {listingDetail?.email ? listingDetail?.email : "-"}
                   </li>
                 </ul>
               </div>
               <div className="col-lg-3">
                 <div className="callnow">
-                  <Link to="contact.html">
+                  <span>
                     {" "}
-                    <i className="feather-phone-call" /> Call Now
-                  </Link>
+                    <i className="feather-phone-call" />{" "}
+                    {listingDetail?.phone ? listingDetail?.phone : "-"}
+                  </span>
                 </div>
               </div>
             </div>
@@ -208,20 +228,11 @@ const ServiceDetails = () => {
                   <h4>Description</h4>
                 </div>
                 <div className="card-body">
+                  <p>{listingDetail?.tagline ? listingDetail?.tagline : "-"}</p>
                   <p>
-                    Lorem Ipsum is simply dummy text of the printing and
-                    typesetting industry. Lorem Ipsum has been the industry's
-                    standard dummy text ever since the 1500s, when an unknown
-                    printer took a galley of type and scrambled it to make a
-                    type specimen book. It has survived not only five centuries,
-                    but also the leap into electronic typesetting, remaining
-                    essentially unchanged.
-                  </p>
-                  <p>
-                    It was popularised in the 1960s with the release of Letraset
-                    sheets containing Lorem Ipsum passages, and more recently
-                    with desktop publishing software like Aldus PageMaker
-                    including versions of Lorem Ipsum.
+                    {listingDetail?.listing_description
+                      ? listingDetail?.listing_description
+                      : "-"}
                   </p>
                 </div>
               </div>
@@ -234,84 +245,83 @@ const ServiceDetails = () => {
                 <div className="card-body">
                   <div className="lisiting-featues">
                     <div className="row">
+                      {features?.map((item, index) => (
+                        <div
+                          className="featureslist d-flex align-items-center col-lg-4 col-md-4"
+                          key={index}
+                        >
+                          <div className="feature-img">
+                            {/* <img src={Feature_1_svg} alt="Room amenties" /> */}
+                          </div>
+                          <div className="featues-info">
+                            <h6>{item}</h6>
+                          </div>
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+                </div>
+              </div>
+              {/*/Listing Features Section*/}
+              {/*category Section*/}
+              <div className="card ">
+                <div className="card-header">
+                  <i className="feather-list" />
+                  <h4>Category</h4>
+                </div>
+                <div className="card-body">
+                  <div className="lisiting-featues">
+                    <div className="row">
                       <div className="featureslist d-flex align-items-center col-lg-4 col-md-4">
                         <div className="feature-img">
-                          <img src={Feature_1_svg} alt="Room amenties" />
+                          <img
+                            src={listingDetail?.category?.feature_image || ""}
+                            alt=""
+                          />
                         </div>
                         <div className="featues-info">
                           <h6>
-                            Room <br /> amenities
-                          </h6>
-                        </div>
-                      </div>
-                      <div className="featureslist d-flex align-items-center col-lg-4 col-md-4">
-                        <div className="feature-img">
-                          <img src={Feature_2_svg} alt="Bathroom amenities" />
-                        </div>
-                        <div className="featues-info">
-                          <h6>
-                            Bathroom <br /> amenities
-                          </h6>
-                        </div>
-                      </div>
-                      <div className="featureslist d-flex align-items-center col-lg-4 col-md-4">
-                        <div className="feature-img">
-                          <img src={Feature_3_svg} alt="Media Technology" />
-                        </div>
-                        <div className="featues-info">
-                          <h6>
-                            Media &amp; Technology <br /> amenities
-                          </h6>
-                        </div>
-                      </div>
-                      <div className="featureslist d-flex align-items-center col-lg-4 col-md-4">
-                        <div className="feature-img">
-                          <img src={Feature_4_svg} alt="Food Security" />
-                        </div>
-                        <div className="featues-info">
-                          <h6>
-                            Food &amp; Security <br /> amenities
-                          </h6>
-                        </div>
-                      </div>
-                      <div className="featureslist d-flex align-items-center col-lg-4 col-md-4">
-                        <div className="feature-img">
-                          <img src={Feature_5_svg} alt="Media Technology" />
-                        </div>
-                        <div className="featues-info">
-                          <h6>
-                            Services &amp; Extra <br /> amenities
+                            {listingDetail?.category?.name
+                              ? listingDetail?.category?.name
+                              : "-"}
                           </h6>
                         </div>
                       </div>
                       <div className="featureslist d-flex align-items-center col-lg-4 col-md-4">
-                        <div className="feature-img">
-                          <img src={Feature_6_svg} alt="Media Technology" />
+                        <div className="feature-img1">
+                          <img src={locationBig} alt="" />
                         </div>
                         <div className="featues-info">
                           <h6>
-                            Outdoor &amp; View <br /> amenities
+                            {listingDetail?.category?.location
+                              ? listingDetail?.category?.location
+                              : "-"}
                           </h6>
                         </div>
                       </div>
-                      <div className="featureslist d-flex  access-feature align-items-center col-lg-4 col-md-4">
-                        <div className="feature-img">
-                          <img src={Feature_7_svg} alt="Media Technology" />
+                      <div className="featureslist d-flex align-items-center col-lg-4 col-md-4">
+                        <div className="feature-img1">
+                          <img src={calendar} alt="" />
                         </div>
                         <div className="featues-info">
                           <h6>
-                            Accessibility <br /> amenities
+                            {listingDetail?.category?.created_at
+                              ? listingDetail?.category?.created_at
+                              : "-"}
                           </h6>
                         </div>
                       </div>
-                      <div className="featureslist d-flex align-items-center access-feature col-lg-4 col-md-4">
+                      <div className="featureslist d-flex align-items-center col-lg-4 col-md-4">
                         <div className="feature-img">
-                          <img src={Feature_8_svg} alt="Media Technology" />
+                          <div>Status:</div>
                         </div>
                         <div className="featues-info">
                           <h6>
-                            Safety &amp; Security
-                            <br /> amenities
+                            {listingDetail?.category?.status
+                              ? CapitalizeFirstLetter(
+                                  listingDetail?.category?.status
+                                )
+                              : "-"}
                           </h6>
                         </div>
                       </div>
@@ -319,8 +329,8 @@ const ServiceDetails = () => {
                   </div>
                 </div>
               </div>
-              {/*/Listing Features Section*/}
-              {/*Gallery Section*/}
+              {/*/category Section*/}
+              {/* Gallery Section */}
               <div className="card gallery-section ">
                 <div className="card-header ">
                   <img src={galleryicon} alt="gallery" />
@@ -328,418 +338,22 @@ const ServiceDetails = () => {
                 </div>
                 <div className="card-body">
                   <div className="gallery-content">
-                    <Roomspics />
+                    <Roomspics listingDetail={listingDetail} />
                   </div>
                 </div>
               </div>
               {/*/Gallery Section*/}
-              {/*Ratings Section*/}
-              <div className="card ">
-                <div className="card-header  align-items-center">
-                  <i className="feather-star" />
-                  <h4>Ratings</h4>
-                </div>
-                <div className="card-body">
-                  <div className="ratings-content">
-                    <div className="row">
-                      <div className="col-lg-3">
-                        <div className="ratings-info">
-                          <p className="ratings-score">
-                            <span>4</span>/5
-                          </p>
-                          <p>OVERALL</p>
-                          <p>
-                            {" "}
-                            <i className="fas fa-star filled" />
-                            <i className="fas fa-star filled" />
-                            <i className="fas fa-star filled" />
-                            <i className="fas fa-star filled" />
-                            <i className="fa-regular fa-star" />
-                          </p>
-                          <p>Based on Listing</p>
-                        </div>
-                      </div>
-                      <div className="col-lg-9">
-                        <div className="ratings-table table-responsive">
-                          <table className="">
-                            <tbody>
-                              <tr>
-                                <td className="star-ratings">
-                                  <i className="fas fa-star filled" />
-                                  <i className="fas fa-star filled" />
-                                  <i className="fas fa-star filled" />
-                                  <i className="fas fa-star filled" />
-                                  <i className="fas fa-star filled" />
-                                </td>
-                                <td className="scrore-width">
-                                  <span> </span>
-                                </td>
-                                <td> 0</td>
-                              </tr>
-                              <tr>
-                                <td className="star-ratings">
-                                  <i className="fas fa-star filled" />
-                                  <i className="fas fa-star filled" />
-                                  <i className="fas fa-star filled" />
-                                  <i className="fas fa-star filled" />
-                                  <i className="fa-regular fa-star rating-color" />
-                                </td>
-                                <td className="scrore-width selected">
-                                  <span> </span>
-                                </td>
-                                <td> 1</td>
-                              </tr>
-                              <tr>
-                                <td className="star-ratings">
-                                  <i className="fas fa-star filled" />
-                                  <i className="fas fa-star filled" />
-                                  <i className="fas fa-star filled" />
-                                  <i className="fa-regular fa-star rating-color" />
-                                  <i className="fa-regular fa-star rating-color" />
-                                </td>
-                                <td className="scrore-width">
-                                  <span> </span>
-                                </td>
-                                <td> 0</td>
-                              </tr>
-                              <tr>
-                                <td className="star-ratings">
-                                  <i className="fas fa-star filled" />
-                                  <i className="fas fa-star filled" />
-                                  <i className="fa-regular fa-star rating-color" />
-                                  <i className="fa-regular fa-star rating-color" />
-                                  <i className="fa-regular fa-star rating-color" />
-                                </td>
-                                <td className="scrore-width">
-                                  <span> </span>
-                                </td>
-                                <td> 0</td>
-                              </tr>
-                              <tr>
-                                <td className="star-ratings">
-                                  <i className="fas fa-star filled" />
-                                  <i className="fa-regular fa-star rating-color" />
-                                  <i className="fa-regular fa-star rating-color" />
-                                  <i className="fa-regular fa-star rating-color" />
-                                  <i className="fa-regular fa-star rating-color" />
-                                </td>
-                                <td className="scrore-width">
-                                  <span> </span>
-                                </td>
-                                <td> 0</td>
-                              </tr>
-                            </tbody>
-                          </table>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              {/*/Ratings Section*/}
+              {/* Rating Section */}
+              <Ratings />
+              {/* Rating Section */}
               {/*Review  Section*/}
-              <div className="card review-sec  mb-0">
-                <div className="card-header  align-items-center">
-                  <i className="fa-regular fa-comment-dots" />
-                  <h4>Write a Review</h4>
-                </div>
-                <div className="card-body">
-                  <div className="review-list">
-                    <ul className="">
-                      <li className="review-box ">
-                        <div className="review-profile">
-                          <div className="review-img">
-                            <img
-                              src={avatar_11}
-                              className="img-fluid"
-                              alt="img"
-                            />
-                          </div>
-                        </div>
-                        <div className="review-details">
-                          <h6>Joseph</h6>
-                          <div className="rating">
-                            <div className="rating-star">
-                              <i className="fas fa-star filled" />
-                              <i className="fas fa-star filled" />
-                              <i className="fas fa-star filled" />
-                              <i className="fas fa-star filled" />
-                              <i className="fa-regular fa-star rating-overall" />
-                            </div>
-                            <div>
-                              <i className="fa-sharp fa-solid fa-calendar-days" />{" "}
-                              4 months ago
-                            </div>
-                            <div>by: Demo Test</div>
-                          </div>
-                          <p>
-                            Lorem Ipsum is simply dummy text of the printing and
-                            typesetting industry. Lorem Ipsum has been the
-                            industry's standard dummy text ever since the 1500s,
-                            when an unknown printer took a galley of type and
-                            scrambled it to make a type specimen book.
-                          </p>
-
-                          <RoomsProfile />
-
-                          <div className="reply-box ">
-                            <p>
-                              Was This Review...?{" "}
-                              <Link to="#" className="thumbsup">
-                                <i className="feather-thumbs-up" /> Like{" "}
-                              </Link>
-                              <Link to="#" className="thumbsdown">
-                                <i className="feather-thumbs-down" /> Dislike{" "}
-                              </Link>
-                            </p>
-                            <Link to="#" className="replylink">
-                              <i className="feather-corner-up-left" /> Reply
-                            </Link>
-                          </div>
-                        </div>
-                      </li>
-                      <li className="review-box">
-                        <div className="review-profile">
-                          <div className="review-img">
-                            <img
-                              src={ProfileAvatar02}
-                              className="img-fluid"
-                              alt="img"
-                            />
-                          </div>
-                        </div>
-                        <div className="review-details">
-                          <h6>Dev</h6>
-                          <div className="rating">
-                            <div className="rating-star">
-                              <i className="fas fa-star filled" />
-                              <i className="fas fa-star filled" />
-                              <i className="fas fa-star filled" />
-                              <i className="fas fa-star filled" />
-                              <i className="fa-regular fa-star rating-overall" />
-                            </div>
-                            <div>
-                              <i className="fa-sharp fa-solid fa-calendar-days" />{" "}
-                              4 months ago
-                            </div>
-                            <div>by: Demo Test</div>
-                          </div>
-                          <p>
-                            Lorem Ipsum is simply dummy text of the printing and
-                            typesetting industry. Lorem Ipsum has been the
-                            industry's standard dummy text ever since the 1500s,
-                            when an unknown printer took a galley of type and
-                            scrambled it to make a type specimen book.
-                          </p>
-                        </div>
-                      </li>
-                      <li className="review-box">
-                        <div className="review-profile">
-                          <div className="review-img">
-                            <img
-                              src={ProfileAvatar01}
-                              className="img-fluid"
-                              alt="img"
-                            />
-                          </div>
-                        </div>
-                        <div className="review-details">
-                          <h6>Johnson</h6>
-                          <div className="rating">
-                            <div className="rating-star">
-                              <i className="fas fa-star filled" />
-                              <i className="fas fa-star filled" />
-                              <i className="fas fa-star filled" />
-                              <i className="fas fa-star filled" />
-                              <i className="fa-regular fa-star rating-overall" />
-                            </div>
-                            <div>
-                              <i className="fa-sharp fa-solid fa-calendar-days" />{" "}
-                              4 months ago
-                            </div>
-                            <div>by: Demo Test</div>
-                          </div>
-                          <p>
-                            Lorem Ipsum is simply dummy text of the printing and
-                            typesetting industry. Lorem Ipsum has been the
-                            industry's standard dummy text ever since the 1500s,
-                            when an unknown printer took a galley of type and
-                            scrambled it to make a type specimen book.
-                          </p>
-                          <div className="reply-box ">
-                            <p>
-                              Was This Review...?{" "}
-                              <Link to="#" className="thumbsup">
-                                <i className="feather-thumbs-up" /> Like{" "}
-                              </Link>
-                              <Link to="#" className="thumbsdown">
-                                <i className="feather-thumbs-down" /> Dislike{" "}
-                              </Link>
-                            </p>
-                            <Link to="#" className="replylink">
-                              <i className="feather-corner-up-left" /> Reply
-                            </Link>
-                          </div>
-                        </div>
-                      </li>
-                      <li className="review-box feedbackbox mb-0">
-                        <div className="review-details">
-                          <h6>Leave feedback about this</h6>
-                        </div>
-                        <div className="card-body">
-                          <form className="">
-                            <div className="form-group">
-                              <input
-                                type="text"
-                                className="form-control"
-                                placeholder="Title"
-                              />
-                            </div>
-                            <div className="namefield">
-                              <div className="form-group">
-                                <input
-                                  type="text"
-                                  className="form-control"
-                                  placeholder="Name*"
-                                  required=""
-                                />
-                              </div>
-                              <div className="form-group me-0">
-                                <input
-                                  type="email"
-                                  className="form-control"
-                                  placeholder="Email*"
-                                  required=""
-                                />
-                              </div>
-                            </div>
-                            <div className="form-group">
-                              <textarea
-                                rows={4}
-                                className="form-control"
-                                placeholder="Write a Review*"
-                                required=""
-                                defaultValue={""}
-                              />
-                            </div>
-                            <div className="reviewbox-rating">
-                              <p>
-                                <span> Rating</span>
-                                <i className="fas fa-star filled" />
-                                <i className="fas fa-star filled" />
-                                <i className="fas fa-star filled" />
-                                <i className="fas fa-star filled" />
-                                <i className="fas fa-star filled" />
-                              </p>
-                            </div>
-                            <div className="submit-section">
-                              <button
-                                className="btn btn-primary submit-btn"
-                                type="submit"
-                              >
-                                {" "}
-                                Submit Review
-                              </button>
-                            </div>
-                          </form>
-                        </div>
-                      </li>
-                    </ul>
-                  </div>
-                </div>
-              </div>
+              <Review />
               {/*/Review Section*/}
             </div>
             <div className="col-lg-3 theiaStickySidebar">
               <StickyBox>
                 <div className="rightsidebar">
-                  <div className="card">
-                    <h4>
-                      <img src={details_icon} alt="details-icon" /> Details
-                    </h4>
-                    <ul>
-                      <li>
-                        Contract <span>For Rent</span>
-                      </li>
-                      <li>
-                        Location <span>New York, USA</span>
-                      </li>
-                      <li>
-                        Year Built <span>1988</span>
-                      </li>
-                      <li>
-                        Rooms <span>3</span>
-                      </li>
-                      <li>
-                        Beds <span>4</span>
-                      </li>
-                      <li>
-                        Baths<span>8</span>
-                      </li>
-                      <li>
-                        Gadgets <span>6</span>
-                      </li>
-                      <li>
-                        Home Area <span>30sqft</span>
-                      </li>
-                      <li>
-                        Lot Dimensions <span>30*30*20 ft</span>
-                      </li>
-                      <li className="p-0">
-                        Lot Area <span>50 ft</span>
-                      </li>
-                    </ul>
-                  </div>
-                  <div className="card">
-                    <h4>
-                      <img src="assets/img/breifcase.svg" alt="" /> Business
-                      Info
-                    </h4>
-                    <div className="map-details">
-                      <div className="map-frame">
-                        <iframe
-                          src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3153.2238528387797!2d-122.41637708468208!3d37.78479337975754!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x80858090475dcdc3%3A0x417fdbbd16e076ed!2s484%20Ellis%20St%2C%20San%20Francisco%2C%20CA%2094102%2C%20USA!5e0!3m2!1sen!2sin!4v1669879954211!5m2!1sen!2sin"
-                          width={200}
-                          height={160}
-                          style={{ border: 0 }}
-                          allowFullScreen=""
-                          loading="lazy"
-                          referrerPolicy="no-referrer-when-downgrade"
-                        />
-                      </div>
-                      <ul className="info-list">
-                        <li>
-                          <i className="feather-map-pin" /> 484, Ellis st, San
-                          Fransisco,
-                          <br />
-                          CS 94102, United States
-                        </li>
-                        <li>
-                          <i className="feather-phone-call" /> + 62 8245 9875
-                        </li>
-                        <li>
-                          <i className="feather-mail" /> support@listee.com
-                        </li>
-                        <li>
-                          <img src={website} alt="website" /> www.listee.com
-                        </li>
-                        <li className="socialicons pb-0">
-                          <Link to="#" target="_blank">
-                            <i className="fab fa-facebook-f" />{" "}
-                          </Link>
-                          <Link to="#" target="_blank">
-                            <i className="fab fa-twitter" />
-                          </Link>
-                          <Link to="#" target="_blank">
-                            <i className="fab fa-instagram" />
-                          </Link>
-                          <Link to="#" target="_blank">
-                            <i className="fab fa-linkedin-in" />
-                          </Link>
-                        </li>
-                      </ul>
-                    </div>
-                  </div>
+                  <ListDetails listingDetail={listingDetail} />
                   <div className="card">
                     <h4>
                       <img src={statistic_icon} alt="location" /> Statisfic
@@ -752,7 +366,12 @@ const ServiceDetails = () => {
                           </span>
                           Views{" "}
                         </div>
-                        <span className="text-end"> 453563</span>
+                        <span className="text-end">
+                          {" "}
+                          {listingDetail?.page_views
+                            ? listingDetail?.page_views
+                            : "0"}
+                        </span>
                       </li>
                       <li>
                         <div className="statistic-details">
@@ -761,16 +380,26 @@ const ServiceDetails = () => {
                           </span>
                           Ratings{" "}
                         </div>
-                        <span className="text-end"> 153</span>
+                        <span className="text-end">
+                          {" "}
+                          {listingDetail?.ratings
+                            ? listingDetail?.ratings
+                            : "0"}
+                        </span>
                       </li>
                       <li>
                         <div className="statistic-details">
                           <span className="icons">
                             <i className="feather-heart" />
                           </span>
-                          Favuorites{" "}
+                          Reviews{" "}
                         </div>
-                        <span className="text-end"> 123</span>
+                        <span className="text-end">
+                          {" "}
+                          {listingDetail?.reviews
+                            ? listingDetail?.reviews
+                            : "0"}
+                        </span>
                       </li>
                       <li className="mb-0">
                         <div className="statistic-details">
@@ -779,7 +408,12 @@ const ServiceDetails = () => {
                           </span>
                           Shares{" "}
                         </div>
-                        <span className="text-end"> 50</span>
+                        <span className="text-end">
+                          {" "}
+                          {listingDetail?.total_shares
+                            ? listingDetail?.total_shares
+                            : "0"}
+                        </span>
                       </li>
                     </ul>
                   </div>
@@ -790,11 +424,14 @@ const ServiceDetails = () => {
                     </h4>
                     <div className="sidebarauthor-details align-items-center">
                       <div className="sideauthor-img">
-                        <img src={ProfileAvatar12} alt="author" />
+                        <img
+                          src={profileData?.profile_pic || ProfileAvatar12}
+                          alt="author"
+                        />
                       </div>
                       <div className="sideauthor-info">
-                        <p className="authorname">Johnson</p>
-                        <p>Member since Nov 24, 2017</p>
+                        <p className="authorname">{profileData?.name || "-"}</p>
+                        <p>{profileData?.created_at || "-"}</p>
                       </div>
                     </div>
                   </div>

@@ -109,6 +109,9 @@ const GridSidebar = () => {
                                 src={item?.logo || listgrid_1}
                                 className="img-fluid"
                                 alt="blog-img"
+                                height={70}
+                                width={70}
+                                style={{ border: "1px solid black" }}
                               />
                             </Link>
                             <div className="fav-item">

@@ -25,6 +25,8 @@ export const Category = ({ categories }) => {
                           src={item?.image || Category27Svg}
                           className="img-fluid"
                           alt="img"
+                          height={50}
+                          width={50}
                         />
                       </span>
                       <h6>{item?.label}</h6>

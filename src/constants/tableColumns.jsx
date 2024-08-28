@@ -6,10 +6,7 @@ export const myListingColumns = (handleDeleteListing) => [
     title: "Title",
     dataIndex: "listing_title",
     render: (text) => (
-      <div className="listingtable-rate">
-        {" "}
-        <Link to="/service-details">{text ? text : "-"}</Link>
-      </div>
+      <div className="listingtable-rate"> {text ? text : "-"}</div>
     ),
   },
   {
@@ -17,9 +14,7 @@ export const myListingColumns = (handleDeleteListing) => [
     render: (text) => (
       <>
         <div className="listingtable-rate">
-          <Link to="/service-details" className="cat-icon">
-            {text?.category ? text?.category?.name : "-"}
-          </Link>{" "}
+          {text?.category ? text?.category?.name : "-"}
         </div>
       </>
     ),
@@ -40,15 +35,21 @@ export const myListingColumns = (handleDeleteListing) => [
     title: "Action",
     render: (text) => (
       <div className="listingtable-rate">
-        {/* <Link to="#" className="action-btn btn-edit">
+        <Link to={`/edit-listing/${text?.id}`} className="action-btn btn-edit">
           <i className="feather-edit-3" />
-        </Link> */}
+        </Link>
         <span
           className="action-btn btn-trash"
           onClick={(e) => handleDeleteListing(e, text?.id)}
         >
           <i className="feather-trash-2" />
         </span>
+        <Link
+          to={`/service-details/${text?.id}`}
+          className="action-btn btn-view"
+        >
+          <i className="feather-view-3" />
+        </Link>
       </div>
     ),
   },

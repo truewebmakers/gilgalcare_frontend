@@ -5,8 +5,6 @@ export { default as LogoSvg } from "../assets/img/logo.svg";
 export { default as LogoBGR } from "../assets/img/logo/logo-bgr.png";
 export { default as Logo } from "../assets/img/logo/logo.png";
 
-
-
 export { default as Home01 } from "../assets/img/home-01.jpg";
 export { default as Home02 } from "../assets/img/home-02.jpg";
 export { default as Home03 } from "../assets/img/home-03.jpg";
@@ -22,7 +20,6 @@ export { default as property_feature_1 } from "../assets/img/featured/property-f
 export { default as property_feature_2 } from "../assets/img/featured/property-feature-2.jpg";
 export { default as property_feature_3 } from "../assets/img/featured/property-feature-3.jpg";
 export { default as feature_text_logo } from "../assets/img/featured/feature-text-logo.png";
-
 
 export { default as top_rent_room_img_1 } from "../assets/img/gallery/top-rent-room-img-1.jpg";
 export { default as top_rent_room_img_2 } from "../assets/img/gallery/top-rent-room-img-2.jpg";
@@ -145,7 +142,7 @@ export { default as galleryimage_12 } from "../assets/img/gallery/gallery2/galle
 export { default as partners_1 } from "../assets/img/partners/partners-1.png";
 export { default as partners_2 } from "../assets/img/partners/partners-2.png";
 export { default as partners_3 } from "../assets/img/partners/partners-3.png";
-export { default as partners_4} from "../assets/img/partners/partners-4.png";
+export { default as partners_4 } from "../assets/img/partners/partners-4.png";
 export { default as partners_5 } from "../assets/img/partners/partners-5.png";
 export { default as partners_6 } from "../assets/img/partners/partners-6.png";
 
@@ -189,8 +186,6 @@ export { default as bloglistview_1 } from "../assets/img/blog/bloglistview-1.jpg
 export { default as bloglistview_2 } from "../assets/img/blog/bloglistview-2.jpg";
 export { default as bloglistview_3 } from "../assets/img/blog/bloglistview-3.jpg";
 export { default as bloglistview_4 } from "../assets/img/blog/bloglistview-4.jpg";
-
-
 
 export { default as FooterLogo } from "../assets/img/footerlogo.svg";
 export { default as CallCallingSvg } from "../assets/img/call-calling.svg";
@@ -269,7 +264,7 @@ export { default as job_logomark_6 } from "../assets/img/icons/job-logomark-6.pn
 export { default as why_us_1 } from "../assets/img/icons/why-us-1.svg";
 export { default as why_us_2 } from "../assets/img/icons/why-us-2.svg";
 export { default as why_us_3 } from "../assets/img/icons/why-us-3.svg";
-export { default as why_us_4} from "../assets/img/icons/why-us-4.svg";
+export { default as why_us_4 } from "../assets/img/icons/why-us-4.svg";
 
 export { default as Stripe } from "../assets/img/icons/stripe.svg";
 export { default as Discover } from "../assets/img/icons/discover.svg";
@@ -291,8 +286,6 @@ export { default as counter_bg } from "../assets/img/bg/counter-bg.png";
 export { default as ads_1 } from "../assets/img/ads-1.png";
 export { default as holiday_cabin_slider } from "../assets/img/bg/holiday-cabin-slider-img-1.jpg";
 export { default as holiday_cabin_slider_2 } from "../assets/img/bg/holiday-cabin-slider-img-2.jpg";
-
-
 
 export { default as Destination1 } from "../assets/img/recommended/destination-01.jpg";
 export { default as Destination2 } from "../assets/img/recommended/destination-02.jpg";
@@ -367,7 +360,6 @@ export { default as blogdetailimg_2 } from "../assets/img/blog/blogdetailimg-2.j
 
 export { default as reviewsvg } from "../assets/img/review.svg";
 export { default as blogquote } from "../assets/img/blogquote.jpg";
-
 
 export { default as bloglistimg_1 } from "../assets/img/blog/bloglistimg-1.jpg";
 export { default as bloglistimg_2 } from "../assets/img/blog/bloglistimg-2.jpg";
@@ -538,15 +530,14 @@ export { default as footer_bg } from "../assets/img/bg/footer-bg.png";
 export { default as agent_bg } from "../assets/img/bg/agent-bg.png";
 export { default as website } from "../assets/img/website.svg";
 
-export { default as mediaimg_2} from "../assets/img/mediaimg-2.jpg";
-export { default as mediaimg_1} from "../assets/img/mediaimg-1.jpg";
+export { default as mediaimg_2 } from "../assets/img/mediaimg-2.jpg";
+export { default as mediaimg_1 } from "../assets/img/mediaimg-1.jpg";
 
-export { default as gallerymedia_1} from "../assets/img/gallery/gallerymedia-1.jpg";
-export { default as gallerymedia_2} from "../assets/img/gallery/gallerymedia-2.jpg";
-export { default as gallerymedia_3} from "../assets/img/gallery/gallerymedia-3.jpg";
-export { default as gallerymedia_4} from "../assets/img/gallery/gallerymedia-4.jpg";
-export { default as gallerymedia_5} from "../assets/img/gallery/gallerymedia-5.jpg";
-
+export { default as gallerymedia_1 } from "../assets/img/gallery/gallerymedia-1.jpg";
+export { default as gallerymedia_2 } from "../assets/img/gallery/gallerymedia-2.jpg";
+export { default as gallerymedia_3 } from "../assets/img/gallery/gallerymedia-3.jpg";
+export { default as gallerymedia_4 } from "../assets/img/gallery/gallerymedia-4.jpg";
+export { default as gallerymedia_5 } from "../assets/img/gallery/gallerymedia-5.jpg";
 
 export { default as car_img } from "../assets/img/car-img.jpg";
 export { default as amsterdam } from "../assets/img/amsterdam.jpg";
@@ -583,7 +574,6 @@ export { default as Feature_6_svg } from "../assets/img//featured/Feature-6.svg"
 export { default as Feature_7_svg } from "../assets/img//featured/Feature-7.svg";
 export { default as Feature_8_svg } from "../assets/img//featured/Feature-8.svg";
 
-
 export { default as gallery_1_jpg } from "../assets/img/gallery/gallery1/gallery-1.jpg";
 export { default as gallery_2_jpg } from "../assets/img/gallery/gallery1/gallery-2.jpg";
 export { default as gallery_3_jpg } from "../assets/img/gallery/gallery1/gallery-3.jpg";
@@ -592,8 +582,6 @@ export { default as gallery_5_jpg } from "../assets/img/gallery/gallery1/gallery
 export { default as gallery_6_jpg } from "../assets/img/gallery/gallery1/gallery-6.jpg";
 export { default as gallery_8_jpg } from "../assets/img/gallery/gallery1/gallery-8.jpg";
 export { default as gallery_7_jpg } from "../assets/img/gallery/gallery1/gallery-7.jpg";
-
-
 
 export { default as car_location_1 } from "../assets/img/city/car-location-1.png";
 export { default as car_location_2 } from "../assets/img/city/car-location-2.png";
@@ -606,18 +594,15 @@ export { default as property_blog_1 } from "../assets/img/blog/property-blog-1.j
 export { default as property_blog_2 } from "../assets/img/blog/property-blog-2.jpg";
 export { default as property_blog_3 } from "../assets/img/blog/property-blog-3.jpg";
 
-
 export { default as avatar_15 } from "../assets/img/profiles/avatar-15.jpg";
 export { default as avatar_16 } from "../assets/img/profiles/avatar-16.jpg";
 export { default as avatar_17 } from "../assets/img/profiles/avatar-17.jpg";
 export { default as avatar_18 } from "../assets/img/profiles/avatar-18.jpg";
 export { default as avatar_11 } from "../assets/img/profiles/avatar-11.jpg";
 
-
 export { default as blog_six_1 } from "../assets/img/blog/blog-six-1.png";
 export { default as blog_six_2 } from "../assets/img/blog/blog-six-2.png";
 export { default as blog_six_3 } from "../assets/img/blog/blog-six-3.png";
-
 
 export { default as category_img_1 } from "../assets/img/latest/category-img-1.png";
 export { default as category_img_2 } from "../assets/img/latest/category-img-2.png";
@@ -661,7 +646,6 @@ export { default as tablelist_6 } from "../assets/img/list/tablelist-6.jpg";
 export { default as tablelist_7 } from "../assets/img/list/tablelist-7.jpg";
 export { default as tablelist_8 } from "../assets/img/list/tablelist-8.jpg";
 
-
 export { default as Restaurant_1 } from "../assets/img/latest/Restaurant-1.jpg";
 export { default as Restaurant_2 } from "../assets/img/latest/Restaurant-2.jpg";
 export { default as Restaurant_3 } from "../assets/img/latest/Restaurant-3.jpg";
@@ -670,7 +654,6 @@ export { default as latest_restaurant_1 } from "../assets/img/latest/latest-rest
 export { default as latest_restaurant_2 } from "../assets/img/latest/latest-restaurant-2.jpg";
 export { default as latest_restaurant_3 } from "../assets/img/latest/latest-restaurant-3.jpg";
 export { default as latest_restaurant_4 } from "../assets/img/latest/latest-restaurant-4.jpg";
-
 
 export { default as circle_11 } from "../assets/img/banner/circle-11.png";
 export { default as banner_left_bottom } from "../assets/img/banner-left-bottom.png";
@@ -710,4 +693,3 @@ export { default as ads_banner } from "../assets/img/ads-banner.png";
 export { default as news_article_1 } from "../assets/img/blog/news-article-1.jpg";
 export { default as news_article_2 } from "../assets/img/blog/news-article-2.jpg";
 export { default as news_article_3 } from "../assets/img/blog/news-article-3.jpg";
-
