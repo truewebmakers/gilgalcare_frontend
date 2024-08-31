@@ -12,7 +12,7 @@ export const apiUrls = {
   getAllCategoriesPublic: "/categories/get-pb/all",
   // listings
   addListing: "/listing/store",
-  editListing: "/admin/listing/update/",
+  editListing: "/listing/update/",
   getAllListingPublic: "/listing/get-pb/all",
   searching: "/listing/search",
   getUserSpecificListing: "/listing/get/all/",

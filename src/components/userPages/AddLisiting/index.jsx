@@ -22,6 +22,7 @@ import { addListingService } from "../../../services/addListingService";
 import { fetchCategories } from "../../../services/getCategoryList";
 import { editListingService } from "../../../services/editListingService";
 import { fetchMyListingDetail } from "../../../services/getMyListingDetail";
+import { fetchImageAsBinary } from "../../../utils/commonFunctions";
 
 const AddLisiting = () => {
   const [listingFields, setListingFields] = useState(initialListingField);
@@ -68,6 +69,20 @@ const AddLisiting = () => {
       featuredImage: response?.featured_image,
       logo: response?.logo,
     });
+    if (response?.featured_image?.length) {
+      const featureRes = await fetchImageAsBinary(response?.featured_image);
+      setUploadedPic((prev) => ({
+        ...prev,
+        featuredImage: featureRes,
+      }));
+    }
+    if (response?.logo?.length) {
+      const featureLogo = await fetchImageAsBinary(response?.logo);
+      setUploadedPic((prev) => ({
+        ...prev,
+        logo: featureLogo,
+      }));
+    }
   };
   const convertToApiKey = (key) => {
     // Convert the camelCase keys to snake_case keys as used in the API response
@@ -203,7 +218,10 @@ const AddLisiting = () => {
   return (
     <>
       <UserHeader />
-      <UserBreadCrumb path="Home" pageName={"Add Listing"} />
+      <UserBreadCrumb
+        path="Home"
+        pageName={id ? "Edit Listing" : "Add Listing"}
+      />
       <div className="dashboard-content">
         <div className="container">
           <UserMenu activeUrl={"add-listing"} />
@@ -258,6 +276,8 @@ const AddLisiting = () => {
                   <>
                     &nbsp;&nbsp; <Loader />
                   </>
+                ) : id ? (
+                  `Edit Listing`
                 ) : (
                   `Add Listing`
                 )}
