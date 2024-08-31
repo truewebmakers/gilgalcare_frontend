@@ -20,6 +20,8 @@ import { validateListingFields } from "../../../utils/validations";
 import Loader from "../../common/Loader";
 import { addListingService } from "../../../services/addListingService";
 import { fetchCategories } from "../../../services/getCategoryList";
+import { editListingService } from "../../../services/editListingService";
+import { fetchMyListingDetail } from "../../../services/getMyListingDetail";
 
 const AddLisiting = () => {
   const [listingFields, setListingFields] = useState(initialListingField);
@@ -41,15 +43,50 @@ const AddLisiting = () => {
   const parms = useLocation().pathname;
   const [categoriesList, setCategoriesList] = useState([]);
   const { user } = useSelector((state) => state.auth);
+  const id = parms?.includes("edit-listing") ? parms?.split("/")[2] : null;
+
+  const fetchCategoriesData = async () => {
+    const response = await fetchCategories(user?.token);
+    if (response?.length) {
+      setCategoriesList(response);
+    }
+  };
+
+  const fetchMyListingData = async () => {
+    const response = await fetchMyListingDetail(user?.token, id);
+    setListingFields((prevFields) => {
+      return Object.entries(prevFields).reduce((acc, [key, _]) => {
+        const apiKey = convertToApiKey(key); // Convert state keys to API response keys
+        acc[key] =
+          response[apiKey] !== undefined
+            ? parseFieldValue(key, response[apiKey])
+            : prevFields[key];
+        return acc;
+      }, {});
+    });
+    setSelectedImage({
+      featuredImage: response?.featured_image,
+      logo: response?.logo,
+    });
+  };
+  const convertToApiKey = (key) => {
+    // Convert the camelCase keys to snake_case keys as used in the API response
+    return key.replace(/([A-Z])/g, "_$1").toLowerCase();
+  };
+
+  const parseFieldValue = (key, value) => {
+    // Parse fields that require special handling, e.g., priceFrom, priceTo
+    if (key === "priceFrom" || key === "priceTo") {
+      return parseFloat(value) || 0;
+    }
+    return value;
+  };
 
   useEffect(() => {
-    const fetchData = async () => {
-      const response = await fetchCategories(user?.token);
-      if (response?.length) {
-        setCategoriesList(response);
-      }
-    };
-    fetchData();
+    fetchCategoriesData();
+    if (id) {
+      fetchMyListingData();
+    }
   }, []);
 
   const hasErrors = (error) => Object.values(error).some((err) => err);
@@ -87,7 +124,9 @@ const AddLisiting = () => {
     if (!hasErrors(newErr) && areAllFieldsFilled(allFields)) {
       setIsLoading(true);
       try {
-        await addListingService(allFields, user?.token);
+        id
+          ? await editListingService(allFields, id, user?.token)
+          : await addListingService(allFields, user?.token);
       } finally {
         setIsLoading(false);
       }
@@ -163,7 +202,7 @@ const AddLisiting = () => {
 
   return (
     <>
-      <UserHeader parms={parms} />
+      <UserHeader />
       <UserBreadCrumb path="Home" pageName={"Add Listing"} />
       <div className="dashboard-content">
         <div className="container">

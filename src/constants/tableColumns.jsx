@@ -6,7 +6,9 @@ export const myListingColumns = (handleDeleteListing) => [
     title: "Title",
     dataIndex: "listing_title",
     render: (text) => (
-      <div className="listingtable-rate"> {text ? text : "-"}</div>
+      <>
+        <div className="listingtable-rate"> {text ? text : "-"}</div>
+      </>
     ),
   },
   {
@@ -36,7 +38,7 @@ export const myListingColumns = (handleDeleteListing) => [
     render: (text) => (
       <div className="listingtable-rate">
         <Link to={`/edit-listing/${text?.id}`} className="action-btn btn-edit">
-          <i className="feather-edit-3" />
+          <i className="feather-edit-2" />
         </Link>
         <span
           className="action-btn btn-trash"
@@ -48,7 +50,7 @@ export const myListingColumns = (handleDeleteListing) => [
           to={`/my-listing-details/${text?.id}`}
           className="action-btn btn-view"
         >
-          <i className="feather-view-3" />
+          <i className="feather-eye" />
         </Link>
       </div>
     ),

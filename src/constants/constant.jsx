@@ -12,6 +12,7 @@ export const apiUrls = {
   getAllCategoriesPublic: "/categories/get-pb/all",
   // listings
   addListing: "/listing/store",
+  editListing: "/admin/listing/update/",
   getAllListingPublic: "/listing/get-pb/all",
   searching: "/listing/search",
   getUserSpecificListing: "/listing/get/all/",
@@ -82,7 +83,7 @@ export const cateogoryOptions = [
 
 export const errorListingFields = {
   listingTitle: "",
-  listingDiscription: "",
+  listingDescription: "",
   categoryId: "",
   tagline: "",
   priceRange: "",
@@ -112,7 +113,7 @@ export const defaultCenter = {
 
 export const initialListingField = {
   listingTitle: "",
-  listingDiscription: "",
+  listingDescription: "",
   categoryId: "",
   tagline: "",
   priceRange: "",

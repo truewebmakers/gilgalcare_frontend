@@ -2,7 +2,7 @@ import { customToast } from "../components/common/Toast";
 import { apiMethods, apiUrls } from "../constants/constant";
 import UseApi from "../hooks/useApi";
 
-export const addListingService = async (listingData, token) => {
+export const editListingService = async (listingData, id, token) => {
   // set headers
   const headers = {
     "Content-Type": "multipart/form-data",
@@ -39,7 +39,7 @@ export const addListingService = async (listingData, token) => {
   try {
     // Call Add Listing API
     const response = await UseApi(
-      apiUrls.addListing,
+      apiUrls.editListing + id,
       apiMethods.POST,
       bodyData,
       headers

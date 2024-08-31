@@ -149,7 +149,7 @@ export const validateListingFields = (name, value, basicInfo2) => {
           : "";
       break;
 
-    case "listingDiscription":
+    case "listingDescription":
       newErr[name] =
         value === ""
           ? "Listing description cannot be empty"

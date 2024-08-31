@@ -6314,6 +6314,9 @@ body table.listing-table.datatable {
   font-weight: 400;
 }
 .listingtable-rate {
+  display: flex; /* Use Flexbox for layout */
+  justify-content: center; /* Center buttons horizontally */
+  align-items: center; /* Align buttons vertically if needed */
   margin-bottom: 5px;
 }
 .listing-table h6 a {
@@ -6327,6 +6330,7 @@ body table.listing-table.datatable {
 .listingtable-rate a:hover {
   color: #d54a38;
 }
+
 .listingtable-rate a i {
   margin-right: 3px;
 }
@@ -6357,10 +6361,10 @@ body table.listing-table.datatable {
   width: 40px;
   height: 40px;
   display: flex;
-  margin: 0 10px 0 0;
-  padding: 13 px;
   align-items: center;
   justify-content: center;
+  margin: 0 10px; /* Space between buttons */
+  padding: 0; /* Remove padding */
   cursor: pointer;
 }
 .listing-table .action-btn:hover {
@@ -6377,14 +6381,15 @@ body table.listing-table.datatable {
 .listing-table .btn-view {
   border: 1px solid #f1f1f1;
 }
+
 .listing-table .btn-edit {
   background: #374b5c;
   color: #fff;
 }
+
 .listing-table .btn-trash {
   background: #d54a38;
   color: #fff;
-  margin: 0;
 }
 .listing-table tr td:first-child {
   padding-left: 20px;

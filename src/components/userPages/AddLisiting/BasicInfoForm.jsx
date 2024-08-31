@@ -34,14 +34,14 @@ export const BasicInfoForm = ({
           rows={6}
           className="form-control listingdescription"
           placeholder="Message"
-          name="listingDiscription"
-          value={basicInfo1?.listingDiscription}
+          name="listingDescription"
+          value={basicInfo1?.listingDescription}
           onChange={handleChange}
           data-handler="basicInfo1"
           autoComplete="off"
         />
-        {error?.listingDiscription && (
-          <p style={{ color: "red" }}>{error?.listingDiscription}</p>
+        {error?.listingDescription && (
+          <p style={{ color: "red" }}>{error?.listingDescription}</p>
         )}
       </div>
       <div className="filter-content form-group">
@@ -50,18 +50,20 @@ export const BasicInfoForm = ({
         </label>
         <select
           className="form-control select category-select"
-          value={basicInfo1?.status}
+          value={basicInfo1?.status} // Ensure this value is correctly set
           data-handler="basicInfo1"
           name="status"
           onChange={handleChange}
         >
-          <option value="">Status</option>
-          <option>Draft</option>
-          <option>Published</option>
-          <option>Unpublished</option>
+          <option value="">Status</option>{" "}
+          {/* Ensure all options have value attributes */}
+          <option value="draft">Draft</option>
+          <option value="published">Published</option>
+          <option value="unpublished">Unpublished</option>
         </select>
         {error?.status && <p style={{ color: "red" }}>{error?.status}</p>}
       </div>
+
       <div className="form-group">
         <label className="col-form-label label-heading">Category </label>
         <div className="row category-listing">
