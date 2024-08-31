@@ -201,21 +201,11 @@ export const validateListingFields = (name, value, basicInfo2) => {
       break;
 
     case "mapLat":
-      newErr[name] =
-        value === ""
-          ? "Latitude cannot be empty"
-          : isNaN(value)
-          ? "Latitude must be a number"
-          : "";
+      newErr[name] = value === "" ? "Latitude cannot be empty" : "";
       break;
 
     case "mapLong":
-      newErr[name] =
-        value === ""
-          ? "Longitude cannot be empty"
-          : isNaN(value)
-          ? "Longitude must be a number"
-          : "";
+      newErr[name] = value === "" ? "Longitude cannot be empty" : "";
       break;
 
     case "email":

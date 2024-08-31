@@ -1,14 +1,11 @@
-import React, { useState } from "react";
+import React, { useEffect } from "react";
 import { GoogleMap, LoadScript, Marker } from "@react-google-maps/api";
+import axios from "axios";
+import { customToast } from "../../common/Toast";
 
 const mapContainerStyle = {
   width: "100%",
   height: "430px",
-};
-
-const defaultCenter = {
-  lat: 26.045130803169,
-  lng: -80.26548188573862,
 };
 
 export const LocationForm = ({
@@ -19,15 +16,61 @@ export const LocationForm = ({
   markerPosition,
   setMarkerPosition,
 }) => {
-  const handleMapClick = (event) => {
-    const lat = event.latLng.lat();
-    const lng = event.latLng.lng();
-    setMarkerPosition({ lat, lng });
-    setLocation((prevState) => ({
-      ...prevState,
-      mapLat: lat.toString(),
-      mapLong: lng.toString(),
-    }));
+  const handleMapClick = async (event) => {
+    const { latLng } = event;
+    const lat = latLng.lat();
+    const lng = latLng.lng();
+
+    // Geocoding API URL
+    const geocodeUrl = `https://maps.googleapis.com/maps/api/geocode/json?latlng=${lat},${lng}&key=AIzaSyDk_TbPERImCZCd7YmCzYacT6wGayV-Lmk`;
+
+    try {
+      const response = await axios.get(geocodeUrl);
+      const results = response?.data?.results;
+
+      if (results?.length > 0) {
+        const addressComponents = results[0]?.address_components;
+        const formattedAddress = results[0]?.formatted_address;
+
+        // Extract state and country
+        const state = addressComponents?.find((component) =>
+          component?.types?.includes("administrative_area_level_1")
+        )?.long_name;
+
+        const country = addressComponents?.find((component) =>
+          component?.types?.includes("country")
+        )?.long_name;
+
+        // Construct address excluding state and country
+        const addressParts = addressComponents
+          ?.filter(
+            (component) =>
+              !component?.types?.includes("administrative_area_level_1") &&
+              !component?.types?.includes("country")
+          )
+          ?.map((component) => component?.long_name)
+          ?.join(", ");
+
+        // Format location and address
+        const location = state && country ? `${state}, ${country}` : "";
+        const address = formattedAddress
+          ? addressParts || formattedAddress
+          : "";
+
+        setLocation((prevState) => ({
+          ...prevState,
+          location: location,
+          address: address,
+          mapLat: lat?.toString(),
+          mapLong: lng?.toString(),
+        }));
+        setMarkerPosition({ lat, lng });
+      } else {
+        customToast.error("No address found");
+      }
+    } catch (error) {
+      customToast.error("Error fetching address: ", error);
+    }
   };
 
   return (

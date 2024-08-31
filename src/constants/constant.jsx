@@ -80,7 +80,7 @@ export const cateogoryOptions = [
   { label: "Behaviour Support", value: "Behaviour Supportss" },
 ];
 
-export const listingFields = {
+export const errorListingFields = {
   listingTitle: "",
   listingDiscription: "",
   categoryId: "",
@@ -102,7 +102,35 @@ export const listingFields = {
   instagram: "",
   featuredImage: "",
   logo: "",
-  addedBy: "",
+  status: "",
+};
+
+export const defaultCenter = {
+  lat: 26.045130803169,
+  lng: -80.26548188573862,
+};
+
+export const initialListingField = {
+  listingTitle: "",
+  listingDiscription: "",
+  categoryId: "",
+  tagline: "",
+  priceRange: "",
+  priceFrom: 0,
+  priceTo: 0,
+  featuresInformation: "",
+  location: "",
+  address: "",
+  mapLat: "",
+  mapLong: "",
+  email: "",
+  website: "",
+  phone: "",
+  facebook: "",
+  twitter: "",
+  googlePlus: "",
+  instagram: "",
+  status: "",
 };
 
 export const dateFormat = "dddd, MMMM Do YYYY, h:mm:ss a";

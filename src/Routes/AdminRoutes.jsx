@@ -7,8 +7,6 @@ import Message from "../components/userPages/mesage";
 import Review from "../components/userPages/review";
 import AddLisiting from "../components/userPages/AddLisiting";
 import AddCategory from "../components/userPages/addCategory";
-import ServiceDetails from "../components/Listings/PublicListingDetails/serviceDetails";
-import EditLisiting from "../components/userPages/editListing";
 import MyListingDetails from "../components/Listings/MyListingDetails";
 
 export const AdminRoutes = [
@@ -46,7 +44,7 @@ export const AdminRoutes = [
   },
   {
     path: "edit-listing/:id",
-    element: <EditLisiting />,
+    element: <AddLisiting />,
   },
 
   {
