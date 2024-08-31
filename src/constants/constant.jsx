@@ -104,3 +104,5 @@ export const listingFields = {
   logo: "",
   addedBy: "",
 };
+
+export const dateFormat = "dddd, MMMM Do YYYY, h:mm:ss a";

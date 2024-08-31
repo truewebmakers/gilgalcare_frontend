@@ -12,7 +12,7 @@ import { useState } from "react";
 import { Link, useLocation } from "react-router-dom";
 import Rooms from "./myComponent2";
 import Roomspics from "./myComponent3";
-import { apiMethods, apiUrls } from "../../../constants/constant";
+import { apiMethods, apiUrls, dateFormat } from "../../../constants/constant";
 import UseApi from "../../../hooks/useApi";
 import { customToast } from "../../common/Toast";
 import mailIcon from "../../../assets/svg/mail.svg";
@@ -24,6 +24,7 @@ import { CapitalizeFirstLetter } from "../../../utils/commonFunctions";
 import { Review } from "./Review";
 import { Ratings } from "./Ratingsx";
 import { ListDetails } from "./listDetails";
+import moment from "moment/moment";
 
 const ServiceDetails = () => {
   const parms = useLocation()?.pathname;
@@ -118,7 +119,7 @@ const ServiceDetails = () => {
                 <ul>
                   <li>
                     <span>
-                      <img src={location} alt="" />
+                      <img src={location} alt="" /> &ndsp;
                       {listingDetail?.location ? listingDetail?.location : "-"}
                     </span>
                   </li>
@@ -132,10 +133,18 @@ const ServiceDetails = () => {
                     </Link>
                   </li>
                   <li>
-                    <Link to="#">
+                    <a
+                      href="#write-review"
+                      onClick={(e) => {
+                        e.preventDefault(); // Prevents default hash behavior
+                        document
+                          .getElementById("write-review")
+                          ?.scrollIntoView({ behavior: "smooth" });
+                      }}
+                    >
                       <i className="fa-regular fa-comment-dots" /> Write a
                       review
-                    </Link>
+                    </a>
                   </li>
                   <li>
                     <img src={mailIcon} alt="" />{" "}
@@ -250,7 +259,9 @@ const ServiceDetails = () => {
                         <div className="featues-info">
                           <h6>
                             {listingDetail?.category?.created_at
-                              ? listingDetail?.category?.created_at
+                              ? moment(
+                                  listingDetail?.category?.created_at
+                                ).format(dateFormat)
                               : "-"}
                           </h6>
                         </div>
@@ -275,7 +286,7 @@ const ServiceDetails = () => {
               </div>
               {/*/category Section*/}
               {/* Gallery Section */}
-              {listingDetail?.meta?.length && (
+              {listingDetail?.meta?.length ? (
                 <div className="card gallery-section ">
                   <div className="card-header ">
                     <img src={galleryicon} alt="gallery" />
@@ -287,7 +298,7 @@ const ServiceDetails = () => {
                     </div>
                   </div>
                 </div>
-              )}
+              ) : null}
               {/*/Gallery Section*/}
               {/* Rating Section */}
               <Ratings />

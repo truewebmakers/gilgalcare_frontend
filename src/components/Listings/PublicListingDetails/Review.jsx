@@ -1,10 +1,11 @@
 import React, { useEffect, useState } from "react";
 import { useLocation } from "react-router-dom";
 import UseApi from "../../../hooks/useApi";
-import { apiMethods, apiUrls } from "../../../constants/constant";
+import { apiMethods, apiUrls, dateFormat } from "../../../constants/constant";
 import { customToast } from "../../common/Toast";
 import { CapitalizeFirstLetter } from "../../../utils/commonFunctions";
 import { AddReview } from "./addReview";
+import moment from "moment";
 
 export const Review = () => {
   const parms = useLocation()?.pathname;
@@ -41,7 +42,7 @@ export const Review = () => {
     <div className="card review-sec  mb-0">
       <div className="card-header  align-items-center">
         <i className="fa-regular fa-comment-dots" />
-        <h4>Write a Review</h4>
+        <h4 id="write-review">Write a Review</h4>
       </div>
       <div className="card-body">
         <div className="review-list">
@@ -51,24 +52,27 @@ export const Review = () => {
                 <div className="review-profile"></div>
                 <div className="review-details">
                   <h6>
-                    {item?.title ? CapitalizeFirstLetter(item?.title) : "-"}
+                    {item?.title ? CapitalizeFirstLetter(item?.title) : null}
                   </h6>
                   <div className="rating">
                     <div className="rating-star">
-                      Rating: {item?.rating ? item?.rating : "-"}
+                      Rating: {item?.rating ? item?.rating : null}
                       &nbsp;&nbsp;
                       <i className="fas fa-star filled" />
                     </div>
                     <div>
                       <i className="fa-sharp fa-solid fa-calendar-days" />{" "}
-                      {item?.updated_at ? item?.updated_at : "-"}
+                      {item?.updated_at
+                        ? moment(item?.updated_at).format(dateFormat)
+                        : null}
                     </div>
                     <div>
-                      by: {item?.name ? CapitalizeFirstLetter(item?.name) : "-"}
+                      by:{" "}
+                      {item?.name ? CapitalizeFirstLetter(item?.name) : null}
                     </div>
                   </div>
                   <p>
-                    {item?.review ? CapitalizeFirstLetter(item?.review) : "-"}
+                    {item?.review ? CapitalizeFirstLetter(item?.review) : null}
                   </p>
                 </div>
               </li>

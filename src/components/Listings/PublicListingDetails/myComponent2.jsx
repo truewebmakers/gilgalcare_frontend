@@ -10,11 +10,22 @@ const Rooms = ({ img }) => {
           style={{ marginTop: "88px", height: "70%" }}
         >
           <span data-fancybox="gallery1">
-            <img className="img-fluid" alt="Image" src={img} />
+            <img
+              className="img-fluid"
+              alt="Image"
+              src={img}
+              style={{
+                width: "100vw", // Full viewport width
+                height: "300px", // Fixed height
+                objectFit: "fill", // Cover to ensure it fills width
+                borderBottom: "1px solid #dee2e7",
+              }}
+            />
           </span>
         </div>
       </div>
     </div>
   );
 };
+
 export default Rooms;

@@ -13,7 +13,7 @@ import { useState } from "react";
 import { Link, useLocation } from "react-router-dom";
 import Rooms from "../PublicListingDetails/myComponent2";
 import Roomspics from "../PublicListingDetails/myComponent3";
-import { apiMethods, apiUrls } from "../../../constants/constant";
+import { apiMethods, apiUrls, dateFormat } from "../../../constants/constant";
 import { useSelector } from "react-redux";
 import UseApi from "../../../hooks/useApi";
 import { customToast } from "../../common/Toast";
@@ -26,6 +26,7 @@ import { CapitalizeFirstLetter } from "../../../utils/commonFunctions";
 import { Review } from "../PublicListingDetails/Review";
 import { Ratings } from "../PublicListingDetails/Ratingsx";
 import { ListDetails } from "../PublicListingDetails/listDetails";
+import moment from "moment";
 
 const MyListingDetails = () => {
   const parms = useLocation()?.pathname;
@@ -257,7 +258,9 @@ const MyListingDetails = () => {
                         <div className="featues-info">
                           <h6>
                             {listingDetail?.category?.created_at
-                              ? listingDetail?.category?.created_at
+                              ? moment(
+                                  listingDetail?.category?.created_at
+                                ).format(dateFormat)
                               : "-"}
                           </h6>
                         </div>
