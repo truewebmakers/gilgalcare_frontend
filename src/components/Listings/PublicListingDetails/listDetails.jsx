@@ -7,7 +7,6 @@ export const ListDetails = ({ listingDetail }) => {
   const mapLat = listingDetail?.map_lat && Math.round(+listingDetail?.map_lat); // Replace with valid latitude
   const mapLong =
     listingDetail?.map_long && Math.round(+listingDetail?.map_long);
-  console.log(Math.round(+listingDetail?.map_lat), "listingDetail?.map_lat");
 
   const mapUrl = `https://www.google.com/maps/embed/v1/place?key=${googleMapsApiKey}&q=${mapLat},${mapLong}`;
   return (

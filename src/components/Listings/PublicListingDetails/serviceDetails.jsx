@@ -2,54 +2,17 @@ import React, { useEffect } from "react";
 import Header from "../../home/header/Header";
 import Footer from "../../home/footer/Footer";
 import {
-  Feature_1_svg,
-  Feature_2_svg,
-  Feature_3_svg,
-  Feature_4_svg,
-  Feature_5_svg,
-  Feature_6_svg,
-  Feature_7_svg,
-  Feature_8_svg,
-  GalleryImg1,
-  GalleryImg10,
-  GalleryImg11,
-  GalleryImg2,
-  GalleryImg3,
-  GalleryImg9,
-  ProfileAvatar01,
-  ProfileAvatar02,
-  ProfileAvatar10,
-  ProfileAvatar12,
-  avatar_11,
-  details_icon,
-  gallery_09,
-  gallery_10,
-  gallery_11,
-  gallery_1_jpg,
-  gallery_2_jpg,
-  gallery_3_jpg,
-  gallery_4_jpg,
-  gallery_5_jpg,
-  gallery_6_jpg,
-  gallery_8_jpg,
   galleryicon,
   profile_img,
   statistic_icon,
   website,
 } from "../../imagepath";
-
 import StickyBox from "react-sticky-box";
 import { useState } from "react";
-// import Lightbox from "react-awesome-lightbox";
-// You need to import the CSS only once
-// import "react-awesome-lightbox/build/style.css";
 import { Link, useLocation } from "react-router-dom";
 import Rooms from "./myComponent2";
 import Roomspics from "./myComponent3";
-import RoomsProfile from "./myComponent4";
-import PhotoAlbum from "react-photo-album";
 import { apiMethods, apiUrls } from "../../../constants/constant";
-import { useSelector } from "react-redux";
 import UseApi from "../../../hooks/useApi";
 import { customToast } from "../../common/Toast";
 import mailIcon from "../../../assets/svg/mail.svg";
@@ -57,57 +20,39 @@ import location from "../../../assets/svg/map-pin.svg";
 import eye from "../../../assets/svg/eye.svg";
 import locationBig from "../../../assets/svg/locationBig.svg";
 import calendar from "../../../assets/svg/calendar.svg";
-
 import { CapitalizeFirstLetter } from "../../../utils/commonFunctions";
 import { Review } from "./Review";
 import { Ratings } from "./Ratingsx";
 import { ListDetails } from "./listDetails";
 
 const ServiceDetails = () => {
-  const [showFancyBox, setBox] = useState(false);
-  let imagess = [
-    {
-      url: { gallery_1_jpg },
-    },
-    {
-      url: { gallery_2_jpg },
-    },
-  ];
-
   const parms = useLocation()?.pathname;
-  const { user, profileData } = useSelector((state) => state.auth);
   const [listingDetail, setListingDetail] = useState({});
   const [features, setFeatures] = useState([]);
-
   const id = parms?.split("/")[2];
 
   const getListingDetail = async () => {
     try {
-      if (user?.token) {
-        // set headers
-        const headers = {
-          "Content-Type": "multipart/form-data",
-          Authorization: `Bearer ${user?.token}`,
-        };
-        // Call signup API
-        const response = await UseApi(
-          apiUrls.getListingDetail + id,
-          apiMethods.GET,
-          null,
-          headers
-        );
-        if (response?.status == 200 || response?.status == 201) {
-          setListingDetail(response?.data?.data);
-          return;
-        }
+      // set headers
+      const headers = {
+        "Content-Type": "multipart/form-data",
+      };
+      // Call signup API
+      const response = await UseApi(
+        apiUrls.getPublicListingDetails + id,
+        apiMethods.GET,
+        null,
+        headers
+      );
+      if (response?.status == 200 || response?.status == 201) {
+        setListingDetail(response?.data?.data);
+        return;
       }
     } catch (err) {
       customToast.error(err?.message);
       return;
     }
   };
-
-  console.log(listingDetail, "response");
 
   useEffect(() => {
     getListingDetail();
@@ -125,7 +70,6 @@ const ServiceDetails = () => {
       <div className="bannergallery-section">
         <div className="gallery-slider d-flex">
           <Rooms img={listingDetail?.featured_image} />
-          {showFancyBox && <PhotoAlbum photos={imagess} layout="rows" />}
         </div>
       </div>
       {/*/Galler Slider Section*/}
@@ -331,17 +275,19 @@ const ServiceDetails = () => {
               </div>
               {/*/category Section*/}
               {/* Gallery Section */}
-              <div className="card gallery-section ">
-                <div className="card-header ">
-                  <img src={galleryicon} alt="gallery" />
-                  <h4>Gallery</h4>
-                </div>
-                <div className="card-body">
-                  <div className="gallery-content">
-                    <Roomspics listingDetail={listingDetail} />
+              {listingDetail?.meta?.length && (
+                <div className="card gallery-section ">
+                  <div className="card-header ">
+                    <img src={galleryicon} alt="gallery" />
+                    <h4>Gallery</h4>
+                  </div>
+                  <div className="card-body">
+                    <div className="gallery-content">
+                      <Roomspics listingDetail={listingDetail} />
+                    </div>
                   </div>
                 </div>
-              </div>
+              )}
               {/*/Gallery Section*/}
               {/* Rating Section */}
               <Ratings />
@@ -416,24 +362,6 @@ const ServiceDetails = () => {
                         </span>
                       </li>
                     </ul>
-                  </div>
-                  <div className="card">
-                    <h4>
-                      {" "}
-                      <i className="feather-user" /> Author
-                    </h4>
-                    <div className="sidebarauthor-details align-items-center">
-                      <div className="sideauthor-img">
-                        <img
-                          src={profileData?.profile_pic || ProfileAvatar12}
-                          alt="author"
-                        />
-                      </div>
-                      <div className="sideauthor-info">
-                        <p className="authorname">{profileData?.name || "-"}</p>
-                        <p>{profileData?.created_at || "-"}</p>
-                      </div>
-                    </div>
                   </div>
                   <div className="card mb-0">
                     <h4>

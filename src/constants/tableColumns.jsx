@@ -45,7 +45,7 @@ export const myListingColumns = (handleDeleteListing) => [
           <i className="feather-trash-2" />
         </span>
         <Link
-          to={`/service-details/${text?.id}`}
+          to={`/my-listing-details/${text?.id}`}
           className="action-btn btn-view"
         >
           <i className="feather-view-3" />

@@ -20,6 +20,7 @@ import BlogGrid from "../components/blog/BlogList/BlogGrid";
 import BlogListSideBar from "../components/blog/BlogList/blogListSidebar";
 import BlogGridSidebar from "../components/blog/BlogList/blogGridSidebar";
 import Contract from "../components/contract";
+import ServiceDetails from "../components/Listings/PublicListingDetails/serviceDetails";
 
 export const FrontendRoute = [
   {
@@ -109,5 +110,9 @@ export const FrontendRoute = [
   {
     path: "contact",
     element: <Contract />,
+  },
+  {
+    path: "listing-details/:id",
+    element: <ServiceDetails />,
   },
 ];

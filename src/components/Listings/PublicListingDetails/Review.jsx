@@ -1,8 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Link, useLocation } from "react-router-dom";
-import Roomsprofile from "./myComponent4";
-import { avatar_11, ProfileAvatar01, ProfileAvatar02 } from "../../imagepath";
-import { useSelector } from "react-redux";
+import { useLocation } from "react-router-dom";
 import UseApi from "../../../hooks/useApi";
 import { apiMethods, apiUrls } from "../../../constants/constant";
 import { customToast } from "../../common/Toast";
@@ -12,28 +9,24 @@ import { AddReview } from "./addReview";
 export const Review = () => {
   const parms = useLocation()?.pathname;
   const id = parms?.split("/")[2];
-  const { user } = useSelector((state) => state.auth);
   const [reviewList, setReviewList] = useState([]);
 
   const getListingReview = async () => {
     try {
-      if (user?.token) {
-        // set headers
-        const headers = {
-          "Content-Type": "multipart/form-data",
-          Authorization: `Bearer ${user?.token}`,
-        };
-        // Call signup API
-        const response = await UseApi(
-          apiUrls.getListingSpecificReviews + id,
-          apiMethods.GET,
-          null,
-          headers
-        );
-        if (response?.status == 200 || response?.status == 201) {
-          setReviewList(response?.data?.feedbacks);
-          return;
-        }
+      // set headers
+      const headers = {
+        "Content-Type": "multipart/form-data",
+      };
+      // Call signup API
+      const response = await UseApi(
+        apiUrls.getListingSpecificReviews + id,
+        apiMethods.GET,
+        null,
+        headers
+      );
+      if (response?.status == 200 || response?.status == 201) {
+        setReviewList(response?.data?.feedbacks);
+        return;
       }
     } catch (err) {
       customToast.error(err?.message);

@@ -16,7 +16,8 @@ export const apiUrls = {
   searching: "/listing/search",
   getUserSpecificListing: "/listing/get/all/",
   deleteListing: "/listing/delete/",
-  getListingDetail: "/listing/get/",
+  getMyListingDetail: "/listing/get/",
+  getPublicListingDetails: "/listing/get-pb/",
 
   // Reviews
   getListingSpecificReviews: "/feedback/business/",

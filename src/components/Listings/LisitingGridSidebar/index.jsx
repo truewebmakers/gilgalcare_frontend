@@ -104,7 +104,7 @@ const GridSidebar = () => {
                       <div className="card">
                         <div className="blog-widget">
                           <div className="blog-img">
-                            <Link to={`/service-details/${item?.id}`}>
+                            <Link to={`/listing-details/${item?.id}`}>
                               <img
                                 src={item?.logo || listgrid_1}
                                 className="img-fluid"
@@ -151,7 +151,7 @@ const GridSidebar = () => {
                                 </div>
                               </div>
                               <h6>
-                                <Link to={`/service-details/${item?.id}`}>
+                                <Link to={`/listing-details/${item?.id}`}>
                                   {item?.listing_description || null}
                                 </Link>
                               </h6>
