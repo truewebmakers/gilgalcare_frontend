@@ -19,7 +19,7 @@ export const apiUrls = {
   deleteListing: "/listing/delete/",
   getMyListingDetail: "/listing/get/",
   getPublicListingDetails: "/listing/get-pb/",
-
+  generateTempImageUrl: "/listing/upload-image",
   // Reviews
   getListingSpecificReviews: "/feedback/business/",
   addReview: "/feedback/store",
@@ -82,7 +82,7 @@ export const cateogoryOptions = [
 ];
 
 export const errorListingFields = {
-  listingTitle: "",
+  listing_title: "",
   listingDescription: "",
   categoryId: "",
   tagline: "",
@@ -112,7 +112,7 @@ export const defaultCenter = {
 };
 
 export const initialListingField = {
-  listingTitle: "",
+  listing_title: "",
   listingDescription: "",
   categoryId: "",
   tagline: "",
@@ -132,6 +132,15 @@ export const initialListingField = {
   googlePlus: "",
   instagram: "",
   status: "",
+};
+
+export const galleryImageFields = {
+  "gallery_images[0]": "",
+  "gallery_images[1]": "",
+  "gallery_images[2]": "",
+  "gallery_images[3]": "",
+  "gallery_images[4]": "",
+  "gallery_images[5]": "",
 };
 
 export const dateFormat = "dddd, MMMM Do YYYY, h:mm:ss a";

@@ -2,7 +2,19 @@ import { customToast } from "../components/common/Toast";
 import { apiMethods, apiUrls } from "../constants/constant";
 import UseApi from "../hooks/useApi";
 
-export const editListingService = async (listingData, id, token) => {
+export const editListingService = async (
+  listingData,
+  id,
+  token,
+  galleryImage
+) => {
+  const galleryImageKeys = Object?.keys(galleryImage)?.filter(
+    (key) => galleryImage[key]
+  );
+  if (galleryImageKeys?.length < 2) {
+    customToast.error("At least two gallery images are required.");
+    return null;
+  }
   // set headers
   const headers = {
     "Content-Type": "multipart/form-data",
@@ -11,7 +23,7 @@ export const editListingService = async (listingData, id, token) => {
 
   // Prepare the body for API request
   const bodyData = {
-    listing_title: listingData?.listingTitle,
+    listing_title: listingData?.listing_title,
     listing_description: listingData?.listingDescription,
     category_id: listingData?.categoryId,
     tagline: listingData?.tagline,
@@ -35,6 +47,14 @@ export const editListingService = async (listingData, id, token) => {
     logo: listingData?.logo,
     added_by: listingData?.addedBy,
   };
+  // Add gallery images dynamically
+  if (galleryImage) {
+    Object?.keys(galleryImage)?.forEach((key) => {
+      if (galleryImage[key]) {
+        bodyData[key] = galleryImage[key];
+      }
+    });
+  }
 
   try {
     // Call Add Listing API

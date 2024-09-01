@@ -8,6 +8,7 @@ import { useSelector } from "react-redux";
 import {
   defaultCenter,
   errorListingFields,
+  galleryImageFields,
   initialListingField,
 } from "../../../constants/constant";
 import { BasicInfoForm } from "./BasicInfoForm";
@@ -23,6 +24,7 @@ import { fetchCategories } from "../../../services/getCategoryList";
 import { editListingService } from "../../../services/editListingService";
 import { fetchMyListingDetail } from "../../../services/getMyListingDetail";
 import { fetchImageAsBinary } from "../../../utils/commonFunctions";
+import { GalleryImages } from "./galleryImages";
 
 const AddLisiting = () => {
   const [listingFields, setListingFields] = useState(initialListingField);
@@ -45,6 +47,8 @@ const AddLisiting = () => {
   const [categoriesList, setCategoriesList] = useState([]);
   const { user } = useSelector((state) => state.auth);
   const id = parms?.includes("edit-listing") ? parms?.split("/")[2] : null;
+  const [galleryImage, setGalleryImage] = useState(galleryImageFields);
+  const [showGalleryImage, setShowGalleryImage] = useState(galleryImageFields);
 
   const fetchCategoriesData = async () => {
     const response = await fetchCategories(user?.token);
@@ -83,7 +87,35 @@ const AddLisiting = () => {
         logo: featureLogo,
       }));
     }
+
+    const galleryImagesBinary = {};
+    const galleryImagesUrls = {};
+    const metaImages = response?.meta || [];
+
+    // Process up to 6 gallery images
+    for (let i = 0; i < metaImages.length && i < 6; i++) {
+      const imageUrl = metaImages[i]?.gallery_image;
+
+      if (imageUrl?.length) {
+        // Set direct URL for showing
+        setShowGalleryImage((prev) => ({
+          ...prev,
+          [`gallery_images[${i}]`]: imageUrl,
+        }));
+
+        // Fetch binary data and set it
+        const imageBinary = await fetchImageAsBinary(imageUrl);
+        galleryImagesBinary[`gallery_images[${i}]`] = imageBinary;
+      }
+    }
+
+    // Optionally, set gallery images to state if needed for binary data
+    setGalleryImage((prev) => ({
+      ...prev,
+      ...galleryImagesBinary,
+    }));
   };
+
   const convertToApiKey = (key) => {
     // Convert the camelCase keys to snake_case keys as used in the API response
     return key.replace(/([A-Z])/g, "_$1").toLowerCase();
@@ -134,14 +166,15 @@ const AddLisiting = () => {
         ...validateListingFields(key, allFields[key], listingFields),
       };
     }
+
     setError(newErr);
 
     if (!hasErrors(newErr) && areAllFieldsFilled(allFields)) {
       setIsLoading(true);
       try {
         id
-          ? await editListingService(allFields, id, user?.token)
-          : await addListingService(allFields, user?.token);
+          ? await editListingService(allFields, id, user?.token, galleryImage)
+          : await addListingService(allFields, user?.token, galleryImage);
       } finally {
         setIsLoading(false);
       }
@@ -152,9 +185,11 @@ const AddLisiting = () => {
   const handleChange = (e) => {
     const { name, value, type, files, checked, dataset } = e.target;
 
+    // Handle image info updates
     if (dataset?.handler === "imageInfo" && files && files[0]) {
       const file = files[0];
       setUploadedPic((prevState) => ({ ...prevState, [name]: file }));
+
       const reader = new FileReader();
       reader.onload = (loadEvent) => {
         setSelectedImage((prevState) => ({
@@ -163,9 +198,17 @@ const AddLisiting = () => {
         }));
       };
       reader.readAsDataURL(file);
+
+      // Validate image info (if necessary)
+      if (isDisable) {
+        const newErr = validateListingFields(name, file, listingFields);
+        setError((prevError) => ({ ...prevError, ...newErr }));
+      }
+
       return;
     }
 
+    // Handle basic info updates
     if (dataset?.handler === "basicInfo1") {
       if (name === "categoryId") {
         const categoryName = categoriesList?.find(
@@ -195,21 +238,18 @@ const AddLisiting = () => {
         ...prevState,
         featuresInformation: features?.join(", "),
       }));
+    } else if (dataset?.handler === "locationInfo") {
+      // Handle location updates separately
+      setListingFields((prevState) => ({
+        ...prevState,
+        [name]: value,
+      }));
     } else {
       setListingFields((prevState) => ({ ...prevState, [name]: value }));
     }
 
-    if (
-      isDisable &&
-      [
-        "basicInfo1",
-        "basicInfo2",
-        "locationInfo",
-        "contactInfo",
-        "socialMediaInfo",
-        "imageInfo",
-      ].includes(dataset.handler)
-    ) {
+    // Validate fields if `isDisable` is true
+    if (isDisable) {
       const newErr = validateListingFields(name, value, listingFields);
       setError((prevError) => ({ ...prevError, ...newErr }));
     }
@@ -250,6 +290,8 @@ const AddLisiting = () => {
                 handleChange={handleChange}
                 markerPosition={markerPosition}
                 setMarkerPosition={setMarkerPosition}
+                setError={setError}
+                isDisable={isDisable}
               />
               <ContactInfoForm
                 contactInfo={listingFields}
@@ -265,6 +307,12 @@ const AddLisiting = () => {
                 selectedImage={selectedImage}
                 error={error}
                 handleChange={handleChange}
+              />
+              <GalleryImages
+                setGalleryImage={setGalleryImage}
+                galleryImage={galleryImage}
+                showGalleryImage={showGalleryImage}
+                setShowGalleryImage={setShowGalleryImage}
               />
               <button
                 className="btn btn-primary"

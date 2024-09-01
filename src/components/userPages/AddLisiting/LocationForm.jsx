@@ -2,6 +2,7 @@ import React, { useEffect } from "react";
 import { GoogleMap, LoadScript, Marker } from "@react-google-maps/api";
 import axios from "axios";
 import { customToast } from "../../common/Toast";
+import { validateListingFields } from "../../../utils/validations";
 
 const mapContainerStyle = {
   width: "100%",
@@ -15,6 +16,8 @@ export const LocationForm = ({
   handleChange,
   markerPosition,
   setMarkerPosition,
+  setError,
+  isDisable,
 }) => {
   const handleMapClick = async (event) => {
     const { latLng } = event;
@@ -65,6 +68,32 @@ export const LocationForm = ({
           mapLong: lng?.toString(),
         }));
         setMarkerPosition({ lat, lng });
+
+        if (isDisable) {
+          const newErr = validateListingFields("mapLat", lat, locationInfo);
+          const newErrLong = validateListingFields(
+            "mapLong",
+            lng,
+            locationInfo
+          );
+          const newErrLoc = validateListingFields(
+            "location",
+            location,
+            locationInfo
+          );
+          const newErrAddr = validateListingFields(
+            "address",
+            address,
+            locationInfo
+          );
+          setError((prevError) => ({
+            ...prevError,
+            ...newErr,
+            ...newErrLong,
+            ...newErrLoc,
+            ...newErrAddr,
+          }));
+        }
       } else {
         customToast.error("No address found");
       }

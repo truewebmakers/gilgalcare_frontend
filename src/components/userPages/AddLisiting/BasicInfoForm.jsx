@@ -16,14 +16,14 @@ export const BasicInfoForm = ({
           type="text"
           className="form-control pass-input"
           placeholder="Title"
-          name="listingTitle"
-          value={basicInfo1?.listingTitle}
+          name="listing_title"
+          value={basicInfo1?.listing_title}
           onChange={(e) => handleChange(e)}
           data-handler="basicInfo1"
           autoComplete="off"
         />
-        {error?.listingTitle && (
-          <p style={{ color: "red" }}>{error?.listingTitle}</p>
+        {error?.listing_title && (
+          <p style={{ color: "red" }}>{error?.listing_title}</p>
         )}
       </div>
       <div className="form-group">

@@ -140,7 +140,7 @@ export const validateListingFields = (name, value, basicInfo2) => {
   const phoneRegex = /^[0-9]{10,15}$/;
 
   switch (name) {
-    case "listingTitle":
+    case "listing_title":
       newErr[name] =
         value === ""
           ? "Listing title cannot be empty"
