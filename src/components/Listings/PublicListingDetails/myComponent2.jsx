@@ -17,7 +17,7 @@ const Rooms = ({ img }) => {
               style={{
                 width: "100vw", // Full viewport width
                 height: "300px", // Fixed height
-                objectFit: "fill", // Cover to ensure it fills width
+                objectFit: "contain", // Cover to ensure it fills width
                 borderBottom: "1px solid #dee2e7",
               }}
             />

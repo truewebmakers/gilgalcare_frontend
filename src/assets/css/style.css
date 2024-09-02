@@ -20969,3 +20969,10 @@ section.advertisement {
 .addCategoryName {
   margin-top: 10px !important
 }
+
+.info-list li {
+  margin-bottom: 10px;
+    word-break: break-word;
+    white-space: normal;
+    max-width: 100%;
+}
