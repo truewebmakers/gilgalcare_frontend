@@ -16,6 +16,7 @@ import { apiMethods, apiUrls, dateFormat } from "../../../constants/constant";
 import UseApi from "../../../hooks/useApi";
 import { customToast } from "../../common/Toast";
 import mailIcon from "../../../assets/svg/mail.svg";
+import shareIcon from "../../../assets/svg/share-2.svg";
 import location from "../../../assets/svg/map-pin.svg";
 import eye from "../../../assets/svg/eye.svg";
 import locationBig from "../../../assets/svg/locationBig.svg";
@@ -26,6 +27,7 @@ import { Ratings } from "./Ratingsx";
 import { ListDetails } from "./listDetails";
 import moment from "moment/moment";
 import { Statistics } from "./Statistics";
+import { incrementShares } from "../../../services/incrementShares";
 
 const ServiceDetails = () => {
   const parms = useLocation()?.pathname;
@@ -64,6 +66,19 @@ const ServiceDetails = () => {
     const listFeatures = listingDetail?.features_information?.split(",");
     setFeatures(listFeatures);
   }, [listingDetail]);
+
+  const handleShareClick = async () => {
+    try {
+      const response = await incrementShares(id);
+      if (response?.status) {
+        const pathname = window.location.pathname;
+        await navigator.clipboard.writeText(pathname);
+        customToast.success("Copied successfully!"); // Example feedback
+      }
+    } catch (error) {
+      return error;
+    }
+  };
 
   return (
     <>
@@ -146,6 +161,16 @@ const ServiceDetails = () => {
                       <i className="fa-regular fa-comment-dots" /> Write a
                       review
                     </a>
+                  </li>
+                  <li>
+                    <img src={shareIcon} alt="" />
+                    <span
+                      onClick={handleShareClick}
+                      style={{ cursor: "pointer" }}
+                    >
+                      {" "}
+                      Share
+                    </span>
                   </li>
                   <li>
                     <img src={mailIcon} alt="" />{" "}

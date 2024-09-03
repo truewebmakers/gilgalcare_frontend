@@ -27,6 +27,7 @@ export const apiUrls = {
   // Dashboard
   getActiveListing: "/dashboard/listing-count",
   getStats: "/listing/stats/",
+  incrementShares: "/listing/increment-shares/",
 };
 
 export const env = {
