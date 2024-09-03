@@ -1,13 +1,10 @@
-import React from "react";
+import React, { useEffect } from "react";
 import {
   ProfileAvatar01,
   ProfileAvatar11,
-  bookmark,
-  chat,
   rating,
   verified,
 } from "../../imagepath";
-import Header from "../../home/header/Header";
 import Footer from "../../home/footer/Footer";
 import { Link, useLocation } from "react-router-dom";
 import ReactApexChart from "react-apexcharts";
@@ -15,6 +12,9 @@ import { useState } from "react";
 import UserHeader from "../Userheader";
 import UserMenu from "../UserMenu";
 import UserBreadCrumb from "../UserBreadCrumb";
+import UseApi from "../../../hooks/useApi";
+import { apiMethods, apiUrls } from "../../../constants/constant";
+import { useSelector } from "react-redux";
 
 const Dashboard = () => {
   const [change, setChange] = useState(false);
@@ -87,8 +87,31 @@ const Dashboard = () => {
       ],
     },
   };
-
+  const { user } = useSelector((state) => state.auth);
   const parms = useLocation().pathname;
+  const [dashboardStats, setDashboardStats] = useState({});
+
+  const getDashboardStats = async () => {
+    try {
+      const headers = {
+        "Content-Type": "multipart/form-data",
+        Authorization: `Bearer ${user?.token}`,
+      };
+      const response = await UseApi(
+        apiUrls.getActiveListing,
+        apiMethods.GET,
+        null,
+        headers
+      );
+      setDashboardStats(response?.data);
+    } catch (err) {
+      return err;
+    }
+  };
+
+  useEffect(() => {
+    getDashboardStats();
+  }, []);
 
   return (
     <>
@@ -113,7 +136,9 @@ const Dashboard = () => {
                     </div>
                     <div className="dash-widget-info">
                       <h6>Active Listing</h6>
-                      <h3 className="counter">500</h3>
+                      <h3 className="counter">
+                        {dashboardStats?.listing_count || 0}
+                      </h3>
                     </div>
                   </div>
                 </div>
@@ -128,7 +153,7 @@ const Dashboard = () => {
                     </div>
                     <div className="dash-widget-info">
                       <h6>Total Reviews</h6>
-                      <h3>15230</h3>
+                      <h3> {dashboardStats?.review_count || 0} </h3>
                     </div>
                   </div>
                 </div>

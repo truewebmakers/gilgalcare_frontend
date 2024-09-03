@@ -42,11 +42,6 @@ export default function UserMenu({ activeUrl }) {
             <i className="feather-list" /> <span>My Listing</span>
           </Link>
         </li>
-        <li className={activeUrl == "review" ? "active" : ""}>
-          <Link to="/reviews">
-            <i className="fas fa-solid fa-star" /> <span>Reviews</span>
-          </Link>
-        </li>
         <li>
           <span onClick={handleLogout} style={{ cursor: "pointer" }}>
             <i className="fas fa-light fa-circle-arrow-left" />{" "}

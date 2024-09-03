@@ -23,6 +23,10 @@ export const apiUrls = {
   // Reviews
   getListingSpecificReviews: "/feedback/business/",
   addReview: "/feedback/store",
+
+  // Dashboard
+  getActiveListing: "/dashboard/listing-count",
+  getStats: "/listing/stats/",
 };
 
 export const env = {

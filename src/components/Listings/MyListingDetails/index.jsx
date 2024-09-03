@@ -27,6 +27,7 @@ import { Review } from "../PublicListingDetails/Review";
 import { Ratings } from "../PublicListingDetails/Ratingsx";
 import { ListDetails } from "../PublicListingDetails/listDetails";
 import moment from "moment";
+import { Statistics } from "../PublicListingDetails/Statistics";
 
 const MyListingDetails = () => {
   const parms = useLocation()?.pathname;
@@ -308,69 +309,7 @@ const MyListingDetails = () => {
               <StickyBox>
                 <div className="rightsidebar">
                   <ListDetails listingDetail={listingDetail} />
-                  <div className="card">
-                    <h4>
-                      <img src={statistic_icon} alt="location" /> Statisfic
-                    </h4>
-                    <ul className="statistics-list">
-                      <li>
-                        <div className="statistic-details">
-                          <span className="icons">
-                            <i className="fa-regular fa-eye" />
-                          </span>
-                          Views{" "}
-                        </div>
-                        <span className="text-end">
-                          {" "}
-                          {listingDetail?.page_views
-                            ? listingDetail?.page_views
-                            : "0"}
-                        </span>
-                      </li>
-                      <li>
-                        <div className="statistic-details">
-                          <span className="icons">
-                            <i className="feather-star" />
-                          </span>
-                          Ratings{" "}
-                        </div>
-                        <span className="text-end">
-                          {" "}
-                          {listingDetail?.ratings
-                            ? listingDetail?.ratings
-                            : "0"}
-                        </span>
-                      </li>
-                      <li>
-                        <div className="statistic-details">
-                          <span className="icons">
-                            <i className="feather-heart" />
-                          </span>
-                          Reviews{" "}
-                        </div>
-                        <span className="text-end">
-                          {" "}
-                          {listingDetail?.reviews
-                            ? listingDetail?.reviews
-                            : "0"}
-                        </span>
-                      </li>
-                      <li className="mb-0">
-                        <div className="statistic-details">
-                          <span className="icons">
-                            <i className="feather-share-2" />
-                          </span>
-                          Shares{" "}
-                        </div>
-                        <span className="text-end">
-                          {" "}
-                          {listingDetail?.total_shares
-                            ? listingDetail?.total_shares
-                            : "0"}
-                        </span>
-                      </li>
-                    </ul>
-                  </div>
+                  <Statistics listingDetail={listingDetail} />
                   <div className="card">
                     <h4>
                       {" "}
