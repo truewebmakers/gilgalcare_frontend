@@ -7,8 +7,8 @@ import { customToast } from "../../common/Toast";
 import Loader from "../../common/Loader";
 
 export const AddReview = ({ getListingReview }) => {
-  const parms = useLocation()?.pathname;
-  const id = parms?.split("/")[2];
+  const parms = useLocation();
+  const id = parms.state?.id;
   const { user } = useSelector((state) => state.auth);
   const reviewFields = { title: "", name: "", email: "", review: "" };
   const [addReview, setAddReview] = useState(reviewFields);

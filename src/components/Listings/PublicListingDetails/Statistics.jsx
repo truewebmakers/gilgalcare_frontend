@@ -7,9 +7,8 @@ import { useLocation } from "react-router-dom";
 
 export const Statistics = ({ listingDetail }) => {
   const [stats, setStats] = useState({});
-  const parms = useLocation()?.pathname;
-
-  const id = parms?.split("/")[2];
+  const parms = useLocation();
+  const id = parms.state?.id;
 
   const getDashboardStats = async () => {
     try {
@@ -23,7 +22,6 @@ export const Statistics = ({ listingDetail }) => {
         null,
         headers
       );
-      console.log(response);
 
       setStats(response?.data);
     } catch (err) {

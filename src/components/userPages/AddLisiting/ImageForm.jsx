@@ -1,5 +1,6 @@
 import React from "react";
-import { mediaimg_1, mediaimg_2 } from "../../imagepath";
+import { mediaimg_1 } from "../../imagepath";
+import defaultPic from "../../../assets/img/defaultProfile.png";
 
 export const ImageForm = ({ selectedImage, error, handleChange }) => {
   return (
@@ -13,7 +14,7 @@ export const ImageForm = ({ selectedImage, error, handleChange }) => {
             <h6 className="media-title">Featured Image</h6>
             <div className="media-image">
               <img
-                src={selectedImage?.featuredImage || mediaimg_2}
+                src={selectedImage?.featuredImage || defaultPic}
                 alt="Featured"
                 style={{ width: "100%", height: "auto" }}
               />

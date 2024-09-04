@@ -43,10 +43,12 @@ const AddLisiting = () => {
   const [isLoading, setIsLoading] = useState(false);
   const [isDisable, setIsDisable] = useState(false);
   const [error, setError] = useState(errorListingFields);
-  const parms = useLocation().pathname;
+  const parms = useLocation();
   const [categoriesList, setCategoriesList] = useState([]);
   const { user } = useSelector((state) => state.auth);
-  const id = parms?.includes("edit-listing") ? parms?.split("/")[2] : null;
+  const id = parms?.pathname?.includes("edit-listing")
+    ? parms?.state?.id
+    : null;
   const [galleryImage, setGalleryImage] = useState(galleryImageFields);
   const [showGalleryImage, setShowGalleryImage] = useState(galleryImageFields);
 

@@ -10,7 +10,7 @@ import {
 } from "../../imagepath";
 import StickyBox from "react-sticky-box";
 import { useState } from "react";
-import { Link, useLocation } from "react-router-dom";
+import { Link, useLocation, useParams } from "react-router-dom";
 import Rooms from "../PublicListingDetails/myComponent2";
 import Roomspics from "../PublicListingDetails/myComponent3";
 import { apiMethods, apiUrls, dateFormat } from "../../../constants/constant";
@@ -19,6 +19,7 @@ import UseApi from "../../../hooks/useApi";
 import { customToast } from "../../common/Toast";
 import mailIcon from "../../../assets/svg/mail.svg";
 import location from "../../../assets/svg/map-pin.svg";
+import defaultPic from "../../../assets/img/defaultProfile.png";
 import eye from "../../../assets/svg/eye.svg";
 import locationBig from "../../../assets/svg/locationBig.svg";
 import calendar from "../../../assets/svg/calendar.svg";
@@ -30,12 +31,11 @@ import moment from "moment";
 import { Statistics } from "../PublicListingDetails/Statistics";
 
 const MyListingDetails = () => {
-  const parms = useLocation()?.pathname;
+  const parms = useLocation();
+  const id = parms?.state?.id; // Access the state property
   const { user, profileData } = useSelector((state) => state.auth);
   const [listingDetail, setListingDetail] = useState({});
   const [features, setFeatures] = useState([]);
-
-  const id = parms?.split("/")[2];
 
   const getListingDetail = async () => {
     try {
@@ -78,7 +78,7 @@ const MyListingDetails = () => {
       {/*Galler Slider Section*/}
       <div className="bannergallery-section">
         <div className="gallery-slider d-flex">
-          <Rooms img={listingDetail?.featured_image} />
+          <Rooms img={listingDetail?.featured_image || defaultPic} />
         </div>
       </div>
       {/*/Galler Slider Section*/}
@@ -88,7 +88,7 @@ const MyListingDetails = () => {
           <div className="about-details">
             <div className="about-headings">
               <div className="author-img">
-                <img src={listingDetail?.logo || profile_img} alt="authorimg" />
+                <img src={listingDetail?.logo || defaultPic} alt="authorimg" />
               </div>
               <div className="authordetails">
                 <h5>

@@ -8,8 +8,8 @@ import { AddReview } from "./addReview";
 import moment from "moment";
 
 export const Review = () => {
-  const parms = useLocation()?.pathname;
-  const id = parms?.split("/")[2];
+  const parms = useLocation();
+  const id = parms.state?.id;
   const [reviewList, setReviewList] = useState([]);
 
   const getListingReview = async () => {

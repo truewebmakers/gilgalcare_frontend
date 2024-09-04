@@ -1,12 +1,7 @@
 import React, { useEffect } from "react";
 import Header from "../../home/header/Header";
 import Footer from "../../home/footer/Footer";
-import {
-  galleryicon,
-  profile_img,
-  statistic_icon,
-  website,
-} from "../../imagepath";
+import { galleryicon, profile_img, website } from "../../imagepath";
 import StickyBox from "react-sticky-box";
 import { useState } from "react";
 import { Link, useLocation } from "react-router-dom";
@@ -28,12 +23,13 @@ import { ListDetails } from "./listDetails";
 import moment from "moment/moment";
 import { Statistics } from "./Statistics";
 import { incrementShares } from "../../../services/incrementShares";
+import defaultPic from "../../../assets/img/defaultProfile.png";
 
 const ServiceDetails = () => {
-  const parms = useLocation()?.pathname;
+  const parms = useLocation();
+  const id = parms?.state?.id;
   const [listingDetail, setListingDetail] = useState({});
   const [features, setFeatures] = useState([]);
-  const id = parms?.split("/")[2];
 
   const getListingDetail = async () => {
     try {
@@ -86,7 +82,7 @@ const ServiceDetails = () => {
       {/*Galler Slider Section*/}
       <div className="bannergallery-section">
         <div className="gallery-slider d-flex">
-          <Rooms img={listingDetail?.featured_image} />
+          <Rooms img={listingDetail?.featured_image || defaultPic} />
         </div>
       </div>
       {/*/Galler Slider Section*/}
@@ -96,7 +92,7 @@ const ServiceDetails = () => {
           <div className="about-details">
             <div className="about-headings">
               <div className="author-img">
-                <img src={listingDetail?.logo || profile_img} alt="authorimg" />
+                <img src={listingDetail?.logo || defaultPic} alt="authorimg" />
               </div>
               <div className="authordetails">
                 <h5>
