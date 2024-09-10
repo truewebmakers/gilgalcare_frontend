@@ -32,6 +32,7 @@ export const apiUrls = {
 
 export const env = {
   API_URL: "https://webapp.hyperiontech.com.au/gilgalcareprovider/api",
+  GOOGLE_MAP_KEY: "AIzaSyDk_TbPERImCZCd7YmCzYacT6wGayV-Lmk",
 };
 
 export const apiMethods = {
