@@ -20,7 +20,6 @@ import { CapitalizeFirstLetter } from "../../../utils/commonFunctions";
 import { Review } from "./Review";
 import { Ratings } from "./Ratingsx";
 import { ListDetails } from "./listDetails";
-import moment from "moment/moment";
 import { Statistics } from "./Statistics";
 import { incrementShares } from "../../../services/incrementShares";
 import defaultPic from "../../../assets/img/defaultProfile.png";
@@ -31,6 +30,7 @@ const ServiceDetails = () => {
   const id = parms?.state?.id;
   const [listingDetail, setListingDetail] = useState({});
   const [features, setFeatures] = useState([]);
+  const [shareUpdated, setShareUpdated] = useState(false);
 
   const getListingDetail = async () => {
     try {
@@ -67,7 +67,8 @@ const ServiceDetails = () => {
   const handleShareClick = async () => {
     try {
       const response = await incrementShares(id);
-      if (response?.status) {
+      if (response?.result?.message == "Shares updated successfully") {
+        setShareUpdated(true);
         const pathname = window.location.pathname;
         await navigator.clipboard.writeText(pathname);
         customToast.success("Copied successfully!"); // Example feedback
@@ -322,7 +323,10 @@ const ServiceDetails = () => {
               <StickyBox>
                 <div className="rightsidebar">
                   <ListDetails listingDetail={listingDetail} />
-                  <Statistics listingDetail={listingDetail} />
+                  <Statistics
+                    listingDetail={listingDetail}
+                    shareUpdated={shareUpdated}
+                  />
                   <div className="card mb-0">
                     <h4>
                       {" "}

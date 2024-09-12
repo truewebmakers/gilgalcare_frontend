@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useCallback } from "react";
 import StickyBox from "react-sticky-box";
 import { details_icon } from "../../imagepath";
 import Slider from "rc-slider";
@@ -6,13 +6,52 @@ import "rc-slider/assets/index.css";
 import UseApi from "../../../hooks/useApi";
 import { apiMethods, apiUrls } from "../../../constants/constant";
 import { fetchAllCategories } from "../../../utils/commonApis";
+import axios from "axios";
 
 const Sidebar = ({ filters, setFilters, fetchPublicBusinessListing }) => {
   const [categories, setCategories] = useState([]);
+  const [countrySuggestions, setCountrySuggestions] = useState([]);
 
   useEffect(() => {
     fetchAllCategories(setCategories);
   }, []);
+
+  // Debounce function to delay API calls
+  const debounce = (func, delay) => {
+    let timer;
+    return function (...args) {
+      if (timer) clearTimeout(timer);
+      timer = setTimeout(() => func.apply(this, args), delay);
+    };
+  };
+
+  // Use useCallback for memoizing debounced function
+  const debouncedGetCountrySuggestions = useCallback(
+    debounce((query) => getCountrySuggestions(query), 300),
+    []
+  );
+
+  // Fetch country suggestions when location input changes
+  useEffect(() => {
+    if (filters.location.length > 1) {
+      debouncedGetCountrySuggestions(filters.location);
+    } else {
+      setCountrySuggestions([]);
+    }
+  }, [filters.location, debouncedGetCountrySuggestions]);
+
+  const getCountrySuggestions = async (query) => {
+    try {
+      const response = await axios.get(
+        `https://restcountries.com/v3.1/name/${query}`
+      );
+      const countries = response?.data?.map((country) => country.name.common);
+      setCountrySuggestions(countries);
+    } catch (error) {
+      console.error("Error fetching country suggestions:", error);
+      setCountrySuggestions([]);
+    }
+  };
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -20,6 +59,14 @@ const Sidebar = ({ filters, setFilters, fetchPublicBusinessListing }) => {
       ...prevFilters,
       [name]: value,
     }));
+  };
+
+  const handleCountrySelection = (country) => {
+    setFilters((prevFilters) => ({
+      ...prevFilters,
+      location: country,
+    }));
+    setCountrySuggestions([]); // Hide suggestions after selection
   };
 
   const handleReset = () => {
@@ -55,9 +102,13 @@ const Sidebar = ({ filters, setFilters, fetchPublicBusinessListing }) => {
                   name="listing_title"
                   value={filters?.listing_title}
                   onChange={handleChange}
+                  autoComplete="off"
                 />
               </div>
-              <div className="filter-content form-group">
+              <div
+                className="filter-content form-group"
+                style={{ position: "relative" }}
+              >
                 <select
                   className="form-control select category-select"
                   name="category_id"
@@ -74,8 +125,8 @@ const Sidebar = ({ filters, setFilters, fetchPublicBusinessListing }) => {
                 <span
                   style={{
                     position: "absolute",
-                    right: "10%",
-                    top: "32%",
+                    right: "10px" /* Adjusted for better alignment */,
+                    top: "50%",
                     transform: "translateY(-50%)",
                     pointerEvents: "none",
                     color: "#000",
@@ -88,18 +139,47 @@ const Sidebar = ({ filters, setFilters, fetchPublicBusinessListing }) => {
                   ></i>
                 </span>
               </div>
-              <div className="filter-content looking-input form-group input-placeholder">
+              <div
+                className="filter-content looking-input form-group input-placeholder"
+                style={{ position: "relative" }}
+              >
                 <div className="group-img">
                   <input
                     type="text"
                     className="form-control"
-                    placeholder="Type Location"
+                    placeholder="Search For Country"
                     name="location"
                     value={filters?.location}
                     onChange={handleChange}
+                    autoComplete="off"
                   />
                   <i className="feather-map-pin" />
                 </div>
+                {countrySuggestions.length > 0 && (
+                  <ul
+                    className="suggestions-list"
+                    style={{
+                      width: "100%",
+                      position: "absolute",
+                      top: "100%",
+                      zIndex: 1000,
+                      backgroundColor: "white",
+                      border: "1px solid #ddd",
+                      padding: 0,
+                      margin: 0,
+                    }}
+                  >
+                    {countrySuggestions.map((country, index) => (
+                      <li
+                        key={index}
+                        onClick={() => handleCountrySelection(country)}
+                        style={{ padding: "10px", cursor: "pointer" }}
+                      >
+                        {country}
+                      </li>
+                    ))}
+                  </ul>
+                )}
               </div>
               <div className="filter-content amenities mb-0">
                 <h4> Price Range</h4>

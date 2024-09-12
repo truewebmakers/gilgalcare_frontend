@@ -1,14 +1,13 @@
 import React, { useEffect, useState } from "react";
 import { statistic_icon } from "../../imagepath";
-import { useSelector } from "react-redux";
 import UseApi from "../../../hooks/useApi";
 import { apiMethods, apiUrls } from "../../../constants/constant";
 import { useLocation } from "react-router-dom";
 
-export const Statistics = ({ listingDetail }) => {
+export const Statistics = ({ listingDetail, shareUpdated }) => {
   const [stats, setStats] = useState({});
   const parms = useLocation();
-  const id = parms.state?.id;
+  const id = parms?.state?.id;
 
   const getDashboardStats = async () => {
     try {
@@ -31,7 +30,8 @@ export const Statistics = ({ listingDetail }) => {
 
   useEffect(() => {
     getDashboardStats();
-  }, []);
+  }, [shareUpdated]);
+
   return (
     <div className="card">
       <h4>
