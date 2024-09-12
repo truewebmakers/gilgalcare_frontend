@@ -3211,7 +3211,7 @@ a:focus {
 }
 .feature-img {
   background: #f1f1f1;
-  padding: 11px;
+  padding: 9px;
   border-radius: 50%;
   margin: 0 15px 0 0;
 }
@@ -3229,8 +3229,8 @@ a:focus {
   display: flex;
 }
 .feature-img img {
-  width: 45px;
-  height: 45px;
+  width: 20px;
+  height: 22px;
 }
 .feature-img1 {
   background: #f1f1f1;
@@ -4544,8 +4544,8 @@ a:focus {
   font-size: 12px;
 }
 .grid-view .card .ratings span {
-  background: #ff823b;
-  color: #fff;
+  background: #078007;
+  color: white;
   padding: 2px 9px;
   margin: 0 6px 0 0;
   border-radius: 4px;
@@ -6614,7 +6614,7 @@ textarea.form-control {
 }
 .settings-upload-btn .hide-input {
   opacity: 0;
-  position: absolute;
+  /* position: absolute; */
   left: 0;
   top: 0;
   width: 100%;
@@ -7082,6 +7082,7 @@ textarea.form-control {
   height: 190px;
 }
 .media-section .settings-upload-btn {
+  top:-32px;
   margin: 0;
 }
 .media-section .settings-upload-btn .file-upload {

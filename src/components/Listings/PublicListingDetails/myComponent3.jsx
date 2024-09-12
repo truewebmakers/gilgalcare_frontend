@@ -16,7 +16,12 @@ const Roomspics = ({ listingDetail }) => {
                   className="img-fluid"
                   alt="Image"
                   src={item?.gallery_image || GalleryImg1}
-                  style={{ border: "1px solid black" }}
+                  style={{
+                    width: "677px", // Set your desired width
+                    height: "200px", // Set your desired height
+                    objectFit: "cover", // Makes the image cover the area without stretching (can use 'contain' if you want the whole image visible)
+                    border: "1px solid black",
+                  }}
                 />
               </SlideshowLightbox>
             </Link>

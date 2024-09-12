@@ -12,13 +12,17 @@ export const ImageForm = ({ selectedImage, error, handleChange }) => {
         <div className="row">
           <div className="col-lg-6 col-md-6 featured-img1">
             <h6 className="media-title">Featured Image</h6>
-            <div className="media-image">
-              <img
-                src={selectedImage?.featuredImage || defaultPic}
-                alt="Featured"
-                style={{ width: "100%", height: "auto" }}
-              />
-            </div>
+            {/* <div className="media-image"> */}
+            <img
+              src={selectedImage?.featuredImage || defaultPic}
+              alt="Featured"
+              style={{
+                width: "300px",
+                height: "300px",
+                border: "1px solid black",
+              }}
+            />
+            {/* </div> */}
             <div className="settings-upload-btn">
               <input
                 type="file"
@@ -39,13 +43,17 @@ export const ImageForm = ({ selectedImage, error, handleChange }) => {
           </div>
           <div className="col-lg-6 col-md-6 featured-img2">
             <h6 className="media-title">Logo</h6>
-            <div className="media-image">
-              <img
-                src={selectedImage?.logo || mediaimg_1}
-                alt="Logo"
-                style={{ width: "100%", height: "auto" }}
-              />
-            </div>
+            {/* <div className="media-image"> */}
+            <img
+              src={selectedImage?.logo || mediaimg_1}
+              alt="Logo"
+              style={{
+                width: "300px",
+                height: "300px",
+                border: "1px solid black",
+              }}
+            />
+            {/* </div> */}
             <div className="settings-upload-btn">
               <input
                 type="file"

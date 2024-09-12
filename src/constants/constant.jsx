@@ -28,6 +28,7 @@ export const apiUrls = {
   getActiveListing: "/dashboard/listing-count",
   getStats: "/listing/stats/",
   incrementShares: "/listing/increment-shares/",
+  incrementViews: "/listing/increment-page-views/",
 };
 
 export const env = {
@@ -149,4 +150,4 @@ export const galleryImageFields = {
   "gallery_images[5]": "",
 };
 
-export const dateFormat = "dddd, MMMM Do YYYY, h:mm:ss a";
+export const dateFormat = "dddd, MMMM Do YYYY";

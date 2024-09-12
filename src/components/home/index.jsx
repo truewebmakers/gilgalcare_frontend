@@ -153,10 +153,6 @@ const Home5 = () => {
         <Testimonial5 />
         {/* Testimonial */}
 
-        {/* Our Latest Blog */}
-        <LatestBlogs />
-        {/* Our Latest Blog */}
-
         {/* Stay Tuned */}
         <StayTuned />
         {/* Stay Tuned */}

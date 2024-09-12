@@ -327,7 +327,7 @@ const AddLisiting = () => {
                     &nbsp;&nbsp; <Loader />
                   </>
                 ) : id ? (
-                  `Edit Listing`
+                  `Update Listing`
                 ) : (
                   `Add Listing`
                 )}

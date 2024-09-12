@@ -24,6 +24,7 @@ import moment from "moment/moment";
 import { Statistics } from "./Statistics";
 import { incrementShares } from "../../../services/incrementShares";
 import defaultPic from "../../../assets/img/defaultProfile.png";
+import BookmarkIcon from "../../../assets/svg/bookmark.svg";
 
 const ServiceDetails = () => {
   const parms = useLocation();
@@ -203,7 +204,9 @@ const ServiceDetails = () => {
                   <h4>Description</h4>
                 </div>
                 <div className="card-body">
-                  <p>{listingDetail?.tagline ? listingDetail?.tagline : "-"}</p>
+                  <h6>
+                    {listingDetail?.tagline ? listingDetail?.tagline : "-"}
+                  </h6>
                   <p>
                     {listingDetail?.listing_description
                       ? listingDetail?.listing_description
@@ -226,7 +229,7 @@ const ServiceDetails = () => {
                           key={index}
                         >
                           <div className="feature-img">
-                            {/* <img src={Feature_1_svg} alt="Room amenties" /> */}
+                            <img src={BookmarkIcon} alt="" />
                           </div>
                           <div className="featues-info">
                             <h6>{item}</h6>
@@ -255,7 +258,7 @@ const ServiceDetails = () => {
                           />
                         </div>
                         <div className="featues-info">
-                          <h6>
+                          <h6 style={{ whiteSpace: "nowrap" }}>
                             {listingDetail?.category?.name
                               ? listingDetail?.category?.name
                               : "-"}
@@ -263,7 +266,7 @@ const ServiceDetails = () => {
                         </div>
                       </div>
                       <div className="featureslist d-flex align-items-center col-lg-4 col-md-4">
-                        <div className="feature-img1">
+                        <div className="feature-img">
                           <img src={locationBig} alt="" />
                         </div>
                         <div className="featues-info">
@@ -275,22 +278,8 @@ const ServiceDetails = () => {
                         </div>
                       </div>
                       <div className="featureslist d-flex align-items-center col-lg-4 col-md-4">
-                        <div className="feature-img1">
-                          <img src={calendar} alt="" />
-                        </div>
-                        <div className="featues-info">
-                          <h6>
-                            {listingDetail?.category?.created_at
-                              ? moment(
-                                  listingDetail?.category?.created_at
-                                ).format(dateFormat)
-                              : "-"}
-                          </h6>
-                        </div>
-                      </div>
-                      <div className="featureslist d-flex align-items-center col-lg-4 col-md-4">
                         <div className="feature-img">
-                          <div>Status:</div>
+                          <div style={{ color: "#d54a38" }}>Status:</div>
                         </div>
                         <div className="featues-info">
                           <h6>

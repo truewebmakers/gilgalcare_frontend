@@ -1,15 +1,13 @@
 import React, { useState } from "react";
-import { useSelector } from "react-redux";
 import { useLocation } from "react-router-dom";
 import UseApi from "../../../hooks/useApi";
 import { apiMethods, apiUrls } from "../../../constants/constant";
 import { customToast } from "../../common/Toast";
 import Loader from "../../common/Loader";
 
-export const AddReview = ({ getListingReview }) => {
+export const AddReview = ({ getListingReview, user }) => {
   const parms = useLocation();
   const id = parms.state?.id;
-  const { user } = useSelector((state) => state.auth);
   const reviewFields = { title: "", name: "", email: "", review: "" };
   const [addReview, setAddReview] = useState(reviewFields);
   const [rating, setRating] = useState(0); // State to track current rating
@@ -20,36 +18,36 @@ export const AddReview = ({ getListingReview }) => {
     e.preventDefault();
     try {
       setIsLoading(true);
-      if (user?.token) {
-        // set headers
-        const headers = {
-          "Content-Type": "multipart/form-data",
-          Authorization: `Bearer ${user?.token}`,
-        };
-        const body = {
-          title: addReview?.title,
-          name: addReview?.name,
-          email: addReview?.email,
-          review: addReview?.review,
-          rating: rating,
-          business_listing_id: id,
-          user_id: user?.userInfo?.id,
-        };
-        // Call signup API
-        const response = await UseApi(
-          apiUrls.addReview,
-          apiMethods.POST,
-          body,
-          headers
-        );
-        if (response?.status == 200 || response?.status == 201) {
-          customToast.success(response?.data?.message);
-          setAddReview(reviewFields);
-          getListingReview();
-          return;
-        } else {
-          customToast.error(response?.data?.message);
-        }
+      // if (user?.token) {
+      // set headers
+      const headers = {
+        "Content-Type": "multipart/form-data",
+        // Authorization: `Bearer ${user?.token}`,
+      };
+      const body = {
+        title: addReview?.title,
+        name: addReview?.name,
+        email: addReview?.email,
+        review: addReview?.review,
+        rating: rating,
+        business_listing_id: id,
+        user_id: user?.userInfo?.id,
+      };
+      // Call signup API
+      const response = await UseApi(
+        apiUrls.addReview,
+        apiMethods.POST,
+        body,
+        headers
+      );
+      if (response?.status == 200 || response?.status == 201) {
+        customToast.success(response?.data?.message);
+        setAddReview(reviewFields);
+        getListingReview();
+        return;
+      } else {
+        customToast.error(response?.data?.message);
+        // }
       }
     } catch (err) {
       customToast.error(err?.message);

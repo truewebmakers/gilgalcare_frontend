@@ -28,7 +28,7 @@ export const LocationForm = ({
             onChange={handleChange}
             data-handler="locationInfo"
             autoComplete="off"
-            placeholder="Enter your address"
+            placeholder="Search for your address"
           />
           {error?.address && <p style={{ color: "red" }}>{error?.address}</p>}
         </div>

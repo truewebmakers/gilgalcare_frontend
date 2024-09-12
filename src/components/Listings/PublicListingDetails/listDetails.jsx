@@ -1,6 +1,7 @@
 import React from "react";
 import { details_icon, website } from "../../imagepath";
 import { Link } from "react-router-dom";
+import { CapitalizeFirstLetter } from "../../../utils/commonFunctions";
 
 export const ListDetails = ({ listingDetail }) => {
   const googleMapsApiKey = "AIzaSyDk_TbPERImCZCd7YmCzYacT6wGayV-Lmk";
@@ -11,43 +12,6 @@ export const ListDetails = ({ listingDetail }) => {
   const mapUrl = `https://www.google.com/maps/embed/v1/place?key=${googleMapsApiKey}&q=${mapLat},${mapLong}`;
   return (
     <>
-      {/* <div className="card">
-        <h4>
-          <img src={details_icon} alt="details-icon" /> Details
-        </h4>
-        <ul>
-          <li>
-            Contract <span>For Rent</span>
-          </li>
-          <li>
-            Location <span>New York, USA</span>
-          </li>
-          <li>
-            Year Built <span>1988</span>
-          </li>
-          <li>
-            Rooms <span>3</span>
-          </li>
-          <li>
-            Beds <span>4</span>
-          </li>
-          <li>
-            Baths<span>8</span>
-          </li>
-          <li>
-            Gadgets <span>6</span>
-          </li>
-          <li>
-            Home Area <span>30sqft</span>
-          </li>
-          <li>
-            Lot Dimensions <span>30*30*20 ft</span>
-          </li>
-          <li className="p-0">
-            Lot Area <span>50 ft</span>
-          </li>
-        </ul>
-      </div> */}
       <div className="card">
         <h4>
           <img src="assets/img/breifcase.svg" alt="" /> Business Info
@@ -55,9 +19,9 @@ export const ListDetails = ({ listingDetail }) => {
         <div className="map-details">
           <div className="map-frame">
             <iframe
-              src={mapUrl}
-              width={200}
-              height={160}
+              src={`${mapUrl}&zoom=6`}
+              width={400}
+              height={300}
               style={{ border: 0 }}
               allowFullScreen=""
               loading="lazy"
@@ -67,9 +31,13 @@ export const ListDetails = ({ listingDetail }) => {
           <ul className="info-list">
             <li>
               <i className="feather-map-pin" />{" "}
-              {listingDetail?.address ? listingDetail?.address : "-"},
-              <br />
-              {listingDetail?.location ? listingDetail?.location : "-"}
+              {listingDetail?.address
+                ? CapitalizeFirstLetter(listingDetail?.address)
+                : "-"}
+              ,&nbsp;
+              {listingDetail?.location
+                ? CapitalizeFirstLetter(listingDetail?.location)
+                : "-"}
             </li>
             <li>
               <i className="feather-phone-call" />{" "}

@@ -6,11 +6,13 @@ import { customToast } from "../../common/Toast";
 import { CapitalizeFirstLetter } from "../../../utils/commonFunctions";
 import { AddReview } from "./addReview";
 import moment from "moment";
+import { useSelector } from "react-redux";
 
 export const Review = () => {
   const parms = useLocation();
   const id = parms.state?.id;
   const [reviewList, setReviewList] = useState([]);
+  const { user } = useSelector((state) => state.auth);
 
   const getListingReview = async () => {
     try {
@@ -77,7 +79,9 @@ export const Review = () => {
                 </div>
               </li>
             ))}
-            <AddReview getListingReview={getListingReview} />
+            {/* {user?.token?.length ? ( */}
+            <AddReview getListingReview={getListingReview} user={user} />
+            {/* ) : null} */}
           </ul>
         </div>
       </div>

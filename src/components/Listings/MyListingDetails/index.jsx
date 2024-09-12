@@ -29,6 +29,7 @@ import { Ratings } from "../PublicListingDetails/Ratingsx";
 import { ListDetails } from "../PublicListingDetails/listDetails";
 import moment from "moment";
 import { Statistics } from "../PublicListingDetails/Statistics";
+import BookmarkIcon from "../../../assets/svg/bookmark.svg";
 
 const MyListingDetails = () => {
   const parms = useLocation();
@@ -204,8 +205,8 @@ const MyListingDetails = () => {
                           key={index}
                         >
                           <div className="feature-img">
-                            {/* <img src={Feature_1_svg} alt="Room amenties" /> */}
-                          </div>
+                            <img src={BookmarkIcon} alt="" />
+                          </div>{" "}
                           <div className="featues-info">
                             <h6>{item}</h6>
                           </div>
@@ -233,7 +234,7 @@ const MyListingDetails = () => {
                           />
                         </div>
                         <div className="featues-info">
-                          <h6>
+                          <h6 style={{ whiteSpace: "nowrap" }}>
                             {listingDetail?.category?.name
                               ? listingDetail?.category?.name
                               : "-"}
@@ -241,7 +242,7 @@ const MyListingDetails = () => {
                         </div>
                       </div>
                       <div className="featureslist d-flex align-items-center col-lg-4 col-md-4">
-                        <div className="feature-img1">
+                        <div className="feature-img">
                           <img src={locationBig} alt="" />
                         </div>
                         <div className="featues-info">
@@ -252,23 +253,10 @@ const MyListingDetails = () => {
                           </h6>
                         </div>
                       </div>
-                      <div className="featureslist d-flex align-items-center col-lg-4 col-md-4">
-                        <div className="feature-img1">
-                          <img src={calendar} alt="" />
-                        </div>
-                        <div className="featues-info">
-                          <h6>
-                            {listingDetail?.category?.created_at
-                              ? moment(
-                                  listingDetail?.category?.created_at
-                                ).format(dateFormat)
-                              : "-"}
-                          </h6>
-                        </div>
-                      </div>
+
                       <div className="featureslist d-flex align-items-center col-lg-4 col-md-4">
                         <div className="feature-img">
-                          <div>Status:</div>
+                          <div style={{ color: "#d54a38" }}>Status:</div>
                         </div>
                         <div className="featues-info">
                           <h6>
@@ -324,7 +312,10 @@ const MyListingDetails = () => {
                       </div>
                       <div className="sideauthor-info">
                         <p className="authorname">{profileData?.name || "-"}</p>
-                        <p>{profileData?.created_at || "-"}</p>
+                        <p>
+                          {moment(profileData?.created_at).format(dateFormat) ||
+                            "-"}
+                        </p>
                       </div>
                     </div>
                   </div>

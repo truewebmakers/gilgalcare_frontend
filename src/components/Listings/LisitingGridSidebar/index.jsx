@@ -7,6 +7,7 @@ import { Link, useLocation } from "react-router-dom";
 import UseApi from "../../../hooks/useApi";
 import { apiMethods, apiUrls } from "../../../constants/constant";
 import { getCategoryNameById } from "../../../utils/commonApis";
+import { CapitalizeFirstLetter } from "../../../utils/commonFunctions";
 
 const GridSidebar = () => {
   const parms = useLocation().pathname;
@@ -112,9 +113,11 @@ const GridSidebar = () => {
                                 src={item?.logo || listgrid_1}
                                 className="img-fluid"
                                 alt="blog-img"
-                                height={70}
-                                width={70}
-                                style={{ border: "1px solid black" }}
+                                style={{
+                                  border: "1px solid black",
+                                  width: "600px",
+                                  height: "310px",
+                                }}
                               />
                             </Link>
                             <div className="fav-item">
@@ -139,18 +142,11 @@ const GridSidebar = () => {
                                   <Link to="#">
                                     <span>
                                       {" "}
-                                      <i className="fa-regular fa-circle-stop" />{" "}
+                                      <b>Category: </b>
                                       {getCategoryNameById(item?.category_id) ||
                                         "-"}
                                     </span>
                                   </Link>
-                                </div>
-                                <div className="blog-author text-end">
-                                  <span>
-                                    {" "}
-                                    <i className="feather-eye" />
-                                    {item?.listing_title || "-"}
-                                  </span>
                                 </div>
                               </div>
                               <h6>
@@ -158,7 +154,7 @@ const GridSidebar = () => {
                                   to={`/listing-details/${item?.uuid} `}
                                   state={{ id: item?.id }}
                                 >
-                                  {item?.listing_description || null}
+                                  {item?.listing_title || "-"}
                                 </Link>
                               </h6>
                               <div className="blog-location-details">
@@ -185,7 +181,9 @@ const GridSidebar = () => {
                                   </span>
                                 </div>
                                 <div className="ratings">
-                                  <span>{item?.status}</span>
+                                  <span>
+                                    {CapitalizeFirstLetter(item?.status)}
+                                  </span>
                                 </div>
                               </div>
                             </div>
