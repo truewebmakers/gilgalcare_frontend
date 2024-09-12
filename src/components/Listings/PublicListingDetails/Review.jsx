@@ -44,7 +44,7 @@ export const Review = () => {
     <div className="card review-sec  mb-0">
       <div className="card-header  align-items-center">
         <i className="fa-regular fa-comment-dots" />
-        <h4 id="write-review">Write a Review</h4>
+        <h4 id="write-review">Review</h4>
       </div>
       <div className="card-body">
         <div className="review-list">
@@ -79,9 +79,9 @@ export const Review = () => {
                 </div>
               </li>
             ))}
-            {/* {user?.token?.length ? ( */}
-            <AddReview getListingReview={getListingReview} user={user} />
-            {/* ) : null} */}
+            {user?.token?.length ? (
+              <AddReview getListingReview={getListingReview} user={user} />
+            ) : null}
           </ul>
         </div>
       </div>

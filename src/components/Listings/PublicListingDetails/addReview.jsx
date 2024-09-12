@@ -18,36 +18,36 @@ export const AddReview = ({ getListingReview, user }) => {
     e.preventDefault();
     try {
       setIsLoading(true);
-      // if (user?.token) {
-      // set headers
-      const headers = {
-        "Content-Type": "multipart/form-data",
-        // Authorization: `Bearer ${user?.token}`,
-      };
-      const body = {
-        title: addReview?.title,
-        name: addReview?.name,
-        email: addReview?.email,
-        review: addReview?.review,
-        rating: rating,
-        business_listing_id: id,
-        user_id: user?.userInfo?.id,
-      };
-      // Call signup API
-      const response = await UseApi(
-        apiUrls.addReview,
-        apiMethods.POST,
-        body,
-        headers
-      );
-      if (response?.status == 200 || response?.status == 201) {
-        customToast.success(response?.data?.message);
-        setAddReview(reviewFields);
-        getListingReview();
-        return;
-      } else {
-        customToast.error(response?.data?.message);
-        // }
+      if (user?.token) {
+        // set headers
+        const headers = {
+          "Content-Type": "multipart/form-data",
+          Authorization: `Bearer ${user?.token}`,
+        };
+        const body = {
+          title: addReview?.title,
+          name: addReview?.name,
+          email: addReview?.email,
+          review: addReview?.review,
+          rating: rating,
+          business_listing_id: id,
+          user_id: user?.userInfo?.id,
+        };
+        // Call signup API
+        const response = await UseApi(
+          apiUrls.addReview,
+          apiMethods.POST,
+          body,
+          headers
+        );
+        if (response?.status == 200 || response?.status == 201) {
+          customToast.success(response?.data?.message);
+          setAddReview(reviewFields);
+          getListingReview();
+          return;
+        } else {
+          customToast.error(response?.data?.message);
+        }
       }
     } catch (err) {
       customToast.error(err?.message);
