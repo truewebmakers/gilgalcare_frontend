@@ -160,7 +160,6 @@ const AddLisiting = () => {
       ...uploadPic,
       addedBy: user?.userInfo?.id, // Add user ID to the listing data
     };
-
     let newErr = {};
     for (let key in allFields) {
       newErr = {
@@ -177,6 +176,8 @@ const AddLisiting = () => {
         id
           ? await editListingService(allFields, id, user?.token, galleryImage)
           : await addListingService(allFields, user?.token, galleryImage);
+      } catch (err) {
+        return err;
       } finally {
         setIsLoading(false);
       }
@@ -190,8 +191,6 @@ const AddLisiting = () => {
     // Handle image info updates
     if (dataset?.handler === "imageInfo" && files && files[0]) {
       const file = files[0];
-      setUploadedPic((prevState) => ({ ...prevState, [name]: file }));
-
       const reader = new FileReader();
       reader.onload = (loadEvent) => {
         setSelectedImage((prevState) => ({
@@ -200,6 +199,8 @@ const AddLisiting = () => {
         }));
       };
       reader.readAsDataURL(file);
+
+      setUploadedPic((prevState) => ({ ...prevState, [name]: file }));
 
       // Validate image info (if necessary)
       if (isDisable) {

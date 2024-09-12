@@ -19,7 +19,6 @@ export const GalleryImages = ({
     const file = files[0];
     const reader = new FileReader();
 
-    // Update the local state with the selected image preview
     reader.onload = (loadEvent) => {
       setShowGalleryImage((prevState) => ({
         ...prevState,
@@ -28,7 +27,6 @@ export const GalleryImages = ({
     };
     reader.readAsDataURL(file);
 
-    // Generate link and update the state
     const response = await generateImageLinkService(
       user?.token,
       file,
