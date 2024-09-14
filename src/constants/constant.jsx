@@ -10,6 +10,9 @@ export const apiUrls = {
   addCategory: "/categories/store",
   getAllCategoriesList: "/categories/get/all",
   getAllCategoriesPublic: "/categories/get-pb/all",
+  getCategoryDetail: "/categories/get/",
+  deleteCategory: "/admin/listing/categories/delete/",
+  editCategory: "/categories/update/",
   // listings
   addListing: "/listing/store",
   editListing: "/listing/update/",

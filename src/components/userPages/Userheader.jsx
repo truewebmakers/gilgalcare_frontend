@@ -85,14 +85,16 @@ const UserHeader = () => {
               </ul>
             </div>
             <ul className="nav header-navbar-rht">
-              <li className="nav-item">
-                <Link
-                  className="nav-link header-login add-listing"
-                  to="/add-listing"
-                >
-                  <i className="fa-solid fa-plus" /> Add Listing
-                </Link>
-              </li>
+              {user?.userInfo?.user_type !== "user" && (
+                <li className="nav-item">
+                  <Link
+                    className="nav-link header-login add-listing"
+                    to="/add-listing"
+                  >
+                    <i className="fa-solid fa-plus" /> Add Listing
+                  </Link>
+                </li>
+              )}
               <li className="nav-item dropdown has-arrow logged-item">
                 <Link
                   to="#"

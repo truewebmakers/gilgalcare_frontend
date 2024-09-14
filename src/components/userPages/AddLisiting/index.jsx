@@ -91,7 +91,6 @@ const AddLisiting = () => {
     }
 
     const galleryImagesBinary = {};
-    const galleryImagesUrls = {};
     const metaImages = response?.meta || [];
 
     // Process up to 6 gallery images
@@ -263,7 +262,7 @@ const AddLisiting = () => {
       <UserHeader />
       <UserBreadCrumb
         path="Home"
-        pageName={id ? "Edit Listing" : "Add Listing"}
+        pageName={id ? "Update Listing" : "Add Listing"}
       />
       <div className="dashboard-content">
         <div className="container">

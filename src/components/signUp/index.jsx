@@ -1,8 +1,7 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import Header from "../home/header/Header";
 import { Link, useNavigate } from "react-router-dom";
 import Footer from "../home/footer/Footer";
-import { useState } from "react";
 import UseApi from "../../hooks/useApi";
 import { apiMethods, apiUrls } from "../../constants/constant";
 import { toast } from "react-toastify";
@@ -17,9 +16,9 @@ const SignUp = () => {
   const [passwordType, setPasswordType] = useState("password");
   const [signupData, setSignUpData] = useState({
     name: "",
-    email:'',
+    email: "",
     passwordInput: "",
-    user_type: "business", //business, admin
+    user_type: "user", // default is business
   });
   const [error, setError] = useState({
     name: "",
@@ -52,49 +51,38 @@ const SignUp = () => {
     setDisable(false);
   }, [error]);
 
-
   const togglePassword = () => {
-    if (passwordType === "password") {
-      setPasswordType("text");
-      return;
-    }
-    setPasswordType("password");
+    setPasswordType(passwordType === "password" ? "text" : "password");
   };
 
   const handleSignUp = async (e) => {
-    e.preventDefault()
+    e.preventDefault();
     let newErr = {};
     for (let key in signupData) {
       newErr = { ...newErr, ...handleValidations(key, signupData[key]) };
     }
     setError(newErr);
-    if (
-      !hasErrors(newErr) && areAllFieldsFilled(signupData)
-    ) {
+    if (!hasErrors(newErr) && areAllFieldsFilled(signupData)) {
       setIsLoading(true);
       try {
-        // Prepare data for signup API
         const bodyData = {
           name: signupData?.name,
           email: signupData?.email,
           password: signupData?.passwordInput,
-          user_type: signupData?.user_type, 
+          user_type: signupData?.user_type, // add user_type to the signup request
         };
-        // Call signup API
         const response = await UseApi(
           apiUrls.signup,
           apiMethods.POST,
           bodyData
         );
-        if (response?.status == 201 || response?.status == 200) {
+        if (response?.status === 201 || response?.status === 200) {
           toast.success(response?.data?.message);
           navigate(path.login);
-          setIsLoading(false);
-          return;
         } else {
           toast.error(response?.data?.message);
-          setIsLoading(false);
         }
+        setIsLoading(false);
       } catch (err) {
         toast.error(err?.message);
         setIsLoading(false);
@@ -105,7 +93,6 @@ const SignUp = () => {
   return (
     <>
       <Header />
-      {/* Breadscrumb Section */}
       <div className="breadcrumb-bar">
         <div className="container">
           <div className="row align-items-center text-center">
@@ -125,8 +112,7 @@ const SignUp = () => {
           </div>
         </div>
       </div>
-      {/* /Breadscrumb Section */}
-      {/* Login Section */}
+
       <div className="login-content">
         <div className="container">
           <div className="row">
@@ -135,11 +121,12 @@ const SignUp = () => {
                 <div className="login-header">
                   <h3>Create an Account</h3>
                   <p>
-                    Lets start with <span>Gilgil</span>
+                    Lets start with <span>Gilgal</span>
                   </p>
                 </div>
-                {/* Login Form */}
+
                 <form action="login">
+                  {/* Name input */}
                   <div className="form-group group-img">
                     <div className="group-img">
                       <i className="feather-user" />
@@ -152,11 +139,13 @@ const SignUp = () => {
                         onChange={handleChange}
                         autoComplete="off"
                       />
-                       {error?.name && (
-                    <p style={{ color: "red" }}>{error?.name}</p>
-                  )}
+                      {error?.name && (
+                        <p style={{ color: "red" }}>{error?.name}</p>
+                      )}
                     </div>
                   </div>
+
+                  {/* Email input */}
                   <div className="form-group group-img">
                     <div className="group-img">
                       <i className="feather-mail" />
@@ -169,11 +158,13 @@ const SignUp = () => {
                         onChange={handleChange}
                         autoComplete="off"
                       />
-                       {error?.email && (
-                    <p style={{ color: "red" }}>{error?.email}</p>
-                  )}
+                      {error?.email && (
+                        <p style={{ color: "red" }}>{error?.email}</p>
+                      )}
                     </div>
                   </div>
+
+                  {/* Password input */}
                   <div className="form-group">
                     <div className="pass-group group-img">
                       <i className="feather-lock" />
@@ -187,7 +178,7 @@ const SignUp = () => {
                         autoComplete="off"
                       />
                       <span
-                        className={`toggle-password  ${
+                        className={`toggle-password ${
                           passwordType === "password"
                             ? "feather-eye"
                             : "feather-eye-off"
@@ -196,24 +187,49 @@ const SignUp = () => {
                       ></span>
                     </div>
                     {error?.passwordInput && (
-                    <p style={{ color: "red" }}>{error?.passwordInput}</p>
-                  )}
+                      <p style={{ color: "red" }}>{error?.passwordInput}</p>
+                    )}
                   </div>
+
+                  {/* User Type Radio Buttons */}
+                  <div className="form-group">
+                    <label>User Type:</label>
+                    <div style={{ display: "flex", gap: "10px" }}>
+                      <div className="form-check">
+                        <input
+                          className="form-check-input"
+                          type="radio"
+                          name="user_type"
+                          value="user"
+                          checked={signupData?.user_type === "user"}
+                          onChange={handleChange}
+                        />
+                        <label className="form-check-label">User</label>
+                      </div>
+                      <div className="form-check">
+                        <input
+                          className="form-check-input"
+                          type="radio"
+                          name="user_type"
+                          value="business"
+                          checked={signupData?.user_type === "business"}
+                          onChange={handleChange}
+                        />
+                        <label className="form-check-label">Business</label>
+                      </div>
+                    </div>
+                  </div>
+
+                  {/* Submit Button */}
                   <button
                     className="btn btn-primary w-100 login-btn"
                     type="submit"
                     disabled={disable}
-                    onClick={(e)=>handleSignUp(e)}
+                    onClick={(e) => handleSignUp(e)}
                   >
-                     {isLoading ? (
-                            <>
-                                &nbsp;&nbsp; <Loader />
-                            </>
-                        ) : (
-                          `Create Account`
-                        )}
-                   
+                    {isLoading ? <Loader /> : `Create Account`}
                   </button>
+
                   <div className="register-link text-center">
                     <p>
                       Already have an account?{" "}
@@ -232,4 +248,5 @@ const SignUp = () => {
     </>
   );
 };
+
 export default SignUp;

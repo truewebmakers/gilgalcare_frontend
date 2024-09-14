@@ -50,9 +50,11 @@ const UserPagesMenu = ({ activesMenu }) => {
         <li className={activesMenu === "/reviews" ? "active" : ""}>
           <Link to="/reviews">Reviews</Link>
         </li>
-        <li className={activesMenu === "/add-listing" ? "active" : ""}>
-          <Link to="/add-listing">Add Listing</Link>
-        </li>
+        {user?.userInfo?.user_type !== "user" && (
+          <li className={activesMenu === "/add-listing" ? "active" : ""}>
+            <Link to="/add-listing">Add Listing</Link>
+          </li>
+        )}
       </ul>
     </li>
   );

@@ -8,6 +8,7 @@ import Review from "../components/userPages/review";
 import AddLisiting from "../components/userPages/AddLisiting";
 import AddCategory from "../components/userPages/addCategory";
 import MyListingDetails from "../components/Listings/MyListingDetails";
+import MyCategory from "../components/userPages/myCategory";
 
 export const AdminRoutes = [
   {
@@ -16,6 +17,10 @@ export const AdminRoutes = [
   },
   {
     path: "add-category",
+    element: <AddCategory />,
+  },
+  {
+    path: "edit-category/:id",
     element: <AddCategory />,
   },
   {
@@ -50,5 +55,9 @@ export const AdminRoutes = [
   {
     path: "my-listing-details/:id",
     element: <MyListingDetails />,
+  },
+  {
+    path: "my-category",
+    element: <MyCategory />,
   },
 ];

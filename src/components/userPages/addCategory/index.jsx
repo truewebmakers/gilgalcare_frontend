@@ -1,15 +1,6 @@
 import React, { useEffect, useState } from "react";
-import { Link, useLocation } from "react-router-dom";
-import {
-  gallerymedia_1,
-  gallerymedia_2,
-  gallerymedia_3,
-  gallerymedia_4,
-  gallerymedia_5,
-  mediaimg_1,
-  mediaimg_2,
-  profile_img,
-} from "../../imagepath";
+import { useLocation } from "react-router-dom";
+import { profile_img } from "../../imagepath";
 import Footer from "../../home/footer/Footer";
 import UserHeader from "../Userheader";
 import UserMenu from "../UserMenu";
@@ -20,6 +11,9 @@ import UseApi from "../../../hooks/useApi";
 import { customToast } from "../../common/Toast";
 import { addCategoryValidation } from "../../../utils/validations";
 import Loader from "../../common/Loader";
+import { addCategoryService } from "../../../services/addCategoryService";
+import { editCategoryService } from "../../../services/editCategoryService";
+import { fetchCategoryDetail } from "../../../services/getCategoryDetail";
 
 const AddCategory = () => {
   const [addCategory, setAddCategory] = useState({
@@ -32,7 +26,7 @@ const AddCategory = () => {
   const [uploadPic, setUploadedPic] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
   const [isDisable, setIsDisable] = useState(false);
-  const parms = useLocation().pathname;
+  const parms = useLocation();
   const { user } = useSelector((state) => state.auth);
   const [error, setError] = useState({
     name: "",
@@ -40,6 +34,33 @@ const AddCategory = () => {
     location: "",
     status: "",
   });
+
+  const id = parms?.pathname?.includes("edit-category")
+    ? parms?.state?.id
+    : null;
+
+  const convertToApiKey = (key) => {
+    return key.replace(/([A-Z])/g, "_$1").toLowerCase();
+  };
+
+  const fetchCategoryData = async () => {
+    try {
+      const response = await fetchCategoryDetail(user?.token, id);
+      setAddCategory((prevFields) => {
+        return Object.entries(prevFields).reduce((acc, [key, _]) => {
+          acc[key] = response[key] || "";
+          return acc;
+        }, {});
+      });
+      if (response?.feature_image) {
+        setSelectedImage(response?.feature_image);
+        const featureRes = await fetchImageAsBinary(response?.feature_image);
+        setUploadedPic(featureRes);
+      }
+    } catch (error) {
+      return error;
+    }
+  };
 
   const handleImageChange = (event) => {
     const file = event.target.files[0];
@@ -52,6 +73,12 @@ const AddCategory = () => {
       reader.readAsDataURL(file);
     }
   };
+
+  useEffect(() => {
+    if (id) {
+      fetchCategoryData();
+    }
+  }, [id]);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -90,37 +117,26 @@ const AddCategory = () => {
 
       // call add category api
       try {
-        // set headers
-        const headers = {
-          "Content-Type": "multipart/form-data",
-          Authorization: `Bearer ${user?.token}`,
-        };
-        // set body
-        const bodyData = {
-          name: addCategory?.name,
-          status: addCategory?.status,
-          details: addCategory?.details,
-          location: addCategory?.location,
-          feature_image: uploadPic,
-        };
-        // Call signup API
-        const response = await UseApi(
-          apiUrls.addCategory,
-          apiMethods.POST,
-          bodyData,
-          headers
-        );
-        if (response?.status == 200 || response?.status == 201) {
-          customToast.success(response?.data?.message);
+        const res = {};
+        id
+          ? (res = await editCategoryService(
+              addCategory,
+              user?.token,
+              uploadPic,
+              id
+            ))
+          : (res = await addCategoryService(
+              addCategory,
+              user?.token,
+              uploadPic
+            ));
+        if (res?.sucessStatus == true) {
           setAddCategory({
             name: "",
             details: "",
             location: "",
             status: "",
           });
-          return;
-        } else {
-          customToast.error(response?.data?.message);
         }
       } catch (err) {
         customToast.error(err?.message);
@@ -132,20 +148,23 @@ const AddCategory = () => {
 
   return (
     <>
-      <UserHeader parms={parms} />
+      <UserHeader parms={parms?.pathname} />
       {/* Breadscrumb Section */}
-      <UserBreadCrumb path="Home" pageName={"Add Category"} />
+      <UserBreadCrumb
+        path="Home"
+        pageName={id ? "Update Catgeory" : "Add Category"}
+      />
 
       {/* /Breadscrumb Section */}
       {/* Profile Content */}
       <div className="dashboard-content">
         <div className="container">
-          <UserMenu activeUrl={"add-category"} />
+          <UserMenu activeUrl={id ? "" : "add-category"} />
           <div className="profile-content">
             <div className="messages-form">
               <div className="card">
                 <div className="card-header">
-                  <h4>Add Category</h4>
+                  <h4>{id ? "Update Category" : "Add Category"}</h4>
                 </div>
                 <div className="card-body">
                   <div className="profile-photo">
@@ -257,6 +276,8 @@ const AddCategory = () => {
                   <>
                     &nbsp;&nbsp; <Loader />
                   </>
+                ) : id ? (
+                  "Update Category"
                 ) : (
                   `Add Category`
                 )}

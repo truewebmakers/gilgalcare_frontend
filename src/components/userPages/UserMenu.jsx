@@ -37,11 +37,20 @@ export default function UserMenu({ activeUrl }) {
             <i className="fa-solid fa-user" /> <span>Profile</span>
           </Link>
         </li>
-        <li className={activeUrl == "my-listing" ? "active" : ""}>
-          <Link to="/my-listing">
-            <i className="feather-list" /> <span>My Listing</span>
-          </Link>
-        </li>
+        {user?.userInfo?.user_type !== "user" ? (
+          <li className={activeUrl == "my-listing" ? "active" : ""}>
+            <Link to="/my-listing">
+              <i className="feather-list" /> <span>My Listing</span>
+            </Link>
+          </li>
+        ) : null}
+        {user?.userInfo?.user_type === "admin" && (
+          <li className={activeUrl == "my-category" ? "active" : ""}>
+            <Link to="/my-category">
+              <i className="feather-list" /> <span>My Category</span>
+            </Link>
+          </li>
+        )}
         <li>
           <span onClick={handleLogout} style={{ cursor: "pointer" }}>
             <i className="fas fa-light fa-circle-arrow-left" />{" "}

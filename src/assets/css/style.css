@@ -6332,7 +6332,7 @@ body table.listing-table.datatable {
 }
 
 .listingtable-rate a i {
-  margin-right: 3px;
+  /* margin-right: 3px; */
 }
 .listing-table .discount-amt {
   color: #d54a38;
