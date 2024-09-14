@@ -42,10 +42,12 @@ export const Review = () => {
   }, []);
   return (
     <div className="card review-sec  mb-0">
-      <div className="card-header  align-items-center">
-        <i className="fa-regular fa-comment-dots" />
-        <h4 id="write-review">Review</h4>
-      </div>
+      {reviewList?.length ? (
+        <div className="card-header  align-items-center">
+          <i className="fa-regular fa-comment-dots" />
+          <h4 id="write-review">Review</h4>
+        </div>
+      ) : null}
       <div className="card-body">
         <div className="review-list">
           <ul className="">
