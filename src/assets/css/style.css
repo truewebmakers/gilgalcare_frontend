@@ -3128,7 +3128,7 @@ a:focus {
 }
 .descriptionlinks ul li {
   margin-right: 25px;
-  text-transform: capitalize;
+  /* text-transform: capitalize; */
 }
 .descriptionlinks ul li a {
   display: flex;

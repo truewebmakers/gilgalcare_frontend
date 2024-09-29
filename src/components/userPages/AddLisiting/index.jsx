@@ -25,6 +25,7 @@ import { editListingService } from "../../../services/editListingService";
 import { fetchMyListingDetail } from "../../../services/getMyListingDetail";
 import { fetchImageAsBinary } from "../../../utils/commonFunctions";
 import { GalleryImages } from "./galleryImages";
+import { toast } from "react-toastify";
 
 const AddLisiting = () => {
   const [listingFields, setListingFields] = useState(initialListingField);
@@ -145,6 +146,7 @@ const AddLisiting = () => {
   useEffect(() => {
     if (hasErrors(error)) {
       setIsDisable(true);
+      toast.error("There is some error please check");
       return;
     }
     setIsDisable(false);
@@ -191,7 +193,9 @@ const AddLisiting = () => {
     if (dataset?.handler === "imageInfo" && files && files[0]) {
       const file = files[0];
       const reader = new FileReader();
+
       reader.onload = (loadEvent) => {
+        console.log(`Loading image for: ${name}`); // Debugging log
         setSelectedImage((prevState) => ({
           ...prevState,
           [name]: loadEvent.target.result,
@@ -199,15 +203,10 @@ const AddLisiting = () => {
       };
       reader.readAsDataURL(file);
 
-      setUploadedPic((prevState) => ({ ...prevState, [name]: file }));
-
-      // Validate image info (if necessary)
-      if (isDisable) {
-        const newErr = validateListingFields(name, file, listingFields);
-        setError((prevError) => ({ ...prevError, ...newErr }));
-      }
-
-      return;
+      setUploadedPic((prevState) => {
+        console.log(`Uploading image: ${name}`); // Debugging log
+        return { ...prevState, [name]: file };
+      });
     }
 
     // Handle basic info updates
@@ -312,7 +311,6 @@ const AddLisiting = () => {
               />
               <GalleryImages
                 setGalleryImage={setGalleryImage}
-                galleryImage={galleryImage}
                 showGalleryImage={showGalleryImage}
                 setShowGalleryImage={setShowGalleryImage}
               />

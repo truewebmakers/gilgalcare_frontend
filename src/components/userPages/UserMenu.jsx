@@ -25,13 +25,6 @@ export default function UserMenu({ activeUrl }) {
             <i className="feather-grid" /> <span>Dashboard</span>
           </Link>
         </li>
-        {user?.userInfo?.user_type === "admin" && (
-          <li className={activeUrl == "add-category" ? "active" : ""}>
-            <Link to="/add-category">
-              <i className="fas fa-solid fa-heart" /> <span>Add Category</span>
-            </Link>
-          </li>
-        )}
         <li className={activeUrl == "profile" ? "active" : ""}>
           <Link to="/profile">
             <i className="fa-solid fa-user" /> <span>Profile</span>

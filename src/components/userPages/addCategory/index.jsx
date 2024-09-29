@@ -117,7 +117,7 @@ const AddCategory = () => {
 
       // call add category api
       try {
-        const res = {};
+        let res = {};
         id
           ? (res = await editCategoryService(
               addCategory,
@@ -221,7 +221,6 @@ const AddCategory = () => {
                     <input
                       className="form-control pass-input"
                       placeholder="Location"
-                      defaultValue={""}
                       value={addCategory?.location}
                       name="location"
                       onChange={handleChange}

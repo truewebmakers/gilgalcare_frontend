@@ -11,7 +11,7 @@ export const apiUrls = {
   getAllCategoriesList: "/categories/get/all",
   getAllCategoriesPublic: "/categories/get-pb/all",
   getCategoryDetail: "/categories/get/",
-  deleteCategory: "/admin/listing/categories/delete/",
+  deleteCategory: "/categories/delete/",
   editCategory: "/categories/update/",
   // listings
   addListing: "/listing/store",

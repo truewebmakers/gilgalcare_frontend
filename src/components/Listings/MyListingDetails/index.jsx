@@ -138,7 +138,9 @@ const MyListingDetails = () => {
                       target="_blank"
                     >
                       <img src={website} alt="website" />
-                      {listingDetail?.website ? listingDetail?.website : "-"}
+                      {listingDetail?.website
+                        ? listingDetail?.website?.toLowerCase()
+                        : "-"}
                     </Link>
                   </li>
                   <li>
@@ -149,7 +151,9 @@ const MyListingDetails = () => {
                   </li>
                   <li>
                     <img src={mailIcon} alt="" />{" "}
-                    {listingDetail?.email ? listingDetail?.email : "-"}
+                    {listingDetail?.email
+                      ? listingDetail?.email?.toLowerCase()
+                      : "-"}
                   </li>
                 </ul>
               </div>
@@ -242,28 +246,16 @@ const MyListingDetails = () => {
                         </div>
                       </div>
                       <div className="featureslist d-flex align-items-center col-lg-4 col-md-4">
-                        <div className="feature-img">
+                        <div
+                          className="feature-img"
+                          style={{ marginLeft: "87px" }}
+                        >
                           <img src={locationBig} alt="" />
                         </div>
                         <div className="featues-info">
                           <h6>
                             {listingDetail?.category?.location
                               ? listingDetail?.category?.location
-                              : "-"}
-                          </h6>
-                        </div>
-                      </div>
-
-                      <div className="featureslist d-flex align-items-center col-lg-4 col-md-4">
-                        <div className="feature-img">
-                          <div style={{ color: "#d54a38" }}>Status:</div>
-                        </div>
-                        <div className="featues-info">
-                          <h6>
-                            {listingDetail?.category?.status
-                              ? CapitalizeFirstLetter(
-                                  listingDetail?.category?.status
-                                )
                               : "-"}
                           </h6>
                         </div>

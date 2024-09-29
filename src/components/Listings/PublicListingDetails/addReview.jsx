@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { useLocation } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import UseApi from "../../../hooks/useApi";
 import { apiMethods, apiUrls } from "../../../constants/constant";
 import { customToast } from "../../common/Toast";
@@ -13,41 +13,46 @@ export const AddReview = ({ getListingReview, user }) => {
   const [rating, setRating] = useState(0); // State to track current rating
   const [hover, setHover] = useState(0); // State to track current hover
   const [isLoading, setIsLoading] = useState(false);
+  const navigate = useNavigate();
 
   const addListingReview = async (e) => {
     e.preventDefault();
     try {
-      setIsLoading(true);
-      if (user?.token) {
-        // set headers
-        const headers = {
-          "Content-Type": "multipart/form-data",
-          Authorization: `Bearer ${user?.token}`,
-        };
-        const body = {
-          title: addReview?.title,
-          name: addReview?.name,
-          email: addReview?.email,
-          review: addReview?.review,
-          rating: rating,
-          business_listing_id: id,
-          user_id: user?.userInfo?.id,
-        };
-        // Call signup API
-        const response = await UseApi(
-          apiUrls.addReview,
-          apiMethods.POST,
-          body,
-          headers
-        );
-        if (response?.status == 200 || response?.status == 201) {
-          customToast.success(response?.data?.message);
-          setAddReview(reviewFields);
-          getListingReview();
-          return;
-        } else {
-          customToast.error(response?.data?.message);
+      if (user?.token?.length) {
+        setIsLoading(true);
+        if (user?.token) {
+          // set headers
+          const headers = {
+            "Content-Type": "multipart/form-data",
+            Authorization: `Bearer ${user?.token}`,
+          };
+          const body = {
+            title: addReview?.title,
+            name: addReview?.name,
+            email: addReview?.email,
+            review: addReview?.review,
+            rating: rating,
+            business_listing_id: id,
+            user_id: user?.userInfo?.id,
+          };
+          // Call signup API
+          const response = await UseApi(
+            apiUrls.addReview,
+            apiMethods.POST,
+            body,
+            headers
+          );
+          if (response?.status == 200 || response?.status == 201) {
+            customToast.success(response?.data?.message);
+            setAddReview(reviewFields);
+            getListingReview();
+            return;
+          } else {
+            customToast.error(response?.data?.message);
+          }
         }
+      } else {
+        navigate("/login");
       }
     } catch (err) {
       customToast.error(err?.message);
@@ -61,6 +66,7 @@ export const AddReview = ({ getListingReview, user }) => {
     const { name, value } = e.target;
     setAddReview({ ...addReview, [name]: value });
   };
+  console.log(user, "userrrrr");
 
   return (
     <li className="review-box feedbackbox mb-0">
@@ -99,8 +105,8 @@ export const AddReview = ({ getListingReview, user }) => {
                 placeholder="Email*"
                 name="email"
                 required
-                value={addReview?.email}
-                onChange={(e) => handleChange(e)}
+                value={user?.userInfo?.email}
+                readOnly={true}
               />
             </div>
           </div>

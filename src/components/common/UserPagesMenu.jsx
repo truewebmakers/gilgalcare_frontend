@@ -30,11 +30,7 @@ const UserPagesMenu = ({ activesMenu }) => {
         <li className={activesMenu === "/dashboard" ? "active" : ""}>
           <Link to="/dashboard">Dashboard</Link>
         </li>
-        {user?.userInfo?.user_type === "admin" && (
-          <li className={activesMenu === "/add-category" ? "active" : ""}>
-            <Link to="/add-category">Add Category</Link>
-          </li>
-        )}
+
         <li className={activesMenu === "/profile" ? "active" : ""}>
           <Link to="/profile">Profile</Link>
         </li>

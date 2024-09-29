@@ -1,12 +1,9 @@
 import React, { useState } from "react";
 import { gallerymedia_1 } from "../../imagepath";
-import { Link } from "react-router-dom";
 import { generateImageLinkService } from "../../../services/generateImageLink";
 import { useSelector } from "react-redux";
-import Loader from "../../common/Loader";
 
 export const GalleryImages = ({
-  galleryImage,
   setGalleryImage,
   showGalleryImage,
   setShowGalleryImage,
@@ -17,6 +14,14 @@ export const GalleryImages = ({
   const handleImageChange = async (e) => {
     const { name, files } = e.target;
     const file = files[0];
+
+    // Validate file type
+    const allowedTypes = ["image/jpeg", "image/jpg", "image/png"];
+    if (!allowedTypes?.includes(file?.type)) {
+      alert("Only JPEG, JPG, and PNG files are allowed!");
+      return; // Prevent further actions if file type is not valid
+    }
+
     const reader = new FileReader();
 
     reader.onload = (loadEvent) => {
@@ -67,6 +72,7 @@ export const GalleryImages = ({
                 alt=""
                 height={250}
                 width={250}
+                style={{ objectFit: "contain" }}
               />
               <span
                 className="profile-img-del"
@@ -77,7 +83,7 @@ export const GalleryImages = ({
               <div className="settings-upload-btn" style={{ marginTop: "4px" }}>
                 <input
                   type="file"
-                  accept="image/*"
+                  accept="image/jpeg, image/jpg, image/png"
                   className="hide-input image-upload"
                   id={`file${index}`}
                   name={imageKey}

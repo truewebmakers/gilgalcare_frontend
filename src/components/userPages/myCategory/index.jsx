@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 
 import { Table } from "antd";
-import { useLocation } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import Footer from "../../home/footer/Footer";
 import UserHeader from "../Userheader";
 import UserMenu from "../UserMenu";
@@ -87,6 +87,12 @@ const MyCategory = () => {
             <div className="dash-cards card">
               <div className="card-header">
                 <h4>My Category</h4>
+                <Link
+                  className="nav-link header-login add-listing"
+                  to="/add-category"
+                >
+                  <i className="fa-solid fa-plus" /> Add Category
+                </Link>
               </div>
               <div className="card-body">
                 <div className="table-responsive">

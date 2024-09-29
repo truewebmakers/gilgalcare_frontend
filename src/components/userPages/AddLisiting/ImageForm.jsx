@@ -59,13 +59,13 @@ export const ImageForm = ({ selectedImage, error, handleChange }) => {
                 type="file"
                 accept="image/*"
                 className="hide-input image-upload"
-                id="file1"
+                id="file11"
                 name="logo"
                 onChange={handleChange}
                 data-handler="imageInfo"
               />
               {error?.logo && <p style={{ color: "red" }}>{error?.logo}</p>}
-              <label htmlFor="file1" className="file-upload">
+              <label htmlFor="file11" className="file-upload">
                 Upload File
               </label>
             </div>

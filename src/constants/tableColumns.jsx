@@ -8,7 +8,7 @@ export const myListingColumns = (handleDeleteListing) => [
     dataIndex: "listing_title",
     render: (text) => (
       <>
-        <div className="listingtable-rate"> {text ? text : "-"}</div>
+        <div className=""> {text ? text : "-"}</div>
       </>
     ),
   },
@@ -16,9 +16,7 @@ export const myListingColumns = (handleDeleteListing) => [
     title: "Category",
     render: (text) => (
       <>
-        <div className="listingtable-rate">
-          {text?.category ? text?.category?.name : "-"}
-        </div>
+        <div className="">{text?.category ? text?.category?.name : "-"}</div>
       </>
     ),
   },

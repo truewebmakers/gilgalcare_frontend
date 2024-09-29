@@ -25,7 +25,7 @@ export const editCategoryService = async (
     // Call signup API
     const response = await UseApi(
       apiUrls.editCategory + id,
-      apiMethods.PUT,
+      apiMethods.POST,
       bodyData,
       headers
     );

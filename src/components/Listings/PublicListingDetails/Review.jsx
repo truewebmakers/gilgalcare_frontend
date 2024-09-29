@@ -81,9 +81,8 @@ export const Review = () => {
                 </div>
               </li>
             ))}
-            {user?.token?.length ? (
-              <AddReview getListingReview={getListingReview} user={user} />
-            ) : null}
+
+            <AddReview getListingReview={getListingReview} user={user} />
           </ul>
         </div>
       </div>
