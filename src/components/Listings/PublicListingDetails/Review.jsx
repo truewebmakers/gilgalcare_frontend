@@ -81,7 +81,7 @@ export const Review = () => {
                 </div>
               </li>
             ))}
-            {/* add review comp */}
+            {/* add review component */}
             <AddReview getListingReview={getListingReview} user={user} />
           </ul>
         </div>
