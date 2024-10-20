@@ -121,7 +121,7 @@ const SignUp = () => {
                 <div className="login-header">
                   <h3>Create an Account</h3>
                   <p>
-                    Lets start with <span>Gilgil</span>
+                    Lets start with <span>Gilgal</span>
                   </p>
                 </div>
 

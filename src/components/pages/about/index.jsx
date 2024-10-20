@@ -57,7 +57,7 @@ const About = () => {
             <div className="about-info">
               <h4>
                 {" "}
-                <span>About</span> Listee
+                <span>About</span> Gilgal
               </h4>
               <p>
                 Orci varius natoque penatibus et magnis dis parturient montes,

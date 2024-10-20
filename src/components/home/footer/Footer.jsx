@@ -88,7 +88,7 @@ const Footer = () => {
                   </div>
                   <div className="footer-address">
                     <i className="feather-mail me-2"></i>
-                    <p> listee@example.com </p>
+                    <p> gilgal@example.com </p>
                   </div>
                   <div className="footer-address">
                     <i className="feather-map-pin me-2"></i>

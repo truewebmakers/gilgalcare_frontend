@@ -1,11 +1,12 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { profile_img } from "../../imagepath";
 import { Link, useNavigate } from "react-router-dom";
 import { LogoBGR } from "../../imagepath";
 import { useDispatch, useSelector } from "react-redux";
-import { getProfileDetails, logOutSuccess } from "../../../redux/auth";
-import { getProfile, logoutHandler } from "../../../utils/commonApis";
+import { logOutSuccess } from "../../../redux/auth";
+import { logoutHandler } from "../../../utils/commonApis";
 import { path } from "../../../constants/routesConstant";
+import { CapitalizeFirstLetter } from "../../../utils/commonFunctions";
 
 const UserHeader = () => {
   const [drops, setDrops] = useState(false);
@@ -87,8 +88,17 @@ const UserHeader = () => {
                     onClick={() => setDrops(!drops)}
                     // className={`${change1===true ? 'dropdown-menu dropdown-menu-end show' : "dropdown-menu dropdown-menu-end"}`}
                   >
-                    <img src={profileData?.profile_pic || profile_img} alt="" />
-                    <span>{profileData?.name ? profileData?.name : null}</span>
+                    <span style={{ marginRight: "10px " }}>
+                      {profileData?.user_type
+                        ? CapitalizeFirstLetter(profileData?.user_type)
+                        : null}
+                    </span>
+
+                    <img
+                      src={profileData?.profile_pic || profile_img}
+                      alt=""
+                      style={{ border: "1px solid black" }}
+                    />
                   </Link>
                   <div className="dropdown-menu dropdown-menu-end">
                     <Link className="dropdown-item" to="/dashboard">
