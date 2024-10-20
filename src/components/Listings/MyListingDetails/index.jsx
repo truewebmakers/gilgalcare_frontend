@@ -108,19 +108,6 @@ const MyListingDetails = () => {
                 </div>
               </div>
             </div>
-            {listingDetail?.price_from && listingDetail?.price_to ? (
-              <div className="rate-details">
-                <h4>
-                  ${listingDetail?.price_from} - ${listingDetail?.price_to}
-                </h4>
-                <p>Fixed</p>
-              </div>
-            ) : (
-              <div className="rate-details">
-                <p>Price</p>
-                <h6>Not-Disclosed</h6>
-              </div>
-            )}
           </div>
           <div className="descriptionlinks">
             <div className="row">
@@ -132,17 +119,7 @@ const MyListingDetails = () => {
                       {listingDetail?.location ? listingDetail?.location : "-"}
                     </span>
                   </li>
-                  <li>
-                    <Link
-                      to={listingDetail?.website ? listingDetail?.website : "#"}
-                      target="_blank"
-                    >
-                      <img src={website} alt="website" />
-                      {listingDetail?.website
-                        ? listingDetail?.website?.toLowerCase()
-                        : "-"}
-                    </Link>
-                  </li>
+
                   <li>
                     <Link to="#">
                       <i className="fa-regular fa-comment-dots" /> Write a
@@ -161,7 +138,10 @@ const MyListingDetails = () => {
                 <div className="callnow">
                   <span>
                     {" "}
-                    <i className="feather-phone-call" />{" "}
+                    <i
+                      className="feather-phone-call"
+                      style={{ color: "red !important" }}
+                    />
                     {listingDetail?.phone ? listingDetail?.phone : "-"}
                   </span>
                 </div>
@@ -183,7 +163,7 @@ const MyListingDetails = () => {
                     <span />
                     <span />
                   </span>
-                  <h4>Description</h4>
+                  <h4>Business Description</h4>
                 </div>
                 <div className="card-body">
                   <p>{listingDetail?.tagline ? listingDetail?.tagline : "-"}</p>
@@ -198,7 +178,7 @@ const MyListingDetails = () => {
               <div className="card ">
                 <div className="card-header">
                   <i className="feather-list" />
-                  <h4>Listing Features</h4>
+                  <h4>Key Features</h4>
                 </div>
                 <div className="card-body">
                   <div className="lisiting-featues">
@@ -225,7 +205,7 @@ const MyListingDetails = () => {
               <div className="card ">
                 <div className="card-header">
                   <i className="feather-list" />
-                  <h4>Category</h4>
+                  <h4>Service Category</h4>
                 </div>
                 <div className="card-body">
                   <div className="lisiting-featues">

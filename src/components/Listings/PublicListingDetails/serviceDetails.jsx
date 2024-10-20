@@ -69,7 +69,7 @@ const ServiceDetails = () => {
       const response = await incrementShares(id);
       if (response?.result?.message == "Shares updated successfully") {
         setShareUpdated(true);
-        const pathname = window.location.pathname;
+        const pathname = window.location.href;
         await navigator.clipboard.writeText(pathname);
         customToast.success("Copied successfully!"); // Example feedback
       }
@@ -113,19 +113,6 @@ const ServiceDetails = () => {
                 </div>
               </div>
             </div>
-            {listingDetail?.price_from && listingDetail?.price_to ? (
-              <div className="rate-details">
-                <h4>
-                  ${listingDetail?.price_from} - ${listingDetail?.price_to}
-                </h4>
-                <p>Fixed</p>
-              </div>
-            ) : (
-              <div className="rate-details">
-                <p>Price</p>
-                <h6>Not-Disclosed</h6>
-              </div>
-            )}
           </div>
           <div className="descriptionlinks">
             <div className="row">
@@ -136,17 +123,6 @@ const ServiceDetails = () => {
                       <img src={location} alt="" /> &nbsp;
                       {listingDetail?.location ? listingDetail?.location : "-"}
                     </span>
-                  </li>
-                  <li>
-                    <Link
-                      to={listingDetail?.website ? listingDetail.website : "#"}
-                      target="_blank"
-                    >
-                      <img src={website} alt="website" />
-                      {listingDetail?.website
-                        ? String(listingDetail?.website)?.toLowerCase()
-                        : "-"}
-                    </Link>
                   </li>
                   <li>
                     <a
@@ -180,11 +156,18 @@ const ServiceDetails = () => {
               </div>
               <div className="col-lg-3">
                 <div className="callnow">
-                  <span>
-                    {" "}
-                    <i className="feather-phone-call" />{" "}
-                    {listingDetail?.phone ? listingDetail?.phone : "-"}
-                  </span>
+                  <a
+                    href={`tel:${listingDetail?.phone}`}
+                    className="btn btn-link"
+                  >
+                    <span>
+                      <i
+                        className="feather-phone-call"
+                        style={{ color: "red" }}
+                      />{" "}
+                      {listingDetail?.phone ? listingDetail?.phone : "-"}
+                    </span>
+                  </a>
                 </div>
               </div>
             </div>
@@ -204,7 +187,7 @@ const ServiceDetails = () => {
                     <span />
                     <span />
                   </span>
-                  <h4>Description</h4>
+                  <h4>Business Description</h4>
                 </div>
                 <div className="card-body">
                   <h6>
@@ -221,7 +204,7 @@ const ServiceDetails = () => {
               <div className="card ">
                 <div className="card-header">
                   <i className="feather-list" />
-                  <h4>Listing Features</h4>
+                  <h4>Key Features</h4>
                 </div>
                 <div className="card-body">
                   <div className="lisiting-featues">
@@ -248,7 +231,7 @@ const ServiceDetails = () => {
               <div className="card ">
                 <div className="card-header">
                   <i className="feather-list" />
-                  <h4>Category</h4>
+                  <h4>Service Category</h4>
                 </div>
                 <div className="card-body">
                   <div className="lisiting-featues">

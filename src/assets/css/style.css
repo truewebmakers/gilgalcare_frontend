@@ -3149,9 +3149,9 @@ a:focus {
 .callnow a {
   background: #d54a38;
   color: #fff;
-  padding: 14px 58px;
   border-radius: 10px;
   border: 1px solid #d54a38;
+  text-decoration: none;
 }
 .callnow a i {
   margin-right: 3px;
@@ -20976,4 +20976,10 @@ section.advertisement {
     word-break: break-word;
     white-space: normal;
     max-width: 100%;
+}
+
+.user-type {
+  margin-top: 5px; /* Adjust spacing as needed */
+  font-size: 12px;  /* Font size */
+  color: #666;      /* Text color */
 }

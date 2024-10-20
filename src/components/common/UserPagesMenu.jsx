@@ -35,7 +35,7 @@ const UserPagesMenu = ({ activesMenu }) => {
           <Link to="/profile">Profile</Link>
         </li>
         <li className={activesMenu == "/my-listing" ? "active" : ""}>
-          <Link to="/my-listing">My Listing</Link>
+          <Link to="/my-listing">My Listings</Link>
         </li>
         <li className={activesMenu === "/bookmarks" ? "active" : ""}>
           <Link to="/bookmarks">Bookmarks</Link>

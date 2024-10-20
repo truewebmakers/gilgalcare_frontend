@@ -239,7 +239,6 @@ const AddCategory = () => {
                       name="status"
                       onChange={handleChange}
                     >
-                      <option value="">Status</option>
                       <option>Published</option>
                       <option>Unpublished</option>
                     </select>

@@ -1,7 +1,9 @@
 import React from "react";
-import { Category27Svg } from "../../imagepath";
 
 export const Category = ({ categories }) => {
+  const newCategories =
+    categories?.length > 7 ? categories?.slice(0, 7) : categories;
+
   return (
     <section className="category-five-section">
       <div className="container">
@@ -11,16 +13,16 @@ export const Category = ({ categories }) => {
               className="section-heading heading-five aos"
               data-aos="fade-up"
             >
-              <h2>Our Categories</h2>
+              <h2>Featured Categories</h2>
             </div>
           </div>
           <div className="col-md-12">
             <ul className="category-items text-center">
-              {categories?.map((item) => (
+              {newCategories?.map((item) => (
                 <li className="aos" data-aos="fade-up" key={item?.value}>
                   <div className="categories-box">
                     <div className="categories-info">
-                      <span>
+                      {/* <span>
                         <img
                           src={item?.image || Category27Svg}
                           className="img-fluid"
@@ -28,7 +30,7 @@ export const Category = ({ categories }) => {
                           height={50}
                           width={50}
                         />
-                      </span>
+                      </span> */}
                       <h6>{item?.label}</h6>
                       <p>{item?.location}</p>
                     </div>

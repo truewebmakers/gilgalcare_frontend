@@ -1,8 +1,8 @@
-import React,{useEffect} from "react";
+import React, { useEffect } from "react";
 import { Link } from "react-router-dom";
 import { FooterLogo, LogoBGR } from "../../imagepath";
 import AOS from "aos";
-import "aos/dist/aos.css"; 
+import "aos/dist/aos.css";
 
 const Footer = () => {
   useEffect(() => {
@@ -54,28 +54,7 @@ const Footer = () => {
                 </div>
               </div>
             </div>
-            <div className="col-lg-2 col-md-6">
-              <div className="footer-widget footer-menu">
-                <h2 className="footer-title">Pages</h2>
-                <ul>
-                  <li>
-                    <Link to="#">Market Place</Link>
-                  </li>
-                  <li>
-                    <Link to="#">Documentaion</Link>
-                  </li>
-                  <li>
-                    <Link to="#">Customers</Link>
-                  </li>
-                  <li>
-                    <Link to="#">Carrers</Link>
-                  </li>
-                  <li>
-                    <Link to="/blog-list">Our Blog</Link>
-                  </li>
-                </ul>
-              </div>
-            </div>
+            <div className="col-lg-2 col-md-6"></div>
             <div className="col-lg-2 col-md-6">
               <div className="footer-widget footer-menu">
                 <h2 className="footer-title">Categories</h2>
@@ -98,31 +77,10 @@ const Footer = () => {
                 </ul>
               </div>
             </div>
-            <div className="col-lg-2 col-md-6">
-              <div className="footer-widget footer-menu">
-                <h2 className="footer-title">Top Cities</h2>
-                <ul>
-                  <li>
-                    <Link to="#">Manhattan</Link>
-                  </li>
-                  <li>
-                    <Link to="#">Los Angeles</Link>
-                  </li>
-                  <li>
-                    <Link to="#">Houston</Link>
-                  </li>
-                  <li>
-                    <Link to="#">Chicago</Link>
-                  </li>
-                  <li>
-                    <Link to="#">Alabama</Link>
-                  </li>
-                </ul>
-              </div>
-            </div>
+            <div className="col-lg-2 col-md-6"></div>
             <div className="col-lg-3 col-md-6">
               <div className="footer-widget">
-                <h2 className="footer-title">Communication</h2>
+                <h2 className="footer-title">Support</h2>
                 <div className="footer-contact-info">
                   <div className="footer-address">
                     <i className="feather-phone me-2"></i>

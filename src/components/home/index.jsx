@@ -146,16 +146,12 @@ const Home5 = () => {
         {/* Space */}
 
         {/* Pricing Plan */}
-        <PricingPlan />
+        {/* <PricingPlan /> */}
         {/* Pricing Plan */}
 
         {/* Testimonial */}
         <Testimonial5 />
         {/* Testimonial */}
-
-        {/* Stay Tuned */}
-        <StayTuned />
-        {/* Stay Tuned */}
 
         <Footer />
       </div>

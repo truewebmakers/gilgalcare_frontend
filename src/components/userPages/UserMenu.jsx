@@ -33,7 +33,7 @@ export default function UserMenu({ activeUrl }) {
         {user?.userInfo?.user_type !== "user" ? (
           <li className={activeUrl == "my-listing" ? "active" : ""}>
             <Link to="/my-listing">
-              <i className="feather-list" /> <span>My Listing</span>
+              <i className="feather-list" /> <span>My Listings</span>
             </Link>
           </li>
         ) : null}

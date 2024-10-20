@@ -55,17 +55,10 @@ const UserHeader = () => {
                 </li>
                 {/* <HomeMenu activeMenu={"Business"} /> */}
                 <li>
-                  <Link to="/listing-grid-sidebar">Listing</Link>
+                  <Link to="/listing-grid-sidebar">Our Listings</Link>
                 </li>
                 <li>
                   <Link to="/about">About Us</Link>
-                </li>
-                {/* <ListingMenu /> */}
-                {/* <PagesMenu /> */}
-                {/* <UserPagesMenu /> */}
-                {/* <BlogMenu /> */}
-                <li>
-                  <Link to="/contact">Contact</Link>
                 </li>
               </ul>
             </div>

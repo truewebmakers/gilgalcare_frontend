@@ -118,7 +118,7 @@ export const Banner = ({ categories }) => {
                           <input
                             type="text"
                             className="form-control"
-                            placeholder="Search For Country"
+                            placeholder="Your Location (suburb e.g.)"
                             value={location}
                             onChange={(e) => setLocation(e.target.value)}
                           />

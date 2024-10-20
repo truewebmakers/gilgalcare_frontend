@@ -14,7 +14,7 @@ const GridSidebar = () => {
   const [listing, setListing] = useState([]);
   const [filters, setFilters] = useState({
     listing_title: "",
-    category_id: "",
+    category_ids: [], // Changed from category_id to category_ids
     location: "",
     price_from: "",
     price_to: "",
@@ -32,12 +32,16 @@ const GridSidebar = () => {
 
       const queryParams = new URLSearchParams();
       for (const key in filters) {
-        if (filters[key]) {
+        if (Array.isArray(filters[key])) {
+          filters[key].forEach((value) => {
+            if (value) queryParams.append(key, value); // Ensure value is defined
+          });
+        } else if (filters[key]) {
           queryParams.append(key, filters[key]);
         }
       }
-      const urlWithParams = `${apiUrls.searching}?${queryParams.toString()}`;
 
+      const urlWithParams = `${apiUrls.searching}?${queryParams.toString()}`;
       const response = await UseApi(
         urlWithParams,
         apiMethods.GET,
@@ -46,6 +50,7 @@ const GridSidebar = () => {
       );
       setListing(response?.data?.data || []);
     } catch (err) {
+      console.error("Error fetching business listings:", err);
       return err;
     }
   };

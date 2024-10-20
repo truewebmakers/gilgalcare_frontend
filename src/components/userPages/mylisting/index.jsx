@@ -77,7 +77,7 @@ const MyListe = () => {
       <UserHeader parms={parms} />
       {/* Breadscrumb Section */}
 
-      <UserBreadCrumb path={"Home"} pageName={"My Listing"} />
+      <UserBreadCrumb path={"Home"} pageName={"My Listings"} />
       {/* /Breadscrumb Section */}
       {/* Dashboard Content */}
       <div className="dashboard-content">
