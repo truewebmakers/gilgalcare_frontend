@@ -1,35 +1,10 @@
-import axios from "axios";
-import React, { useEffect, useState, useCallback } from "react";
-import { useNavigate } from "react-router-dom"; // Assuming you're using react-router-dom for navigation
+import React, { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 export const Banner = ({ categories }) => {
   const [selectedCategory, setSelectedCategory] = useState("");
   const [location, setLocation] = useState("");
-  const [suggestions, setSuggestions] = useState([]);
   const navigate = useNavigate();
-
-  // Debounce function to delay API calls
-  const debounce = (func, delay) => {
-    let timer;
-    return function (...args) {
-      if (timer) clearTimeout(timer);
-      timer = setTimeout(() => func.apply(this, args), delay);
-    };
-  };
-
-  // Use useCallback for memoizing debounced function
-  const debouncedGetSuggestions = useCallback(
-    debounce((query) => getSuggestions(query), 300),
-    []
-  );
-
-  useEffect(() => {
-    if (location.length > 1) {
-      debouncedGetSuggestions(location);
-    } else {
-      setSuggestions([]);
-    }
-  }, [location, debouncedGetSuggestions]);
 
   const handleSearch = (e) => {
     e.preventDefault();
@@ -38,23 +13,23 @@ export const Banner = ({ categories }) => {
     );
   };
 
-  const getSuggestions = async (query) => {
-    try {
-      const response = await axios.get(
-        `https://restcountries.com/v3.1/name/${query}`
-      );
-      const countries = response?.data?.map((country) => country.name.common);
-      setSuggestions(countries);
-    } catch (error) {
-      setSuggestions([]);
-      return error;
-    }
-  };
+  useEffect(() => {
+    const input = document.getElementById("location-input");
+    const autocompleteInstance = new window.google.maps.places.Autocomplete(
+      input,
+      {
+        fields: ["formatted_address"], // Adjusted to only fetch formatted_address
+        types: ["address"],
+      }
+    );
 
-  const handleSuggestionClick = (suggestion) => {
-    setLocation(suggestion);
-    setSuggestions([]); // Hide suggestions on selection
-  };
+    autocompleteInstance.addListener("place_changed", () => {
+      const place = autocompleteInstance.getPlace();
+      if (place && place.formatted_address) {
+        setLocation(place.formatted_address);
+      }
+    });
+  }, []);
 
   return (
     <section className="banner-section banner-five">
@@ -91,8 +66,7 @@ export const Banner = ({ categories }) => {
                             <span
                               style={{
                                 position: "absolute",
-                                right:
-                                  "10px" /* Adjust this value for alignment */,
+                                right: "10px",
                                 top: "50%",
                                 transform: "translateY(-50%)",
                                 pointerEvents: "none",
@@ -116,6 +90,7 @@ export const Banner = ({ categories }) => {
                       <div className="form-group mb-0">
                         <div className="group-img">
                           <input
+                            id="location-input"
                             type="text"
                             className="form-control"
                             placeholder="Your Location (suburb e.g.)"
@@ -124,33 +99,6 @@ export const Banner = ({ categories }) => {
                           />
                           <i className="feather-map-pin"></i>
                         </div>
-                        {suggestions.length > 0 && (
-                          <ul
-                            className="suggestions-list"
-                            style={{
-                              width: "100%",
-                              position: "absolute",
-                              top: "100%",
-                              zIndex: 1000,
-                              backgroundColor: "white",
-                              border: "1px solid #ddd",
-                              padding: 0,
-                              margin: 0,
-                            }}
-                          >
-                            {suggestions.map((suggestion, index) => (
-                              <li
-                                key={index}
-                                onClick={() =>
-                                  handleSuggestionClick(suggestion)
-                                }
-                                style={{ padding: "10px", cursor: "pointer" }}
-                              >
-                                {suggestion}
-                              </li>
-                            ))}
-                          </ul>
-                        )}
                       </div>
                     </div>
 

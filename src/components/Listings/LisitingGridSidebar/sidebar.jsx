@@ -3,52 +3,34 @@ import StickyBox from "react-sticky-box";
 import { details_icon } from "../../imagepath";
 import "rc-slider/assets/index.css";
 import { fetchAllCategories } from "../../../utils/commonApis";
-import axios from "axios";
 
 const Sidebar = ({ filters, setFilters, fetchPublicBusinessListing }) => {
   const [categories, setCategories] = useState([]);
-  const [countrySuggestions, setCountrySuggestions] = useState([]);
 
   useEffect(() => {
     fetchAllCategories(setCategories);
   }, []);
 
-  // Debounce function to delay API calls
-  const debounce = (func, delay) => {
-    let timer;
-    return function (...args) {
-      if (timer) clearTimeout(timer);
-      timer = setTimeout(() => func.apply(this, args), delay);
-    };
-  };
-
-  // Use useCallback for memoizing debounced function
-  const debouncedGetCountrySuggestions = useCallback(
-    debounce((query) => getCountrySuggestions(query), 300),
-    []
-  );
-
-  // Fetch country suggestions when location input changes
   useEffect(() => {
-    if (filters.location.length > 1) {
-      debouncedGetCountrySuggestions(filters.location);
-    } else {
-      setCountrySuggestions([]);
-    }
-  }, [filters.location, debouncedGetCountrySuggestions]);
+    const input = document.getElementById("location-input");
+    const autocompleteInstance = new window.google.maps.places.Autocomplete(
+      input,
+      {
+        fields: ["formatted_address"],
+        types: ["address"],
+      }
+    );
 
-  const getCountrySuggestions = async (query) => {
-    try {
-      const response = await axios.get(
-        `https://restcountries.com/v3.1/name/${query}`
-      );
-      const countries = response?.data?.map((country) => country.name.common);
-      setCountrySuggestions(countries);
-    } catch (error) {
-      console.error("Error fetching country suggestions:", error);
-      setCountrySuggestions([]);
-    }
-  };
+    autocompleteInstance.addListener("place_changed", () => {
+      const place = autocompleteInstance.getPlace();
+      if (place && place.formatted_address) {
+        setFilters((prevFilters) => ({
+          ...prevFilters,
+          location: place.formatted_address,
+        }));
+      }
+    });
+  }, []);
 
   const handleChange = (e) => {
     const { name, value, checked } = e.target;
@@ -72,14 +54,6 @@ const Sidebar = ({ filters, setFilters, fetchPublicBusinessListing }) => {
         [name]: value,
       }));
     }
-  };
-
-  const handleCountrySelection = (country) => {
-    setFilters((prevFilters) => ({
-      ...prevFilters,
-      location: country,
-    }));
-    setCountrySuggestions([]); // Hide suggestions after selection
   };
 
   const handleReset = () => {
@@ -125,6 +99,7 @@ const Sidebar = ({ filters, setFilters, fetchPublicBusinessListing }) => {
               >
                 <div className="group-img">
                   <input
+                    id="location-input"
                     type="text"
                     className="form-control"
                     placeholder="Your Location (suburb e.g.)"
@@ -135,32 +110,8 @@ const Sidebar = ({ filters, setFilters, fetchPublicBusinessListing }) => {
                   />
                   <i className="feather-map-pin" />
                 </div>
-                {countrySuggestions.length > 0 && (
-                  <ul
-                    className="suggestions-list"
-                    style={{
-                      width: "100%",
-                      position: "absolute",
-                      top: "100%",
-                      zIndex: 1000,
-                      backgroundColor: "white",
-                      border: "1px solid #ddd",
-                      padding: 0,
-                      margin: 0,
-                    }}
-                  >
-                    {countrySuggestions.map((country, index) => (
-                      <li
-                        key={index}
-                        onClick={() => handleCountrySelection(country)}
-                        style={{ padding: "10px", cursor: "pointer" }}
-                      >
-                        {country}
-                      </li>
-                    ))}
-                  </ul>
-                )}
               </div>
+
               <div className="filter-content form-group">
                 <label style={{ fontWeight: "bold", color: "black" }}>
                   Choose Categories:
@@ -175,7 +126,7 @@ const Sidebar = ({ filters, setFilters, fetchPublicBusinessListing }) => {
                       value={item?.id}
                       checked={filters?.category_ids?.includes(
                         item?.id?.toString()
-                      )} // Ensure this line is correct
+                      )}
                       onChange={handleChange}
                     />
                     <label
@@ -194,7 +145,6 @@ const Sidebar = ({ filters, setFilters, fetchPublicBusinessListing }) => {
                     type="button"
                     onClick={handleSearch}
                   >
-                    {" "}
                     <i className="fa fa-search" aria-hidden="true" /> Search
                   </button>
                   <button
@@ -202,7 +152,6 @@ const Sidebar = ({ filters, setFilters, fetchPublicBusinessListing }) => {
                     type="button"
                     onClick={handleReset}
                   >
-                    {" "}
                     <i className="fas fa-light fa-arrow-rotate-right" /> Reset
                     Filters
                   </button>
