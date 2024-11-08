@@ -60,16 +60,20 @@ const About = () => {
                 <span>About</span> Gilgal
               </h4>
               <p>
-                Orci varius natoque penatibus et magnis dis parturient montes,
-                nascetur ridiculus mus. Nulla fermentum malesuada pulvinar.
-                Vestibulum laoreet rutrum semper. Vivamus malesuada, nisl in
-                consectetur semper, mauris nulla aliquam risus, nec ultricies
-                sapien elit sed ante. Aenean luctus felis in sem
+                At Gilgal Provider Finder, we believe in empowering every NDIS
+                participant with the freedom to choose from the best, most
+                reliable service providers available. Our platform meticulously
+                selects each provider to ensure you receive top-tier support
+                tailored to your unique needs. Whether you're seeking assistance
+                with daily activities or specialized therapeutic support, our
+                user-friendly interface makes it easy to find trusted providers
+                in your community.
               </p>
               <p>
-                Orci varius natoque penatibus et magnis dis parturient montes,
-                nascetur ridiculus mus. Nulla fermentum malesuada pulvinar.
-                Vestibulum laoreet rutrum semper. Vivamus malesuada,{" "}
+                At Gilgal Provider Finder, we empower NDIS participants by
+                connecting them with a curated list of reliable and high-quality
+                service providers. Our platform is designed with your needs in
+                mind, ensuring you find the support you deserve, close to home.
               </p>
             </div>
           </div>
@@ -80,55 +84,36 @@ const About = () => {
       <section className="howitworks">
         <div className="container">
           <h3>How It Works</h3>
-          <p>
-            Orci varius natoque penatibus et magnis dis parturient montes,
-            nascetur ridiculus mus. Nulla fermentum malesuada pulvinar.
-            Vestibulum laoreet rutrum semper. Vivamus malesuada, nisl in
-            consectetur semper, mauris nulla aliquam risus, nec ultricies sapien
-            elit sed ante. Aenean luctus felis in sem consequat auctor. Nulla
-            turpis enim, scelerisque sit amet consectetur vel, lacinia sed
-            augue. Proin ultricies dui id ex fringilla porta.
-          </p>
-          <p>
-            Morbi nisi justo, venenatis ac nibh at, bibendum mattis risus.
-            Maecenas tincidunt, ligula sed congue tempus, magna augue cursus
-            ipsum, in malesuada justo risus nec lorem. Nam augue augue, mollis
-            nec condimentum euismod, lacinia ultricies leo.
-          </p>
+          <p>Your Guide to Finding the Right Support Quickly and Efficiently</p>
+
           <div className="row">
             <div className="col-lg-3 col-md-3 d-flex">
               <div className="howitwork-info">
                 <h5>01</h5>
-                <h6>Create Account</h6>
+                <h6>Search</h6>
                 <p>
-                  Morbi nisi justo, venenatis ac nibh at, bibendum mattis risus.
-                  Maecenas tincidunt, ligula sed congue tempus, magna augue
-                  cursus ipsum, in malesuada justo risus nec lorem. Nam augue
-                  augue, mollis nec condimentum euismod, lacinia ultricies leo.
+                  Enter your location and service requirements to see a list of
+                  available NDIS providers near you.
                 </p>
               </div>
             </div>
             <div className="col-lg-3 col-md-3 d-flex">
               <div className="howitwork-info">
                 <h5>02</h5>
-                <h6>Post An Ad</h6>
+                <h6>Compare</h6>
                 <p>
-                  Morbi nisi justo, venenatis ac nibh at, bibendum mattis risus.
-                  Maecenas tincidunt, ligula sed congue tempus, magna augue
-                  cursus ipsum, in malesuada justo risus nec lorem. Nam augue
-                  augue, mollis nec condimentum euismod, lacinia ultricies leo.
+                  View detailed profiles, read reviews, and compare service
+                  offerings to ensure you find the perfect match for your needs.
                 </p>
               </div>
             </div>
             <div className="col-lg-3 col-md-3 d-flex">
               <div className="howitwork-info">
                 <h5>03</h5>
-                <h6>Find,Buy &amp; Own Dreams</h6>
+                <h6>Connect</h6>
                 <p>
-                  Morbi nisi justo, venenatis ac nibh at, bibendum mattis risus.
-                  Maecenas tincidunt, ligula sed congue tempus, magna augue
-                  cursus ipsum, in malesuada justo risus nec lorem. Nam augue
-                  augue, mollis nec condimentum euismod, lacinia ultricies leo.
+                  Use our secure platform to contact providers directly and
+                  arrange the services you require with confidence and ease.
                 </p>
               </div>
             </div>

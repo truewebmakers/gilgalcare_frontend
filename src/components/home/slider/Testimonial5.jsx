@@ -44,11 +44,11 @@ const Testimonial5 = () => {
                     </span>
                     <h6>It was a wonderful experience</h6>
                     <p>
-                      Omnis totam molestiae delectus nemo alias nesciunt harum
-                      et. Nobis dolorum excepturi quod vel. Sunt est qui ab non
-                      dolores repellat rem impedit dolores. Ut ea rerum cum eum.
-                      Alias dolores tempore illo accusantium est et voluptatem
-                      voluptas
+                      Found Gilgal Provider Finder while looking for local
+                      personal care services. The site was super easy to
+                      navigate, and I quickly matched with a fantastic team.
+                      They're always on time and understand exactly what I need.
+                      Couldn't be happier!
                     </p>
                   </div>
                   <div className="testimonialslider-heading d-flex">
@@ -60,7 +60,7 @@ const Testimonial5 = () => {
                       />
                     </div>
                     <div className="testi-author">
-                      <h6>Dev</h6>
+                      <h6>James L.</h6>
                     </div>
                   </div>
                 </div>
@@ -74,11 +74,11 @@ const Testimonial5 = () => {
                     </span>
                     <h6>It was a very good experience</h6>
                     <p>
-                      Omnis totam molestiae delectus nemo alias nesciunt harum
-                      et. Nobis dolorum excepturi quod vel. Sunt est qui ab non
-                      dolores repellat rem impedit dolores. Ut ea rerum cum eum.
-                      Alias dolores tempore illo accusantium est et voluptatem
-                      voluptas
+                      I needed help with my NDIS plan and wasn't sure where to
+                      start. Gilgal Provider Finder popped up in my search, and
+                      I decided to try it out. The coordinator I connected with
+                      was a lifesaver, explained everything and helped me get
+                      everything sorted.
                     </p>
                   </div>
                   <div className="testimonialslider-heading d-flex">
@@ -90,7 +90,7 @@ const Testimonial5 = () => {
                       />
                     </div>
                     <div className="testi-author">
-                      <h6>Esther Hills</h6>
+                      <h6>Sandra K.</h6>
                     </div>
                   </div>
                 </div>
@@ -102,13 +102,12 @@ const Testimonial5 = () => {
                     <span>
                       <i className="fa-solid fa-quote-left"></i>
                     </span>
-                    <h6>It was a good experience</h6>
+                    <h6>Wonderful experience</h6>
                     <p>
-                      Omnis totam molestiae delectus nemo alias nesciunt harum
-                      et. Nobis dolorum excepturi quod vel. Sunt est qui ab non
-                      dolores repellat rem impedit dolores. Ut ea rerum cum eum.
-                      Alias dolores tempore illo accusantium est et voluptatem
-                      voluptas
+                      I used Gilgal Provider Finder on a friend’s recommendation
+                      to find a NDIS cleaning business. I decided to try it out.
+                      The process was straightforward, and I appreciated the
+                      quick responses from providers.
                     </p>
                   </div>
                   <div className="testimonialslider-heading d-flex">
@@ -120,7 +119,7 @@ const Testimonial5 = () => {
                       />
                     </div>
                     <div className="testi-author">
-                      <h6>Hannah Schmitt</h6>
+                      <h6>Harpreet Singh</h6>
                     </div>
                   </div>
                 </div>

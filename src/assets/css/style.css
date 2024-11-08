@@ -1985,7 +1985,7 @@ html.menu-opened body {
 }
 .banner-section h1 {
   font-weight: 800;
-  font-size: 50px;
+  font-size: 40px;
   color: #0d233e;
   margin-bottom: 25px;
 }
@@ -20988,4 +20988,29 @@ section.advertisement {
   width: 100px;
   border-radius: 24px;
   color: green;
+}
+
+
+
+
+.location-suggestions {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  width: 100%;
+  background-color: white;
+  border: 1px solid #ddd;
+  max-height: 200px;
+  overflow-y: auto;
+  z-index: 1000;
+  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.suggestion-item {
+  padding: 8px 12px;
+  cursor: pointer;
+}
+
+.suggestion-item:hover {
+  background-color: #f0f0f0;
 }

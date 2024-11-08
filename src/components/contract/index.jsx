@@ -37,7 +37,7 @@ const Contract = () => {
       <section className="contactusform-section">
         <div className="container">
           <div className="contact-info" style={{ marginTop: "25px" }}>
-            <h4>We are here to help you</h4>
+            <h4>Reach out to Gilgal Provider Finder for any inquiries.</h4>
           </div>
           <div className="row justify-content-center align-items-center">
             <div className="col-lg-6 col-md-8">
