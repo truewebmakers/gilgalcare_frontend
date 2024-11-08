@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useLocation } from "react-router-dom";
 import Footer from "../../home/footer/Footer";
-import UserHeader from "../Userheader";
 import UserMenu from "../UserMenu";
 import UserBreadCrumb from "../UserBreadCrumb";
 import { useSelector } from "react-redux";
@@ -26,6 +25,7 @@ import { fetchMyListingDetail } from "../../../services/getMyListingDetail";
 import { fetchImageAsBinary } from "../../../utils/commonFunctions";
 import { GalleryImages } from "./galleryImages";
 import { toast } from "react-toastify";
+import UserHeader from "../../home/header/Header";
 
 const AddLisiting = () => {
   const [listingFields, setListingFields] = useState(initialListingField);

@@ -61,6 +61,9 @@ const UserHeader = () => {
                 <li>
                   <Link to="/about">About Us</Link>
                 </li>
+                <li>
+                  <Link to="/contact">Contact Us</Link>
+                </li>
               </ul>
             </div>
             {isLoggedIn ? (
@@ -89,11 +92,10 @@ const UserHeader = () => {
                     // className={`${change1===true ? 'dropdown-menu dropdown-menu-end show' : "dropdown-menu dropdown-menu-end"}`}
                   >
                     <span style={{ marginRight: "10px " }}>
-                      {profileData?.user_type
-                        ? CapitalizeFirstLetter(profileData?.user_type)
+                      {profileData?.name
+                        ? CapitalizeFirstLetter(profileData?.name)
                         : null}
                     </span>
-
                     <img
                       src={profileData?.profile_pic || profile_img}
                       alt=""
@@ -112,6 +114,11 @@ const UserHeader = () => {
                     </Link>
                   </div>
                 </li>
+                <span className="user-type">
+                  {profileData?.user_type
+                    ? CapitalizeFirstLetter(profileData?.user_type)
+                    : null}
+                </span>
               </ul>
             ) : (
               <ul className="nav header-navbar-rht nav">

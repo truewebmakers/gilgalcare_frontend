@@ -82,3 +82,23 @@ export const getCategoryNameById = (id) => {
     JSON.parse(categories)?.find((category) => category?.id == id);
   return category ? category?.name : "-";
 };
+
+export const getCountries = async (setCountryList) => {
+  try {
+    const response = await fetch("/location.json");
+
+    if (!response.ok) {
+      throw new Error("Network response was not ok");
+    }
+    const data = await response?.json();
+    const formattedArray = data?.map((location, index) => ({
+      id: index + 1,
+      name: location?.suburb, // Assuming 'name' is a property in your JSON
+    }));
+
+    setCountryList(formattedArray);
+    sessionStorage.setItem("countries", JSON.stringify(formattedArray));
+  } catch (error) {
+    toast.error("Error fetching countries: " + error.message);
+  }
+};

@@ -1,8 +1,10 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { getCountries } from "../../../utils/commonApis";
 
 export const Banner = ({ categories }) => {
   const [selectedCategory, setSelectedCategory] = useState("");
+  const [countryList, setCountryList] = useState([]);
   const [location, setLocation] = useState("");
   const navigate = useNavigate();
 
@@ -14,21 +16,15 @@ export const Banner = ({ categories }) => {
   };
 
   useEffect(() => {
-    const input = document.getElementById("location-input");
-    const autocompleteInstance = new window.google.maps.places.Autocomplete(
-      input,
-      {
-        fields: ["formatted_address"], // Adjusted to only fetch formatted_address
-        types: ["address"],
+    const fetchData = async () => {
+      const storedCountries = sessionStorage.getItem("countries");
+      if (storedCountries?.length > 0) {
+        setCountryList(JSON.parse(storedCountries));
+      } else {
+        await getCountries(setCountryList);
       }
-    );
-
-    autocompleteInstance.addListener("place_changed", () => {
-      const place = autocompleteInstance.getPlace();
-      if (place && place.formatted_address) {
-        setLocation(place.formatted_address);
-      }
-    });
+    };
+    fetchData();
   }, []);
 
   return (

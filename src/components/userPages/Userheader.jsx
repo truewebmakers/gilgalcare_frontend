@@ -5,11 +5,12 @@ import { LogoBGR } from "../imagepath";
 import { useDispatch, useSelector } from "react-redux";
 import { getProfileDetails, logOutSuccess } from "../../redux/auth";
 import { getProfile, logoutHandler } from "../../utils/commonApis";
+import { CapitalizeFirstLetter } from "../../utils/commonFunctions";
 
-const UserHeader = () => {
+const UserHeader1 = () => {
   const [drops, setDrops] = useState(false);
-  const [profileData, setProfileData] = useState({});
-  const { user } = useSelector((state) => state.auth);
+  const [profileDatas, setProfileData] = useState({});
+  const { user, profileData, isLoggedIn } = useSelector((state) => state.auth);
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
@@ -70,60 +71,85 @@ const UserHeader = () => {
                 </li>
                 {/* <HomeMenu activeMenu={"Business"} /> */}
                 <li>
-                  <Link to="/listing-grid-sidebar">Listing</Link>
+                  <Link to="/listing-grid-sidebar">Our Listings</Link>
                 </li>
                 <li>
                   <Link to="/about">About Us</Link>
                 </li>
-                {/* <ListingMenu /> */}
-                {/* <PagesMenu /> */}
-                {/* <UserPagesMenu /> */}
-                {/* <BlogMenu /> */}
                 <li>
-                  <Link to="/contact">Contact</Link>
+                  <Link to="/contact">Contact Us</Link>
                 </li>
               </ul>
             </div>
-            <ul className="nav header-navbar-rht">
-              {user?.userInfo?.user_type !== "user" && (
-                <li className="nav-item">
+            {isLoggedIn ? (
+              <ul className="nav header-navbar-rht">
+                {user?.userInfo?.user_type !== "user" && (
+                  <li className="nav-item">
+                    <Link
+                      className="nav-link header-login add-listing"
+                      to="/add-listing"
+                    >
+                      <i className="fa-solid fa-plus" /> Add Listing
+                    </Link>
+                  </li>
+                )}
+                <li className="nav-item dropdown has-arrow logged-item">
                   <Link
-                    className="nav-link header-login add-listing"
-                    to="/add-listing"
+                    to="#"
+                    className={`${
+                      drops === true
+                        ? "dropdown-toggle profile-userlink show "
+                        : "dropdown-toggle profile-userlink"
+                    }`}
+                    data-bs-toggle="dropdown"
+                    aria-expanded="false"
+                    onClick={() => setDrops(!drops)}
+                    // className={`${change1===true ? 'dropdown-menu dropdown-menu-end show' : "dropdown-menu dropdown-menu-end"}`}
                   >
-                    <i className="fa-solid fa-plus" /> Add Listing
+                    <span style={{ marginRight: "10px " }}>
+                      {profileData?.name
+                        ? CapitalizeFirstLetter(profileData?.name)
+                        : null}
+                    </span>
+                    <img
+                      src={profileData?.profile_pic || profile_img}
+                      alt=""
+                      style={{ border: "1px solid black" }}
+                    />
                   </Link>
+                  <div className="dropdown-menu dropdown-menu-end">
+                    <Link className="dropdown-item" to="/dashboard">
+                      Dashboard
+                    </Link>
+                    <Link className="dropdown-item" to="/profile">
+                      Profile Settings
+                    </Link>
+                    <Link className="dropdown-item" onClick={handleLogout}>
+                      Logout
+                    </Link>
+                  </div>
                 </li>
-              )}
-              <li className="nav-item dropdown has-arrow logged-item">
-                <Link
-                  to="#"
-                  className={`${
-                    drops === true
-                      ? "dropdown-toggle profile-userlink show "
-                      : "dropdown-toggle profile-userlink"
-                  }`}
-                  data-bs-toggle="dropdown"
-                  aria-expanded="false"
-                  onClick={() => setDrops(!drops)}
-                  // className={`${change1===true ? 'dropdown-menu dropdown-menu-end show' : "dropdown-menu dropdown-menu-end"}`}
-                >
-                  <img src={profileData?.profile_pic || profile_img} alt="" />
-                  <span>{profileData?.name ? profileData?.name : null}</span>
-                </Link>
-                <div className="dropdown-menu dropdown-menu-end">
-                  <Link className="dropdown-item" to="/dashboard">
-                    Dashboard
-                  </Link>
-                  <Link className="dropdown-item" to="/profile">
-                    Profile Settings
-                  </Link>
-                  <Link className="dropdown-item" onClick={handleLogout}>
-                    Logout
-                  </Link>
-                </div>
-              </li>
-            </ul>
+                <span className="user-type">
+                  {profileData?.user_type
+                    ? CapitalizeFirstLetter(profileData?.user_type)
+                    : null}
+                </span>
+              </ul>
+            ) : (
+              <ul className="nav header-navbar-rht nav">
+                <li className="nav-item">
+                  <div className="cta-btn">
+                    <Link to={path.login} className="btn">
+                      <i className="feather-user"></i> sign in /
+                    </Link>
+                    <Link to="/signup" className="btn ms-1">
+                      {" "}
+                      register
+                    </Link>
+                  </div>
+                </li>
+              </ul>
+            )}
           </nav>
         </div>
       </header>
@@ -131,4 +157,4 @@ const UserHeader = () => {
     </>
   );
 };
-export default UserHeader;
+export default UserHeader1;
