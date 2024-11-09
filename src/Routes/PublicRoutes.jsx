@@ -21,6 +21,7 @@ import BlogListSideBar from "../components/blog/BlogList/blogListSidebar";
 import BlogGridSidebar from "../components/blog/BlogList/blogGridSidebar";
 import Contract from "../components/contract";
 import ServiceDetails from "../components/Listings/PublicListingDetails/serviceDetails";
+import PayNow from "../components/pages/payForm";
 
 export const FrontendRoute = [
   {
@@ -54,6 +55,10 @@ export const FrontendRoute = [
   {
     path: "pricing",
     element: <Pricing />,
+  },
+  {
+    path: "paynow/:id",
+    element: <PayNow />,
   },
   {
     path: "faq",

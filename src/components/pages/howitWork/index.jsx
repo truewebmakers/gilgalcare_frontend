@@ -40,7 +40,7 @@ const HowItWork = () => {
             </p>
           </div>
           <div className="row">
-            <div className="col-lg-4 col-md-4 d-flex">
+            <div className="col-lg-6 col-md-6 d-flex">
               <div className="work-info card">
                 <img src={work1_jpg} className="img-fluid" alt="" />
                 <h5>01</h5>

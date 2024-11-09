@@ -44,6 +44,13 @@ export default function UserMenu({ activeUrl }) {
             </Link>
           </li>
         )}
+        {user?.userInfo?.user_type === "admin" && (
+          <li className={activeUrl == "my-plans" ? "active" : ""}>
+            <Link to="/my-plans">
+              <i className="feather-list" /> <span>My Plans</span>
+            </Link>
+          </li>
+        )}
         <li>
           <span onClick={handleLogout} style={{ cursor: "pointer" }}>
             <i className="fas fa-light fa-circle-arrow-left" />{" "}

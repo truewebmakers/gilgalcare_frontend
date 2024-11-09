@@ -9,6 +9,8 @@ import AddLisiting from "../components/userPages/AddLisiting";
 import AddCategory from "../components/userPages/addCategory";
 import MyListingDetails from "../components/Listings/MyListingDetails";
 import MyCategory from "../components/userPages/myCategory";
+import MyPlans from "../components/userPages/myPlans";
+import AddPlans from "../components/userPages/myPlans/addPlans";
 
 export const AdminRoutes = [
   {
@@ -32,6 +34,10 @@ export const AdminRoutes = [
     element: <MyListe />,
   },
   {
+    path: "my-plans",
+    element: <MyPlans />,
+  },
+  {
     path: "bookmarks",
     element: <Bookmarks />,
   },
@@ -46,6 +52,14 @@ export const AdminRoutes = [
   {
     path: "add-listing",
     element: <AddLisiting />,
+  },
+  {
+    path: "add-plans",
+    element: <AddPlans />,
+  },
+  {
+    path: "edit-plans/:id",
+    element: <AddPlans />,
   },
   {
     path: "edit-listing/:id",

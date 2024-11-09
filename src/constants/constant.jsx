@@ -13,6 +13,10 @@ export const apiUrls = {
   getCategoryDetail: "/categories/get/",
   deleteCategory: "/categories/delete/",
   editCategory: "/categories/update/",
+
+  // palns
+  addPlans: "/plan/store",
+  editPlans: "/plan/update/",
   // listings
   addListing: "/listing/store",
   editListing: "/listing/update/",
@@ -154,3 +158,45 @@ export const galleryImageFields = {
 };
 
 export const dateFormat = "dddd, MMMM Do YYYY";
+
+export const planFeatures = [
+  { value: "business_name", name: "Business Name" },
+  { value: "phone_number", name: "Phone Number" },
+  { value: "website_url", name: "Website URL" },
+  { value: "email", name: "Email" },
+  { value: "address", name: "Address" },
+  { value: "map_location", name: "Map Location" },
+  {
+    value: "add_up_to_3_business_locations",
+    name: "Add up to 3 business locations (separate listings)",
+  },
+  {
+    value: "verified_badge",
+    name: "Verified Badge (up to 24 hours required for verification)",
+  },
+  {
+    value: "highest_search_display_priority",
+    name: "Highest Search Display Priority 🥇",
+  },
+  {
+    value: "business_tagline",
+    name: "Business Tagline (appears under business name)",
+  },
+  {
+    value: "business_description",
+    name: "Business Description (can include custom links)",
+  },
+  { value: "display_your_work_hours", name: "Display your Work Hours" },
+  { value: "upload_logo", name: "Upload Logo" },
+  { value: "upload_cover_image", name: "Upload Cover Image" },
+  { value: "upload_gallery_images", name: "Upload Gallery Images" },
+  { value: "video_url", name: "Video URL (Display YouTube video e.g.)" },
+  {
+    value: "links_to_your_social_media_profile",
+    name: "Links to your social media profile (Facebook, Instagram e.g)",
+  },
+  {
+    value: "features_based_on_plan",
+    name: "these are features based on the plan user can make them enable and disable",
+  },
+];

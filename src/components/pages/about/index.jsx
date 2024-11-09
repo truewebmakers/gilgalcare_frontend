@@ -117,7 +117,7 @@ const About = () => {
                 </p>
               </div>
             </div>
-            <div className="col-lg-3 col-md-3 d-flex">
+            {/* <div className="col-lg-3 col-md-3 d-flex">
               <div className="howitwork-info">
                 <h5>04</h5>
                 <h6>Post An Ad</h6>
@@ -128,7 +128,7 @@ const About = () => {
                   augue, mollis nec condimentum euismod, lacinia ultricies leo.
                 </p>
               </div>
-            </div>
+            </div> */}
           </div>
         </div>
       </section>

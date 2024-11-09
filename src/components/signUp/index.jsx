@@ -57,11 +57,19 @@ const SignUp = () => {
 
   const handleSignUp = async (e) => {
     e.preventDefault();
+
+    // If user selects "business", navigate to the pricing page and prevent API call
+    if (signupData.user_type === "business") {
+      navigate("/pricing"); // Assuming the pricing page route is defined in `path`
+      return;
+    }
+
     let newErr = {};
     for (let key in signupData) {
       newErr = { ...newErr, ...handleValidations(key, signupData[key]) };
     }
     setError(newErr);
+
     if (!hasErrors(newErr) && areAllFieldsFilled(signupData)) {
       setIsLoading(true);
       try {
@@ -69,7 +77,7 @@ const SignUp = () => {
           name: signupData?.name,
           email: signupData?.email,
           password: signupData?.passwordInput,
-          user_type: signupData?.user_type, // add user_type to the signup request
+          user_type: signupData?.user_type,
         };
         const response = await UseApi(
           apiUrls.signup,

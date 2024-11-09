@@ -74,6 +74,9 @@ const UserHeader1 = () => {
                   <Link to="/listing-grid-sidebar">Our Listings</Link>
                 </li>
                 <li>
+                  <Link to="/pricing">Pricing</Link>
+                </li>
+                <li>
                   <Link to="/about">About Us</Link>
                 </li>
                 <li>
@@ -83,7 +86,7 @@ const UserHeader1 = () => {
             </div>
             {isLoggedIn ? (
               <ul className="nav header-navbar-rht">
-                {user?.userInfo?.user_type !== "user" && (
+                {/* {user?.userInfo?.user_type !== "user" && (
                   <li className="nav-item">
                     <Link
                       className="nav-link header-login add-listing"
@@ -92,7 +95,7 @@ const UserHeader1 = () => {
                       <i className="fa-solid fa-plus" /> Add Listing
                     </Link>
                   </li>
-                )}
+                )} */}
                 <li className="nav-item dropdown has-arrow logged-item">
                   <Link
                     to="#"

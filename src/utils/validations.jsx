@@ -131,6 +131,54 @@ export const addCategoryValidation = (name, value) => {
   return newErr;
 };
 
+export const addPlanValidation = (name, value) => {
+  let newErr = {};
+
+  switch (name) {
+    case "name":
+      if (value === "") {
+        newErr[name] = "Plan name cannot be empty";
+      } else if (value.length < 3) {
+        newErr[name] = "Plan name is too short";
+      } else {
+        newErr[name] = "";
+      }
+      break;
+
+    case "term":
+      if (value === "") {
+        newErr[name] = "Term cannot be empty";
+      } else {
+        newErr[name] = "";
+      }
+      break;
+
+    case "price":
+      if (value === "") {
+        newErr[name] = "Price cannot be empty";
+      } else if (isNaN(value) || Number(value) <= 0) {
+        newErr[name] = "Price must be a positive number";
+      } else {
+        newErr[name] = "";
+      }
+      break;
+
+    case "features":
+      // Check if at least one feature is selected
+      if (Object.values(value).every((feature) => feature === false)) {
+        newErr[name] = "At least one feature must be selected";
+      } else {
+        newErr[name] = "";
+      }
+      break;
+
+    default:
+      break;
+  }
+
+  return newErr;
+};
+
 export const validateListingFields = (name, value, basicInfo2) => {
   let newErr = {};
 
