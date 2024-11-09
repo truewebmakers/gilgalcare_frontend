@@ -1965,7 +1965,8 @@ html.menu-opened body {
 .banner-section {
   background: #f3f3f3;
   position: relative;
-  padding: 235px 0 0;
+  padding: 100px 0 0;
+  height: 887px;
 }
 .banner-section p {
   color: #374b5c;
