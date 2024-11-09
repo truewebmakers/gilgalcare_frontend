@@ -20,7 +20,7 @@ import Footer from "../../home/footer/Footer";
 
 const About = () => {
   const parms = useLocation().pathname;
-  console.log(parms, "aboutpage");
+
   return (
     <>
       <Header parms={parms} />

@@ -11,6 +11,7 @@ import Loader from "../../common/Loader";
 import { planFeatures } from "../../../constants/constant";
 import { addPlanService } from "../../../services/addPlanService";
 import { editPlanService } from "../../../services/editPlanService";
+import { getPlanById } from "../../../services/getPlansById";
 
 const AddPlans = () => {
   const [addPlans, setAddPlans] = useState({
@@ -34,6 +35,61 @@ const AddPlans = () => {
 
   const id = parms?.pathname?.includes("edit-plans") ? parms?.state?.id : null;
 
+  const fetchPlansById = async () => {
+    try {
+      // Fetch the plan data from the API
+      const response = await getPlanById(user?.token, id);
+
+      // Set state based on the API response
+      setAddPlans((prevFields) => {
+        return Object.entries(prevFields).reduce((acc, [key, value]) => {
+          if (
+            key === "features" &&
+            typeof value === "object" &&
+            value !== null
+          ) {
+            // Map the features from the API response
+            const updatedFeatures = planFeatures?.reduce(
+              (nestedAcc, { value: featureKey, name }) => {
+                // Convert the feature key to match the API format, e.g., 'business-name' -> 'features['business_name']'
+                const apiFeatureKey = `features['${featureKey.replace(
+                  /-/g,
+                  "_"
+                )}']`;
+
+                // Set the checkbox to true if the feature is present in the response
+                nestedAcc[featureKey] =
+                  response?.plans.features?.[apiFeatureKey] || false;
+                return nestedAcc;
+              },
+              {}
+            );
+
+            acc[key] = {
+              ...value, // Preserve existing values for features
+              ...updatedFeatures, // Update with features from the response
+            };
+          } else if (key === "name" || key === "term" || key === "price") {
+            // Update simple fields like name, term, and price from the response
+            acc[key] = response?.plans[key] || value;
+          } else {
+            // For other fields, preserve their default values or use the response
+            acc[key] = value;
+          }
+          return acc;
+        }, {});
+      });
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
+  useEffect(() => {
+    if (id) {
+      fetchPlansById();
+    }
+  }, [id]);
+
   const handleChange = (e) => {
     const { name, value, checked } = e.target;
 
@@ -42,7 +98,7 @@ const AddPlans = () => {
         ...prevState,
         features: {
           ...prevState.features,
-          [value]: checked,
+          [value]: checked, // Update the specific feature
         },
       }));
     } else {
@@ -90,8 +146,6 @@ const AddPlans = () => {
         } else {
           res = await addPlanService(payload, user?.token);
         }
-        console.log(res, "resssssssss");
-
         if (res?.successStatus === true) {
           setAddPlans({
             name: "",
@@ -190,7 +244,7 @@ const AddPlans = () => {
                             <li key={index}>
                               <label className="custom_check">
                                 <input
-                                  type="checkbox" // Corrected to checkbox
+                                  type="checkbox"
                                   name="features"
                                   value={item?.value}
                                   checked={addPlans.features[item?.value]}
@@ -222,9 +276,9 @@ const AddPlans = () => {
                     &nbsp;&nbsp;
                   </>
                 ) : id ? (
-                  "Update Category"
+                  "Update Plan"
                 ) : (
-                  "Add Category"
+                  "Add Plan"
                 )}
               </button>
             </div>

@@ -2,6 +2,7 @@ import React from "react";
 import { Link } from "react-router-dom";
 import { CapitalizeFirstLetter } from "../utils/commonFunctions";
 import BookmarkIcon from "../assets/img/icons/bookmark.svg";
+
 export const myListingColumns = (handleDeleteListing) => [
   {
     title: "Title",
@@ -56,6 +57,53 @@ export const myListingColumns = (handleDeleteListing) => [
         >
           <i className="feather-eye" />
         </Link>
+      </div>
+    ),
+  },
+];
+
+export const myPlansColumns = (handleDeleteListing) => [
+  {
+    title: "Name",
+    dataIndex: "name",
+    render: (text) => (
+      <>
+        <div className=""> {text ? CapitalizeFirstLetter(text) : "-"}</div>
+      </>
+    ),
+  },
+  {
+    title: "Term",
+    render: (text) => (
+      <>
+        <div className="">
+          {text?.term ? CapitalizeFirstLetter(text?.term) : "-"}
+        </div>
+      </>
+    ),
+  },
+  {
+    title: "Price",
+    dataIndex: "price",
+    render: (text) => <span className="">{text ? text : "-"}</span>,
+  },
+  {
+    title: "Action",
+    render: (text) => (
+      <div className="listingtable-rate">
+        <Link
+          to={`/edit-plans/${text?.uuid}`}
+          state={{ id: text?.id }}
+          className="action-btn btn-edit"
+        >
+          <i className="feather-edit-2" />
+        </Link>
+        <span
+          className="action-btn btn-trash"
+          onClick={(e) => handleDeleteListing(e, text?.id)}
+        >
+          <i className="feather-trash-2" />
+        </span>
       </div>
     ),
   },

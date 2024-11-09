@@ -9,8 +9,6 @@ import { apiMethods, apiUrls } from "../../../constants/constant";
 import Loader from "../../common/Loader";
 
 const PayNowForm = () => {
-  console.log("helooooooooooooooooooooo");
-
   const [totalAmount, setTotalAmount] = useState(0);
   const [amountToReceive, setAmountToReceive] = useState(0);
   const [receiptUrl, setReceiptUrl] = useState("");
@@ -19,7 +17,6 @@ const PayNowForm = () => {
   const { state } = useLocation();
   const { user } = useSelector((state) => state.auth);
   const navigate = useNavigate();
-  console.log(state, "statee");
 
   useEffect(() => {
     if (state?.presentRate && state?.startDate && state?.endDate) {

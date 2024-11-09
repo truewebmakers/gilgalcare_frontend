@@ -195,7 +195,6 @@ const AddLisiting = () => {
       const reader = new FileReader();
 
       reader.onload = (loadEvent) => {
-        console.log(`Loading image for: ${name}`); // Debugging log
         setSelectedImage((prevState) => ({
           ...prevState,
           [name]: loadEvent.target.result,
@@ -204,7 +203,6 @@ const AddLisiting = () => {
       reader.readAsDataURL(file);
 
       setUploadedPic((prevState) => {
-        console.log(`Uploading image: ${name}`); // Debugging log
         return { ...prevState, [name]: file };
       });
     }

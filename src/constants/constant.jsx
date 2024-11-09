@@ -17,6 +17,9 @@ export const apiUrls = {
   // palns
   addPlans: "/plan/store",
   editPlans: "/plan/update/",
+  getPlans: "/plan/getall",
+  getPlansById: "/plan/get/",
+  deletePlan: "/plan/delete/",
   // listings
   addListing: "/listing/store",
   editListing: "/listing/update/",
@@ -197,6 +200,6 @@ export const planFeatures = [
   },
   {
     value: "features_based_on_plan",
-    name: "these are features based on the plan user can make them enable and disable",
+    name: "These are features based on the plan user can make them enable and disable",
   },
 ];
