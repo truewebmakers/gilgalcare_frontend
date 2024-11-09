@@ -1,5 +1,10 @@
 import React from "react";
-import { ProfileAvatar06, Testimonial1, Testimonial2 } from "../../imagepath";
+import {
+  profile_pic,
+  ProfileAvatar06,
+  Testimonial1,
+  Testimonial2,
+} from "../../imagepath";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import Slider from "react-slick";
@@ -54,10 +59,12 @@ const Testimonial5 = () => {
                   <div className="testimonialslider-heading d-flex">
                     <div className="testi-img">
                       <img
-                        src={Testimonial1}
+                        src={profile_pic}
                         className="img-fluid"
-                        alt="testi-img"
-                      />
+                        alt=""
+                        height={79}
+                        width={79}
+                      />{" "}
                     </div>
                     <div className="testi-author">
                       <h6>James L.</h6>
@@ -84,10 +91,12 @@ const Testimonial5 = () => {
                   <div className="testimonialslider-heading d-flex">
                     <div className="testi-img">
                       <img
-                        src={Testimonial2}
+                        src={profile_pic}
                         className="img-fluid"
-                        alt="testi-img"
-                      />
+                        alt=""
+                        height={79}
+                        width={79}
+                      />{" "}
                     </div>
                     <div className="testi-author">
                       <h6>Sandra K.</h6>
@@ -113,10 +122,12 @@ const Testimonial5 = () => {
                   <div className="testimonialslider-heading d-flex">
                     <div className="testi-img">
                       <img
-                        src={ProfileAvatar06}
+                        src={profile_pic}
                         className="img-fluid"
-                        alt="testi-img"
-                      />
+                        alt=""
+                        height={79}
+                        width={79}
+                      />{" "}
                     </div>
                     <div className="testi-author">
                       <h6>Harpreet Singh</h6>

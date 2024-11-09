@@ -1,20 +1,7 @@
 import React from "react";
-import {
-  about_img,
-  australia_1,
-  canada_1,
-  china_1,
-  cta_img,
-  france_1,
-  london_1,
-  quotes,
-  uk_1,
-  usa_1,
-} from "../../imagepath";
+import { about_img, cta_img, quotes } from "../../imagepath";
 import Cilent from "./silder/cilent";
-import Sponcer from "./silder/sponcer";
 import { Link, useLocation } from "react-router-dom";
-
 import Header from "../../home/header/Header";
 import Footer from "../../home/footer/Footer";
 
@@ -52,7 +39,13 @@ const About = () => {
         <div className="container">
           <div className="about-listee">
             <div className="about-img">
-              <img src={about_img} className="img-fluid" alt="" />
+              <img
+                src={about_img}
+                className="img-fluid"
+                alt=""
+                height={650}
+                width={650}
+              />
             </div>
             <div className="about-info">
               <h4>
@@ -87,7 +80,7 @@ const About = () => {
           <p>Your Guide to Finding the Right Support Quickly and Efficiently</p>
 
           <div className="row">
-            <div className="col-lg-3 col-md-3 d-flex">
+            <div className="col-lg-4 col-md-4 d-flex">
               <div className="howitwork-info">
                 <h5>01</h5>
                 <h6>Search</h6>
@@ -97,7 +90,7 @@ const About = () => {
                 </p>
               </div>
             </div>
-            <div className="col-lg-3 col-md-3 d-flex">
+            <div className="col-lg-4 col-md-4 d-flex">
               <div className="howitwork-info">
                 <h5>02</h5>
                 <h6>Compare</h6>
@@ -107,7 +100,7 @@ const About = () => {
                 </p>
               </div>
             </div>
-            <div className="col-lg-3 col-md-3 d-flex">
+            <div className="col-lg-4 col-md-4 d-flex">
               <div className="howitwork-info">
                 <h5>03</h5>
                 <h6>Connect</h6>
@@ -159,7 +152,12 @@ const About = () => {
             </div>
             <div className="col-lg-5">
               <div className="cta-img">
-                <img src={cta_img} className="img-fluid" alt="CTA" />
+                <img
+                  src={cta_img}
+                  className="img-fluid"
+                  alt="CTA"
+                  style={{ borderRadius: "50px" }}
+                />
               </div>
             </div>
           </div>

@@ -59,9 +59,6 @@ const UserHeader = () => {
                   <Link to="/listing-grid-sidebar">Our Listings</Link>
                 </li>
                 <li>
-                  <Link to="/pricing">Pricing</Link>
-                </li>
-                <li>
                   <Link to="/about">About Us</Link>
                 </li>
                 <li>

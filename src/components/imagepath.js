@@ -430,8 +430,8 @@ export { default as WorkCity6 } from "../assets/img/work/city-06.jpg";
 
 export { default as SpaceImg } from "../assets/img/space-img.png";
 
-export { default as about_img } from "../assets/img/about-img.jpg";
-export { default as cta_img } from "../assets/img/cta-img.png";
+export { default as about_img } from "../assets/img/about_img.jpg";
+export { default as cta_img } from "../assets/img/cta-img.jpg";
 export { default as quotes } from "../assets/img/quotes.png";
 
 export { default as london_1 } from "../assets/img/locations/london-1.jpg";
@@ -452,7 +452,7 @@ export { default as City2 } from "../assets/img/city/city-02.jpg";
 export { default as City3 } from "../assets/img/city/city-03.jpg";
 export { default as City4 } from "../assets/img/city/city-04.jpg";
 
-export { default as FeaturePng } from "../assets/img/feature.png";
+export { default as FeaturePng } from "../assets/img/feature.jpg";
 
 export { default as business_team_1 } from "../assets/img/business/team-1.jpg";
 export { default as business_team_2 } from "../assets/img/business/team-2.jpg";
@@ -593,6 +593,7 @@ export { default as car_location_6 } from "../assets/img/city/car-location-6.png
 export { default as property_blog_1 } from "../assets/img/blog/property-blog-1.jpg";
 export { default as property_blog_2 } from "../assets/img/blog/property-blog-2.jpg";
 export { default as property_blog_3 } from "../assets/img/blog/property-blog-3.jpg";
+export { default as profile_pic } from "../assets/img/defaultProfile.png";
 
 export { default as avatar_15 } from "../assets/img/profiles/avatar-15.jpg";
 export { default as avatar_16 } from "../assets/img/profiles/avatar-16.jpg";

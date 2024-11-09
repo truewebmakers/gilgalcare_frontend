@@ -1,5 +1,5 @@
 import React from "react";
-import { Testimonial1, Testimonial2 } from "../../../imagepath";
+import { profile_pic, Testimonial1, Testimonial2 } from "../../../imagepath";
 import OwlCarousel from "react-owl-carousel";
 import "owl.carousel/dist/assets/owl.carousel.css";
 import "owl.carousel/dist/assets/owl.theme.default.css";
@@ -37,7 +37,13 @@ const Cilent = () => {
           <div className="testimonial-info">
             <div className="testimonialslider-heading d-flex">
               <div className="testi-img">
-                <img src={Testimonial1} className="img-fluid" alt="testi-img" />
+                <img
+                  src={profile_pic}
+                  className="img-fluid"
+                  alt=""
+                  height={79}
+                  width={79}
+                />
               </div>
               <div className="testi-author">
                 <h6>James L.</h6>
@@ -56,7 +62,13 @@ const Cilent = () => {
           <div className="testimonial-info">
             <div className="testimonialslider-heading d-flex">
               <div className="testi-img">
-                <img src={Testimonial2} className="img-fluid" alt="testi-img" />
+                <img
+                  src={profile_pic}
+                  className="img-fluid"
+                  alt=""
+                  height={79}
+                  width={79}
+                />{" "}
               </div>
               <div className="testi-author">
                 <h6>Sandra K.</h6>
@@ -75,7 +87,13 @@ const Cilent = () => {
           <div className="testimonial-info">
             <div className="testimonialslider-heading d-flex">
               <div className="testi-img">
-                <img src={Testimonial2} className="img-fluid" alt="testi-img" />
+                <img
+                  src={profile_pic}
+                  className="img-fluid"
+                  alt=""
+                  height={79}
+                  width={79}
+                />{" "}
               </div>
               <div className="testi-author">
                 <h6>Harpreet Singh</h6>

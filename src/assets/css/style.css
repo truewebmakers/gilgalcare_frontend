@@ -1965,7 +1965,7 @@ html.menu-opened body {
 .banner-section {
   background: #f3f3f3;
   position: relative;
-  padding: 85px 0 0;
+  padding: 235px 0 0;
 }
 .banner-section p {
   color: #374b5c;
@@ -2557,8 +2557,8 @@ a:focus {
 }
 .testimonials-section .owl-carousel .owl-item .testi-img {
   border-radius: 50px;
-  width: 86px;
-  height: 86px;
+  width: 79;
+  height: 79;
   border: 3px solid rgba(62, 102, 223, 0.3);
 }
 .testimonials-section .owl-carousel .owl-item img {
@@ -5224,14 +5224,15 @@ ul.tags {
 .aboutbanner {
   position: relative;
   background: url("../img/banner/aboutbanner.jpg");
-  background-position: center;
+  background-position: top;
   background-size: cover;
   background-repeat: no-repeat;
   text-align: center;
-  padding: 170px 0 90px;
+  padding: 183px 0 90px;
   position: relative;
   overflow: hidden;
-  z-index: 1;
+  /* z-index: 1; */
+  height: 450px;
 }
 .innerbanner .breadcrumb-title {
   font-size: 32px;
@@ -5519,14 +5520,15 @@ ul.tags {
 .contactbanner {
   position: relative;
   background: url("../img/banner/contactbanner.jpg");
-  background-position: center;
+  background-position: top;
   background-size: cover;
   background-repeat: no-repeat;
   text-align: center;
-  padding: 170px 0 90px;
+  padding: 214px 0 90px;
   position: relative;
   overflow: hidden;
   z-index: 1;
+  height: 365px;
 }
 .innerbanner::after {
   content: "";
@@ -7082,7 +7084,7 @@ textarea.form-control {
   height: 190px;
 }
 .media-section .settings-upload-btn {
-  top:-32px;
+  top: -32px;
   margin: 0;
 }
 .media-section .settings-upload-btn .file-upload {
@@ -10491,7 +10493,7 @@ textarea.form-control {
 -----------------------*/
 
 .banner-five {
-  background: url("../img/banner/banner-05.png");
+  background: url("../img/banner/banner-05.jpg");
   background-size: cover;
   background-repeat: no-repeat;
   background-position: center bottom;
@@ -20963,19 +20965,19 @@ section.advertisement {
   height: 50px;
 }
 
-.updateProfileButton{
+.updateProfileButton {
   margin-top: 10px;
 }
 
 .addCategoryName {
-  margin-top: 10px !important
+  margin-top: 10px !important;
 }
 
 .info-list li {
   margin-bottom: 10px;
-    word-break: break-word;
-    white-space: normal;
-    max-width: 100%;
+  word-break: break-word;
+  white-space: normal;
+  max-width: 100%;
 }
 
 .user-type {
@@ -20989,9 +20991,6 @@ section.advertisement {
   border-radius: 24px;
   color: green;
 }
-
-
-
 
 .location-suggestions {
   position: absolute;

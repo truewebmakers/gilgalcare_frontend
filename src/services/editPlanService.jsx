@@ -33,13 +33,13 @@ export const editPlanService = async (payload, token, id) => {
 
     if (response?.status === 200 || response?.status === 201) {
       customToast.success(response?.data?.message);
-      return { successStatus: true };
+      return { successEditStatus: true };
     } else {
       customToast.error(response?.data?.message || "Something went wrong");
-      return { successStatus: false };
+      return { successEditStatus: false };
     }
   } catch (err) {
     customToast.error(err?.message || "An error occurred");
-    return { successStatus: false };
+    return { successEditStatus: false };
   }
 };
