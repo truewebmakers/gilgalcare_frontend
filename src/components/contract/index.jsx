@@ -36,11 +36,19 @@ const Contract = () => {
       {/*contact Form*/}
       <section className="contactusform-section">
         <div className="container">
-          <div className="contact-info" style={{ marginTop: "25px" }}>
-            <h4>Reach out to Gilgal Provider Finder for any inquiries.</h4>
+          <div className="contact-info">
+            <h2>
+              Contact <span>Us</span>
+            </h2>
+            <p>Contact Gilgal Provider Finder | Get Help and Support Today</p>
           </div>
-          <div className="row justify-content-center align-items-center">
-            <div className="col-lg-6 col-md-8">
+          <div className="row align-items-center">
+            <div className="col-lg-5 col-md-5">
+              <div className="contactform-img">
+                <img src={contactform_img} className="img-fluid" alt="" />
+              </div>
+            </div>
+            <div className="col-lg-7 col-md-7">
               <div className="contactus-form">
                 <form>
                   <div className="form-group">
@@ -96,6 +104,7 @@ const Contract = () => {
           </div>
         </div>
       </section>
+
       {/*/contact Form*/}
       <Footer />
     </>
