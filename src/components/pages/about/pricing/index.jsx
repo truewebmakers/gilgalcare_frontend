@@ -93,7 +93,7 @@ const Pricing = () => {
         </div>
         <div className="container">
           <div className="row">
-            <div className="col-lg-3 d-flex col-md-6">
+            {/* <div className="col-lg-3 d-flex col-md-6">
               <div className="price-card flex-fill">
                 <div className="price-head">
                   <div className="price-level">
@@ -127,7 +127,7 @@ const Pricing = () => {
                   </div>
                 </div>
               </div>
-            </div>
+            </div> */}
             {myPlans?.map((item, index) => (
               <div className="col-lg-3 d-flex col-md-6" key={index}>
                 <div className="price-card flex-fill">
@@ -159,7 +159,11 @@ const Pricing = () => {
                     <div>
                       <Link
                         to={`/paynow/${item?.uuid}`}
-                        state={{ id: item?.uuid, registerData }}
+                        state={{
+                          id: item?.uuid,
+                          registerData,
+                          price: item?.price,
+                        }}
                         className="btn viewdetails-btn"
                       >
                         Choose Plan
