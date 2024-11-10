@@ -8,6 +8,7 @@ import { toast } from "react-toastify";
 import { handleValidations } from "../../utils/validations";
 import { path } from "../../constants/routesConstant";
 import Loader from "../common/Loader";
+import { registerService } from "../../services/registerService";
 
 const SignUp = () => {
   const navigate = useNavigate();
@@ -60,7 +61,7 @@ const SignUp = () => {
 
     // If user selects "business", navigate to the pricing page and prevent API call
     if (signupData.user_type === "business") {
-      navigate("/pricing"); // Assuming the pricing page route is defined in `path`
+      navigate("/pricing", { state: { signupData } }); // Assuming the pricing page route is defined in `path`
       return;
     }
 
@@ -73,22 +74,11 @@ const SignUp = () => {
     if (!hasErrors(newErr) && areAllFieldsFilled(signupData)) {
       setIsLoading(true);
       try {
-        const bodyData = {
-          name: signupData?.name,
-          email: signupData?.email,
-          password: signupData?.passwordInput,
-          user_type: signupData?.user_type,
-        };
-        const response = await UseApi(
-          apiUrls.signup,
-          apiMethods.POST,
-          bodyData
-        );
-        if (response?.status === 201 || response?.status === 200) {
-          toast.success(response?.data?.message);
+        const res = await registerService(signupData);
+        console.log(res, "ress");
+
+        if (res?.successStatus === true) {
           navigate(path.login);
-        } else {
-          toast.error(response?.data?.message);
         }
         setIsLoading(false);
       } catch (err) {

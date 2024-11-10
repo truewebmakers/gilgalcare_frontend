@@ -1,14 +1,63 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 
 import Header from "../../../home/header/Header";
 import Footer from "../../../home/footer/Footer";
 import { Link, useLocation } from "react-router-dom";
+import UseApi from "../../../../hooks/useApi";
+import { apiMethods, apiUrls } from "../../../../constants/constant";
+import { customToast } from "../../../common/Toast";
+import { useSelector } from "react-redux";
+import { CapitalizeFirstLetter } from "../../../../utils/commonFunctions";
 
 const Pricing = () => {
-  const parms = useLocation().pathname;
+  const parms = useLocation();
+  const { user } = useSelector((state) => state.auth);
+  const [myPlans, setMyPlans] = useState([]);
+  const registerData = parms?.state?.signupData;
+
+  // Fetch user's plans
+  const getPlans = async () => {
+    try {
+      const headers = {
+        "Content-Type": "multipart/form-data",
+        Authorization: `Bearer ${user?.token}`,
+      };
+
+      const response = await UseApi(
+        apiUrls.getPlans,
+        apiMethods.GET,
+        null,
+        headers
+      );
+      if (response?.status === 200 || response?.status === 201) {
+        setMyPlans(response?.data?.plans);
+      }
+    } catch (err) {
+      console.log(err, "errrrrrr");
+      customToast.error(err?.message);
+    }
+  };
+
+  useEffect(() => {
+    getPlans();
+  }, []);
+  console.log(myPlans, "myyyy");
+
+  const formatFeatureName = (featureKey) => {
+    const match = featureKey?.match(/features\['(.*?)'\]/);
+    if (match && match[1]) {
+      // Convert snake_case or other formats into a readable string
+      return match[1]
+        .replace(/_/g, " ") // Replace underscores with spaces
+        .replace(/\b\w/g, (char) => char.toUpperCase()); // Capitalize the first letter of each word
+    }
+    return featureKey;
+  };
+  console.log(registerData, "regggg");
+
   return (
     <>
-      <Header parms={parms} />
+      <Header parms={parms?.pathname} />
       {/* Breadscrumb Section */}
       <div className="breadcrumb-bar">
         <div className="container">
@@ -64,94 +113,62 @@ const Pricing = () => {
                     <li className="inactive">Edit your listing</li>
                   </ul>
                   <div>
-                    <Link to={`/paynow/${2}`} className="btn viewdetails-btn">
+                    <Link
+                      to={`/paynow/${"5ed3fd38-8cc6-49a7-821e-024b6b9a1486"}`}
+                      state={{
+                        id: "5ed3fd38-8cc6-49a7-821e-024b6b9a1486",
+                        registerData,
+                        price: 500,
+                      }}
+                      className="btn viewdetails-btn"
+                    >
                       Choose Plan
                     </Link>
                   </div>
                 </div>
               </div>
             </div>
-            <div className="col-lg-3 d-flex col-md-6">
-              <div className="price-card flex-fill">
-                <div className="price-head">
-                  <div className="price-level">
-                    <h6>Basic</h6>
+            {myPlans?.map((item, index) => (
+              <div className="col-lg-3 d-flex col-md-6" key={index}>
+                <div className="price-card flex-fill">
+                  <div className="price-head">
+                    <div className="price-level">
+                      <h6>
+                        {item?.name ? CapitalizeFirstLetter(item?.name) : "-"}
+                      </h6>
+                    </div>
+                    <h4>
+                      ${item?.price ? item?.price : "0"}{" "}
+                      <span>/ {item?.term}</span>
+                    </h4>
                   </div>
-                  <h4>
-                    $25 <span>/ month</span>
-                  </h4>
-                </div>
-                <div className="price-body">
-                  <p>For most business that want to optimize web queries</p>
-                  <ul>
-                    <li className="active">Basic listing submission</li>
-                    <li className="active">One Listing</li>
-                    <li className="active">30 days Availabilty</li>
-                    <li className="inactive">Limited Support</li>
-                    <li className="inactive">Edit your listing</li>
-                  </ul>
-                  <div>
-                    <Link to={`/paynow/${1}`} className="btn viewdetails-btn">
-                      Choose Plan
-                    </Link>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div className="col-lg-3 d-flex col-md-6">
-              <div className="price-card flex-fill">
-                <div className="price-head">
-                  <div className="price-level">
-                    <h6>Popular</h6>
-                  </div>
-                  <h4>
-                    $50 <span>/ month</span>
-                  </h4>
-                </div>
-                <div className="price-body">
-                  <p>For most business that want to optimize web queries</p>
-                  <ul>
-                    <li className="active">Basic listing submission</li>
-                    <li className="active">One Listing</li>
-                    <li className="active">30 days Availabilty</li>
-                    <li className="inactive">Limited Support</li>
-                    <li className="inactive">Edit your listing</li>
-                  </ul>
-                  <div>
-                    <Link to={`/paynow/${3}`} className="btn viewdetails-btn">
-                      Choose Plan
-                    </Link>
+                  <div className="price-body">
+                    {/* <p>For most business that want to optimize web queries</p> */}
+                    <ul>
+                      {Object.keys(item?.features).map((key) => (
+                        <li
+                          key={key}
+                          className={
+                            item?.features[key] ? "active" : "inactive"
+                          }
+                        >
+                          {formatFeatureName(key)}
+                        </li>
+                      ))}
+                    </ul>
+                    <div>
+                      <Link
+                        to={`/paynow/${item?.uuid}`}
+                        state={{ id: item?.uuid, registerData }}
+                        className="btn viewdetails-btn"
+                      >
+                        Choose Plan
+                      </Link>
+                    </div>
                   </div>
                 </div>
               </div>
-            </div>
-            <div className="col-lg-3 d-flex col-md-6">
-              <div className="price-card flex-fill">
-                <div className="price-head">
-                  <div className="price-level">
-                    <h6>Enterprise</h6>
-                  </div>
-                  <h4>
-                    $100 <span>/ month</span>
-                  </h4>
-                </div>
-                <div className="price-body">
-                  <p>For most business that want to optimize web queries</p>
-                  <ul>
-                    <li className="active">Basic listing submission</li>
-                    <li className="active">One Listing</li>
-                    <li className="active">30 days Availabilty</li>
-                    <li className="inactive">Limited Support</li>
-                    <li className="inactive">Edit your listing</li>
-                  </ul>
-                  <div>
-                    <Link to={`/paynow/${4}`} className="btn viewdetails-btn">
-                      Choose Plan
-                    </Link>
-                  </div>
-                </div>
-              </div>
-            </div>
+            ))}
           </div>
         </div>
       </section>

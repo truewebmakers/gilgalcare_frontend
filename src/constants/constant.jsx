@@ -20,6 +20,7 @@ export const apiUrls = {
   getPlans: "/plan/getall",
   getPlansById: "/plan/get/",
   deletePlan: "/plan/delete/",
+  payNow: "/create/subsscription",
   // listings
   addListing: "/listing/store",
   editListing: "/listing/update/",

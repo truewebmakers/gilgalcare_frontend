@@ -1,3 +1,4 @@
+import moment from "moment";
 import { customToast } from "../components/common/Toast";
 
 export const CapitalizeFirstLetter = (str) => {
@@ -27,3 +28,18 @@ export async function fetchImageAsBinary(url) {
     customToast.error("Error fetching and converting image:", error);
   }
 }
+
+export const calculatePayment = (presentRate = 0) => {
+  const feePercentage = 0.035;
+  const fixedFee = 0.3;
+
+  // Calculate amount to receive
+  const amountToReceive = presentRate;
+  // Calculate total amount based on hourly rate
+  const totalAmount = (amountToReceive + fixedFee) / (1 - feePercentage);
+
+  return {
+    amountToReceive: amountToReceive.toFixed(2),
+    totalAmount: totalAmount.toFixed(2),
+  };
+};

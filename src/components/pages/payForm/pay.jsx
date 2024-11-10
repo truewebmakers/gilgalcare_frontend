@@ -7,6 +7,9 @@ import "./index.css";
 import UseApi from "../../../hooks/useApi";
 import { apiMethods, apiUrls } from "../../../constants/constant";
 import Loader from "../../common/Loader";
+import { calculatePayment } from "../../../utils/commonFunctions";
+import { registerService } from "../../../services/registerService";
+import { path } from "../../../constants/routesConstant";
 
 const PayNowForm = () => {
   const [totalAmount, setTotalAmount] = useState(0);
@@ -15,19 +18,18 @@ const PayNowForm = () => {
   const [isLoading, setIsLoading] = useState(false);
   const [calculating, setCalculating] = useState(true);
   const { state } = useLocation();
+
   const { user } = useSelector((state) => state.auth);
   const navigate = useNavigate();
 
-  useEffect(() => {
-    if (state?.presentRate && state?.startDate && state?.endDate) {
-      const { presentRate, startDate, endDate } = state;
+  console.log(state, "sttaaa");
 
+  useEffect(() => {
+    if (state?.price) {
       setCalculating(true);
-      const { amountToReceive, totalAmount } = calculatePayment(
-        presentRate,
-        startDate,
-        endDate
-      );
+      const { amountToReceive, totalAmount } = calculatePayment(state?.price);
+      console.log(amountToReceive, "amountToReceive");
+
       setAmountToReceive(amountToReceive);
       setTotalAmount(totalAmount);
       setCalculating(false);
@@ -52,25 +54,29 @@ const PayNowForm = () => {
       if (error) {
         toast.error(error.message);
       } else {
-        const headers = {
-          Authorization: `Bearer ${user?.token}`,
-        };
-        const bodyData = {
-          payment_method: paymentMethod.id,
-          plan_id: planId,
-        };
-        const { data } = await UseApi(
-          apiUrls.payNow,
-          apiMethods.POST,
-          bodyData,
-          headers
-        );
-        if (data?.status === true) {
-          setReceiptUrl(data?.invoice_url);
-          toast.success(data?.message);
-          navigate(routes.Bookings);
-        } else {
-          toast.error(data?.message);
+        const response = await registerService(state?.registerData);
+        console.log(response, "ressss");
+        if (response?.successStatus == true) {
+          const bodyData = {
+            payment_method: paymentMethod?.id,
+            plan_id: state?.id,
+            user_id: response?.data?.userInfo?.id,
+          };
+          const { data } = await UseApi(
+            apiUrls.payNow,
+            apiMethods.POST,
+            bodyData,
+            null
+          );
+          console.log(data, "datattttt");
+
+          if (data?.status === true) {
+            // setReceiptUrl(data?.invoice_url);
+            toast.success(data?.message);
+            navigate(path.login);
+          } else {
+            toast.error(data?.message);
+          }
         }
       }
     } catch (err) {
