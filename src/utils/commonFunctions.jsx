@@ -34,12 +34,12 @@ export const calculatePayment = (presentRate = 0) => {
   const fixedFee = 0.3;
 
   // Calculate amount to receive
-  const amountToReceive = presentRate;
+  const amountToReceive = +presentRate;
   // Calculate total amount based on hourly rate
   const totalAmount = (amountToReceive + fixedFee) / (1 - feePercentage);
 
   return {
-    amountToReceive: amountToReceive.toFixed(2),
+    amountToReceivee: amountToReceive?.toFixed(2),
     totalAmount: totalAmount.toFixed(2),
   };
 };

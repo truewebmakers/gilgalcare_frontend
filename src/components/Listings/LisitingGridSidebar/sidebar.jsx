@@ -35,16 +35,16 @@ const Sidebar = ({ filters, setFilters, fetchPublicBusinessListing }) => {
   const handleChange = (e) => {
     const { name, value, checked } = e.target;
 
-    if (name === "category_ids") {
+    if (name === "category_id") {
       // Handle checkbox changes
       setFilters((prevFilters) => {
         const newCategoryIds = checked
-          ? [...(prevFilters.category_ids || []), value] // Add value if checked
-          : prevFilters.category_ids.filter((id) => id !== value); // Remove value if unchecked
+          ? [...(prevFilters.category_id || []), value] // Add value if checked
+          : prevFilters.category_id.filter((id) => id !== value); // Remove value if unchecked
 
         return {
           ...prevFilters,
-          category_ids: newCategoryIds,
+          category_id: newCategoryIds,
         };
       });
     } else {
@@ -122,9 +122,9 @@ const Sidebar = ({ filters, setFilters, fetchPublicBusinessListing }) => {
                       type="checkbox"
                       className="form-check-input"
                       id={`category-${item?.id}`}
-                      name="category_ids"
+                      name="category_id"
                       value={item?.id}
-                      checked={filters?.category_ids?.includes(
+                      checked={filters?.category_id?.includes(
                         item?.id?.toString()
                       )}
                       onChange={handleChange}

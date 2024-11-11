@@ -27,10 +27,10 @@ const PayNowForm = () => {
   useEffect(() => {
     if (state?.price) {
       setCalculating(true);
-      const { amountToReceive, totalAmount } = calculatePayment(state?.price);
-      console.log(amountToReceive, "amountToReceive");
+      const { amountToReceivee, totalAmount } = calculatePayment(state?.price);
+      console.log(amountToReceivee, "amountToReceive");
 
-      setAmountToReceive(amountToReceive);
+      setAmountToReceive(amountToReceivee);
       setTotalAmount(totalAmount);
       setCalculating(false);
     }
@@ -62,16 +62,13 @@ const PayNowForm = () => {
             plan_id: state?.id,
             user_id: response?.data?.userInfo?.id,
           };
-          const { data } = await UseApi(
+          const data = await UseApi(
             apiUrls.payNow,
             apiMethods.POST,
             bodyData,
             null
           );
-          console.log(data, "datattttt");
-
-          if (data?.status === true) {
-            // setReceiptUrl(data?.invoice_url);
+          if (data?.status === 200 || data?.status === 201) {
             toast.success(data?.message);
             navigate(path.login);
           } else {

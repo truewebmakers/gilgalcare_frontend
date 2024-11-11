@@ -1,15 +1,16 @@
-import React from "react";
-import {
-  Business1,
-  ProfileAvatar03,
-} from "../../imagepath";
+import React, { useEffect, useState } from "react";
+import { Business1, ProfileAvatar03 } from "../../imagepath";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import Slider from "react-slick";
 import { Link } from "react-router-dom";
-import "./Trending5.css"; 
+import "./Trending5.css";
+import UseApi from "../../../hooks/useApi";
+import { apiMethods, apiUrls } from "../../../constants/constant";
+import { CapitalizeFirstLetter } from "../../../utils/commonFunctions";
 
 const Trending5 = () => {
+  const [trendingData, setTrendingData] = useState([]);
   const settings = {
     dots: false,
     arrows: true,
@@ -46,6 +47,21 @@ const Trending5 = () => {
     ],
   };
 
+  const trendingPlaces = async () => {
+    try {
+      const response = await UseApi(apiUrls.trendingListings, apiMethods.GET);
+      console.log(response?.data?.data, "responseeeee");
+
+      setTrendingData(response?.data?.data);
+    } catch (err) {
+      return err?.message;
+    }
+  };
+
+  useEffect(() => {
+    trendingPlaces();
+  }, []);
+
   return (
     <section className="business-section">
       <div className="container">
@@ -63,306 +79,63 @@ const Trending5 = () => {
           {...settings}
           className="silderBotton business-slider grid-view"
         >
-          <div className="card business-card aos" data-aos="fade-up">
-            <div className="blog-widget">
-              <div className="blog-img">
-                <Link to="/service-details">
-                  <img src={Business1} className="img-fluid" alt="blog-img" />
-                </Link>
-                <div className="fav-item justify-content-end">
-                  <Link to="#" className="fav-icon">
-                    <i className="feather-heart"></i>
+          {trendingData?.map((item, index) => (
+            <div className="card business-card aos" data-aos="fade-up">
+              <div className="blog-widget">
+                <div className="blog-img">
+                  <Link
+                    to={`/listing-details/${item?.uuid}`}
+                    state={{ id: item?.id }}
+                  >
+                    <img
+                      src={item?.featured_image}
+                      alt=""
+                      width={256}
+                      height={168}
+                    />
                   </Link>
                 </div>
-              </div>
-              <div className="bloglist-content">
-                <div className="card-body">
-                  <span className="Featured-text">Featured</span>
-                  <div className="grid-author">
-                    <img src={ProfileAvatar03} alt="author" />
-                  </div>
-                  <div className="blogfeaturelink">
-                    <div className="blog-features">
-                      <Link to="#">
+                <div className="bloglist-content">
+                  <div className="card-body">
+                    <span className="Featured-text">Featured</span>
+                    <div className="grid-author">
+                      <img src={item?.logo} />
+                    </div>
+                    <div className="blogfeaturelink">
+                      <div className="blog-author text-end">
                         <span>
-                          {" "}
-                          <i className="fa-regular fa-circle-stop"></i>{" "}
-                          Restaurant
+                          <i className="feather-map-pin"></i>{" "}
+                          {item?.location
+                            ? CapitalizeFirstLetter(item?.location)
+                            : "-"}
                         </span>
+                      </div>
+                    </div>
+                    <h6>
+                      <Link
+                        to={`/listing-details/${item?.uuid}`}
+                        state={{ id: item?.id }}
+                      >
+                        {item?.listing_title
+                          ? CapitalizeFirstLetter(item?.listing_title)
+                          : "-"}
                       </Link>
-                    </div>
-                    <div className="blog-author text-end">
-                      <span>
-                        <i className="feather-map-pin"></i> Paris
-                      </span>
-                    </div>
-                  </div>
-                  <h6>
-                    <Link to="/service-details">Mattone Restaurant 1</Link>
-                  </h6>
-                  <div className="amount-details">
-                    <div className="amount">
-                      <span className="validrate">$350</span>
-                      <span>$450</span>
-                    </div>
-                    <div className="ratings">
-                      <span>4.7</span> (50)
+                    </h6>
+                    <div className="amount-details">
+                      <div className="amount">
+                        <span className="validrate">
+                          ${item?.price_to ? item?.price_to : null}
+                        </span>
+                      </div>
+                      <div className="ratings">
+                        <span>Published </span>
+                      </div>
                     </div>
                   </div>
                 </div>
               </div>
             </div>
-          </div>
-          <div className="card business-card aos" data-aos="fade-up">
-            <div className="blog-widget">
-              <div className="blog-img">
-                <Link to="/service-details">
-                  <img src={Business1} className="img-fluid" alt="blog-img" />
-                </Link>
-                <div className="fav-item justify-content-end">
-                  <Link to="#" className="fav-icon">
-                    <i className="feather-heart"></i>
-                  </Link>
-                </div>
-              </div>
-              <div className="bloglist-content">
-                <div className="card-body">
-                  <span className="Featured-text">Featured</span>
-                  <div className="grid-author">
-                    <img src={ProfileAvatar03} alt="author" />
-                  </div>
-                  <div className="blogfeaturelink">
-                    <div className="blog-features">
-                      <Link to="#">
-                        <span>
-                          {" "}
-                          <i className="fa-regular fa-circle-stop"></i>{" "}
-                          Restaurant
-                        </span>
-                      </Link>
-                    </div>
-                    <div className="blog-author text-end">
-                      <span>
-                        <i className="feather-map-pin"></i> Paris
-                      </span>
-                    </div>
-                  </div>
-                  <h6>
-                    <Link to="/service-details">Mattone Restaurant 2</Link>
-                  </h6>
-                  <div className="amount-details">
-                    <div className="amount">
-                      <span className="validrate">$350</span>
-                      <span>$450</span>
-                    </div>
-                    <div className="ratings">
-                      <span>4.7</span> (50)
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div className="card business-card aos" data-aos="fade-up">
-            <div className="blog-widget">
-              <div className="blog-img">
-                <Link to="/service-details">
-                  <img src={Business1} className="img-fluid" alt="blog-img" />
-                </Link>
-                <div className="fav-item justify-content-end">
-                  <Link to="#" className="fav-icon">
-                    <i className="feather-heart"></i>
-                  </Link>
-                </div>
-              </div>
-              <div className="bloglist-content">
-                <div className="card-body">
-                  <span className="Featured-text">Featured</span>
-                  <div className="grid-author">
-                    <img src={ProfileAvatar03} alt="author" />
-                  </div>
-                  <div className="blogfeaturelink">
-                    <div className="blog-features">
-                      <Link to="#">
-                        <span>
-                          {" "}
-                          <i className="fa-regular fa-circle-stop"></i>{" "}
-                          Restaurant
-                        </span>
-                      </Link>
-                    </div>
-                    <div className="blog-author text-end">
-                      <span>
-                        <i className="feather-map-pin"></i> Paris
-                      </span>
-                    </div>
-                  </div>
-                  <h6>
-                    <Link to="/service-details">Mattone Restaurant 3</Link>
-                  </h6>
-                  <div className="amount-details">
-                    <div className="amount">
-                      <span className="validrate">$350</span>
-                      <span>$450</span>
-                    </div>
-                    <div className="ratings">
-                      <span>4.7</span> (50)
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div className="card business-card aos" data-aos="fade-up">
-            <div className="blog-widget">
-              <div className="blog-img">
-                <Link to="/service-details">
-                  <img src={Business1} className="img-fluid" alt="blog-img" />
-                </Link>
-                <div className="fav-item justify-content-end">
-                  <Link to="#" className="fav-icon">
-                    <i className="feather-heart"></i>
-                  </Link>
-                </div>
-              </div>
-              <div className="bloglist-content">
-                <div className="card-body">
-                  <span className="Featured-text">Featured</span>
-                  <div className="grid-author">
-                    <img src={ProfileAvatar03} alt="author" />
-                  </div>
-                  <div className="blogfeaturelink">
-                    <div className="blog-features">
-                      <Link to="#">
-                        <span>
-                          {" "}
-                          <i className="fa-regular fa-circle-stop"></i>{" "}
-                          Restaurant
-                        </span>
-                      </Link>
-                    </div>
-                    <div className="blog-author text-end">
-                      <span>
-                        <i className="feather-map-pin"></i> Paris
-                      </span>
-                    </div>
-                  </div>
-                  <h6>
-                    <Link to="/service-details">Mattone Restaurant 4</Link>
-                  </h6>
-                  <div className="amount-details">
-                    <div className="amount">
-                      <span className="validrate">$350</span>
-                      <span>$450</span>
-                    </div>
-                    <div className="ratings">
-                      <span>4.7</span> (50)
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div className="card business-card aos" data-aos="fade-up">
-            <div className="blog-widget">
-              <div className="blog-img">
-                <Link to="/service-details">
-                  <img src={Business1} className="img-fluid" alt="blog-img" />
-                </Link>
-                <div className="fav-item justify-content-end">
-                  <Link to="#" className="fav-icon">
-                    <i className="feather-heart"></i>
-                  </Link>
-                </div>
-              </div>
-              <div className="bloglist-content">
-                <div className="card-body">
-                  <span className="Featured-text">Featured</span>
-                  <div className="grid-author">
-                    <img src={ProfileAvatar03} alt="author" />
-                  </div>
-                  <div className="blogfeaturelink">
-                    <div className="blog-features">
-                      <Link to="#">
-                        <span>
-                          {" "}
-                          <i className="fa-regular fa-circle-stop"></i>{" "}
-                          Restaurant
-                        </span>
-                      </Link>
-                    </div>
-                    <div className="blog-author text-end">
-                      <span>
-                        <i className="feather-map-pin"></i> Paris
-                      </span>
-                    </div>
-                  </div>
-                  <h6>
-                    <Link to="/service-details">Mattone Restaurant 5</Link>
-                  </h6>
-                  <div className="amount-details">
-                    <div className="amount">
-                      <span className="validrate">$350</span>
-                      <span>$450</span>
-                    </div>
-                    <div className="ratings">
-                      <span>4.7</span> (50)
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div className="card business-card aos" data-aos="fade-up">
-            <div className="blog-widget">
-              <div className="blog-img">
-                <Link to="/service-details">
-                  <img src={Business1} className="img-fluid" alt="blog-img" />
-                </Link>
-                <div className="fav-item justify-content-end">
-                  <Link to="#" className="fav-icon">
-                    <i className="feather-heart"></i>
-                  </Link>
-                </div>
-              </div>
-              <div className="bloglist-content">
-                <div className="card-body">
-                  <span className="Featured-text">Featured</span>
-                  <div className="grid-author">
-                    <img src={ProfileAvatar03} alt="author" />
-                  </div>
-                  <div className="blogfeaturelink">
-                    <div className="blog-features">
-                      <Link to="#">
-                        <span>
-                          {" "}
-                          <i className="fa-regular fa-circle-stop"></i>{" "}
-                          Restaurant
-                        </span>
-                      </Link>
-                    </div>
-                    <div className="blog-author text-end">
-                      <span>
-                        <i className="feather-map-pin"></i> Paris
-                      </span>
-                    </div>
-                  </div>
-                  <h6>
-                    <Link to="/service-details">Mattone Restaurant 6</Link>
-                  </h6>
-                  <div className="amount-details">
-                    <div className="amount">
-                      <span className="validrate">$350</span>
-                      <span>$450</span>
-                    </div>
-                    <div className="ratings">
-                      <span>4.7</span> (50)
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
+          ))}
           {/* Repeat for other cards */}
         </Slider>
       </div>

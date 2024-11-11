@@ -31,6 +31,7 @@ export const apiUrls = {
   getMyListingDetail: "/listing/get/",
   getPublicListingDetails: "/listing/get-pb/",
   generateTempImageUrl: "/listing/upload-image",
+  trendingListings: "/listing/top-ten-trending",
   // Reviews
   getListingSpecificReviews: "/feedback/business/",
   addReview: "/feedback/store",

@@ -14,14 +14,14 @@ const GridSidebar = () => {
   const [listing, setListing] = useState([]);
   const [filters, setFilters] = useState({
     listing_title: "",
-    category_ids: [], // Changed from category_id to category_ids
+    category_id: [],
     location: "",
     price_from: "",
     price_to: "",
   });
   const location = useLocation();
   const query = new URLSearchParams(location.search);
-  const category_id = query.get("category") || "";
+  const categoryIdVal = query.get("category") || "";
   const urlLocation = query.get("location") || "";
 
   const fetchPublicBusinessListing = async (filters) => {
@@ -59,13 +59,16 @@ const GridSidebar = () => {
     // Set filters based on URL parameters
     setFilters((prevFilters) => ({
       ...prevFilters,
-      category_id,
+      category_id: categoryIdVal,
       location: urlLocation,
     }));
 
     // Fetch data based on URL parameters
-    fetchPublicBusinessListing({ category_id, location: urlLocation });
-  }, [category_id, urlLocation]);
+    fetchPublicBusinessListing({
+      category_id: categoryIdVal,
+      location: urlLocation,
+    });
+  }, [categoryIdVal, urlLocation]);
 
   const handleNavigate = () => {};
 
