@@ -116,27 +116,29 @@ const Sidebar = ({ filters, setFilters, fetchPublicBusinessListing }) => {
                 <label style={{ fontWeight: "bold", color: "black" }}>
                   Choose Categories:
                 </label>
-                {categories?.map((item) => (
-                  <div key={item?.id} className="form-check">
-                    <input
-                      type="checkbox"
-                      className="form-check-input"
-                      id={`category-${item?.id}`}
-                      name="category_id"
-                      value={item?.id}
-                      checked={filters?.category_id?.includes(
-                        item?.id?.toString()
-                      )}
-                      onChange={handleChange}
-                    />
-                    <label
-                      className="form-check-label"
-                      htmlFor={`category-${item?.id}`}
-                    >
-                      {item?.name}
-                    </label>
-                  </div>
-                ))}
+                <span className="sidebar-categories">
+                  {categories?.map((item) => (
+                    <div key={item?.id} className="form-check">
+                      <input
+                        type="checkbox"
+                        className="form-check-input"
+                        id={`category-${item?.id}`}
+                        name="category_id"
+                        value={item?.id}
+                        checked={filters?.category_id?.includes(
+                          item?.id?.toString()
+                        )}
+                        onChange={handleChange}
+                      />
+                      <label
+                        className="form-check-label"
+                        htmlFor={`category-${item?.id}`}
+                      >
+                        {item?.name}
+                      </label>
+                    </div>
+                  ))}
+                </span>
               </div>
               <div className="filter-content amenities mb-0">
                 <div className="search-btn">

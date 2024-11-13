@@ -6,6 +6,9 @@ export const apiUrls = {
   changePassword: "/admin/update/password/",
   updateProfile: "/admin/update/profile/",
   getProfile: "/admin/getProfile/",
+  getSubscriptionDetail: "/admin/get-current-plan",
+  cancelSubscription: "/admin/cancel-subscription",
+  checkEmail: "/check-email",
   // categories
   addCategory: "/categories/store",
   getAllCategoriesList: "/categories/get/all",

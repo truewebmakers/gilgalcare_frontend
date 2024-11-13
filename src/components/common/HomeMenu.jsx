@@ -17,10 +17,15 @@ const HomeMenu = ({ activeMenu }) => {
   const [menu1, setMenu1] = useState(false);
   return (
     <li className="has-submenu megamenu ">
-      <Link to="" className={menu1 ? 'submenu' : ""}>
-        Home <i className="fas fa-chevron-down" onClick={() => setMenu1(!menu1)}></i>
+      <Link to="" className={menu1 ? "submenu" : ""}>
+        Home{" "}
+        <i className="fas fa-chevron-down" onClick={() => setMenu1(!menu1)}></i>
       </Link>
-      <ul  className={menu1 ? "submenu mega-submenu d-block" : "submenu mega-submenu"}>
+      <ul
+        className={
+          menu1 ? "submenu mega-submenu d-block" : "submenu mega-submenu"
+        }
+      >
         <li>
           <div className="megamenu-wrapper">
             <div className="row">

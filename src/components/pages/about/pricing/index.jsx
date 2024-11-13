@@ -87,7 +87,7 @@ const Pricing = () => {
               <h2>
                 Our Pricing <span>Pla</span>n
               </h2>
-              <p>checkout these latest cool ads from our members</p>
+              <p>Checkout these subscription plans for our clients</p>
             </div>
           </div>
         </div>

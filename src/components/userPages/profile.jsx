@@ -10,6 +10,7 @@ import UseApi from "../../hooks/useApi";
 import { apiMethods, apiUrls } from "../../constants/constant";
 import { toast } from "react-toastify";
 import Loader from "../common/Loader";
+import GetUserSubscription from "./getUserSubscription";
 
 const Profile = () => {
   const [profileDetails, setProfileDetails] = useState({
@@ -241,88 +242,11 @@ const Profile = () => {
                             />
                           </div>
                         </div>
-                        {/* <div className="row socialmedia-info">
-                          <div className="col-lg-6 col-md-6">
-                            <div className="form-group">
-                              <label className="col-form-label">Facebook</label>
-                              <div className="pass-group group-img">
-                                <span className="lock-icon">
-                                  <i className="fab fa-facebook-f" />
-                                </span>
-                                <input
-                                  type="text"
-                                  className="form-control"
-                                  name="fb_link"
-                                  placeholder="Enter Facebook Link"
-                                  value={profileDetails?.fb_link}
-                                  onChange={handleOnChange}
-                                />
-                              </div>
-                            </div>
-                          </div>
-                          <div className="col-lg-6 col-md-6">
-                            <div className="form-group">
-                              <label className="col-form-label">Twitter</label>
-                              <div className="pass-group group-img">
-                                <span className="lock-icon">
-                                  <i className="fab fa-twitter" />
-                                </span>
-                                <input
-                                  type="text"
-                                  className="form-control"
-                                  name="twitter_link"
-                                  placeholder="Enter Twitter Link"
-                                  value={profileDetails?.twitter_link}
-                                  onChange={handleOnChange}
-                                />
-                              </div>
-                            </div>
-                          </div>
-                        </div>
-                        <div className="row socialmedia-info">
-                          <div className="col-lg-6 col-md-6">
-                            <div className="form-group formlast-input">
-                              <label className="col-form-label">Google+</label>
-                              <div className="pass-group group-img">
-                                <span className="lock-icon">
-                                  <i className="fa-brands fa-google-plus-g" />
-                                </span>
-                                <input
-                                  type="text"
-                                  className="form-control"
-                                  name="googleplus_link"
-                                  placeholder="Enter Google+ Link"
-                                  value={profileDetails?.googleplus_link}
-                                  onChange={handleOnChange}
-                                />
-                              </div>
-                            </div>
-                          </div>
-                          <div className="col-lg-6 col-md-6">
-                            <div className="form-group formlast-input">
-                              <label className="col-form-label">
-                                Instagram
-                              </label>
-                              <div className="pass-group group-img">
-                                <span className="lock-icon">
-                                  <i className="fab fa-instagram" />
-                                </span>
-                                <input
-                                  type="text"
-                                  name="insta_link"
-                                  className="form-control"
-                                  placeholder="Enter Instagram Link"
-                                  value={profileDetails?.insta_link}
-                                  onChange={handleOnChange}
-                                />
-                              </div>
-                            </div>
-                          </div>
-                        </div> */}
                       </form>
                     </div>
                   </div>
                 </div>
+                {/* get user subscription section */}
               </div>
               <ChangePassword />
             </div>
@@ -342,6 +266,9 @@ const Profile = () => {
             )}
           </button>
         </div>
+        {profileData?.user_type?.toLowerCase() === "business" ? (
+          <GetUserSubscription />
+        ) : null}
       </div>
       {/* /Profile Content */}
       <Footer />

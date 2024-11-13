@@ -17,7 +17,7 @@ const Trending5 = () => {
     infinite: true,
     lazyLoad: true,
     speed: 2000,
-    slidesToShow: 4,
+    slidesToShow: 3,
     slidesToScroll: 1,
     draggable: true,
     swipe: true,

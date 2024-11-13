@@ -9,6 +9,7 @@ import { handleValidations } from "../../utils/validations";
 import { path } from "../../constants/routesConstant";
 import Loader from "../common/Loader";
 import { registerService } from "../../services/registerService";
+import { customToast } from "../common/Toast";
 
 const SignUp = () => {
   const navigate = useNavigate();
@@ -19,7 +20,7 @@ const SignUp = () => {
     name: "",
     email: "",
     passwordInput: "",
-    user_type: "user", // default is business
+    user_type: "user", // default is user
   });
   const [error, setError] = useState({
     name: "",
@@ -56,14 +57,20 @@ const SignUp = () => {
     setPasswordType(passwordType === "password" ? "text" : "password");
   };
 
+  const checkValidEmail = async () => {
+    const body = {
+      email: signupData?.email,
+    };
+    const response = await UseApi(apiUrls.checkEmail, apiMethods.POST, body);
+    console.log(response?.data?.exists, "resssss");
+    const isExist = response?.data?.exists;
+    return isExist;
+  };
+
   const handleSignUp = async (e) => {
     e.preventDefault();
 
     // If user selects "business", navigate to the pricing page and prevent API call
-    if (signupData.user_type === "business") {
-      navigate("/pricing", { state: { signupData } }); // Assuming the pricing page route is defined in `path`
-      return;
-    }
 
     let newErr = {};
     for (let key in signupData) {
@@ -73,10 +80,21 @@ const SignUp = () => {
 
     if (!hasErrors(newErr) && areAllFieldsFilled(signupData)) {
       setIsLoading(true);
+
+      if (signupData?.user_type?.toLowerCase() === "business") {
+        const isExist = await checkValidEmail();
+        if (!isExist) {
+          navigate("/pricing", { state: { signupData } });
+          setIsLoading(false);
+        } else {
+          customToast.error("This email already exists.");
+          setIsLoading(false);
+        }
+        return;
+      }
       try {
         const res = await registerService(signupData);
         console.log(res, "ress");
-
         if (res?.successStatus === true) {
           navigate(path.login);
         }
@@ -191,7 +209,7 @@ const SignUp = () => {
 
                   {/* User Type Radio Buttons */}
                   <div className="form-group">
-                    <label>User Type:</label>
+                    <label>Type:</label>
                     <div style={{ display: "flex", gap: "10px" }}>
                       <div className="form-check">
                         <input
@@ -199,10 +217,12 @@ const SignUp = () => {
                           type="radio"
                           name="user_type"
                           value="user"
-                          checked={signupData?.user_type === "user"}
+                          checked={
+                            signupData?.user_type?.toLowerCase() === "user"
+                          }
                           onChange={handleChange}
                         />
-                        <label className="form-check-label">User</label>
+                        <label className="form-check-label">Participant</label>
                       </div>
                       <div className="form-check">
                         <input
@@ -210,10 +230,12 @@ const SignUp = () => {
                           type="radio"
                           name="user_type"
                           value="business"
-                          checked={signupData?.user_type === "business"}
+                          checked={
+                            signupData?.user_type?.toLowerCase() === "business"
+                          }
                           onChange={handleChange}
                         />
-                        <label className="form-check-label">Business</label>
+                        <label className="form-check-label">Providers</label>
                       </div>
                     </div>
                   </div>

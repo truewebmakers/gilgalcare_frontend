@@ -83,7 +83,7 @@ const UserHeader1 = () => {
             </div>
             {isLoggedIn ? (
               <ul className="nav header-navbar-rht">
-                {/* {user?.userInfo?.user_type !== "user" && (
+                {/* {user?.userInfo?.type !== "user" && (
                   <li className="nav-item">
                     <Link
                       className="nav-link header-login add-listing"

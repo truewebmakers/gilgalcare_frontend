@@ -21014,3 +21014,9 @@ section.advertisement {
 .suggestion-item:hover {
   background-color: #f0f0f0;
 }
+
+.sidebar-categories{
+  overflow-y: scroll;
+  height: 219px;
+  display: block;
+}
