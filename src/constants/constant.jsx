@@ -9,6 +9,7 @@ export const apiUrls = {
   getSubscriptionDetail: "/admin/get-current-plan",
   cancelSubscription: "/admin/cancel-subscription",
   checkEmail: "/check-email",
+  contact_us: "/send-email",
   // categories
   addCategory: "/categories/store",
   getAllCategoriesList: "/categories/get/all",
