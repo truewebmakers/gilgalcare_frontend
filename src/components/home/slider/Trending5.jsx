@@ -50,7 +50,6 @@ const Trending5 = () => {
   const trendingPlaces = async () => {
     try {
       const response = await UseApi(apiUrls.trendingListings, apiMethods.GET);
-      console.log(response?.data?.data, "responseeeee");
 
       setTrendingData(response?.data?.data);
     } catch (err) {

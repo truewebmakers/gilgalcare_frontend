@@ -18,18 +18,12 @@ const PayNowForm = () => {
   const [isLoading, setIsLoading] = useState(false);
   const [calculating, setCalculating] = useState(true);
   const { state } = useLocation();
-
-  const { user } = useSelector((state) => state.auth);
   const navigate = useNavigate();
-
-  console.log(state, "sttaaa");
 
   useEffect(() => {
     if (state?.price) {
       setCalculating(true);
       const { amountToReceivee, totalAmount } = calculatePayment(state?.price);
-      console.log(amountToReceivee, "amountToReceive");
-
       setAmountToReceive(amountToReceivee);
       setTotalAmount(totalAmount);
       setCalculating(false);
@@ -55,7 +49,6 @@ const PayNowForm = () => {
         toast.error(error.message);
       } else {
         const response = await registerService(state?.registerData);
-        console.log(response, "ressss");
         if (response?.successStatus == true) {
           const bodyData = {
             payment_method: paymentMethod?.id,

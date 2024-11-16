@@ -2,6 +2,8 @@ import React from "react";
 import { Link } from "react-router-dom";
 import { CapitalizeFirstLetter } from "../utils/commonFunctions";
 import BookmarkIcon from "../assets/img/icons/bookmark.svg";
+import moment from "moment";
+import { dateFormat } from "./constant";
 
 export const myListingColumns = (handleDeleteListing) => [
   {
@@ -159,6 +161,53 @@ export const myCategoryListingColumns = (handleDeleteListing) => [
           <i className="feather-trash-2" />
         </span>
       </div>
+    ),
+  },
+];
+
+export const myContactEnquiryTable = () => [
+  {
+    title: "Name",
+    // dataIndex: "name",
+    render: (text) => (
+      <>
+        <div className="">
+          {" "}
+          {text?.first_name
+            ? CapitalizeFirstLetter(text?.first_name + " " + text?.last_name)
+            : "-"}
+        </div>
+      </>
+    ),
+  },
+  {
+    title: "Email",
+    render: (text) => (
+      <>
+        <div className="">{text?.email ? text?.email : "-"}</div>
+      </>
+    ),
+  },
+  {
+    title: "Phone",
+    dataIndex: "phone",
+    render: (text) => <span className="">{text ? text : "-"}</span>,
+  },
+  {
+    title: "Subject",
+    dataIndex: "subject",
+    render: (text) => <span className="">{text ? text : "-"}</span>,
+  },
+  {
+    title: "Query",
+    dataIndex: "query",
+    render: (text) => <span className="">{text ? text : "-"}</span>,
+  },
+  {
+    title: "Date & Time",
+    dataIndex: "created_at",
+    render: (text) => (
+      <span className="">{text ? moment(text).format(dateFormat) : "-"}</span>
     ),
   },
 ];

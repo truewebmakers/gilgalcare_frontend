@@ -66,7 +66,6 @@ export const AddReview = ({ getListingReview, user }) => {
     const { name, value } = e.target;
     setAddReview({ ...addReview, [name]: value });
   };
-  console.log(user, "userrrrr");
 
   return (
     <li className="review-box feedbackbox mb-0">

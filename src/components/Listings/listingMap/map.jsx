@@ -105,7 +105,6 @@ const data = [
 ];
 
 const ShowDetails = (object) => {
-  console.log(object, "obj");
   return (
     <div
       className="profile-widget"

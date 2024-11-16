@@ -45,6 +45,9 @@ export const apiUrls = {
   getStats: "/stats/",
   incrementShares: "/increment-shares/",
   incrementViews: "/increment-page-views/",
+
+  // contact
+  getContactEnquiryList: "/admin/get-contactform-entries",
 };
 
 export const env = {

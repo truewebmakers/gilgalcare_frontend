@@ -7,16 +7,20 @@ import Footer from "../home/footer/Footer";
 import UseApi from "../../hooks/useApi";
 import { apiMethods, apiUrls } from "../../constants/constant";
 import { customToast } from "../common/Toast";
+import Loader from "../common/Loader";
 
 const Contract = () => {
-  // State to manage form data
+  // State to manage form data, including phone number
   const [formData, setFormData] = useState({
     first_name: "",
     last_name: "",
     email: "",
     subject: "",
     query: "",
+    phone: "", // New phone field
   });
+
+  const [isLoading, setIsLoading] = useState(false);
 
   // Handle input changes to update state
   const handleChange = (e) => {
@@ -27,14 +31,34 @@ const Contract = () => {
     });
   };
 
+  // Ensure only numbers are entered in the phone field
+  const handlePhoneChange = (e) => {
+    // Allow only numbers and update the state
+    const value = e.target.value.replace(/[^0-9]/g, ""); // Remove non-numeric characters
+    setFormData({
+      ...formData,
+      phone: value,
+    });
+  };
+
   // Handle contact form submission
   const handleContactUs = async (e) => {
     e.preventDefault(); // Prevent form from reloading the page
+    setIsLoading(true);
+    // Destructure form data
+    const { first_name, last_name, email, subject, query, phone } = formData;
 
-    // Check if all required fields are filled
-    const { first_name, last_name, email, subject, query } = formData;
-    if (!first_name || !last_name || !email || !subject || !query) {
+    // Validation for required fields
+    if (!first_name || !last_name || !email || !subject || !query || !phone) {
       customToast.error("Please fill all the required fields.");
+      setIsLoading(false);
+      return;
+    }
+
+    // Validate phone number (should be 10 digits)
+    if (phone.length !== 10) {
+      customToast.error("Phone number should be 10 digits.");
+      setIsLoading(false);
       return;
     }
 
@@ -54,6 +78,7 @@ const Contract = () => {
           email: "",
           subject: "",
           query: "",
+          phone: "", // Reset phone field
         });
       } else {
         customToast.error("Something went wrong. Please try again.");
@@ -62,6 +87,8 @@ const Contract = () => {
       customToast.error(
         err?.message || "An error occurred while submitting the form."
       );
+    } finally {
+      setIsLoading(false);
     }
   };
 
@@ -143,6 +170,19 @@ const Contract = () => {
                       required
                     />
                   </div>
+                  {/* Phone Number Field */}
+                  <div className="form-group">
+                    <input
+                      type="text"
+                      className="form-control"
+                      name="phone"
+                      placeholder="Phone Number*"
+                      value={formData.phone}
+                      onChange={handlePhoneChange} // Handle phone input change
+                      maxLength={10} // Limit to 10 digits
+                      required
+                    />
+                  </div>
                   <div className="form-group">
                     <input
                       type="text"
@@ -154,6 +194,7 @@ const Contract = () => {
                       required
                     />
                   </div>
+
                   <div className="form-group">
                     <textarea
                       rows={4}
@@ -165,12 +206,13 @@ const Contract = () => {
                       required
                     />
                   </div>
+
                   <div className="submit-section text-center">
                     <button
                       type="submit"
                       className="btn btn-primary submit-btn"
                     >
-                      Submit
+                      {isLoading ? <Loader /> : "Submit"}
                     </button>
                   </div>
                 </form>

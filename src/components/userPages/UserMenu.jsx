@@ -51,6 +51,13 @@ export default function UserMenu({ activeUrl }) {
             </Link>
           </li>
         )}
+        {user?.userInfo?.user_type === "admin" && (
+          <li className={activeUrl == "contact-enquiry" ? "active" : ""}>
+            <Link to="/contact-enquiry">
+              <i className="feather-list" /> <span>Contact Enquiry</span>
+            </Link>
+          </li>
+        )}
         <li>
           <span onClick={handleLogout} style={{ cursor: "pointer" }}>
             <i className="fas fa-light fa-circle-arrow-left" />{" "}

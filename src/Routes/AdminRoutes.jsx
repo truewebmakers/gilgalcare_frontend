@@ -11,6 +11,7 @@ import MyListingDetails from "../components/Listings/MyListingDetails";
 import MyCategory from "../components/userPages/myCategory";
 import MyPlans from "../components/userPages/myPlans";
 import AddPlans from "../components/userPages/myPlans/addPlans";
+import ContactEnquiry from "../components/userPages/contactEnquiry";
 
 export const AdminRoutes = [
   {
@@ -36,6 +37,10 @@ export const AdminRoutes = [
   {
     path: "my-plans",
     element: <MyPlans />,
+  },
+  {
+    path: "contact-enquiry",
+    element: <ContactEnquiry />,
   },
   {
     path: "bookmarks",

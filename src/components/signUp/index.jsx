@@ -62,7 +62,6 @@ const SignUp = () => {
       email: signupData?.email,
     };
     const response = await UseApi(apiUrls.checkEmail, apiMethods.POST, body);
-    console.log(response?.data?.exists, "resssss");
     const isExist = response?.data?.exists;
     return isExist;
   };
@@ -94,7 +93,6 @@ const SignUp = () => {
       }
       try {
         const res = await registerService(signupData);
-        console.log(res, "ress");
         if (res?.successStatus === true) {
           navigate(path.login);
         }

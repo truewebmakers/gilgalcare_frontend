@@ -33,7 +33,6 @@ const Pricing = () => {
         setMyPlans(response?.data?.plans);
       }
     } catch (err) {
-      console.log(err, "errrrrrr");
       customToast.error(err?.message);
     }
   };
@@ -41,7 +40,6 @@ const Pricing = () => {
   useEffect(() => {
     getPlans();
   }, []);
-  console.log(myPlans, "myyyy");
 
   const formatFeatureName = (featureKey) => {
     const match = featureKey?.match(/features\['(.*?)'\]/);
@@ -53,7 +51,6 @@ const Pricing = () => {
     }
     return featureKey;
   };
-  console.log(registerData, "regggg");
 
   return (
     <>
