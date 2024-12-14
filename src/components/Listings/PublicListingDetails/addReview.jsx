@@ -8,7 +8,12 @@ import Loader from "../../common/Loader";
 export const AddReview = ({ getListingReview, user }) => {
   const parms = useLocation();
   const id = parms.state?.id;
-  const reviewFields = { title: "", name: "", email: "", review: "" };
+  const reviewFields = {
+    title: "",
+    name: "",
+    email: user?.userInfo?.email || "",
+    review: "",
+  };
   const [addReview, setAddReview] = useState(reviewFields);
   const [rating, setRating] = useState(0); // State to track current rating
   const [hover, setHover] = useState(0); // State to track current hover

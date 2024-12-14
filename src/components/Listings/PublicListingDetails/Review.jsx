@@ -1,45 +1,22 @@
 import React, { useEffect, useState } from "react";
-import { useLocation } from "react-router-dom";
-import UseApi from "../../../hooks/useApi";
-import { apiMethods, apiUrls, dateFormat } from "../../../constants/constant";
-import { customToast } from "../../common/Toast";
+import { dateFormat } from "../../../constants/constant";
 import { CapitalizeFirstLetter } from "../../../utils/commonFunctions";
 import { AddReview } from "./addReview";
 import moment from "moment";
 import { useSelector } from "react-redux";
 
-export const Review = () => {
-  const parms = useLocation();
-  const id = parms.state?.id;
+export const Review = ({ getListingReview }) => {
   const [reviewList, setReviewList] = useState([]);
   const { user } = useSelector((state) => state.auth);
 
-  const getListingReview = async () => {
-    try {
-      // set headers
-      const headers = {
-        "Content-Type": "multipart/form-data",
-      };
-      // Call signup API
-      const response = await UseApi(
-        apiUrls.getListingSpecificReviews + id,
-        apiMethods.GET,
-        null,
-        headers
-      );
-      if (response?.status == 200 || response?.status == 201) {
-        setReviewList(response?.data?.feedbacks);
-        return;
-      }
-    } catch (err) {
-      customToast.error(err?.message);
-      return;
-    }
-  };
-
   useEffect(() => {
-    getListingReview();
+    const fetchData = async () => {
+      const data = await getListingReview();
+      setReviewList(data);
+    };
+    fetchData();
   }, []);
+
   return (
     <div className="card review-sec  mb-0">
       {reviewList?.length ? (

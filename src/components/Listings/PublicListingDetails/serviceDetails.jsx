@@ -23,6 +23,7 @@ import { ListDetails } from "./listDetails";
 import { Statistics } from "./Statistics";
 import { incrementShares } from "../../../services/incrementShares";
 import BookmarkIcon from "../../../assets/svg/bookmark.svg";
+import { ReviewListingComp } from "./ReviewListingComp";
 
 const ServiceDetails = () => {
   const parms = useLocation();
@@ -286,10 +287,7 @@ const ServiceDetails = () => {
               ) : null}
               {/*/Gallery Section*/}
               {/* Rating Section */}
-              <Ratings />
-              {/* Rating Section */}
-              {/*Review  Section*/}
-              <Review />
+              <ReviewListingComp />
               {/*/Review Section*/}
             </div>
             <div className="col-lg-3 theiaStickySidebar">
