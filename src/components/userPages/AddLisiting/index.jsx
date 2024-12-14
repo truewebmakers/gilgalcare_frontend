@@ -146,7 +146,7 @@ const AddLisiting = () => {
   useEffect(() => {
     if (hasErrors(error)) {
       setIsDisable(true);
-      toast.error("There is some error please check");
+      // toast.error("There is some error please check");
       return;
     }
     setIsDisable(false);
@@ -313,7 +313,7 @@ const AddLisiting = () => {
                 setShowGalleryImage={setShowGalleryImage}
               />
               <button
-                className="btn btn-primary"
+                className="btn btn-primary "
                 type="submit"
                 onClick={handleAddListing}
                 disabled={isDisable}

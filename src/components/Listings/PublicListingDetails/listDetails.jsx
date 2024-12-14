@@ -2,9 +2,10 @@ import React from "react";
 import { details_icon, website } from "../../imagepath";
 import { Link } from "react-router-dom";
 import { CapitalizeFirstLetter } from "../../../utils/commonFunctions";
+import { env } from "../../../constants/constant";
 
 export const ListDetails = ({ listingDetail }) => {
-  const googleMapsApiKey = "AIzaSyDk_TbPERImCZCd7YmCzYacT6wGayV-Lmk";
+  const googleMapsApiKey = env.GOOGLE_MAP_KEY;
   const mapLat = listingDetail?.map_lat && Math.round(+listingDetail?.map_lat); // Replace with valid latitude
   const mapLong =
     listingDetail?.map_long && Math.round(+listingDetail?.map_long);

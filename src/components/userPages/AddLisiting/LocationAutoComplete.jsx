@@ -3,6 +3,7 @@ import { GoogleMap, Marker } from "@react-google-maps/api";
 import axios from "axios";
 import { customToast } from "../../common/Toast";
 import { validateListingFields } from "../../../utils/validations";
+import { env } from "../../../constants/constant";
 
 const mapContainerStyle = {
   width: "100%",
@@ -43,12 +44,11 @@ const MapSection = ({
     const lng = latLng.lng();
 
     // Geocoding API URL
-    const geocodeUrl = `https://maps.googleapis.com/maps/api/geocode/json?latlng=${lat},${lng}&key=AIzaSyDk_TbPERImCZCd7YmCzYacT6wGayV-Lmk`;
+    const geocodeUrl = `https://maps.googleapis.com/maps/api/geocode/json?latlng=${lat},${lng}&key=${env.GOOGLE_MAP_KEY}`;
 
     try {
       const response = await axios.get(geocodeUrl);
       const results = response?.data?.results;
-
       if (results?.length > 0) {
         const addressComponents = results[0]?.address_components;
         const formattedAddress = results[0]?.formatted_address;
@@ -112,7 +112,7 @@ const MapSection = ({
           }));
         }
       } else {
-        customToast.error("No address found");
+        customToast.error(response?.data?.error_message);
       }
     } catch (error) {
       customToast.error("Error fetching address: ", error);

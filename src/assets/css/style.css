@@ -8391,7 +8391,8 @@ textarea.form-control {
   font-size: 14px !important;
 }
 .banner-section.banner-three {
-  background: url("https://gilgalcareprovider.s3.ap-southeast-1.amazonaws.com/banner-01.png") no-repeat 380px 0;
+  background: url("https://gilgalcareprovider.s3.ap-southeast-1.amazonaws.com/banner-01.png")
+    no-repeat 380px 0;
   background-position: top right;
   position: relative;
   padding-top: 86px;
@@ -8542,7 +8543,8 @@ textarea.form-control {
 .banner-btm-img-blk:before {
   position: absolute;
   content: "";
-  background: url("https://gilgalcareprovider.s3.ap-southeast-1.amazonaws.com/banner-btm-shape.png") no-repeat;
+  background: url("https://gilgalcareprovider.s3.ap-southeast-1.amazonaws.com/banner-btm-shape.png")
+    no-repeat;
   width: 336px;
   height: 302px;
   top: 59px;
@@ -8564,7 +8566,8 @@ textarea.form-control {
 .section-blk .title-blk h2:before {
   position: absolute;
   content: "";
-  background: url("https://gilgalcareprovider.s3.ap-southeast-1.amazonaws.com/trip-icon.png") no-repeat top right;
+  background: url("https://gilgalcareprovider.s3.ap-southeast-1.amazonaws.com/trip-icon.png")
+    no-repeat top right;
   width: 55px;
   height: 32px;
   right: -35px;
@@ -8583,7 +8586,8 @@ textarea.form-control {
 .destination-blk:before {
   position: absolute;
   content: "";
-  background: url(https://gilgalcareprovider.s3.ap-southeast-1.amazonaws.com/balloon-img.png) no-repeat center left;
+  background: url(https://gilgalcareprovider.s3.ap-southeast-1.amazonaws.com/balloon-img.png)
+    no-repeat center left;
   width: 125px;
   height: 182px;
   top: 140px;
@@ -8733,7 +8737,8 @@ textarea.form-control {
 .section-blk .service-content h2:before {
   position: absolute;
   content: "";
-  background: url("https://gilgalcareprovider.s3.ap-southeast-1.amazonaws.com/trip-icon.png") no-repeat top right;
+  background: url("https://gilgalcareprovider.s3.ap-southeast-1.amazonaws.com/trip-icon.png")
+    no-repeat top right;
   width: 55px;
   height: 32px;
   right: -35px;
@@ -8838,7 +8843,8 @@ textarea.form-control {
 .offer-blk:before {
   position: absolute;
   content: "";
-  background: url(https://gilgalcareprovider.s3.ap-southeast-1.amazonaws.com/offer-bg.png) no-repeat top center;
+  background: url(https://gilgalcareprovider.s3.ap-southeast-1.amazonaws.com/offer-bg.png)
+    no-repeat top center;
   width: 100%;
   height: 423px;
   top: 0px;
@@ -8846,7 +8852,8 @@ textarea.form-control {
 .offer-blk:after {
   position: absolute;
   content: "";
-  background: url(https://gilgalcareprovider.s3.ap-southeast-1.amazonaws.com/balloon-img.png) no-repeat center right;
+  background: url(https://gilgalcareprovider.s3.ap-southeast-1.amazonaws.com/balloon-img.png)
+    no-repeat center right;
   width: 125px;
   height: 182px;
   top: 140px;
@@ -8878,7 +8885,8 @@ textarea.form-control {
   width: 100%;
 }
 .box-style .btm-box-style:before {
-  background: url(https://gilgalcareprovider.s3.ap-southeast-1.amazonaws.com/offer-arrow.svg) no-repeat center left;
+  background: url(https://gilgalcareprovider.s3.ap-southeast-1.amazonaws.com/offer-arrow.svg)
+    no-repeat center left;
   content: "";
   width: 100%;
   height: 80%;
@@ -8966,7 +8974,8 @@ textarea.form-control {
   background-size: contain, 125px;
 }
 .recommended-blk.style1-blk {
-  background: url(https://gilgalcareprovider.s3.ap-southeast-1.amazonaws.com/recomended-bg-btm.png) #f5fcff no-repeat center bottom;
+  background: url(https://gilgalcareprovider.s3.ap-southeast-1.amazonaws.com/recomended-bg-btm.png)
+    #f5fcff no-repeat center bottom;
   width: 100%;
   min-height: 300px;
   padding: 80px 0px;
@@ -9147,7 +9156,8 @@ textarea.form-control {
   margin-bottom: 0;
 }
 .testi-blk {
-  background: url("https://gilgalcareprovider.s3.ap-southeast-1.amazonaws.com/testimonial-banner-bg.jpg") no-repeat center top;
+  background: url("https://gilgalcareprovider.s3.ap-southeast-1.amazonaws.com/testimonial-banner-bg.jpg")
+    no-repeat center top;
   width: 100%;
   position: relative;
   height: 100%;
@@ -9155,7 +9165,8 @@ textarea.form-control {
   margin-top: 80px;
 }
 .testi-blk:before {
-  background: url(https://gilgalcareprovider.s3.ap-southeast-1.amazonaws.com/testi-after-img.png) no-repeat center left;
+  background: url(https://gilgalcareprovider.s3.ap-southeast-1.amazonaws.com/testi-after-img.png)
+    no-repeat center left;
   content: "";
   width: 100%;
   height: 100%;
@@ -9213,7 +9224,8 @@ textarea.form-control {
 .testi-widget .testi-info-blk:before {
   position: absolute;
   content: "";
-  background: url(https://gilgalcareprovider.s3.ap-southeast-1.amazonaws.com/quote-before.png) no-repeat left top;
+  background: url(https://gilgalcareprovider.s3.ap-southeast-1.amazonaws.com/quote-before.png)
+    no-repeat left top;
   width: 46px;
   height: 32px;
   top: 0;
@@ -9223,7 +9235,8 @@ textarea.form-control {
 .testi-widget .testi-info-blk:after {
   position: absolute;
   content: "";
-  background: url(https://gilgalcareprovider.s3.ap-southeast-1.amazonaws.com/quote-after.png) no-repeat left top;
+  background: url(https://gilgalcareprovider.s3.ap-southeast-1.amazonaws.com/quote-after.png)
+    no-repeat left top;
   width: 46px;
   height: 32px;
   bottom: 0;
@@ -9298,7 +9311,8 @@ textarea.form-control {
 .faq-blk:before {
   position: absolute;
   content: "";
-  background: url(https://gilgalcareprovider.s3.ap-southeast-1.amazonaws.com/balloon-img.png) no-repeat center left;
+  background: url(https://gilgalcareprovider.s3.ap-southeast-1.amazonaws.com/balloon-img.png)
+    no-repeat center left;
   width: 125px;
   height: 182px;
   top: 140px;
@@ -9331,7 +9345,8 @@ textarea.form-control {
 .subscribe-blk:before {
   position: absolute;
   content: "";
-  background: url(https://gilgalcareprovider.s3.ap-southeast-1.amazonaws.com/services-bg.png) no-repeat center right;
+  background: url(https://gilgalcareprovider.s3.ap-southeast-1.amazonaws.com/services-bg.png)
+    no-repeat center right;
   width: 320px;
   height: 399px;
   top: -86px;
@@ -9416,7 +9431,8 @@ textarea.form-control {
   margin-bottom: 5px;
 }
 .promo-style {
-  background: url("https://gilgalcareprovider.s3.ap-southeast-1.amazonaws.com/promo-banner-bg.jpg") no-repeat center center;
+  background: url("https://gilgalcareprovider.s3.ap-southeast-1.amazonaws.com/promo-banner-bg.jpg")
+    no-repeat center center;
   background-size: cover;
   width: 100%;
   height: 100%;
@@ -9607,7 +9623,8 @@ textarea.form-control {
 .blog-block:before {
   position: absolute;
   content: "";
-  background: url(https://gilgalcareprovider.s3.ap-southeast-1.amazonaws.com/balloon-img.png) no-repeat center left;
+  background: url(https://gilgalcareprovider.s3.ap-southeast-1.amazonaws.com/balloon-img.png)
+    no-repeat center left;
   width: 125px;
   height: 182px;
   top: 140px;
@@ -10964,7 +10981,8 @@ textarea.form-control {
   padding: 50px 0;
   position: relative;
   overflow: hidden;
-  background: url(https://gilgalcareprovider.s3.ap-southeast-1.amazonaws.com/footer-bg.png), #d54a38;
+  background: url(https://gilgalcareprovider.s3.ap-southeast-1.amazonaws.com/footer-bg.png),
+    #d54a38;
   background-repeat: no-repeat;
   background-position: center;
 }
@@ -15375,12 +15393,14 @@ button.btn.car-search-icon:hover {
   border-radius: 10px;
 }
 .adv-bg-one {
-  background: url(https://gilgalcareprovider.s3.ap-southeast-1.amazonaws.com/ads-bg-1.png) #0d233e;
+  background: url(https://gilgalcareprovider.s3.ap-southeast-1.amazonaws.com/ads-bg-1.png)
+    #0d233e;
   background-repeat: no-repeat;
   background-position: left top;
 }
 .adv-bg-two {
-  background: url(https://gilgalcareprovider.s3.ap-southeast-1.amazonaws.com/ads-bg-2.png) #d54a38;
+  background: url(https://gilgalcareprovider.s3.ap-southeast-1.amazonaws.com/ads-bg-2.png)
+    #d54a38;
   background-repeat: no-repeat;
   background-position: left top;
 }
@@ -15419,7 +15439,8 @@ section.advertisement {
   z-index: 9;
 }
 .pricingplan-section.pricing-eight {
-  background: url(https://gilgalcareprovider.s3.ap-southeast-1.amazonaws.com/pricing-main-bg.png) #f5f8fd;
+  background: url(https://gilgalcareprovider.s3.ap-southeast-1.amazonaws.com/pricing-main-bg.png)
+    #f5f8fd;
   padding: 200px 0 80px;
   background-repeat: no-repeat;
   background-size: 50%;
@@ -15891,7 +15912,8 @@ section.advertisement {
   border-top: none;
 }
 .footer.footer-eight {
-  background: url(https://gilgalcareprovider.s3.ap-southeast-1.amazonaws.com/footer-bg-1.png) #ffffff;
+  background: url(https://gilgalcareprovider.s3.ap-southeast-1.amazonaws.com/footer-bg-1.png)
+    #ffffff;
   background-repeat: no-repeat;
   background-position: left bottom;
   background-size: contain;
@@ -16232,7 +16254,8 @@ section.advertisement {
   padding: 50px 0;
   position: relative;
   overflow: hidden;
-  background: url(https://gilgalcareprovider.s3.ap-southeast-1.amazonaws.com/footer-bg.png), #d54a38;
+  background: url(https://gilgalcareprovider.s3.ap-southeast-1.amazonaws.com/footer-bg.png),
+    #d54a38;
   background-repeat: no-repeat;
   background-position: center;
 }
@@ -16376,7 +16399,8 @@ section.advertisement {
 }
 .footer-three:before {
   position: absolute;
-  background: url(https://gilgalcareprovider.s3.ap-southeast-1.amazonaws.com/footer-bg-01.jpg) no-repeat center top;
+  background: url(https://gilgalcareprovider.s3.ap-southeast-1.amazonaws.com/footer-bg-01.jpg)
+    no-repeat center top;
   content: "";
   width: 100%;
   height: 100%;
@@ -21056,4 +21080,8 @@ section.advertisement {
   overflow-y: scroll;
   height: 219px;
   display: block;
+}
+
+.disableButton{
+  cursor:not-allowed !important
 }

@@ -284,11 +284,36 @@ export const validateListingFields = (name, value, basicInfo2) => {
       break;
 
     case "facebook":
+      newErr[name] =
+        value === ""
+          ? "Facebook cannot be empty"
+          : !urlRegex.test(value)
+          ? "Facebook URL is not valid (eg. https://fb.com)"
+          : "";
+      break;
     case "twitter":
+      newErr[name] =
+        value === ""
+          ? "Twitter cannot be empty"
+          : !urlRegex.test(value)
+          ? "Twitter URL is not valid (eg. https://twitter.com)"
+          : "";
+      break;
     case "googlePlus":
+      newErr[name] =
+        value === ""
+          ? "Google+ cannot be empty"
+          : !urlRegex.test(value)
+          ? "Google+ URL is not valid (eg. https://google.com)"
+          : "";
+      break;
     case "instagram":
       newErr[name] =
-        value && !urlRegex.test(value) ? "Social media URL is not valid" : "";
+        value === ""
+          ? "Instagram cannot be empty"
+          : !urlRegex.test(value)
+          ? "Instagram URL is not valid (eg. https://instagram.com)"
+          : "";
       break;
 
     case "featuredImage":

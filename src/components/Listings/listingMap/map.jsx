@@ -16,6 +16,7 @@ import {
   marker7,
 } from "../../../components/imagepath";
 import { Link } from "react-router-dom";
+import { env } from "../../../constants/constant";
 const data = [
   {
     id: 1,
@@ -170,7 +171,7 @@ const ShowMps = () => {
   return (
     <div style={{ height: "100vh", width: "100%" }}>
       <GoogleMapReact
-        bootstrapURLKeys={{ key: "AIzaSyDk_TbPERImCZCd7YmCzYacT6wGayV-Lmk" }}
+        bootstrapURLKeys={{ key: env.GOOGLE_MAP_KEY }}
         defaultCenter={{ lat: 53.470692, lng: -2.220328 }}
         defaultZoom={11}
       >
