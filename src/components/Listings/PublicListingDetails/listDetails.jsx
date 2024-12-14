@@ -14,7 +14,13 @@ export const ListDetails = ({ listingDetail }) => {
     <>
       <div className="card">
         <h4>
-          <img src="assets/img/breifcase.svg" alt="" /> Business Info
+          <img
+            src={
+              "https://gilgalcareprovider.s3.ap-southeast-1.amazonaws.com/breifcase.svg"
+            }
+            alt=""
+          />{" "}
+          Business Info
         </h4>
         <div className="map-details">
           <div className="map-frame">

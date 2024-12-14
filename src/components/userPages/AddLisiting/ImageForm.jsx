@@ -1,6 +1,5 @@
 import React from "react";
-import { mediaimg_1 } from "../../imagepath";
-import defaultPic from "../../../assets/img/defaultProfile.png";
+import { defaultPic, mediaimg_1 } from "../../imagepath";
 
 export const ImageForm = ({ selectedImage, error, handleChange }) => {
   return (

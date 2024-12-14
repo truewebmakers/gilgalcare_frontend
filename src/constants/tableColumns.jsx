@@ -1,7 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import { CapitalizeFirstLetter } from "../utils/commonFunctions";
-import BookmarkIcon from "../assets/img/icons/bookmark.svg";
 import moment from "moment";
 import { dateFormat } from "./constant";
 
@@ -118,7 +117,14 @@ export const myCategoryListingColumns = (handleDeleteListing) => [
     render: (text) => (
       <>
         <span className="">
-          <img src={text || BookmarkIcon} height={25} width={25} />{" "}
+          <img
+            src={
+              text ||
+              "https://gilgalcareprovider.s3.ap-southeast-1.amazonaws.com/bookmark.svg"
+            }
+            height={25}
+            width={25}
+          />{" "}
         </span>
       </>
     ),

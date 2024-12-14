@@ -8,7 +8,6 @@ import {
   fashion,
   foodhabits,
   marker,
-  marker1,
   marker2,
   marker3,
   marker4,

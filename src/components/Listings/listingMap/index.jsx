@@ -1,98 +1,125 @@
 import React, { useState } from "react";
 import Map from "./map";
-import { ProfileAvatar02, ProfileAvatar04, ProfileAvatar05, ProfileAvatar06, ProfileAvatar08, ProfileAvatar09, ProfileAvatar10, bloglistimg_1, bloglistimg_2, bloglistimg_3, bloglistimg_4, bloglistimg_5, bloglistimg_6, bloglistimg_7, bloglistimg_8, car_img, details_icon, marker, marker1, marker2, marker3, marker4, marker5, marker6, marker7 } from "../../imagepath";
+import {
+  ProfileAvatar02,
+  ProfileAvatar04,
+  ProfileAvatar05,
+  ProfileAvatar06,
+  ProfileAvatar08,
+  ProfileAvatar09,
+  ProfileAvatar10,
+  amsterdam,
+  bloglistimg_1,
+  bloglistimg_2,
+  bloglistimg_3,
+  bloglistimg_4,
+  bloglistimg_5,
+  bloglistimg_6,
+  bloglistimg_7,
+  bloglistimg_8,
+  car_img,
+  details_icon,
+  education,
+  fashion,
+  foodhabits,
+  marker1,
+  marker2,
+  petanimal,
+} from "../../imagepath";
 import Header from "../../home/header/Header";
 import Footer from "../../home/footer/Footer";
 import { Link, useLocation } from "react-router-dom";
 import ShowMps from "./map";
 // import Apps from "./map";
 
-
-
-
-
 const ListingMap = () => {
   const [offset, setOffset] = useState(false);
-  const data = [{
-    "id": 1,
-    "doc_name": "Audi A6 1.8 TFSI 201",
-    "address": "Alabama, USA",
-    "amount": "$350",
-    "lat": 53.470692,
-    "lng": -2.220328,
-    "icons": "default",
-    "total_review": "Fixed",
-    // "image":car_img
-  }, {
-
-    "id": 2,
-    "doc_name": "Amsterdam",
-    "address": "Newyork, USA",
-    "amount": "$50",
-    "lat": 53.469189,
-    "lng": -2.199262,
-    "icons": "icon2",
-    "total_review": "Fixed",
-    "image": 'assets/img/amsterdam.jpg'
-  }, {
-    "id": 3,
-    "doc_name": "Fresh organic herbs",
-    "address": "Georgia, USA",
-    "amount": "$100",
-    "lat": 53.468665,
-    "lng": -2.189269,
-    "icons": "icon3",
-    "total_review": "Fixed",
-    "image": 'assets/img/foodhabits.jpg'
-  }, {
-    "id": 4,
-    "doc_name": "Light Wool Navy Blazer",
-    "address": "Louisiana, USA",
-    "amount": "$150",
-    "lat": 53.463894,
-    "lng": -2.177880,
-    "icons": "icon4",
-    "total_review": "Fixed",
-    "image": 'assets/img/fashion.jpg'
-  }, {
-    "id": 5,
-    "doc_name": "Easy Ways To Learn",
-    "address": "Michigan, USA",
-    "amount": "$50",
-    "lat": 53.460359,
-    "lng": -2.210394,
-    "icons": "icon7",
-    "total_review": "Fixed",
-    "image": 'assets/img/education.jpg',
-    'icon2': marker2,
-  }, {
-    "id": 6,
-    "doc_name": "Joyful dog",
-    "address": "Texas, USA",
-    "amount": "$100",
-    "lat": 53.463906,
-    "lng": -2.213271,
-    "icons": "icon5",
-    "total_review": "Fixed",
-    "image": 'assets/img/petanimal.jpg',
-    'icon2': marker2,
-  }, {
-    "id": 7,
-    "doc_name": "Apple iPhone 6 16GB 4G LTE",
-    "address": "Kansas, USA",
-    "amount": "$450",
-    "lat": 53.468974,
-    "lng": -2.210661,
-    "icons": "icon6",
-    "total_review": "Fixed",
-    "image": car_img,
-    'icon2': marker1,
-  }
+  const data = [
+    {
+      id: 1,
+      doc_name: "Audi A6 1.8 TFSI 201",
+      address: "Alabama, USA",
+      amount: "$350",
+      lat: 53.470692,
+      lng: -2.220328,
+      icons: "default",
+      total_review: "Fixed",
+      // "image":car_img
+    },
+    {
+      id: 2,
+      doc_name: "Amsterdam",
+      address: "Newyork, USA",
+      amount: "$50",
+      lat: 53.469189,
+      lng: -2.199262,
+      icons: "icon2",
+      total_review: "Fixed",
+      image: { amsterdam },
+    },
+    {
+      id: 3,
+      doc_name: "Fresh organic herbs",
+      address: "Georgia, USA",
+      amount: "$100",
+      lat: 53.468665,
+      lng: -2.189269,
+      icons: "icon3",
+      total_review: "Fixed",
+      image: { foodhabits },
+    },
+    {
+      id: 4,
+      doc_name: "Light Wool Navy Blazer",
+      address: "Louisiana, USA",
+      amount: "$150",
+      lat: 53.463894,
+      lng: -2.17788,
+      icons: "icon4",
+      total_review: "Fixed",
+      image: { fashion },
+    },
+    {
+      id: 5,
+      doc_name: "Easy Ways To Learn",
+      address: "Michigan, USA",
+      amount: "$50",
+      lat: 53.460359,
+      lng: -2.210394,
+      icons: "icon7",
+      total_review: "Fixed",
+      image: { education },
+      icon2: marker2,
+    },
+    {
+      id: 6,
+      doc_name: "Joyful dog",
+      address: "Texas, USA",
+      amount: "$100",
+      lat: 53.463906,
+      lng: -2.213271,
+      icons: "icon5",
+      total_review: "Fixed",
+      image: { petanimal },
+      icon2: marker2,
+    },
+    {
+      id: 7,
+      doc_name: "Apple iPhone 6 16GB 4G LTE",
+      address: "Kansas, USA",
+      amount: "$450",
+      lat: 53.468974,
+      lng: -2.210661,
+      icons: "icon6",
+      total_review: "Fixed",
+      image: car_img,
+      icon2: marker1,
+    },
   ];
-  const parms=useLocation().pathname
+  const parms = useLocation().pathname;
   return (
     <>
-      <Header parms={parms}/>
+      <Header parms={parms} />
       {/* Main Content Section */}
       <div className="list-content listmap-grid">
         <div className="container-fluid">
@@ -166,10 +193,7 @@ const ListingMap = () => {
                             </div>
                             <div className="blog-author">
                               <div className="blog-author-img">
-                                <img
-                                  src={ProfileAvatar02}
-                                  alt="author"
-                                />
+                                <img src={ProfileAvatar02} alt="author" />
                               </div>
                               <Link to="#">John Doe</Link>
                             </div>
@@ -228,16 +252,14 @@ const ListingMap = () => {
                               <Link to="#">
                                 <span>
                                   {" "}
-                                  <i className="fa-regular fa-circle-stop" /> Jobs
+                                  <i className="fa-regular fa-circle-stop" />{" "}
+                                  Jobs
                                 </span>
                               </Link>
                             </div>
                             <div className="blog-author">
                               <div className="blog-author-img">
-                                <img
-                                  src={ProfileAvatar10}
-                                  alt="author"
-                                />
+                                <img src={ProfileAvatar10} alt="author" />
                               </div>
                               <Link to="#">Orlando Diggs</Link>
                             </div>
@@ -303,10 +325,7 @@ const ListingMap = () => {
                             </div>
                             <div className="blog-author">
                               <div className="blog-author-img">
-                                <img
-                                  src={ProfileAvatar04}
-                                  alt="author"
-                                />
+                                <img src={ProfileAvatar04} alt="author" />
                               </div>
                               <Link to="#">Kate Morrison</Link>
                             </div>
@@ -372,10 +391,7 @@ const ListingMap = () => {
                             </div>
                             <div className="blog-author">
                               <div className="blog-author-img">
-                                <img
-                                  src={ProfileAvatar06}
-                                  alt="author"
-                                />
+                                <img src={ProfileAvatar06} alt="author" />
                               </div>
                               <Link to="#">Koray Okumus</Link>
                             </div>
@@ -441,10 +457,7 @@ const ListingMap = () => {
                             </div>
                             <div className="blog-author">
                               <div className="blog-author-img">
-                                <img
-                                  src={ProfileAvatar05}
-                                  alt="author"
-                                />
+                                <img src={ProfileAvatar05} alt="author" />
                               </div>
                               <Link to="#">Ava Wright</Link>
                             </div>
@@ -510,10 +523,7 @@ const ListingMap = () => {
                             </div>
                             <div className="blog-author">
                               <div className="blog-author-img">
-                                <img
-                                  src={ProfileAvatar08}
-                                  alt="author"
-                                />
+                                <img src={ProfileAvatar08} alt="author" />
                               </div>
                               <Link to="#">Eve Leroy</Link>
                             </div>
@@ -579,10 +589,7 @@ const ListingMap = () => {
                             </div>
                             <div className="blog-author">
                               <div className="blog-author-img">
-                                <img
-                                  src={ProfileAvatar09}
-                                  alt="author"
-                                />
+                                <img src={ProfileAvatar09} alt="author" />
                               </div>
                               <Link to="#">Zahir Mays</Link>
                             </div>
@@ -648,10 +655,7 @@ const ListingMap = () => {
                             </div>
                             <div className="blog-author">
                               <div className="blog-author-img">
-                                <img
-                                  src={ProfileAvatar10}
-                                  alt="author"
-                                />
+                                <img src={ProfileAvatar10} alt="author" />
                               </div>
                               <Link to="#">Zahir Mays</Link>
                             </div>
@@ -706,7 +710,10 @@ const ListingMap = () => {
                             </li>
                             <li className="page-item active">
                               <Link className="page-link" to="#">
-                                2 <span className="visually-hidden">(current)</span>
+                                2{" "}
+                                <span className="visually-hidden">
+                                  (current)
+                                </span>
                               </Link>
                             </li>
                             <li className="page-item">
@@ -739,26 +746,28 @@ const ListingMap = () => {
               </div>
             </div>
             <div className="col-lg-6 map-right">
-              <div id="map" className="map-listing" >
-              
-            <ShowMps/>
-             
+              <div id="map" className="map-listing">
+                <ShowMps />
               </div>
               <div className={offset ? "showfilter filter-open" : "showfilter"}>
                 <button className="btn filterbtn">
-                  <span className="showfilter-btn" onClick={() => setOffset(true)}>
-                    <img src={details_icon} alt="details-icon" />{" "}
-                    Show Filters
+                  <span
+                    className="showfilter-btn"
+                    onClick={() => setOffset(true)}
+                  >
+                    <img src={details_icon} alt="details-icon" /> Show Filters
                   </span>
-                  <span className="hidefilter-btn" onClick={() => setOffset(false)}>
+                  <span
+                    className="hidefilter-btn"
+                    onClick={() => setOffset(false)}
+                  >
                     <i className="feather-eye-off" /> Hide Filters
                   </span>
                 </button>
                 <div className="listings-sidebar">
                   <div className="card">
                     <h4>
-                      <img src={details_icon} alt="details-icon" />{" "}
-                      Filter
+                      <img src={details_icon} alt="details-icon" /> Filter
                     </h4>
                     <form>
                       <div className="filter-content looking-input form-group">
@@ -805,8 +814,12 @@ const ListingMap = () => {
                           </li>
                           <li>
                             <label className="custom_check">
-                              <input type="checkbox" name="accept-credit-card" />
-                              <span className="checkmark" /> Accepts Credit Cards
+                              <input
+                                type="checkbox"
+                                name="accept-credit-card"
+                              />
+                              <span className="checkmark" /> Accepts Credit
+                              Cards
                             </label>
                           </li>
                           <li>
@@ -866,7 +879,11 @@ const ListingMap = () => {
                         <div className="search-btn">
                           <button className="btn btn-primary" type="submit">
                             {" "}
-                            <i className="fa fa-search" aria-hidden="true" /> Search
+                            <i
+                              className="fa fa-search"
+                              aria-hidden="true"
+                            />{" "}
+                            Search
                           </button>
                           <button className="btn btn-reset mb-0" type="submit">
                             {" "}
@@ -885,7 +902,6 @@ const ListingMap = () => {
       </div>
       {/* /Main Content Section */}
     </>
-
   );
-}
+};
 export default ListingMap;

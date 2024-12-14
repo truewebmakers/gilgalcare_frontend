@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import Header from "../../home/header/Header";
 import Footer from "../../home/footer/Footer";
-import { galleryicon, profile_img, website } from "../../imagepath";
+import { defaultPic, galleryicon, profile_img, website } from "../../imagepath";
 import StickyBox from "react-sticky-box";
 import { useState } from "react";
 import { Link, useLocation } from "react-router-dom";
@@ -22,7 +22,6 @@ import { Ratings } from "./Ratingsx";
 import { ListDetails } from "./listDetails";
 import { Statistics } from "./Statistics";
 import { incrementShares } from "../../../services/incrementShares";
-import defaultPic from "../../../assets/img/defaultProfile.png";
 import BookmarkIcon from "../../../assets/svg/bookmark.svg";
 
 const ServiceDetails = () => {

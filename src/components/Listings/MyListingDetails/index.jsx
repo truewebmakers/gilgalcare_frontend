@@ -1,16 +1,10 @@
 import React, { useEffect } from "react";
 import Header from "../../home/header/Header";
 import Footer from "../../home/footer/Footer";
-import {
-  ProfileAvatar12,
-  galleryicon,
-  profile_img,
-  statistic_icon,
-  website,
-} from "../../imagepath";
+import { ProfileAvatar12, defaultPic, galleryicon } from "../../imagepath";
 import StickyBox from "react-sticky-box";
 import { useState } from "react";
-import { Link, useLocation, useParams } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import Rooms from "../PublicListingDetails/myComponent2";
 import Roomspics from "../PublicListingDetails/myComponent3";
 import { apiMethods, apiUrls, dateFormat } from "../../../constants/constant";
@@ -19,11 +13,8 @@ import UseApi from "../../../hooks/useApi";
 import { customToast } from "../../common/Toast";
 import mailIcon from "../../../assets/svg/mail.svg";
 import location from "../../../assets/svg/map-pin.svg";
-import defaultPic from "../../../assets/img/defaultProfile.png";
 import eye from "../../../assets/svg/eye.svg";
 import locationBig from "../../../assets/svg/locationBig.svg";
-import calendar from "../../../assets/svg/calendar.svg";
-import { CapitalizeFirstLetter } from "../../../utils/commonFunctions";
 import { Review } from "../PublicListingDetails/Review";
 import { Ratings } from "../PublicListingDetails/Ratingsx";
 import { ListDetails } from "../PublicListingDetails/listDetails";
