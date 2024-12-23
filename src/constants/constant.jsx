@@ -137,6 +137,26 @@ export const defaultCenter = {
   lng: -80.26548188573862,
 };
 
+export const timeAvailabilyFields = {
+  Monday: [{ start: "", end: "" }],
+  Tuesday: [{ start: "", end: "" }],
+  Wednesday: [{ start: "", end: "" }],
+  Thursday: [{ start: "", end: "" }],
+  Friday: [{ start: "", end: "" }],
+  Saturday: [{ start: "", end: "" }],
+  Sunday: [{ start: "", end: "" }],
+};
+
+export const enabledAvailableDays = {
+  Monday: true,
+  Tuesday: false,
+  Wednesday: false,
+  Thursday: false,
+  Friday: false,
+  Saturday: false,
+  Sunday: false,
+};
+
 export const initialListingField = {
   listing_title: "",
   listingDescription: "",

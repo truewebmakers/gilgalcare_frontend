@@ -80,7 +80,7 @@ const Footer = () => {
             <div className="col-lg-2 col-md-6"></div>
             <div className="col-lg-3 col-md-6">
               <div className="footer-widget">
-                <h2 className="footer-title">Support</h2>
+                <h2 className="footer-title">Quick Links</h2>
                 <div className="footer-contact-info">
                   <div className="footer-address">
                     <i className="feather-phone me-2"></i>

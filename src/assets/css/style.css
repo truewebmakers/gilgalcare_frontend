@@ -5226,7 +5226,7 @@ ul.tags {
 }
 .aboutbanner {
   position: relative;
-  background: url("https://gilgalcareprovider.s3.ap-southeast-1.amazonaws.com/aboutbanner.jpg");
+  background: url("https://gilgalcareprovider.s3.ap-southeast-1.amazonaws.com/banner/aboutbanner.jpg");
   background-position: top;
   background-size: cover;
   background-repeat: no-repeat;
@@ -5522,7 +5522,7 @@ ul.tags {
 
 .contactbanner {
   position: relative;
-  background: url("https://gilgalcareprovider.s3.ap-southeast-1.amazonaws.com/contactbanner.jpg");
+  background: url("https://gilgalcareprovider.s3.ap-southeast-1.amazonaws.com/banner/contactbanner.jpg");
   background-position: top;
   background-size: cover;
   background-repeat: no-repeat;
@@ -10537,7 +10537,7 @@ textarea.form-control {
 -----------------------*/
 
 .banner-five {
-  background: url("https://gilgalcareprovider.s3.ap-southeast-1.amazonaws.com/banner-05.jpg");
+  background: url("https://gilgalcareprovider.s3.ap-southeast-1.amazonaws.com/banner/banner-05.jpg");
   background-size: cover;
   background-repeat: no-repeat;
   background-position: center bottom;
@@ -21082,6 +21082,232 @@ section.advertisement {
   display: block;
 }
 
-.disableButton{
-  cursor:not-allowed !important
+.disableButton {
+  cursor: not-allowed !important;
+}
+
+.availability-container {
+  font-family: Arial, sans-serif;
+}
+
+h3 {
+  font-size: 1.5em;
+  margin-bottom: 5px;
+}
+
+p {
+  color: #666;
+  margin-bottom: 20px;
+}
+
+.day-section {
+  /* margin-bottom: 30px; */
+}
+
+.day-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 10px;
+}
+
+.time-row {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 10px;
+}
+
+.time-row input {
+  flex: 1;
+  padding: 8px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+.add-time-btn {
+  background: none;
+  color: #00b894;
+  border: none;
+  font-size: 0.9em;
+  cursor: pointer;
+}
+
+.add-time-btn:hover {
+  text-decoration: underline;
+}
+
+.verified {
+  position: absolute;
+  right: 10px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: green;
+  font-weight: bold;
+  font-size: 12px;
+}
+
+.unverified {
+  position: absolute;
+  right: 10px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: red;
+  font-weight: bold;
+  font-size: 12px;
+}
+
+.time-slots {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr); /* Limit to 3 buttons per row */
+  gap: 10px; /* Spacing between buttons */
+  margin-top: 10px;
+}
+
+.time-slots .btn {
+  flex: none;
+  width: 100%; /* Full width for grid column */
+  max-width: 175px; /* Cap the width to 25px if it's a single button */
+  text-align: center; /* Center-align text inside the button */
+}
+
+.time-slots .btn.single {
+  max-width: 175px; /* Set width specifically for a single button */
+  justify-self: center; /* Center the button in the row */
+}
+
+.react-datepicker-wrapper {
+  width: 286px;
+}
+
+.time-slots button {
+  font-size: 14px;
+}
+
+.switch-style1 input.form-check-input {
+  background-color: rgba(91, 187, 123, 0.1);
+  border: none;
+  height: 30px;
+  width: 55px;
+}
+
+.switch-style1 .form-check-input {
+  background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='-3 -3 6 6'%3e%3ccircle r='2' fill='%23fff'/%3e%3c/svg%3e");
+  background-position: left center;
+  transition: background-position 0.15s ease-in-out;
+}
+
+.switch-style1 .form-check-input:checked {
+  background-color: #5bbb7b;
+  box-shadow: none;
+}
+
+.switch-style1 .form-check-input:focus {
+  background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='-3 -3 6 6'%3e%3ccircle r='2' fill='%23fff'/%3e%3c/svg%3e");
+  box-shadow: none;
+  outline: none;
+}
+
+.switch-style1 label.form-check-label {
+  color: var(--headings-color);
+  font-size: 15px;
+  font-style: normal;
+  font-weight: 500;
+  letter-spacing: 0em;
+  line-height: 30px;
+  margin-left: 17px;
+}
+
+.bselect-style1 .bootstrap-select .dropdown-toggle {
+  border: none;
+  font-size: 15px;
+  height: 55px;
+  line-height: 40px;
+  outline: none;
+}
+
+.bselect-style1 .bootstrap-select .dropdown-toggle:hover {
+  color: var(--headings-color);
+}
+
+.bselect-style1 .bootstrap-select .dropdown-toggle:focus {
+  border: none;
+  outline-offset: 0;
+}
+
+.bselect-style1 .bootstrap-select .dropdown-menu {
+  margin-top: 13px !important;
+  padding-bottom: 7px;
+}
+
+.bselect-style1 .bootstrap-select .dropdown-menu.show {
+  border: 1px solid #e9e9e9;
+}
+
+.bselect-style1 .bootstrap-select .dropdown-menu.inner.show {
+  border: none;
+}
+
+.bselect-style1 .bootstrap-select .dropdown-item {
+  font-size: 15px;
+  padding-left: 30px;
+  padding-right: 30px;
+}
+
+.bselect-style1 .bootstrap-select .dropdown-item:hover,
+.bselect-style1 .bootstrap-select .dropdown-item.active {
+  background-color: #f0efec;
+}
+
+.bootstrap-select:not([class*="col-"]):not([class*="form-control"]):not(
+    .input-group-btn
+  ) {
+  width: 100%;
+}
+
+.bootstrap-select:not([class*="col-"]):not([class*="form-control"]):not(
+    .input-group-btn
+  )
+  .btn,
+.bootstrap-select:not([class*="col-"]):not([class*="form-control"]):not(
+    .input-group-btn
+  )
+  .btn-light {
+  background-color: rgba(255, 255, 255, 0.05);
+  border-radius: 4px;
+}
+
+.bootstrap-select:not([class*="col-"]):not([class*="form-control"]):not(
+    .input-group-btn
+  )
+  .dropdown-toggle:focus {
+  box-shadow: none;
+  outline: none !important;
+}
+
+.form-style1
+  .bootstrap-select:not([class*="col-"]):not([class*="form-control"]):not(
+    .input-group-btn
+  ) {
+  width: 100%;
+}
+
+.form-style1
+  .bootstrap-select:not([class*="col-"]):not([class*="form-control"]):not(
+    .input-group-btn
+  )
+  .btn,
+.form-style1
+  .bootstrap-select:not([class*="col-"]):not([class*="form-control"]):not(
+    .input-group-btn
+  )
+  .btn-light {
+  border: 1px solid #e9e9e9;
+}
+
+.bootstrap-select.show-tick .dropdown-menu .selected span {
+  color: var(--headings-color);
+}
+
+.bootstrap-select.show-tick .dropdown-menu .selected span.check-mark {
+  right: 25px;
 }

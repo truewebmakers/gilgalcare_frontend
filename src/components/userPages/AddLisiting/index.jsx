@@ -6,9 +6,11 @@ import UserBreadCrumb from "../UserBreadCrumb";
 import { useSelector } from "react-redux";
 import {
   defaultCenter,
+  enabledAvailableDays,
   errorListingFields,
   galleryImageFields,
   initialListingField,
+  timeAvailabilyFields,
 } from "../../../constants/constant";
 import { BasicInfoForm } from "./BasicInfoForm";
 import { PriceAndFeaturesForm } from "./Price&FeaturesForm";
@@ -26,6 +28,7 @@ import { fetchImageAsBinary } from "../../../utils/commonFunctions";
 import { GalleryImages } from "./galleryImages";
 import { toast } from "react-toastify";
 import UserHeader from "../../home/header/Header";
+import UserAvailability from "./UserAvailability";
 
 const AddLisiting = () => {
   const [listingFields, setListingFields] = useState(initialListingField);
@@ -52,6 +55,8 @@ const AddLisiting = () => {
     : null;
   const [galleryImage, setGalleryImage] = useState(galleryImageFields);
   const [showGalleryImage, setShowGalleryImage] = useState(galleryImageFields);
+  const [availability, setAvailability] = useState(timeAvailabilyFields);
+  const [enabledDays, setEnabledDays] = useState(enabledAvailableDays);
 
   const fetchCategoriesData = async () => {
     const response = await fetchCategories(user?.token);
@@ -296,6 +301,12 @@ const AddLisiting = () => {
                 contactInfo={listingFields}
                 error={error}
                 handleChange={handleChange}
+              />
+              <UserAvailability
+                setAvailability={setAvailability}
+                availability={availability}
+                enabledDays={enabledDays}
+                setEnabledDays={setEnabledDays}
               />
               <SocialMediaForm
                 socialMedia={listingFields}

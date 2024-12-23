@@ -85,33 +85,33 @@ export const Category28Svg =
   "https://gilgalcareprovider.s3.ap-southeast-1.amazonaws.com/category-28.svg";
 
 export const ProfileAvatar01 =
-  "https://gilgalcareprovider.s3.ap-southeast-1.amazonaws.com/avatar-01.jpg";
+  "https://gilgalcareprovider.s3.ap-southeast-1.amazonaws.com/profiles/avatar-01.jpg";
 export const ProfileAvatar02 =
-  "https://gilgalcareprovider.s3.ap-southeast-1.amazonaws.com/avatar-02.jpg";
+  "https://gilgalcareprovider.s3.ap-southeast-1.amazonaws.com/profiles/avatar-02.jpg";
 export const ProfileAvatar03 =
-  "https://gilgalcareprovider.s3.ap-southeast-1.amazonaws.com/avatar-03.jpg";
+  "https://gilgalcareprovider.s3.ap-southeast-1.amazonaws.com/profiles/avatar-03.jpg";
 export const ProfileAvatar04 =
-  "https://gilgalcareprovider.s3.ap-southeast-1.amazonaws.com/avatar-04.jpg";
+  "https://gilgalcareprovider.s3.ap-southeast-1.amazonaws.com/profiles/avatar-04.jpg";
 export const ProfileAvatar05 =
-  "https://gilgalcareprovider.s3.ap-southeast-1.amazonaws.com/avatar-05.jpg";
+  "https://gilgalcareprovider.s3.ap-southeast-1.amazonaws.com/profiles/avatar-05.jpg";
 export const ProfileAvatar06 =
-  "https://gilgalcareprovider.s3.ap-southeast-1.amazonaws.com/avatar-06.jpg";
+  "https://gilgalcareprovider.s3.ap-southeast-1.amazonaws.com/profiles/avatar-06.jpg";
 export const ProfileAvatar07 =
-  "https://gilgalcareprovider.s3.ap-southeast-1.amazonaws.com/avatar-07.jpg";
+  "https://gilgalcareprovider.s3.ap-southeast-1.amazonaws.com/profiles/avatar-07.jpg";
 export const ProfileAvatar08 =
-  "https://gilgalcareprovider.s3.ap-southeast-1.amazonaws.com/avatar-08.jpg";
+  "https://gilgalcareprovider.s3.ap-southeast-1.amazonaws.com/profiles/avatar-08.jpg";
 export const ProfileAvatar09 =
-  "https://gilgalcareprovider.s3.ap-southeast-1.amazonaws.com/avatar-09.jpg";
+  "https://gilgalcareprovider.s3.ap-southeast-1.amazonaws.com/profiles/avatar-09.jpg";
 export const ProfileAvatar10 =
-  "https://gilgalcareprovider.s3.ap-southeast-1.amazonaws.com/avatar-10.jpg";
+  "https://gilgalcareprovider.s3.ap-southeast-1.amazonaws.com/profiles/avatar-10.jpg";
 export const ProfileAvatar11 =
-  "https://gilgalcareprovider.s3.ap-southeast-1.amazonaws.com/avatar-11.jpg";
+  "https://gilgalcareprovider.s3.ap-southeast-1.amazonaws.com/profiles/avatar-11.jpg";
 export const ProfileAvatar12 =
-  "https://gilgalcareprovider.s3.ap-southeast-1.amazonaws.com/avatar-12.jpg";
+  "https://gilgalcareprovider.s3.ap-southeast-1.amazonaws.com/profiles/avatar-12.jpg";
 export const ProfileAvatar13 =
-  "https://gilgalcareprovider.s3.ap-southeast-1.amazonaws.com/avatar-13.jpg";
+  "https://gilgalcareprovider.s3.ap-southeast-1.amazonaws.com/profiles/avatar-13.jpg";
 export const ProfileAvatar14 =
-  "https://gilgalcareprovider.s3.ap-southeast-1.amazonaws.com/avatar-14.jpg";
+  "https://gilgalcareprovider.s3.ap-southeast-1.amazonaws.com/profiles/avatar-14.jpg";
 
 export const Quotes =
   "https://gilgalcareprovider.s3.ap-southeast-1.amazonaws.com/quotes.png";
@@ -305,7 +305,7 @@ export const mediaimg_1 =
   "https://gilgalcareprovider.s3.ap-southeast-1.amazonaws.com/mediaimg-1.jpg";
 
 export const gallerymedia_1 =
-  "https://gilgalcareprovider.s3.ap-southeast-1.amazonaws.com/gallerymedia-1.jpg";
+  "https://gilgalcareprovider.s3.ap-southeast-1.amazonaws.com/gallery/gallerymedia-1.jpg";
 
 export const defaultPic =
   "https://gilgalcareprovider.s3.ap-southeast-1.amazonaws.com/defaultProfile.png";
@@ -343,21 +343,21 @@ export const marker7 =
   "https://gilgalcareprovider.s3.ap-southeast-1.amazonaws.com/marker7.png";
 
 export const listgrid_1 =
-  "https://gilgalcareprovider.s3.ap-southeast-1.amazonaws.com/listgrid-1.jpg";
+  "https://gilgalcareprovider.s3.ap-southeast-1.amazonaws.com/list/listgrid-1.jpg";
 export const listgrid_2 =
-  "https://gilgalcareprovider.s3.ap-southeast-1.amazonaws.com/listgrid-2.jpg";
+  "https://gilgalcareprovider.s3.ap-southeast-1.amazonaws.com/list/listgrid-2.jpg";
 export const listgrid_3 =
-  "https://gilgalcareprovider.s3.ap-southeast-1.amazonaws.com/listgrid-3.jpg";
+  "https://gilgalcareprovider.s3.ap-southeast-1.amazonaws.com/list/listgrid-3.jpg";
 export const listgrid_4 =
-  "https://gilgalcareprovider.s3.ap-southeast-1.amazonaws.com/listgrid-4.jpg";
+  "https://gilgalcareprovider.s3.ap-southeast-1.amazonaws.com/list/listgrid-4.jpg";
 export const listgrid_5 =
-  "https://gilgalcareprovider.s3.ap-southeast-1.amazonaws.com/listgrid-5.jpg";
+  "https://gilgalcareprovider.s3.ap-southeast-1.amazonaws.com/list/listgrid-5.jpg";
 export const listgrid_6 =
-  "https://gilgalcareprovider.s3.ap-southeast-1.amazonaws.com/listgrid-6.jpg";
+  "https://gilgalcareprovider.s3.ap-southeast-1.amazonaws.com/list/listgrid-6.jpg";
 export const listgrid_7 =
-  "https://gilgalcareprovider.s3.ap-southeast-1.amazonaws.com/listgrid-7.jpg";
+  "https://gilgalcareprovider.s3.ap-southeast-1.amazonaws.com/list/listgrid-7.jpg";
 export const listgrid_8 =
-  "https://gilgalcareprovider.s3.ap-southeast-1.amazonaws.com/listgrid-8.jpg";
+  "https://gilgalcareprovider.s3.ap-southeast-1.amazonaws.com/list/listgrid-8.jpg";
 
 export const gallery_1_jpg =
   "https://gilgalcareprovider.s3.ap-southeast-1.amazonaws.com/gallery-1.jpg";
