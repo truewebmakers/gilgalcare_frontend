@@ -43,3 +43,9 @@ export const calculatePayment = (presentRate = 0) => {
     totalAmount: totalAmount.toFixed(2),
   };
 };
+
+export const truncateName = (name) => {
+  if (!name) return "";
+  const words = name.split(" ");
+  return words.length > 3 ? words.slice(0, 3).join(" ") + "..." : name;
+};

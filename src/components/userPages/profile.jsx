@@ -58,7 +58,15 @@ const Profile = () => {
 
   const handleOnChange = (e) => {
     const { value, name } = e.target;
-    setProfileDetails({ ...profileDetails, [name]: value });
+    if (name === "phone") {
+      const valuee = value.replace(/[^0-9]/g, ""); // Remove non-numeric characters
+      setProfileDetails({
+        ...profileDetails,
+        phone: valuee,
+      });
+    } else {
+      setProfileDetails({ ...profileDetails, [name]: value });
+    }
   };
 
   const handleSave = async (e) => {
@@ -199,13 +207,14 @@ const Profile = () => {
                                   <i className="feather-phone-call" />
                                 </span>
                                 <input
-                                  type="tel"
+                                  type="text"
                                   className="form-control"
                                   name="phone"
                                   placeholder="Enter Your Phone No."
                                   value={profileDetails?.phone}
-                                  readOnly={true}
-                                  // onChange={handleOnChange}
+                                  // readOnly={true}
+                                  onChange={handleOnChange}
+                                  maxLength={10}
                                 />
                               </div>
                             </div>

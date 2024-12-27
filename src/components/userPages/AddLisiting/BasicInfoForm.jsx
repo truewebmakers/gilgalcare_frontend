@@ -72,10 +72,10 @@ export const BasicInfoForm = ({
                 <li key={item?.id}>
                   <label className="custom_check">
                     <input
-                      type="radio"
+                      type="checkbox"
                       name="categoryId"
                       value={item?.id}
-                      checked={basicInfo1?.categoryId == item?.id}
+                      checked={basicInfo1?.categoryId?.includes(item?.id)} // Check if the category is selected
                       onChange={handleChange}
                       data-handler="basicInfo1"
                       autoComplete="off"

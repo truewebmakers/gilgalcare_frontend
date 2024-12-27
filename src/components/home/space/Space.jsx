@@ -9,12 +9,7 @@ export const Space = () => {
         <div className="row">
           <div className="col-lg-6 col-md-0 aos" data-aos="fade-up">
             <div className="featuring-img">
-              <img
-                src={FeaturePng}
-                className="img-fluid"
-                alt=""
-                style={{ borderRadius: "168px" }}
-              />
+              <img src={FeaturePng} className="img-fluid" alt="" />
             </div>
           </div>
           <div className="col-lg-6 col-md-12 aos" data-aos="fade-up">

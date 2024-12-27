@@ -128,12 +128,6 @@ const GridSidebar = () => {
                                 }}
                               />
                             </Link>
-                            <div className="fav-item">
-                              <span className="Featured-text">Featured</span>
-                              <Link to="#" className="fav-icon">
-                                <i className="feather-heart" />
-                              </Link>
-                            </div>
                           </div>
                           <div className="bloglist-content">
                             <div className="card-body">
@@ -151,8 +145,11 @@ const GridSidebar = () => {
                                     <span>
                                       {" "}
                                       <b>Category: </b>
-                                      {getCategoryNameById(item?.category_id) ||
-                                        "-"}
+                                      {item?.categories?.length
+                                        ? getCategoryNameById(
+                                            item?.categories[0]?.id
+                                          )
+                                        : "-"}
                                     </span>
                                   </Link>
                                 </div>
@@ -168,7 +165,7 @@ const GridSidebar = () => {
                               <div className="blog-location-details">
                                 <div className="location-info">
                                   <i className="feather-map-pin" />{" "}
-                                  {item?.location || "-"}
+                                  {item?.address || "-"}
                                 </div>
                                 <div className="location-info">
                                   <i className="feather-phone-call" />

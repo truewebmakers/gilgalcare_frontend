@@ -13,7 +13,7 @@ export const Ratings = ({ getListingReview }) => {
 
   // Calculate overall rating
   const calculateAverageRating = () => {
-    if (reviewList?.length === 0) return 0;
+    if (reviewList?.length === 0 || !reviewList) return 0;
 
     const totalRating = reviewList?.reduce(
       (sum, review) => sum + review?.rating,
@@ -36,7 +36,7 @@ export const Ratings = ({ getListingReview }) => {
 
   // Render filled and empty stars
   const renderStars = (rating) => {
-    const filledStars = Math.floor(rating);
+    const filledStars = Math?.floor(rating);
     const halfStar = rating % 1 >= 0.5;
     const emptyStars = 5 - filledStars - (halfStar ? 1 : 0);
 

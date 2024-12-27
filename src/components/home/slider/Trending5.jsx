@@ -63,81 +63,86 @@ const Trending5 = () => {
 
   return (
     <section className="business-section">
-      <div className="container">
-        <div className="row">
-          <div className="col-md-12 text-center">
-            <div
-              className="section-heading heading-five aos"
-              data-aos="fade-up"
-            >
-              <h2>Trending Business Places</h2>
+      {trendingData?.length ? (
+        <div className="container">
+          <div className="row">
+            <div className="col-md-12 text-center">
+              <div
+                className="section-heading heading-five aos"
+                data-aos="fade-up"
+              >
+                <h2>Trending Business Places</h2>
+              </div>
             </div>
           </div>
-        </div>
-        <Slider
-          {...settings}
-          className="silderBotton business-slider grid-view"
-        >
-          {trendingData?.map((item, index) => (
-            <div className="card business-card aos" data-aos="fade-up">
-              <div className="blog-widget">
-                <div className="blog-img">
-                  <Link
-                    to={`/listing-details/${item?.uuid}`}
-                    state={{ id: item?.id }}
-                  >
-                    <img
-                      src={item?.featured_image}
-                      alt=""
-                      width={256}
-                      height={168}
-                    />
-                  </Link>
-                </div>
-                <div className="bloglist-content">
-                  <div className="card-body">
-                    <span className="Featured-text">Featured</span>
-                    <div className="grid-author">
-                      <img src={item?.logo} />
-                    </div>
-                    <div className="blogfeaturelink">
-                      <div className="blog-author text-end">
-                        <span>
-                          <i className="feather-map-pin"></i>{" "}
-                          {item?.location
-                            ? CapitalizeFirstLetter(item?.location)
+          <Slider
+            {...settings}
+            className="silderBotton business-slider grid-view"
+          >
+            {trendingData?.map((item, index) => (
+              <div className="card business-card aos" data-aos="fade-up">
+                <div className="blog-widget">
+                  <div className="blog-img">
+                    <Link
+                      to={`/listing-details/${item?.uuid}`}
+                      state={{ id: item?.id }}
+                    >
+                      <img
+                        src={
+                          item?.featured_image || "/img/trendingDefault.jpeg"
+                        }
+                        alt=""
+                        width={256}
+                        height={168}
+                      />
+                    </Link>
+                  </div>
+                  <div className="bloglist-content">
+                    <div className="card-body">
+                      <span className="Featured-text">Featured</span>
+                      <div className="grid-author">
+                        <img src={item?.logo} />
+                      </div>
+                      <div className="blogfeaturelink">
+                        <div className="blog-author text-end">
+                          <span>
+                            {console.log(item, "ittttttttttttt")}
+                            <i className="feather-map-pin"></i>{" "}
+                            {item?.address
+                              ? CapitalizeFirstLetter(item?.address)
+                              : "-"}
+                          </span>
+                        </div>
+                      </div>
+                      <h6>
+                        <Link
+                          to={`/listing-details/${item?.uuid}`}
+                          state={{ id: item?.id }}
+                        >
+                          {item?.listing_title
+                            ? CapitalizeFirstLetter(item?.listing_title)
                             : "-"}
-                        </span>
-                      </div>
-                    </div>
-                    <h6>
-                      <Link
-                        to={`/listing-details/${item?.uuid}`}
-                        state={{ id: item?.id }}
-                      >
-                        {item?.listing_title
-                          ? CapitalizeFirstLetter(item?.listing_title)
-                          : "-"}
-                      </Link>
-                    </h6>
-                    <div className="amount-details">
-                      <div className="amount">
-                        <span className="validrate">
-                          ${item?.price_to ? item?.price_to : null}
-                        </span>
-                      </div>
-                      <div className="ratings">
-                        <span>Published </span>
+                        </Link>
+                      </h6>
+                      <div className="amount-details">
+                        <div className="amount">
+                          <span className="validrate">
+                            ${item?.price_to ? item?.price_to : null}
+                          </span>
+                        </div>
+                        <div className="ratings">
+                          <span>Published </span>
+                        </div>
                       </div>
                     </div>
                   </div>
                 </div>
               </div>
-            </div>
-          ))}
-          {/* Repeat for other cards */}
-        </Slider>
-      </div>
+            ))}
+            {/* Repeat for other cards */}
+          </Slider>
+        </div>
+      ) : null}
     </section>
   );
 };

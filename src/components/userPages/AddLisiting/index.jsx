@@ -18,7 +18,10 @@ import { LocationForm } from "./LocationForm";
 import { ContactInfoForm } from "./ContactInfoForm";
 import { SocialMediaForm } from "./SocialMediaForm";
 import { ImageForm } from "./ImageForm";
-import { validateListingFields } from "../../../utils/validations";
+import {
+  isTimeDifferenceValid,
+  validateListingFields,
+} from "../../../utils/validations";
 import Loader from "../../common/Loader";
 import { addListingService } from "../../../services/addListingService";
 import { fetchCategories } from "../../../services/getCategoryList";
@@ -29,6 +32,9 @@ import { GalleryImages } from "./galleryImages";
 import { toast } from "react-toastify";
 import UserHeader from "../../home/header/Header";
 import UserAvailability from "./UserAvailability";
+import { addUserAvailabilityService } from "../../../services/userAvailabilityService";
+import { customToast } from "../../common/Toast";
+import { fetchAvailability } from "../../../services/fetchAvailablity";
 
 const AddLisiting = () => {
   const [listingFields, setListingFields] = useState(initialListingField);
@@ -67,6 +73,8 @@ const AddLisiting = () => {
 
   const fetchMyListingData = async () => {
     const response = await fetchMyListingDetail(user?.token, id);
+    console.log(response, "resssssssssssss");
+
     setListingFields((prevFields) => {
       return Object.entries(prevFields).reduce((acc, [key, _]) => {
         const apiKey = convertToApiKey(key); // Convert state keys to API response keys
@@ -81,6 +89,13 @@ const AddLisiting = () => {
       featuredImage: response?.featured_image,
       logo: response?.logo,
     });
+    if (response?.categories?.length) {
+      const categoryIds = response?.categories?.map((category) => category?.id); // Extract ids
+      setListingFields((prev) => ({
+        ...prev,
+        categoryId: categoryIds, // Save ids in categoryId
+      }));
+    }
     if (response?.featured_image?.length) {
       const featureRes = await fetchImageAsBinary(response?.featured_image);
       setUploadedPic((prev) => ({
@@ -122,6 +137,7 @@ const AddLisiting = () => {
       ...galleryImagesBinary,
     }));
   };
+  console.log(listingFields, "listingFields");
 
   const convertToApiKey = (key) => {
     // Convert the camelCase keys to snake_case keys as used in the API response
@@ -140,6 +156,7 @@ const AddLisiting = () => {
     fetchCategoriesData();
     if (id) {
       fetchMyListingData();
+      fetchAvailability(setAvailability, setEnabledDays, user?.token, id);
     }
   }, []);
 
@@ -151,7 +168,6 @@ const AddLisiting = () => {
   useEffect(() => {
     if (hasErrors(error)) {
       setIsDisable(true);
-      // toast.error("There is some error please check");
       return;
     }
     setIsDisable(false);
@@ -159,6 +175,7 @@ const AddLisiting = () => {
 
   // api handler for add lsiting
   const handleAddListing = async (e) => {
+    console.log("helooooo");
     e.preventDefault();
     const allFields = {
       ...listingFields,
@@ -166,6 +183,8 @@ const AddLisiting = () => {
       ...uploadPic,
       addedBy: user?.userInfo?.id, // Add user ID to the listing data
     };
+    console.log("helooooo 1");
+
     let newErr = {};
     for (let key in allFields) {
       newErr = {
@@ -173,20 +192,48 @@ const AddLisiting = () => {
         ...validateListingFields(key, allFields[key], listingFields),
       };
     }
+    console.log("helooooo 2");
+    if (areAllFieldsFilled(allFields)) {
+      setError(newErr);
+      console.log("helooooo 3");
+      if (!isTimeDifferenceValid(availability, enabledDays)) {
+        console.log("i am hereeeeeeee");
+        console.log("helooooo 4");
+        return;
+      } else if (!hasErrors(newErr)) {
+        setIsLoading(true);
+        let response = null;
 
-    setError(newErr);
+        try {
+          response = id
+            ? await editListingService(allFields, id, user?.token, galleryImage)
+            : await addListingService(allFields, user?.token, galleryImage);
+          console.log(response, "ressssss");
 
-    if (!hasErrors(newErr) && areAllFieldsFilled(allFields)) {
-      setIsLoading(true);
-      try {
-        id
-          ? await editListingService(allFields, id, user?.token, galleryImage)
-          : await addListingService(allFields, user?.token, galleryImage);
-      } catch (err) {
-        return err;
-      } finally {
-        setIsLoading(false);
+          // Check if `addListingService` returned a listingId
+          if (response?.listing?.id) {
+            // Call the userAvailability API with the listingId
+            await addUserAvailabilityService(
+              response?.listing?.id,
+              user?.token,
+              availability,
+              enabledDays
+            );
+          }
+        } catch (err) {
+          console.log("helooooo 5");
+
+          customToast.error(
+            err?.message ||
+              "Encountered some error while adding listing. Please fill all field correctly"
+          );
+          return err;
+        } finally {
+          setIsLoading(false);
+        }
       }
+    } else {
+      customToast.error("Enter All fields");
     }
   };
 
@@ -215,13 +262,19 @@ const AddLisiting = () => {
     // Handle basic info updates
     if (dataset?.handler === "basicInfo1") {
       if (name === "categoryId") {
-        const categoryName = categoriesList?.find(
-          (cat) => cat?.id == value
-        )?.name;
+        const selectedIds = listingFields?.categoryId || []; // Initialize as an array if not already
+        let updatedIds;
+
+        if (selectedIds.includes(value)) {
+          // If the value already exists, remove it (uncheck)
+          updatedIds = selectedIds.filter((id) => id !== value);
+        } else {
+          // Otherwise, add the value (check)
+          updatedIds = [...selectedIds, value];
+        }
         setListingFields((prevState) => ({
           ...prevState,
-          [name]: value,
-          categoryName: categoryName,
+          [name]: updatedIds, // Update the categoryId with the new array
         }));
       } else {
         setListingFields((prevState) => ({ ...prevState, [name]: value }));
@@ -258,6 +311,7 @@ const AddLisiting = () => {
       setError((prevError) => ({ ...prevError, ...newErr }));
     }
   };
+  console.log(error, "liiiii");
 
   return (
     <>
@@ -308,11 +362,11 @@ const AddLisiting = () => {
                 enabledDays={enabledDays}
                 setEnabledDays={setEnabledDays}
               />
-              <SocialMediaForm
+              {/* <SocialMediaForm
                 socialMedia={listingFields}
                 error={error}
                 handleChange={handleChange}
-              />
+              /> */}
               <ImageForm
                 selectedImage={selectedImage}
                 error={error}

@@ -58,7 +58,7 @@ export const ListDetails = ({ listingDetail }) => {
               <img src={website} alt="website" />{" "}
               {listingDetail?.website ? listingDetail?.website : "-"}
             </li>
-            <li className="socialicons pb-0">
+            {/* <li className="socialicons pb-0">
               <Link to={listingDetail?.facebook || "#"} target="_blank">
                 <i className="fab fa-facebook-f" />{" "}
               </Link>
@@ -71,7 +71,7 @@ export const ListDetails = ({ listingDetail }) => {
               <Link to={listingDetail?.google_plus || "-"} target="_blank">
                 <i className="fab fa-linkedin-in" />
               </Link>
-            </li>
+            </li> */}
           </ul>
         </div>
       </div>

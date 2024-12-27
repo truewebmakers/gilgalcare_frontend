@@ -131,7 +131,11 @@ const Contract = () => {
           <div className="row align-items-center">
             <div className="col-lg-5 col-md-5">
               <div className="contactform-img">
-                <img src={contactform_img} className="img-fluid" alt="" />
+                <img
+                  src="/img/contactform-img.svg"
+                  className="img-fluid"
+                  alt=""
+                />
               </div>
             </div>
             <div className="col-lg-7 col-md-7">

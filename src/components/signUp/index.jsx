@@ -16,6 +16,7 @@ const SignUp = () => {
   const [disable, setDisable] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const [passwordType, setPasswordType] = useState("password");
+  const [isTermsChecked, setIsTermsChecked] = useState(false); // Track checkbox state
   const [signupData, setSignUpData] = useState({
     name: "",
     email: "",
@@ -69,7 +70,11 @@ const SignUp = () => {
   const handleSignUp = async (e) => {
     e.preventDefault();
 
-    // If user selects "business", navigate to the pricing page and prevent API call
+    // Check if Terms & Conditions checkbox is checked
+    if (!isTermsChecked) {
+      customToast.error("Please accept the Terms & Conditions.");
+      return;
+    }
 
     let newErr = {};
     for (let key in signupData) {
@@ -158,7 +163,6 @@ const SignUp = () => {
                       )}
                     </div>
                   </div>
-
                   {/* Email input */}
                   <div className="form-group group-img">
                     <div className="group-img">
@@ -177,7 +181,6 @@ const SignUp = () => {
                       )}
                     </div>
                   </div>
-
                   {/* Password input */}
                   <div className="form-group">
                     <div className="pass-group group-img">
@@ -204,7 +207,6 @@ const SignUp = () => {
                       <p style={{ color: "red" }}>{error?.passwordInput}</p>
                     )}
                   </div>
-
                   {/* User Type Radio Buttons */}
                   <div className="form-group">
                     <label>Type:</label>
@@ -237,17 +239,32 @@ const SignUp = () => {
                       </div>
                     </div>
                   </div>
-
+                  {/* Terms & Conditions */}
+                  <div style={{ marginBottom: "10px" }}>
+                    <input
+                      type="checkbox"
+                      checked={isTermsChecked}
+                      onChange={(e) => setIsTermsChecked(e.target.checked)}
+                    />
+                    &nbsp;&nbsp;{" "}
+                    <a
+                      href="https://gilgalcareprovider.com.au/terms-and-conditions-for-gilgal-care-provider/"
+                      className="terms-link"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                    >
+                      I have read the terms & conditions
+                    </a>
+                  </div>
                   {/* Submit Button */}
                   <button
                     className="btn btn-primary w-100 login-btn"
                     type="submit"
-                    disabled={disable}
+                    disabled={disable || !isTermsChecked}
                     onClick={(e) => handleSignUp(e)}
                   >
                     {isLoading ? <Loader /> : `Create Account`}
                   </button>
-
                   <div className="register-link text-center">
                     <p>
                       Already have an account?{" "}

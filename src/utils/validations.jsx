@@ -1,3 +1,5 @@
+import { customToast } from "../components/common/Toast";
+
 let emailRegex = /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/;
 let passwordRegex = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[a-zA-Z]).{8,}$/;
 
@@ -207,7 +209,7 @@ export const validateListingFields = (name, value, basicInfo2) => {
       break;
 
     case "categoryId":
-      newErr[name] = value === "" ? "Category cannot be empty" : "";
+      newErr[name] = value?.length == 0 ? "Category cannot be empty" : "";
       break;
 
     case "tagline":
@@ -223,13 +225,13 @@ export const validateListingFields = (name, value, basicInfo2) => {
       break;
 
     case "priceFrom":
-      newErr[name] = value <= 0 ? "Price from cannot be negative" : "";
+      newErr[name] = value <= 0 ? "Price from should be greater than 0" : "";
       break;
 
     case "priceTo":
       newErr[name] =
         value <= 0
-          ? "Price to cannot be negative"
+          ? "Price to should be greater than 0"
           : value < basicInfo2?.priceFrom
           ? "Price to cannot be less than price from"
           : "";
@@ -240,20 +242,22 @@ export const validateListingFields = (name, value, basicInfo2) => {
       newErr[name] = value ? "" : "Features information cannot be empty";
       break;
 
-    case "location":
-      newErr[name] = value === "" ? "Location cannot be empty" : "";
-      break;
+    // case "location":
+    //   newErr[name] = value === "" ? "Location cannot be empty" : "";
+    //   break;
 
     case "address":
       newErr[name] = value === "" ? "Address cannot be empty" : "";
       break;
 
     case "mapLat":
-      newErr[name] = value === "" ? "Latitude cannot be empty" : "";
+      newErr[name] =
+        value === "" || value == null ? "Latitude cannot be empty" : "";
       break;
 
     case "mapLong":
-      newErr[name] = value === "" ? "Longitude cannot be empty" : "";
+      newErr[name] =
+        value === "" || value == null ? "Longitude cannot be empty" : "";
       break;
 
     case "email":
@@ -283,31 +287,31 @@ export const validateListingFields = (name, value, basicInfo2) => {
           : "";
       break;
 
-    case "facebook":
-      newErr[name] =
-        value === ""
-          ? "Facebook cannot be empty"
-          : !urlRegex.test(value)
-          ? "Facebook URL is not valid (eg. https://fb.com)"
-          : "";
-      break;
-    case "twitter":
-      newErr[name] =
-        value === ""
-          ? "Twitter cannot be empty"
-          : !urlRegex.test(value)
-          ? "Twitter URL is not valid (eg. https://twitter.com)"
-          : "";
-      break;
-    case "googlePlus":
-      newErr[name] =
-        value === ""
-          ? "Google+ cannot be empty"
-          : !urlRegex.test(value)
-          ? "Google+ URL is not valid (eg. https://google.com)"
-          : "";
-      break;
-    case "instagram":
+      // case "facebook":
+      //   newErr[name] =
+      //     value === ""
+      //       ? "Facebook cannot be empty"
+      //       : !urlRegex.test(value)
+      //       ? "Facebook URL is not valid (eg. https://fb.com)"
+      //       : "";
+      //   break;
+      // case "twitter":
+      //   newErr[name] =
+      //     value === ""
+      //       ? "Twitter cannot be empty"
+      //       : !urlRegex.test(value)
+      //       ? "Twitter URL is not valid (eg. https://twitter.com)"
+      //       : "";
+      //   break;
+      // case "googlePlus":
+      //   newErr[name] =
+      //     value === ""
+      //       ? "Google+ cannot be empty"
+      //       : !urlRegex.test(value)
+      //       ? "Google+ URL is not valid (eg. https://google.com)"
+      //       : "";
+      //   break;
+      // case "instagram":
       newErr[name] =
         value === ""
           ? "Instagram cannot be empty"
@@ -331,4 +335,29 @@ export const validateListingFields = (name, value, basicInfo2) => {
   }
 
   return newErr;
+};
+
+export const isTimeDifferenceValid = (availability, enabledDays) => {
+  for (const day in availability) {
+    if (enabledDays[day]) {
+      for (const time of availability[day]) {
+        const startTime = new Date(`1970-01-01T${time.start}:00`);
+        const endTime = new Date(`1970-01-01T${time.end}:00`);
+        const differenceInHours = (endTime - startTime) / (1000 * 60 * 60);
+        console.log(time, "differenceInHours,", differenceInHours);
+
+        if (!time?.start || !time?.end || differenceInHours < 2) {
+          console.log("hiiiii");
+          customToast.error(
+            `The difference b/w ${day}'s start time & end time should be at least 2 hours.`
+          );
+          return false;
+        } else {
+          return true;
+        }
+      }
+    } else {
+      return true;
+    }
+  }
 };

@@ -21311,3 +21311,25 @@ p {
 .bootstrap-select.show-tick .dropdown-menu .selected span.check-mark {
   right: 25px;
 }
+
+.feather-phone-call {
+  color: #ffffff;
+}
+
+.featuring-img img {
+  border-radius: 10px !important;
+}
+
+.howitworks {
+  padding: 40px;
+}
+
+.terms-link {
+  color: inherit;
+  text-decoration: none;
+  transition: color 0.3s ease;
+}
+
+.terms-link:hover {
+  color: #007bff;
+}

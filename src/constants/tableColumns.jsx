@@ -31,7 +31,7 @@ export const myListingColumns = (handleDeleteListing) => [
   },
   {
     title: "Location",
-    dataIndex: "location",
+    dataIndex: "address",
     render: (text) => <span>{text ? CapitalizeFirstLetter(text) : "-"}</span>,
   },
   {

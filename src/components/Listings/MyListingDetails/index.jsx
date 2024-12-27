@@ -107,7 +107,7 @@ const MyListingDetails = () => {
                   <li>
                     <span>
                       <img src={location} alt="" />
-                      {listingDetail?.location ? listingDetail?.location : "-"}
+                      {listingDetail?.address ? listingDetail?.address : "-"}
                     </span>
                   </li>
 
@@ -225,8 +225,8 @@ const MyListingDetails = () => {
                         </div>
                         <div className="featues-info">
                           <h6>
-                            {listingDetail?.category?.location
-                              ? listingDetail?.category?.location
+                            {listingDetail?.category?.address
+                              ? listingDetail?.category?.address
                               : "-"}
                           </h6>
                         </div>

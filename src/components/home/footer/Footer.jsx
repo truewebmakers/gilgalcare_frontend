@@ -28,7 +28,7 @@ const Footer = () => {
                     paratyp i muvåning, och pesask vyfisat.{" "}
                   </p>
                 </div>
-                <div className="social-icon">
+                {/* <div className="social-icon">
                   <ul>
                     <li>
                       <Link to="#" target="_blank">
@@ -51,13 +51,13 @@ const Footer = () => {
                       </Link>
                     </li>
                   </ul>
-                </div>
+                </div> */}
               </div>
             </div>
             <div className="col-lg-2 col-md-6"></div>
             <div className="col-lg-2 col-md-6">
               <div className="footer-widget footer-menu">
-                <h2 className="footer-title">Categories</h2>
+                <h2 className="footer-title">Quick Links</h2>
                 <ul>
                   <li>
                     <Link to="#">Restaurant</Link>
@@ -80,7 +80,7 @@ const Footer = () => {
             <div className="col-lg-2 col-md-6"></div>
             <div className="col-lg-3 col-md-6">
               <div className="footer-widget">
-                <h2 className="footer-title">Quick Links</h2>
+                <h2 className="footer-title">Support</h2>
                 <div className="footer-contact-info">
                   <div className="footer-address">
                     <i className="feather-phone me-2"></i>

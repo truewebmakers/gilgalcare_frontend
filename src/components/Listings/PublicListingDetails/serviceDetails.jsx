@@ -16,7 +16,10 @@ import location from "../../../assets/svg/map-pin.svg";
 import eye from "../../../assets/svg/eye.svg";
 import locationBig from "../../../assets/svg/locationBig.svg";
 import calendar from "../../../assets/svg/calendar.svg";
-import { CapitalizeFirstLetter } from "../../../utils/commonFunctions";
+import {
+  CapitalizeFirstLetter,
+  truncateName,
+} from "../../../utils/commonFunctions";
 import { Review } from "./Review";
 import { Ratings } from "./Ratingsx";
 import { ListDetails } from "./listDetails";
@@ -120,8 +123,8 @@ const ServiceDetails = () => {
                 <ul>
                   <li>
                     <span>
-                      <img src={location} alt="" /> &nbsp;
-                      {listingDetail?.location ? listingDetail?.location : "-"}
+                      <img src={location} alt="" />
+                      {listingDetail?.address ? listingDetail?.address : "-"}
                     </span>
                   </li>
                   <li>
@@ -235,38 +238,32 @@ const ServiceDetails = () => {
                 </div>
                 <div className="card-body">
                   <div className="lisiting-featues">
-                    <div className="row">
-                      <div className="featureslist d-flex align-items-center col-lg-4 col-md-4">
-                        <div className="feature-img">
-                          <img
-                            src={listingDetail?.category?.feature_image || ""}
-                            alt=""
-                          />
+                    {listingDetail?.categories &&
+                      listingDetail?.categories?.map((item, index) => (
+                        <div className="row" key={index}>
+                          <div className="featureslist d-flex align-items-center col-lg-4 col-md-4">
+                            <div className="feature-img">
+                              <img src={item?.feature_image || ""} alt="" />
+                            </div>
+                            <div className="featues-info">
+                              <h6 style={{ whiteSpace: "nowrap" }}>
+                                {truncateName(item?.name) || "-"}
+                              </h6>
+                            </div>
+                          </div>
+                          <div className="featureslist d-flex align-items-center col-lg-4 col-md-4">
+                            <div
+                              className="feature-img"
+                              style={{ marginLeft: "87px" }}
+                            >
+                              <img src={locationBig} alt="" />
+                            </div>
+                            <div className="featues-info">
+                              <h6>{item?.location || "-"}</h6>
+                            </div>
+                          </div>
                         </div>
-                        <div className="featues-info">
-                          <h6 style={{ whiteSpace: "nowrap" }}>
-                            {listingDetail?.category?.name
-                              ? listingDetail?.category?.name
-                              : "-"}
-                          </h6>
-                        </div>
-                      </div>
-                      <div className="featureslist d-flex align-items-center col-lg-4 col-md-4">
-                        <div
-                          className="feature-img"
-                          style={{ marginLeft: "87px" }}
-                        >
-                          <img src={locationBig} alt="" />
-                        </div>
-                        <div className="featues-info">
-                          <h6>
-                            {listingDetail?.category?.location
-                              ? listingDetail?.category?.location
-                              : "-"}
-                          </h6>
-                        </div>
-                      </div>
-                    </div>
+                      ))}
                   </div>
                 </div>
               </div>

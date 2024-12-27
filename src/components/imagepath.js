@@ -180,7 +180,7 @@ export const Testimonial1 =
 export const Testimonial2 =
   "https://gilgalcareprovider.s3.ap-southeast-1.amazonaws.com/monial-2.jpg";
 export const contactform_img =
-  "https://gilgalcareprovider.s3.ap-southeast-1.amazonaws.com/ctform-img.svg";
+  "https://gilgalcareprovider.s3.ap-southeast-1.amazonaws.com/contactform_img.svg";
 export const apple =
   "https://gilgalcareprovider.s3.ap-southeast-1.amazonaws.com/.svg";
 export const google =

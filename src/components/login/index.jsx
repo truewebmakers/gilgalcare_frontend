@@ -13,7 +13,7 @@ import { customToast } from "../common/Toast";
 
 const Login = () => {
   const navigate = useNavigate();
-  const dispatch=useDispatch()
+  const dispatch = useDispatch();
   const [disable, setDisable] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const [passwordType, setPasswordType] = useState("password");
@@ -67,14 +67,15 @@ const Login = () => {
           dispatch(logInSuccess(userData));
           navigate(path.dashboard);
           setIsLoading(false);
-          customToast.success('Logged In Successfully');
+          customToast.success("Logged In Successfully");
           return;
         } else {
-          customToast.error(response?.data?.error);
+          let message = response?.data?.message || response?.data?.error;
+          customToast.error(message);
           setIsLoading(false);
         }
       } catch (err) {
-        customToast.error('err?.message');
+        customToast.error(err?.message);
         setIsLoading(false);
       }
     }
@@ -154,16 +155,16 @@ const Login = () => {
                   <button
                     className="btn btn-primary w-100 login-btn"
                     type="submit"
-                    onClick={(e)=>handleLogin(e)}
+                    onClick={(e) => handleLogin(e)}
                     disabled={disable}
                   >
                     {isLoading ? (
-                            <>
-                                &nbsp;&nbsp; <Loader />
-                            </>
-                        ) : (
-                          `Log In`
-                        )} 
+                      <>
+                        &nbsp;&nbsp; <Loader />
+                      </>
+                    ) : (
+                      `Log In`
+                    )}
                   </button>
                   <div className="register-link text-center">
                     <p>

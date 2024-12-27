@@ -32,19 +32,6 @@ export const LocationForm = ({
           />
           {error?.address && <p style={{ color: "red" }}>{error?.address}</p>}
         </div>
-        <div className="form-group">
-          <label className="col-form-label">Location</label>
-          <input
-            type="text"
-            className="form-control"
-            name="location"
-            value={locationInfo?.location}
-            onChange={handleChange}
-            data-handler="locationInfo"
-            autoComplete="off"
-          />
-          {error?.location && <p style={{ color: "red" }}>{error?.location}</p>}
-        </div>
         <MapSection
           markerPosition={markerPosition}
           setMarkerPosition={setMarkerPosition}

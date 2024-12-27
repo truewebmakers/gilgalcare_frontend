@@ -116,7 +116,11 @@ const UserHeader = () => {
                 </li>
                 <span className="user-type">
                   {profileData?.user_type
-                    ? CapitalizeFirstLetter(profileData?.user_type)
+                    ? profileData?.user_type?.toLowerCase() === "business"
+                      ? "Providers"
+                      : profileData?.user_type?.toLowerCase() === "user"
+                      ? "Participant"
+                      : "-"
                     : null}
                 </span>
               </ul>
