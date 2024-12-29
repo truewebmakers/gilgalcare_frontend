@@ -99,6 +99,6 @@ export const getCountries = async (setCountryList) => {
     setCountryList(formattedArray);
     sessionStorage.setItem("countries", JSON.stringify(formattedArray));
   } catch (error) {
-    toast.error("Error fetching countries: " + error.message);
+    customToast.error("Error fetching countries: " + error.message);
   }
 };

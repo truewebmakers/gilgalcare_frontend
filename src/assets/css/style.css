@@ -21333,3 +21333,54 @@ p {
 .terms-link:hover {
   color: #007bff;
 }
+
+/* Align Search and Reset Buttons with Filters */
+.header-bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between; /* Space between filter inputs and buttons */
+  gap: 10px; /* Adjust spacing between elements if needed */
+}
+
+/* Ensure all filter inputs and buttons are aligned */
+.header-bar .filter-content,
+.header-bar button {
+  display: flex;
+  align-items: center;
+  margin-right: 10px;
+}
+
+/* Reduce Space Between Header and Filters */
+.header-bar {
+  margin-top: 10px; /* Adjust as needed */
+  padding: 10px 0;
+}
+
+.container .list-content {
+  margin-top: 20px; /* Decrease space below the breadcrumb or header */
+}
+
+.no-data-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100vh; /* Full viewport height */
+  background-color: #f9f9f9; /* Light background */
+  text-align: center;
+  padding: 20px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  border-radius: 8px;
+}
+
+.no-data-title {
+  font-size: 24px;
+  font-weight: bold;
+  color: #333; /* Darker text */
+  margin-bottom: 10px;
+}
+
+.no-data-subtitle {
+  font-size: 16px;
+  color: #777; /* Lighter text */
+}

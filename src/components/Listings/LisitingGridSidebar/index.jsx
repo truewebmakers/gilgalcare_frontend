@@ -8,6 +8,8 @@ import UseApi from "../../../hooks/useApi";
 import { apiMethods, apiUrls } from "../../../constants/constant";
 import { getCategoryNameById } from "../../../utils/commonApis";
 import { CapitalizeFirstLetter } from "../../../utils/commonFunctions";
+import HeaderFilterBar from "./filterBar";
+import PageNotFound from "../../pageNotFound";
 
 const GridSidebar = () => {
   const parms = useLocation().pathname;
@@ -23,9 +25,11 @@ const GridSidebar = () => {
   const query = new URLSearchParams(location.search);
   const categoryIdVal = query.get("category") || "";
   const urlLocation = query.get("location") || "";
+  const [loading, setLoading] = useState("init");
 
   const fetchPublicBusinessListing = async (filters) => {
     try {
+      setLoading("fetching");
       const headers = {
         "Content-Type": "multipart/form-data",
       };
@@ -48,9 +52,11 @@ const GridSidebar = () => {
         null,
         headers
       );
+      setLoading("success");
       setListing(response?.data?.data || []);
     } catch (err) {
       console.error("Error fetching business listings:", err);
+      setLoading("error");
       return err;
     }
   };
@@ -99,162 +105,117 @@ const GridSidebar = () => {
       {/* Main Content Section */}
       <div className="list-content">
         <div className="container">
-          <div className="row">
-            <Sidebar
-              setFilters={setFilters}
+          <div className="header-bar">
+            <HeaderFilterBar
               filters={filters}
+              setFilters={setFilters}
               fetchPublicBusinessListing={fetchPublicBusinessListing}
             />
-            <div className="col-lg-8">
-              <div className="grid-view listgrid-sidebar">
-                <div className="row">
-                  {listing?.map((item) => (
-                    <div className="col-lg-6 col-md-4">
-                      <div className="card">
-                        <div className="blog-widget">
-                          <div className="blog-img">
-                            <Link
-                              to={`/listing-details/${item?.uuid}`}
-                              state={{ id: item?.id }}
-                            >
-                              <img
-                                src={item?.logo || listgrid_1}
-                                className="img-fluid"
-                                alt="blog-img"
-                                style={{
-                                  border: "1px solid black",
-                                  width: "600px",
-                                  height: "310px",
-                                }}
-                              />
-                            </Link>
-                          </div>
-                          <div className="bloglist-content">
-                            <div className="card-body">
-                              <div className="blogfeaturelink">
-                                <div className="grid-author">
-                                  <img
-                                    src={
-                                      item?.featured_image || ProfileAvatar02
-                                    }
-                                    alt="author"
-                                  />
+          </div>
+          {(loading === "success" || loading === "error") &&
+          listing?.length <= 0 ? (
+            <PageNotFound />
+          ) : (
+            <div className="row">
+              <div className="container">
+                <div className="bookmarks-content grid-view featured-slider">
+                  <div className="row align-items-center justify-content-center">
+                    {listing?.map((item) => (
+                      <div className="col-xl-4 col-lg-6 col-md-6 col-sm-12 aos aos-init aos-animate">
+                        <div className="card flex-fill">
+                          <div className="blog-widget">
+                            <div className="blog-img">
+                              <Link
+                                to={`/listing-details/${item?.uuid}`}
+                                state={{ id: item?.id }}
+                              >
+                                <img
+                                  src={item?.logo || listgrid_1}
+                                  className="img-fluid"
+                                  alt="blog-img"
+                                  style={{
+                                    border: "1px solid black",
+                                    width: "600px",
+                                    height: "310px",
+                                  }}
+                                />
+                              </Link>
+                            </div>
+                            <div className="bloglist-content">
+                              <div className="card-body">
+                                <div className="blogfeaturelink">
+                                  <div className="grid-author">
+                                    <img
+                                      src={
+                                        item?.featured_image || ProfileAvatar02
+                                      }
+                                      alt="author"
+                                    />
+                                  </div>
+                                  <div className="blog-features">
+                                    <Link to="#">
+                                      <span>
+                                        {" "}
+                                        <b>Category: </b>
+                                        {item?.categories?.length
+                                          ? getCategoryNameById(
+                                              item?.categories[0]?.id
+                                            )
+                                          : "-"}
+                                      </span>
+                                    </Link>
+                                  </div>
                                 </div>
-                                <div className="blog-features">
-                                  <Link to="#">
-                                    <span>
-                                      {" "}
-                                      <b>Category: </b>
-                                      {item?.categories?.length
-                                        ? getCategoryNameById(
-                                            item?.categories[0]?.id
-                                          )
-                                        : "-"}
-                                    </span>
+                                <h6>
+                                  <Link
+                                    to={`/listing-details/${item?.uuid} `}
+                                    state={{ id: item?.id }}
+                                  >
+                                    {item?.listing_title || "-"}
                                   </Link>
+                                </h6>
+                                <div className="blog-location-details">
+                                  <div className="location-info">
+                                    <i className="feather-map-pin" />{" "}
+                                    {item?.address || "-"}
+                                  </div>
+                                  <div className="location-info">
+                                    <i className="feather-phone-call" />
+                                    {item?.phone || "-"}
+                                  </div>
+                                  <div className="location-info">
+                                    <i className="feather-email" />{" "}
+                                    {item?.email || "-"}
+                                  </div>
                                 </div>
-                              </div>
-                              <h6>
-                                <Link
-                                  to={`/listing-details/${item?.uuid} `}
-                                  state={{ id: item?.id }}
-                                >
-                                  {item?.listing_title || "-"}
-                                </Link>
-                              </h6>
-                              <div className="blog-location-details">
-                                <div className="location-info">
-                                  <i className="feather-map-pin" />{" "}
-                                  {item?.address || "-"}
-                                </div>
-                                <div className="location-info">
-                                  <i className="feather-phone-call" />
-                                  {item?.phone || "-"}
-                                </div>
-                                <div className="location-info">
-                                  <i className="feather-email" />{" "}
-                                  {item?.email || "-"}
-                                </div>
-                              </div>
-                              <div className="amount-details">
-                                <div className="amount">
-                                  <span className="validrate">
-                                    ${item?.price_from || 0} -{" "}
-                                  </span>
-                                  <span className="validrate">
-                                    ${item?.price_to || 0}
-                                  </span>
-                                </div>
-                                <div className="ratings">
-                                  <span>
-                                    {CapitalizeFirstLetter(item?.status)}
-                                  </span>
+                                <div className="amount-details">
+                                  <div className="amount">
+                                    <span className="validrate">
+                                      ${item?.price_from || 0} -{" "}
+                                    </span>
+                                    <span className="validrate">
+                                      ${item?.price_to || 0}
+                                    </span>
+                                  </div>
+                                  <div className="ratings">
+                                    <span>
+                                      {CapitalizeFirstLetter(item?.status)}
+                                    </span>
+                                  </div>
                                 </div>
                               </div>
                             </div>
                           </div>
                         </div>
                       </div>
-                    </div>
-                  ))}
+                    ))}
+                  </div>
                 </div>
               </div>
-
-              {/*Pagination*/}
-              {/* <div className="blog-pagination">
-                <nav>
-                  <ul className="pagination">
-                    <li className="page-item previtem">
-                      <Link className="page-link" to="#">
-                        <i className="fas fa-regular fa-arrow-left" /> Prev
-                      </Link>
-                    </li>
-                    <li className="justify-content-center pagination-center">
-                      <div className="pagelink">
-                        <ul>
-                          <li className="page-item">
-                            <Link className="page-link" to="#">
-                              1
-                            </Link>
-                          </li>
-                          <li className="page-item active">
-                            <Link className="page-link" to="#">
-                              2{" "}
-                              <span className="visually-hidden">(current)</span>
-                            </Link>
-                          </li>
-                          <li className="page-item">
-                            <Link className="page-link" to="#">
-                              3
-                            </Link>
-                          </li>
-                          <li className="page-item">
-                            <Link className="page-link" to="#">
-                              ...
-                            </Link>
-                          </li>
-                          <li className="page-item">
-                            <Link className="page-link" to="#">
-                              14
-                            </Link>
-                          </li>
-                        </ul>
-                      </div>
-                    </li>
-                    <li className="page-item nextlink">
-                      <Link className="page-link" to="#">
-                        Next <i className="fas fa-regular fa-arrow-right" />
-                      </Link>
-                    </li>
-                  </ul>
-                </nav>
-              </div> */}
-              {/*Pagination*/}
             </div>
-          </div>
+          )}
         </div>
       </div>
-      {/* /Main Content Section */}
 
       <Footer />
     </>
