@@ -5,7 +5,7 @@ import { AddReview } from "./addReview";
 import moment from "moment";
 import { useSelector } from "react-redux";
 
-export const Review = ({ getListingReview }) => {
+export const Review = ({ getListingReview = () => {} }) => {
   const [reviewList, setReviewList] = useState([]);
   const { user } = useSelector((state) => state.auth);
 

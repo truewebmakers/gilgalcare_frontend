@@ -15,12 +15,14 @@ import mailIcon from "../../../assets/svg/mail.svg";
 import location from "../../../assets/svg/map-pin.svg";
 import eye from "../../../assets/svg/eye.svg";
 import locationBig from "../../../assets/svg/locationBig.svg";
-import { Review } from "../PublicListingDetails/Review";
-import { Ratings } from "../PublicListingDetails/Ratingsx";
 import { ListDetails } from "../PublicListingDetails/listDetails";
 import moment from "moment";
 import { Statistics } from "../PublicListingDetails/Statistics";
 import BookmarkIcon from "../../../assets/svg/bookmark.svg";
+import { fetchAvailability } from "../../../services/fetchAvailablity";
+import WorkingHoursModal from "../PublicListingDetails/WorkingHoursModal";
+import { truncateName } from "../../../utils/commonFunctions";
+import { ReviewListingComp } from "../PublicListingDetails/ReviewListingComp";
 
 const MyListingDetails = () => {
   const parms = useLocation();
@@ -28,6 +30,7 @@ const MyListingDetails = () => {
   const { user, profileData } = useSelector((state) => state.auth);
   const [listingDetail, setListingDetail] = useState({});
   const [features, setFeatures] = useState([]);
+  const [workingHours, setWorkingHours] = useState([]);
 
   const getListingDetail = async () => {
     try {
@@ -57,6 +60,7 @@ const MyListingDetails = () => {
 
   useEffect(() => {
     getListingDetail();
+    fetchAvailability(setWorkingHours, id, user?.token);
   }, [id]);
 
   useEffect(() => {
@@ -200,41 +204,36 @@ const MyListingDetails = () => {
                 </div>
                 <div className="card-body">
                   <div className="lisiting-featues">
-                    <div className="row">
-                      <div className="featureslist d-flex align-items-center col-lg-4 col-md-4">
-                        <div className="feature-img">
-                          <img
-                            src={listingDetail?.category?.feature_image || ""}
-                            alt=""
-                          />
+                    {listingDetail?.categories &&
+                      listingDetail?.categories?.map((item, index) => (
+                        <div className="row" key={index}>
+                          <div className="featureslist d-flex align-items-center col-lg-4 col-md-4">
+                            <div className="feature-img">
+                              <img src={item?.feature_image || ""} alt="" />
+                            </div>
+                            <div className="featues-info">
+                              <h6 style={{ whiteSpace: "nowrap" }}>
+                                {truncateName(item?.name) || "-"}
+                              </h6>
+                            </div>
+                          </div>
+                          <div className="featureslist d-flex align-items-center col-lg-4 col-md-4">
+                            <div
+                              className="feature-img"
+                              style={{ marginLeft: "87px" }}
+                            >
+                              <img src={locationBig} alt="" />
+                            </div>
+                            <div className="featues-info">
+                              <h6>{item?.location || "-"}</h6>
+                            </div>
+                          </div>
                         </div>
-                        <div className="featues-info">
-                          <h6 style={{ whiteSpace: "nowrap" }}>
-                            {listingDetail?.category?.name
-                              ? listingDetail?.category?.name
-                              : "-"}
-                          </h6>
-                        </div>
-                      </div>
-                      <div className="featureslist d-flex align-items-center col-lg-4 col-md-4">
-                        <div
-                          className="feature-img"
-                          style={{ marginLeft: "87px" }}
-                        >
-                          <img src={locationBig} alt="" />
-                        </div>
-                        <div className="featues-info">
-                          <h6>
-                            {listingDetail?.category?.address
-                              ? listingDetail?.category?.address
-                              : "-"}
-                          </h6>
-                        </div>
-                      </div>
-                    </div>
+                      ))}
                   </div>
                 </div>
               </div>
+              <WorkingHoursModal workingHours={workingHours} />
               {/*/category Section*/}
               {/* Gallery Section */}
               <div className="card gallery-section ">
@@ -250,10 +249,7 @@ const MyListingDetails = () => {
               </div>
               {/*/Gallery Section*/}
               {/* Rating Section */}
-              <Ratings />
-              {/* Rating Section */}
-              {/*Review  Section*/}
-              <Review />
+              <ReviewListingComp />
               {/*/Review Section*/}
             </div>
             <div className="col-lg-3 theiaStickySidebar">

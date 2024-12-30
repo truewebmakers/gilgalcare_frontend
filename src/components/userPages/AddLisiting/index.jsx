@@ -73,7 +73,6 @@ const AddLisiting = () => {
 
   const fetchMyListingData = async () => {
     const response = await fetchMyListingDetail(user?.token, id);
-    console.log(response, "resssssssssssss");
 
     setListingFields((prevFields) => {
       return Object.entries(prevFields).reduce((acc, [key, _]) => {
@@ -137,7 +136,6 @@ const AddLisiting = () => {
       ...galleryImagesBinary,
     }));
   };
-  console.log(listingFields, "listingFields");
 
   const convertToApiKey = (key) => {
     // Convert the camelCase keys to snake_case keys as used in the API response
@@ -156,7 +154,7 @@ const AddLisiting = () => {
     fetchCategoriesData();
     if (id) {
       fetchMyListingData();
-      fetchAvailability(setAvailability, setEnabledDays, user?.token, id);
+      fetchAvailability(setAvailability, id, user?.token, setEnabledDays);
     }
   }, []);
 
@@ -175,7 +173,6 @@ const AddLisiting = () => {
 
   // api handler for add lsiting
   const handleAddListing = async (e) => {
-    console.log("helooooo");
     e.preventDefault();
     const allFields = {
       ...listingFields,
@@ -183,7 +180,6 @@ const AddLisiting = () => {
       ...uploadPic,
       addedBy: user?.userInfo?.id, // Add user ID to the listing data
     };
-    console.log("helooooo 1");
 
     let newErr = {};
     for (let key in allFields) {
@@ -192,13 +188,9 @@ const AddLisiting = () => {
         ...validateListingFields(key, allFields[key], listingFields),
       };
     }
-    console.log("helooooo 2");
     if (areAllFieldsFilled(allFields)) {
       setError(newErr);
-      console.log("helooooo 3");
       if (!isTimeDifferenceValid(availability, enabledDays)) {
-        console.log("i am hereeeeeeee");
-        console.log("helooooo 4");
         return;
       } else if (!hasErrors(newErr)) {
         setIsLoading(true);
@@ -208,7 +200,6 @@ const AddLisiting = () => {
           response = id
             ? await editListingService(allFields, id, user?.token, galleryImage)
             : await addListingService(allFields, user?.token, galleryImage);
-          console.log(response, "ressssss");
 
           // Check if `addListingService` returned a listingId
           if (response?.listing?.id) {
@@ -221,8 +212,6 @@ const AddLisiting = () => {
             );
           }
         } catch (err) {
-          console.log("helooooo 5");
-
           customToast.error(
             err?.message ||
               "Encountered some error while adding listing. Please fill all field correctly"
@@ -262,19 +251,15 @@ const AddLisiting = () => {
     // Handle basic info updates
     if (dataset?.handler === "basicInfo1") {
       if (name === "categoryId") {
-        const selectedIds = listingFields?.categoryId || []; // Initialize as an array if not already
-        let updatedIds;
+        // Ensure value is treated as a string for consistency
+        const selectedIds = listingFields?.categoryId || []; // Initialize as an array if undefined
+        const updatedIds = selectedIds?.includes(value)
+          ? selectedIds?.filter((id) => id !== value) // Remove the unchecked category
+          : [...selectedIds, value]; // Add the checked category
 
-        if (selectedIds.includes(value)) {
-          // If the value already exists, remove it (uncheck)
-          updatedIds = selectedIds.filter((id) => id !== value);
-        } else {
-          // Otherwise, add the value (check)
-          updatedIds = [...selectedIds, value];
-        }
         setListingFields((prevState) => ({
           ...prevState,
-          [name]: updatedIds, // Update the categoryId with the new array
+          categoryId: updatedIds, // Update categoryId with the new array
         }));
       } else {
         setListingFields((prevState) => ({ ...prevState, [name]: value }));
@@ -311,7 +296,6 @@ const AddLisiting = () => {
       setError((prevError) => ({ ...prevError, ...newErr }));
     }
   };
-  console.log(error, "liiiii");
 
   return (
     <>

@@ -21336,10 +21336,11 @@ p {
 
 /* Align Search and Reset Buttons with Filters */
 .header-bar {
-  display: flex;
-  align-items: center;
-  justify-content: space-between; /* Space between filter inputs and buttons */
-  gap: 10px; /* Adjust spacing between elements if needed */
+  box-shadow: 0px 0px 20px rgb(0 0 0 / 5%);
+  padding: 20px;
+  background-color: #ffffff;
+  margin-bottom: 30px;
+  border-radius: 20px;
 }
 
 /* Ensure all filter inputs and buttons are aligned */

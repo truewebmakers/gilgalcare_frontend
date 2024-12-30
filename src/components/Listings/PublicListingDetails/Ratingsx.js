@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 
-export const Ratings = ({ getListingReview }) => {
+export const Ratings = ({ getListingReview = () => {} }) => {
   const [reviewList, setReviewList] = useState([]);
 
   useEffect(() => {

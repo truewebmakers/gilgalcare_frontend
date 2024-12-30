@@ -24,7 +24,7 @@ export const Banner = ({ categories }) => {
 
     if (query?.length > 1) {
       // Filter the countryList based on the input query (case-insensitive match)
-      const filteredSuggestions = countryList.filter((country) =>
+      const filteredSuggestions = countryList?.filter((country) =>
         country?.name?.toLowerCase()?.includes(query?.toLowerCase())
       );
       setLocationSuggestions(filteredSuggestions);

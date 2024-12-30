@@ -119,7 +119,7 @@ const GridSidebar = () => {
             <div className="row">
               <div className="container">
                 <div className="bookmarks-content grid-view featured-slider">
-                  <div className="row align-items-center justify-content-center">
+                  <div className="row align-items-center">
                     {listing?.map((item) => (
                       <div className="col-xl-4 col-lg-6 col-md-6 col-sm-12 aos aos-init aos-animate">
                         <div className="card flex-fill">

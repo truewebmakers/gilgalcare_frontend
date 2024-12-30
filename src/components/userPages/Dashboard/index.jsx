@@ -43,8 +43,6 @@ const Dashboard = () => {
     getDashboardStats();
   }, []);
 
-  console.log(user?.userInfo?.user_type === "business", "userrrrr");
-
   return (
     <>
       <UserHeader parms={parms} />

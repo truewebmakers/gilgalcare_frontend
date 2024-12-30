@@ -75,7 +75,11 @@ export const BasicInfoForm = ({
                       type="checkbox"
                       name="categoryId"
                       value={item?.id}
-                      checked={basicInfo1?.categoryId?.includes(item?.id)} // Check if the category is selected
+                      checked={
+                        basicInfo1?.categoryId?.includes(
+                          item?.id?.toString()
+                        ) || basicInfo1?.categoryId?.includes(item?.id)
+                      } // Check if the category is selected
                       onChange={handleChange}
                       data-handler="basicInfo1"
                       autoComplete="off"

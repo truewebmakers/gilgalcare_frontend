@@ -3,10 +3,10 @@ import { apiMethods, apiUrls } from "../constants/constant";
 import UseApi from "../hooks/useApi";
 
 export const fetchAvailability = async (
-  setAvailability,
-  setEnabledDays,
+  setAvailability = () => {},
+  id,
   token,
-  id
+  setEnabledDays = () => {}
 ) => {
   const headers = {
     Authorization: `Bearer ${token}`,

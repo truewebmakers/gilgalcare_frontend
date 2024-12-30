@@ -106,7 +106,6 @@ const Trending5 = () => {
                       <div className="blogfeaturelink">
                         <div className="blog-author text-end">
                           <span>
-                            {console.log(item, "ittttttttttttt")}
                             <i className="feather-map-pin"></i>{" "}
                             {item?.address
                               ? CapitalizeFirstLetter(item?.address)

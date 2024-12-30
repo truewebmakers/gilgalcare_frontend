@@ -1,13 +1,13 @@
 import React, { useEffect } from "react";
 import Header from "../../home/header/Header";
 import Footer from "../../home/footer/Footer";
-import { defaultPic, galleryicon, profile_img, website } from "../../imagepath";
+import { defaultPic, galleryicon } from "../../imagepath";
 import StickyBox from "react-sticky-box";
 import { useState } from "react";
-import { Link, useLocation } from "react-router-dom";
+import { useLocation } from "react-router-dom";
 import Rooms from "./myComponent2";
 import Roomspics from "./myComponent3";
-import { apiMethods, apiUrls, dateFormat } from "../../../constants/constant";
+import { apiMethods, apiUrls } from "../../../constants/constant";
 import UseApi from "../../../hooks/useApi";
 import { customToast } from "../../common/Toast";
 import mailIcon from "../../../assets/svg/mail.svg";
@@ -15,18 +15,14 @@ import shareIcon from "../../../assets/svg/share-2.svg";
 import location from "../../../assets/svg/map-pin.svg";
 import eye from "../../../assets/svg/eye.svg";
 import locationBig from "../../../assets/svg/locationBig.svg";
-import calendar from "../../../assets/svg/calendar.svg";
-import {
-  CapitalizeFirstLetter,
-  truncateName,
-} from "../../../utils/commonFunctions";
-import { Review } from "./Review";
-import { Ratings } from "./Ratingsx";
+import { truncateName } from "../../../utils/commonFunctions";
 import { ListDetails } from "./listDetails";
 import { Statistics } from "./Statistics";
 import { incrementShares } from "../../../services/incrementShares";
 import BookmarkIcon from "../../../assets/svg/bookmark.svg";
 import { ReviewListingComp } from "./ReviewListingComp";
+import WorkingHoursModal from "./WorkingHoursModal";
+import { fetchAvailability } from "../../../services/fetchAvailablity";
 
 const ServiceDetails = () => {
   const parms = useLocation();
@@ -34,6 +30,7 @@ const ServiceDetails = () => {
   const [listingDetail, setListingDetail] = useState({});
   const [features, setFeatures] = useState([]);
   const [shareUpdated, setShareUpdated] = useState(false);
+  const [workingHours, setWorkingHours] = useState([]);
 
   const getListingDetail = async () => {
     try {
@@ -60,6 +57,11 @@ const ServiceDetails = () => {
 
   useEffect(() => {
     getListingDetail();
+    fetchAvailability(
+      setWorkingHours,
+      id,
+      "111|EcL6b1VnXnz2b7Fg2VUsCvXrsrnyqXfdOX63gPW011bd0d10"
+    );
   }, [id]);
 
   useEffect(() => {
@@ -267,6 +269,7 @@ const ServiceDetails = () => {
                   </div>
                 </div>
               </div>
+              <WorkingHoursModal workingHours={workingHours} />
               {/*/category Section*/}
               {/* Gallery Section */}
               {listingDetail?.meta?.length ? (

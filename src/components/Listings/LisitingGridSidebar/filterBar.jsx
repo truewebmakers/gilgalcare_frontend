@@ -54,6 +54,10 @@ const HeaderFilterBar = ({
     };
     setFilters(resetFilters);
     fetchPublicBusinessListing(resetFilters);
+
+    // Reset the value of the select dropdown
+    const categorySelect = document.querySelector('select[name="category_id"]');
+    if (categorySelect) categorySelect.value = "";
   };
 
   const handleSearch = () => {

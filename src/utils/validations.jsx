@@ -344,10 +344,8 @@ export const isTimeDifferenceValid = (availability, enabledDays) => {
         const startTime = new Date(`1970-01-01T${time.start}:00`);
         const endTime = new Date(`1970-01-01T${time.end}:00`);
         const differenceInHours = (endTime - startTime) / (1000 * 60 * 60);
-        console.log(time, "differenceInHours,", differenceInHours);
 
         if (!time?.start || !time?.end || differenceInHours < 2) {
-          console.log("hiiiii");
           customToast.error(
             `The difference b/w ${day}'s start time & end time should be at least 2 hours.`
           );
