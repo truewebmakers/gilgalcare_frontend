@@ -76,6 +76,7 @@ export const fetchAllCategories = async (setCategories = () => {}) => {
 };
 
 export const getCategoryNameById = (id) => {
+   
   let categories = localStorage.getItem("categories");
   const category =
     categories?.length &&
@@ -99,6 +100,6 @@ export const getCountries = async (setCountryList) => {
     setCountryList(formattedArray);
     sessionStorage.setItem("countries", JSON.stringify(formattedArray));
   } catch (error) {
-    customToast.error("Error fetching countries: " + error.message);
+    // customToast.error("Error fetching countries: " + error.message);
   }
 };

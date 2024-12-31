@@ -120,8 +120,8 @@ const GridSidebar = () => {
               <div className="container">
                 <div className="bookmarks-content grid-view featured-slider">
                   <div className="row align-items-center">
-                    {listing?.map((item) => (
-                      <div className="col-xl-4 col-lg-6 col-md-6 col-sm-12 aos aos-init aos-animate">
+                    {listing?.map((item,key) => (
+                      <div className="col-xl-4 col-lg-6 col-md-6 col-sm-12 aos aos-init aos-animate" key={key}>
                         <div className="card flex-fill">
                           <div className="blog-widget">
                             <div className="blog-img">
@@ -156,12 +156,12 @@ const GridSidebar = () => {
                                     <Link to="#">
                                       <span>
                                         {" "}
-                                        <b>Category: </b>
+                                        <b>Categories: </b>
                                         {item?.categories?.length
-                                          ? getCategoryNameById(
-                                              item?.categories[0]?.id
-                                            )
-                                          : "-"}
+                                                ? item?.categories.slice(0, 3) // Limit to 3 categories
+                                                    .map((category, index) => getCategoryNameById(category?.id)) // Map over the categories
+                                                    .join(', ') // Join them with commas
+                                                : "-"}
                                       </span>
                                     </Link>
                                   </div>
@@ -189,7 +189,7 @@ const GridSidebar = () => {
                                   </div>
                                 </div>
                                 <div className="amount-details">
-                                  <div className="amount">
+                                  <div className="amount d-none">
                                     <span className="validrate">
                                       ${item?.price_from || 0} -{" "}
                                     </span>
@@ -197,7 +197,7 @@ const GridSidebar = () => {
                                       ${item?.price_to || 0}
                                     </span>
                                   </div>
-                                  <div className="ratings">
+                                  <div className="ratings d-none">
                                     <span>
                                       {CapitalizeFirstLetter(item?.status)}
                                     </span>

@@ -13,7 +13,7 @@ export const Banner = ({ categories }) => {
   const handleSearch = (e) => {
     e.preventDefault();
     navigate(
-      `/listing-grid-sidebar?category=${selectedCategory}&location=${location}`
+      `/our-listing?category=${selectedCategory}&location=${location}`
     );
   };
 

@@ -320,11 +320,11 @@ const AddLisiting = () => {
                   categoriesList={categoriesList}
                 />
               </div>
-              <PriceAndFeaturesForm
+              {/* <PriceAndFeaturesForm
                 basicInfo2={listingFields}
                 error={error}
                 handleChange={handleChange}
-              />
+              /> */}
               <LocationForm
                 locationInfo={listingFields}
                 setLocation={setListingFields}

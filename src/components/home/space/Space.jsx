@@ -41,7 +41,7 @@ export const Space = () => {
                   </li>
                 </ul>
               </div>
-              <Link to="/listing-grid-sidebar" className="btn btn-grey">
+              <Link to="/our-listing" className="btn btn-grey">
                 Get Started <i className="feather-arrow-right"></i>
               </Link>
             </div>

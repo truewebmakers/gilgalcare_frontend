@@ -33,7 +33,7 @@ export default function UserAvailability({
   };
 
   return (
-    <div className="ps-widget bgc-white bdrs4 p30 mb30 position-relative">
+    <div className="ps-widget bgc-white bdrs4 p30 mb30 position-relative card">
       <div className="bdrb1 pb15 mb30 d-sm-flex justify-content-between align-items-center">
         <h5 className="list-title">Available days and times</h5>
         <p>
@@ -41,11 +41,15 @@ export default function UserAvailability({
         </p>
       </div>
       <div className="col-lg-14">
+      
         <div className="availability-container">
           {Object.keys(availability).map((day, index) => (
             <div key={day} className="day-section">
               <div className="day-header">
                 <div className="col-sm-3 mb4">
+            
+
+
                   <label className="heading-color ff-heading fw500">
                     {day}
                   </label>
@@ -84,7 +88,7 @@ export default function UserAvailability({
                       }
                       placeholder="End time"
                     />
-                    <button
+                    {/* <button
                       className="delete-time-btn ml-2"
                       onClick={() => handleDeleteTime(day, idx)}
                       style={{
@@ -94,18 +98,18 @@ export default function UserAvailability({
                         cursor: "pointer",
                       }}
                     >
-                      ✕
-                    </button>
+                      <i className="fa fa-trash"></i>
+                    </button> */}
                   </div>
                 ))}
-              {enabledDays[day] && (
+              {/* {enabledDays[day] && (
                 <button
                   className="add-time-btn"
                   onClick={() => handleAddTime(day)}
                 >
                   + Add another time
                 </button>
-              )}
+              )} */}
             </div>
           ))}
         </div>

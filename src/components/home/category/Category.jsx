@@ -18,25 +18,27 @@ export const Category = ({ categories }) => {
           </div>
           <div className="col-md-12">
             <ul className="category-items text-center">
-              {newCategories?.map((item) => (
-                <li className="aos" data-aos="fade-up" key={item?.value}>
-                  <div className="categories-box">
-                    <div className="categories-info">
-                      {/* <span>
-                        <img
-                          src={item?.image || Category27Svg}
-                          className="img-fluid"
-                          alt="img"
-                          height={50}
-                          width={50}
-                        />
-                      </span> */}
-                      <h6>{item?.label}</h6>
-                      <p>{item?.location}</p>
-                    </div>
-                  </div>
-                </li>
-              ))}
+            {newCategories?.slice(0, 6).map((item) => (
+  <li className="aos" data-aos="fade-up" key={item?.value}>
+    <div className="categories-box">
+      <div className="categories-info">
+        {/* <span>
+          <img
+            src={item?.image || Category27Svg}
+            className="img-fluid"
+            alt="img"
+            height={50}
+            width={50}
+          />
+        </span> */}
+       <h6>{item?.label?.length > 20 ? `${item?.label?.slice(0, 40)}...` : item?.label}</h6>
+
+        {/* <p>{item?.location}</p> */}
+      </div>
+    </div>
+  </li>
+))}
+
             </ul>
             {/* <ul className="category-items text-center">
               <li className="aos" data-aos="fade-up">

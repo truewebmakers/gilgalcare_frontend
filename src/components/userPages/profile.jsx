@@ -251,6 +251,20 @@ const Profile = () => {
                             />
                           </div>
                         </div>
+                        <button
+                          className="btn btn-primary updateProfileButton"
+                          type="submit"
+                          onClick={(e) => handleSave(e)}
+                        >
+                          {" "}
+                          {isLoading ? (
+                            <>
+                              &nbsp;&nbsp; <Loader />
+                            </>
+                          ) : (
+                            `Update Profile`
+                          )}
+                        </button>
                       </form>
                     </div>
                   </div>
@@ -260,20 +274,6 @@ const Profile = () => {
               <ChangePassword />
             </div>
           </div>
-          <button
-            className="btn btn-primary updateProfileButton"
-            type="submit"
-            onClick={(e) => handleSave(e)}
-          >
-            {" "}
-            {isLoading ? (
-              <>
-                &nbsp;&nbsp; <Loader />
-              </>
-            ) : (
-              `Update Profile`
-            )}
-          </button>
         </div>
         {profileData?.user_type?.toLowerCase() === "business" ? (
           <GetUserSubscription />

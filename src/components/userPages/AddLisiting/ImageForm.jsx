@@ -22,7 +22,7 @@ export const ImageForm = ({ selectedImage, error, handleChange }) => {
               }}
             />
             {/* </div> */}
-            <div className="settings-upload-btn">
+            <div className="settings-upload-btn mt-2">
               <input
                 type="file"
                 accept="image/*"
@@ -44,7 +44,7 @@ export const ImageForm = ({ selectedImage, error, handleChange }) => {
             <h6 className="media-title">Logo</h6>
             {/* <div className="media-image"> */}
             <img
-              src={selectedImage?.logo || mediaimg_1}
+              src={selectedImage?.logo || defaultPic}
               alt="Logo"
               style={{
                 width: "300px",
@@ -53,7 +53,7 @@ export const ImageForm = ({ selectedImage, error, handleChange }) => {
               }}
             />
             {/* </div> */}
-            <div className="settings-upload-btn">
+            <div className="settings-upload-btn mt-2">
               <input
                 type="file"
                 accept="image/*"

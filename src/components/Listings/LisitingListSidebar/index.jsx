@@ -80,7 +80,7 @@ const ListSidebar = () => {
                         </Link>
                       </li>
                       <li>
-                        <Link to="/listing-grid-sidebar">
+                        <Link to="/our-listing">
                           <i className="feather-grid" />
                         </Link>
                       </li>

@@ -129,7 +129,7 @@ const Contract = () => {
             <p>Contact Gilgal Provider Finder | Get Help and Support Today</p>
           </div>
           <div className="row align-items-center">
-            <div className="col-lg-5 col-md-5">
+            {/* <div className="col-lg-5 col-md-5">
               <div className="contactform-img">
                 <img
                   src="/img/contactform-img.svg"
@@ -137,33 +137,36 @@ const Contract = () => {
                   alt=""
                 />
               </div>
-            </div>
-            <div className="col-lg-7 col-md-7">
+            </div> */}
+            <div className="col-lg-12col-md-7">
               <div className="contactus-form">
                 <form onSubmit={handleContactUs}>
-                  <div className="form-group">
+                  <div className="row">
+                    <div className="col-lg-6">
                     <input
                       type="text"
                       className="form-control"
-                      placeholder="First Name*"
+                      placeholder="Full Name*"
                       name="first_name"
                       value={formData.first_name}
                       onChange={handleChange}
                       required
                     />
-                  </div>
-                  <div className="form-group">
+                    </div>
+                    <div className="col-lg-6">
                     <input
                       type="text"
                       className="form-control"
-                      placeholder="Last Name*"
+                      placeholder="Company Name*"
                       name="last_name"
                       value={formData.last_name}
                       onChange={handleChange}
                       required
                     />
+                      </div>
                   </div>
-                  <div className="form-group">
+                  <div className="row mt-3">
+                    <div className="col-lg-6">
                     <input
                       type="email"
                       className="form-control"
@@ -173,9 +176,8 @@ const Contract = () => {
                       onChange={handleChange}
                       required
                     />
-                  </div>
-                  {/* Phone Number Field */}
-                  <div className="form-group">
+                    </div>
+                    <div className="col-lg-6">
                     <input
                       type="text"
                       className="form-control"
@@ -186,8 +188,10 @@ const Contract = () => {
                       maxLength={10} // Limit to 10 digits
                       required
                     />
-                  </div>
-                  <div className="form-group">
+                    </div>
+                    </div>
+                  
+                  <div className="form-group mt-3">
                     <input
                       type="text"
                       className="form-control"
@@ -203,8 +207,8 @@ const Contract = () => {
                     <textarea
                       rows={4}
                       className="form-control"
-                      placeholder="Query*"
-                      name="query"
+                      placeholder="How Can We Help You?*"
+                      name="How Can We Help You?"
                       value={formData.query}
                       onChange={handleChange}
                       required

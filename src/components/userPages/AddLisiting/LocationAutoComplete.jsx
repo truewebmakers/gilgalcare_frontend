@@ -52,7 +52,6 @@ const MapSection = ({
       if (results?.length > 0) {
         const addressComponents = results[0]?.address_components;
         const formattedAddress = results[0]?.formatted_address;
-
         // Extract state and country
         const state = addressComponents?.find((component) =>
           component?.types?.includes("administrative_area_level_1")

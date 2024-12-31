@@ -168,7 +168,7 @@ const ServiceDetails = () => {
                     <span>
                       <i
                         className="feather-phone-call"
-                        style={{ color: "red" }}
+                        
                       />{" "}
                       {listingDetail?.phone ? listingDetail?.phone : "-"}
                     </span>

@@ -23,9 +23,7 @@ const Footer = () => {
                 </div>
                 <div className="footer-content">
                   <p>
-                    Lörem ipsum od ohet dilogi. Bell trabel, samuligt, ohöbel
-                    utom diska. Jinesade bel när feras redorade i belogi. FAR
-                    paratyp i muvåning, och pesask vyfisat.{" "}
+                  Gilgal Provider Finder empowers NDIS participants to connect with trusted, top-quality service providers tailored to their needs. Our user-friendly platform ensures access to reliable support, from daily assistance to specialized therapies, all within your community.{" "}
                   </p>
                 </div>
                 {/* <div className="social-icon">
@@ -60,19 +58,22 @@ const Footer = () => {
                 <h2 className="footer-title">Quick Links</h2>
                 <ul>
                   <li>
-                    <Link to="#">Restaurant</Link>
+                    <Link to="/">Home</Link>
                   </li>
                   <li>
-                    <Link to="#">Beauty</Link>
+                    <Link to="/our-listing">Our Listing</Link>
                   </li>
                   <li>
-                    <Link to="#">Fitness</Link>
+                    <Link to="/about">About Us</Link>
                   </li>
                   <li>
-                    <Link to="#">Night Life</Link>
+                    <Link to="/contact">Contact Us</Link>
                   </li>
                   <li>
-                    <Link to="#">Shopping</Link>
+                    <Link to="#">Privacy & Policy</Link>
+                  </li>
+                  <li>
+                    <Link to="#">Terms & Conditions</Link>
                   </li>
                 </ul>
               </div>
@@ -107,7 +108,7 @@ const Footer = () => {
               <div className="col-md-12">
                 <div className="copyright-text text-center">
                   <p className="mb-0">
-                    2024 &copy; GilgalCareProvider. All rights reserved.
+                  {new Date().getFullYear()}  &copy; GilgalCareProvider. All rights reserved.
                   </p>
                 </div>
               </div>

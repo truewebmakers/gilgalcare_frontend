@@ -71,7 +71,7 @@ const Trending5 = () => {
                 className="section-heading heading-five aos"
                 data-aos="fade-up"
               >
-                <h2>Trending Business Places</h2>
+                <h2>Trending Listings</h2>
               </div>
             </div>
           </div>
@@ -80,7 +80,7 @@ const Trending5 = () => {
             className="silderBotton business-slider grid-view"
           >
             {trendingData?.map((item, index) => (
-              <div className="card business-card aos" data-aos="fade-up">
+              <div className="card business-card aos" data-aos="fade-up" key={index}>
                 <div className="blog-widget">
                   <div className="blog-img">
                     <Link
@@ -97,7 +97,7 @@ const Trending5 = () => {
                       />
                     </Link>
                   </div>
-                  <div className="bloglist-content">
+                  <div className="bloglist-content" key={index}>
                     <div className="card-body">
                       <span className="Featured-text">Featured</span>
                       <div className="grid-author">
@@ -124,7 +124,7 @@ const Trending5 = () => {
                         </Link>
                       </h6>
                       <div className="amount-details">
-                        <div className="amount">
+                        <div className="amount d-none">
                           <span className="validrate">
                             ${item?.price_to ? item?.price_to : null}
                           </span>

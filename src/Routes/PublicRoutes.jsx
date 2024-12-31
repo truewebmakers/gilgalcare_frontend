@@ -41,7 +41,7 @@ export const FrontendRoute = [
     element: <ListingMap />,
   },
   {
-    path: "listing-grid-sidebar",
+    path: "our-listing",
     element: <GridSidebar />,
   },
   {
