@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from "react";
-import { details_icon } from "../../imagepath";
 import "rc-slider/assets/index.css";
 import { fetchAllCategories } from "../../../utils/commonApis";
 

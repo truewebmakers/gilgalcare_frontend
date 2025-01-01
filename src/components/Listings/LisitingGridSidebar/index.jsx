@@ -120,8 +120,11 @@ const GridSidebar = () => {
               <div className="container">
                 <div className="bookmarks-content grid-view featured-slider">
                   <div className="row align-items-center">
-                    {listing?.map((item,key) => (
-                      <div className="col-xl-4 col-lg-6 col-md-6 col-sm-12 aos aos-init aos-animate" key={key}>
+                    {listing?.map((item, key) => (
+                      <div
+                        className="col-xl-4 col-lg-6 col-md-6 col-sm-12 aos aos-init aos-animate"
+                        key={key}
+                      >
                         <div className="card flex-fill">
                           <div className="blog-widget">
                             <div className="blog-img">
@@ -158,10 +161,15 @@ const GridSidebar = () => {
                                         {" "}
                                         <b>Categories: </b>
                                         {item?.categories?.length
-                                                ? item?.categories.slice(0, 3) // Limit to 3 categories
-                                                    .map((category, index) => getCategoryNameById(category?.id)) // Map over the categories
-                                                    .join(', ') // Join them with commas
-                                                : "-"}
+                                          ? item?.categories
+                                              .slice(0, 2) // Limit to 3 categories
+                                              .map((category, index) =>
+                                                getCategoryNameById(
+                                                  category?.id
+                                                )
+                                              ) // Map over the categories
+                                              .join(", ") // Join them with commas
+                                          : "-"}
                                       </span>
                                     </Link>
                                   </div>

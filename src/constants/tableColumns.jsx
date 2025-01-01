@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import { CapitalizeFirstLetter } from "../utils/commonFunctions";
 import moment from "moment";
 import { dateFormat } from "./constant";
+import { getCategoryNameById } from "../utils/commonApis";
 
 export const myListingColumns = (handleDeleteListing) => [
   {
@@ -18,7 +19,14 @@ export const myListingColumns = (handleDeleteListing) => [
     title: "Category",
     render: (text) => (
       <>
-        <div className="">{text?.category ? text?.category?.name : "-"}</div>
+        <div className="">
+          {text?.categories?.length
+            ? text?.categories
+                ?.slice(0, 1) // Limit to 3 categories
+                ?.map((category, index) => getCategoryNameById(category?.id)) // Map over the categories
+                ?.join(", ") + "..."
+            : "-"}
+        </div>
       </>
     ),
   },
