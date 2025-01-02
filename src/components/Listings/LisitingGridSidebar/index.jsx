@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from "react";
-import Sidebar from "./sidebar";
 import { ProfileAvatar02, listgrid_1 } from "../../imagepath";
 import Header from "../../home/header/Header";
 import Footer from "../../home/footer/Footer";
@@ -75,8 +74,6 @@ const GridSidebar = () => {
       location: urlLocation,
     });
   }, [categoryIdVal, urlLocation]);
-
-  const handleNavigate = () => {};
 
   return (
     <>

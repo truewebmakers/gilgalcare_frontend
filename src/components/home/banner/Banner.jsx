@@ -1,57 +1,39 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { getCountries } from "../../../utils/commonApis";
 
 export const Banner = ({ categories }) => {
   const [selectedCategory, setSelectedCategory] = useState("");
-  const [countryList, setCountryList] = useState([]); // List of countries or locations
-  const [location, setLocation] = useState(""); // User input for location
-  const [locationSuggestions, setLocationSuggestions] = useState([]); // Suggestions based on user input
+  const [location, setLocation] = useState("");
   const navigate = useNavigate();
 
   // Function to handle search form submission
   const handleSearch = (e) => {
     e.preventDefault();
-    navigate(
-      `/our-listing?category=${selectedCategory}&location=${location}`
-    );
+    navigate(`/our-listing?category=${selectedCategory}&location=${location}`);
   };
 
-  // Handle location input change and update suggestions
-  const handleLocationChange = (e) => {
-    const query = e.target.value;
-    setLocation(query);
-
-    if (query?.length > 1) {
-      // Filter the countryList based on the input query (case-insensitive match)
-      const filteredSuggestions = countryList?.filter((country) =>
-        country?.name?.toLowerCase()?.includes(query?.toLowerCase())
-      );
-      setLocationSuggestions(filteredSuggestions);
-    } else {
-      // Clear suggestions if input length is less than 3 characters
-      setLocationSuggestions([]);
-    }
-  };
-
-  // Handle location selection from suggestions
-  const handleLocationSelect = (suggestion) => {
-    setLocation(suggestion?.name); // Set the selected location to input
-    setLocationSuggestions([]); // Clear the suggestions list
-  };
-
-  // Fetch countries on component mount
+  // Set up Google Maps Autocomplete on the location input field
   useEffect(() => {
-    const fetchData = async () => {
-      const storedCountries = sessionStorage.getItem("countries");
-      if (storedCountries?.length > 0) {
-        setCountryList(JSON.parse(storedCountries));
-      } else {
-        // Fetch countries if not already in sessionStorage
-        await getCountries(setCountryList);
-      }
-    };
-    fetchData();
+    const input = document.getElementById("location-input");
+
+    if (window.google && window.google.maps) {
+      const autocompleteInstance = new window.google.maps.places.Autocomplete(
+        input,
+        {
+          fields: ["formatted_address"],
+          types: ["(regions)"],
+          componentRestrictions: { country: "AU" }, // Restrict to Australia
+        }
+      );
+
+      // Listen for place selection from Autocomplete
+      autocompleteInstance.addListener("place_changed", () => {
+        const place = autocompleteInstance.getPlace();
+        if (place && place.formatted_address) {
+          setLocation(place.formatted_address);
+        }
+      });
+    }
   }, []);
 
   return (
@@ -119,24 +101,11 @@ export const Banner = ({ categories }) => {
                             className="form-control"
                             placeholder="Your Location (suburb e.g.)"
                             value={location}
-                            onChange={handleLocationChange}
+                            onChange={(e) => setLocation(e.target.value)}
                             autoComplete="off"
                           />
                           <i className="feather-map-pin"></i>
                         </div>
-                        {locationSuggestions.length > 0 && (
-                          <ul className="location-suggestions">
-                            {locationSuggestions.map((suggestion, index) => (
-                              <li
-                                key={index}
-                                onClick={() => handleLocationSelect(suggestion)}
-                                className="suggestion-item"
-                              >
-                                {suggestion.name}
-                              </li>
-                            ))}
-                          </ul>
-                        )}
                       </div>
                     </div>
 

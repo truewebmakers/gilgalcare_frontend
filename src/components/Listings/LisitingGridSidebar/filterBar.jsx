@@ -19,14 +19,16 @@ const HeaderFilterBar = ({
       input,
       {
         fields: ["formatted_address"],
-        types: ["address"],
+        // types: ["address"],
+        types: ["(regions)"],
         componentRestrictions: { country: "AU" },
       }
     );
 
     autocompleteInstance.addListener("place_changed", () => {
       const place = autocompleteInstance.getPlace();
-      if (place && place.formatted_address) {
+
+      if (place && place?.formatted_address) {
         setFilters((prevFilters) => ({
           ...prevFilters,
           location: place.formatted_address,
@@ -87,7 +89,7 @@ const HeaderFilterBar = ({
             id="location-input"
             type="text"
             className="form-control"
-            placeholder="Your Location " 
+            placeholder="Your Location "
             name="location"
             value={filters?.location}
             onChange={handleChange}
@@ -95,8 +97,6 @@ const HeaderFilterBar = ({
           />
           {/* <i className="feather-map-pin" /> */}
         </div>
- 
-
 
         <div className="filter-content form-group">
           <select

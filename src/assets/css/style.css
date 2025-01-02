@@ -6942,7 +6942,7 @@ textarea.form-control {
 }
 
 .form-group input {
-  min-height: 50px;
+  /* min-height: 50px; */
 }
 .social-info input {
   background: #fff;
@@ -21343,15 +21343,12 @@ p {
   overflow: auto;
 }
 
-
-
-
 .contactus-form {
   border-radius: 20px;
   border: 2px solid #fff; /* Black border with 2px thickness */
   padding: 40px;
   margin: 20px;
-  box-sizing: border-box; 
+  box-sizing: border-box;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Adding box shadow */
 }
 
@@ -21407,10 +21404,6 @@ p {
   color: #777; /* Lighter text */
 }
 
-
-
-
-
 .switch-style1 .form-check-input:checked {
   background-color: #5bbb7b;
   box-shadow: none;
@@ -21427,4 +21420,8 @@ p {
   width: 60px;
   background-repeat: no-repeat;
   cursor: pointer;
+}
+
+i.feather-phone-call:hover {
+  color: #dc3545 !important;
 }

@@ -220,22 +220,22 @@ export const validateListingFields = (name, value, basicInfo2) => {
       newErr[name] = value === "" ? "Choose status" : "";
       break;
 
-    case "priceRange":
-      newErr[name] = value === "" ? "Price range cannot be empty" : "";
-      break;
+    // case "priceRange":
+    //   newErr[name] = value === "" ? "Price range cannot be empty" : "";
+    //   break;
 
-    case "priceFrom":
-      newErr[name] = value <= 0 ? "Price from should be greater than 0" : "";
-      break;
+    // case "priceFrom":
+    //   newErr[name] = value <= 0 ? "Price from should be greater than 0" : "";
+    //   break;
 
-    case "priceTo":
-      newErr[name] =
-        value <= 0
-          ? "Price to should be greater than 0"
-          : value < basicInfo2?.priceFrom
-          ? "Price to cannot be less than price from"
-          : "";
-      break;
+    // case "priceTo":
+    //   newErr[name] =
+    //     value <= 0
+    //       ? "Price to should be greater than 0"
+    //       : value < basicInfo2?.priceFrom
+    //       ? "Price to cannot be less than price from"
+    //       : "";
+    //   break;
 
     case "featuresInformation":
       // If featuresInformation is required, ensure it's not empty

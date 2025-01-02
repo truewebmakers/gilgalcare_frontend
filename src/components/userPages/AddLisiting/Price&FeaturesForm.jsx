@@ -48,9 +48,9 @@ export const PriceAndFeaturesForm = ({ basicInfo2, error, handleChange }) => {
 
   return (
     <>
-      <div className="card">
+      {/* <div className="card">
         <div className="card-header">
-          <h4>Price And Features</h4>
+          <h4>Features</h4>
         </div>
         <div className="card-body">
           <div className="form-group">
@@ -108,7 +108,7 @@ export const PriceAndFeaturesForm = ({ basicInfo2, error, handleChange }) => {
             </div>
           </div>
         </div>
-      </div>
+      </div> */}
       <div className="card">
         <div className="card-header">
           <h4>Features Information</h4>

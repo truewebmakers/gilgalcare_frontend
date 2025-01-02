@@ -25,14 +25,17 @@ const MapSection = ({
     const autocompleteInstance = new window.google.maps.places.Autocomplete(
       input,
       {
-        fields: ["address_components", "geometry"],
-        types: ["address"],
+        fields: ["address_components", "geometry", "formatted_address"],
+        types: ["(regions)"],
+        componentRestrictions: { country: "AU" },
       }
     );
 
     autocompleteInstance.addListener("place_changed", () => {
       const place = autocompleteInstance.getPlace();
-      fillInAddress(place);
+      if (place && place?.formatted_address) {
+        fillInAddress(place);
+      }
     });
 
     setAutocomplete(autocompleteInstance);
@@ -72,14 +75,15 @@ const MapSection = ({
           ?.join(", ");
 
         const location = state && country ? `${state}, ${country}` : "";
+
         const address = formattedAddress
           ? addressParts || formattedAddress
           : "";
 
         setLocation((prevState) => ({
           ...prevState,
-          location: location,
-          address: address,
+          // location: "",
+          address: location + address,
           mapLat: lat?.toString(),
           mapLong: lng?.toString(),
         }));
@@ -92,11 +96,6 @@ const MapSection = ({
             lng,
             locationInfo
           );
-          const newErrLoc = validateListingFields(
-            "location",
-            location,
-            locationInfo
-          );
           const newErrAddr = validateListingFields(
             "address",
             address,
@@ -106,7 +105,6 @@ const MapSection = ({
             ...prevError,
             ...newErr,
             ...newErrLong,
-            ...newErrLoc,
             ...newErrAddr,
           }));
         }
@@ -119,47 +117,19 @@ const MapSection = ({
   };
 
   const fillInAddress = (place) => {
-    let address1 = "";
-    let postal = "";
+    const lat = place?.geometry?.location?.lat();
+    const lng = place?.geometry?.location?.lng();
+    const formattedAddress = place?.formatted_address || "";
 
-    for (const component of place.address_components) {
-      const componentType = component.types[0];
-
-      switch (componentType) {
-        case "street_number":
-          address1 = `${component.long_name} ${address1}`;
-          break;
-        case "route":
-          address1 += component.short_name;
-          break;
-        case "postal_code":
-          postal = `${component.long_name}${postal}`;
-          break;
-        case "postal_code_suffix":
-          postal = `${postal}-${component.long_name}`;
-          break;
-        case "locality":
-          setLocation((prev) => ({ ...prev, location: component.long_name }));
-          break;
-        case "administrative_area_level_1":
-          setLocation((prev) => ({ ...prev, location: component.short_name }));
-          break;
-        case "country":
-          setLocation((prev) => ({ ...prev, location: component.long_name }));
-          break;
-      }
-    }
-
-    setLocation((prev) => ({
-      ...prev,
-      address: address1,
-      mapLat: place.geometry.location.lat(),
-      mapLong: place.geometry.location.lng(),
+    // Update location and marker position
+    setLocation((prevState) => ({
+      ...prevState,
+      // location: "",
+      address: formattedAddress,
+      mapLat: lat?.toString(),
+      mapLong: lng?.toString(),
     }));
-    setMarkerPosition({
-      lat: place.geometry.location.lat(),
-      lng: place.geometry.location.lng(),
-    });
+    setMarkerPosition({ lat, lng });
   };
 
   return (
@@ -167,7 +137,7 @@ const MapSection = ({
       <GoogleMap
         mapContainerStyle={mapContainerStyle}
         center={markerPosition}
-        zoom={15}
+        zoom={10}
         onClick={handleMapClick}
       >
         <Marker position={markerPosition} />

@@ -172,8 +172,10 @@ const ShowMps = () => {
     <div style={{ height: "100vh", width: "100%" }}>
       <GoogleMapReact
         bootstrapURLKeys={{ key: env.GOOGLE_MAP_KEY }}
-        defaultCenter={{ lat: 53.470692, lng: -2.220328 }}
-        defaultZoom={11}
+        defaultCenter={
+          { lat: -33.1077, lng: 149.7078 } // Australia center
+        }
+        defaultZoom={10}
       >
         {list?.length > 0 &&
           list.map((obj, index) => (

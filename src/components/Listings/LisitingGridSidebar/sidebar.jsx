@@ -17,7 +17,9 @@ const Sidebar = ({ filters, setFilters, fetchPublicBusinessListing }) => {
       input,
       {
         fields: ["formatted_address"],
-        types: ["address"],
+        // types: ["address"],
+        types: ["(regions)"],
+        componentRestrictions: { country: "AU" },
       }
     );
 
