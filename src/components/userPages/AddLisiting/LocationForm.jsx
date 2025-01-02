@@ -49,10 +49,13 @@ export const LocationForm = ({
                 className="form-control"
                 name="mapLat"
                 value={locationInfo?.mapLat}
-                onChange={handleChange}
+                // on Change={handleChange}
                 data-handler="locationInfo"
                 autoComplete="off"
+                readOnly={true}
+                style={{ cursor: "not-allowed" }}
               />
+
               {error?.mapLat && <p style={{ color: "red" }}>{error?.mapLat}</p>}
             </div>
           </div>
@@ -64,9 +67,11 @@ export const LocationForm = ({
                 className="form-control"
                 name="mapLong"
                 value={locationInfo?.mapLong}
-                onChange={handleChange}
+                // onChange={handleChange}
                 data-handler="locationInfo"
                 autoComplete="off"
+                readOnly={true}
+                style={{ cursor: "not-allowed" }}
               />
               {error?.mapLong && (
                 <p style={{ color: "red" }}>{error?.mapLong}</p>

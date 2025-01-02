@@ -48,12 +48,17 @@ export const fetchAvailability = async (
         transformedAvailability[day]?.push({
           start: item?.start_time,
           end: item?.end_time,
+          isEnabled: item?.is_enabled,
         });
       });
 
       Object.keys(transformedAvailability)?.forEach((day) => {
         if (transformedAvailability[day]?.length === 0) {
-          transformedAvailability[day]?.push({ start: "", end: "" });
+          transformedAvailability[day]?.push({
+            start: "",
+            end: "",
+            isEnabled: "",
+          });
         }
       });
       setAvailability(transformedAvailability);

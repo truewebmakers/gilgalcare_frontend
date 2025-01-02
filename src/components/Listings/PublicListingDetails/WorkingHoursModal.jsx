@@ -28,15 +28,25 @@ const WorkingHoursModal = ({ workingHours }) => {
   };
 
   const getDaySchedule = (day) => {
-    const schedules = workingHours[day]
-      ?.filter((schedule) => schedule?.start && schedule?.end)
-      .map(
-        (schedule) =>
-          `${formatTime(schedule?.start)} - ${formatTime(schedule?.end)}`
-      );
-    return schedules && schedules?.length > 0
-      ? schedules?.join(", ")
-      : "Closed";
+    const schedules = workingHours[day]?.filter(
+      (schedule) => schedule?.start && schedule?.end
+    );
+
+    if (!schedules || schedules.length === 0) {
+      return "Closed";
+    }
+
+    // Check isEnabled flag for each schedule
+    return schedules
+      .map((schedule, index) => {
+        if (schedule.isEnabled === 0) {
+          return "Closed";
+        } else if (schedule.isEnabled === 1) {
+          return `${formatTime(schedule.start)} - ${formatTime(schedule.end)}`;
+        }
+        return "Closed"; // Default to "Closed" if no valid isEnabled value
+      })
+      .join(", ");
   };
 
   const formatTime = (time) => {
@@ -50,6 +60,7 @@ const WorkingHoursModal = ({ workingHours }) => {
   const getFormattedDateTime = () => {
     return moment().format("DD MMMM YYYY h:mm a") + " local time";
   };
+
   return (
     <div className="card mt-4">
       <div className="card-header d-flex justify-content-between align-items-center">

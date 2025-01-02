@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { useLocation } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import Footer from "../../home/footer/Footer";
 import UserMenu from "../UserMenu";
 import UserBreadCrumb from "../UserBreadCrumb";
@@ -63,6 +63,7 @@ const AddLisiting = () => {
   const [showGalleryImage, setShowGalleryImage] = useState(galleryImageFields);
   const [availability, setAvailability] = useState(timeAvailabilyFields);
   const [enabledDays, setEnabledDays] = useState(enabledAvailableDays);
+  const navigate = useNavigate();
 
   const fetchCategoriesData = async () => {
     const response = await fetchCategories(user?.token);
@@ -204,12 +205,15 @@ const AddLisiting = () => {
           // Check if `addListingService` returned a listingId
           if (response?.listing?.id) {
             // Call the userAvailability API with the listingId
-            await addUserAvailabilityService(
+            const res = await addUserAvailabilityService(
               response?.listing?.id,
               user?.token,
               availability,
               enabledDays
             );
+            if (res == true) {
+              navigate("/my-listing");
+            }
           }
         } catch (err) {
           customToast.error(

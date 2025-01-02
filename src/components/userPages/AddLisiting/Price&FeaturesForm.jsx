@@ -36,7 +36,10 @@ export const PriceAndFeaturesForm = ({ basicInfo2, error, handleChange }) => {
 
   // Handle concatenation and updating state on blur
   const handleFeatureBlur = () => {
-    const concatenatedFeatures = features.filter(Boolean).join(","); // Concatenate non-empty features
+    const concatenatedFeatures = features
+      .filter(Boolean)
+      .map((feature) => feature.replace(/,/g, "\\,")) // Escape any commas inside feature values
+      .join(",");
     handleChange({
       target: {
         name: "featuresInformation",
@@ -48,67 +51,6 @@ export const PriceAndFeaturesForm = ({ basicInfo2, error, handleChange }) => {
 
   return (
     <>
-      {/* <div className="card">
-        <div className="card-header">
-          <h4>Features</h4>
-        </div>
-        <div className="card-body">
-          <div className="form-group">
-            <label className="col-form-label">Price Range</label>
-            <input
-              type="text"
-              className="form-control pass-input"
-              placeholder="$$$"
-              name="priceRange"
-              value={basicInfo2?.priceRange}
-              onChange={handleChange}
-              autoComplete="off"
-              data-handler="basicInfo2"
-            />
-            {error?.priceRange && (
-              <p style={{ color: "red" }}>{error?.priceRange}</p>
-            )}
-          </div>
-          <div className="row">
-            <div className="col-lg-6 col-md-6">
-              <div className="form-group formlast-input">
-                <label className="col-form-label">Price From</label>
-                <input
-                  type="text"
-                  className="form-control pass-input"
-                  placeholder="$$$"
-                  name="priceFrom"
-                  value={basicInfo2?.priceFrom}
-                  onChange={handleChange}
-                  autoComplete="off"
-                  data-handler="basicInfo2"
-                />
-              </div>
-              {error?.priceFrom ? (
-                <p style={{ color: "red" }}>{error?.priceFrom}</p>
-              ) : null}
-            </div>
-            <div className="col-lg-6 col-md-6">
-              <div className="form-group formlast-input formlast-input-inner">
-                <label className="col-form-label">Price To</label>
-                <input
-                  type="text"
-                  className="form-control pass-input"
-                  placeholder="$$$"
-                  name="priceTo"
-                  value={basicInfo2?.priceTo}
-                  onChange={handleChange}
-                  autoComplete="off"
-                  data-handler="basicInfo2"
-                />
-              </div>
-              {error?.priceTo ? (
-                <p style={{ color: "red" }}>{error?.priceTo}</p>
-              ) : null}
-            </div>
-          </div>
-        </div>
-      </div> */}
       <div className="card">
         <div className="card-header">
           <h4>Features Information</h4>
@@ -128,7 +70,7 @@ export const PriceAndFeaturesForm = ({ basicInfo2, error, handleChange }) => {
                     placeholder="Enter Feature"
                     value={feature}
                     onChange={(e) => handleFeatureChange(index, e.target.value)}
-                    onBlur={handleFeatureBlur} // Update onBlur
+                    // onBlur={handleFeatureBlur} // Update onBlur
                   />
                   {index > 0 && (
                     <button

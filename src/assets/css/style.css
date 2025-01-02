@@ -21425,3 +21425,13 @@ p {
 i.feather-phone-call:hover {
   color: #dc3545 !important;
 }
+
+.featured-slider .blog-features {
+  height: 65px;
+}
+
+@media only screen and (max-width: 767px) {
+  .list-content .header-bar .filter-content, .header-bar button {
+      width: 100%;
+  }
+  }

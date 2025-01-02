@@ -41,10 +41,6 @@ export const ListDetails = ({ listingDetail }) => {
               {listingDetail?.address
                 ? CapitalizeFirstLetter(listingDetail?.address)
                 : "-"}
-              ,&nbsp;
-              {listingDetail?.location
-                ? CapitalizeFirstLetter(listingDetail?.location)
-                : "-"}
             </li>
             <li>
               <i className="feather-phone-call" />{" "}

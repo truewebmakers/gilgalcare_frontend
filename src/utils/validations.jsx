@@ -213,7 +213,12 @@ export const validateListingFields = (name, value, basicInfo2) => {
       break;
 
     case "tagline":
-      newErr[name] = value === "" ? "Tagline cannot be empty" : "";
+      newErr[name] =
+        value === "" || value?.length == 0
+          ? "Tagline cannot be empty"
+          : value?.length > 100
+          ? "Tagline can't contain more than 100 characters"
+          : "";
       break;
 
     case "status":
@@ -274,7 +279,7 @@ export const validateListingFields = (name, value, basicInfo2) => {
         value === ""
           ? "Website cannot be empty"
           : !urlRegex.test(value)
-          ? "Website URL is not valid"
+          ? "Website URL is not valid Eg: (https://example.com)"
           : "";
       break;
 

@@ -38,12 +38,15 @@ export const addUserAvailabilityService = async (
     );
     if (response?.status === 200 || response?.status === 201) {
       customToast.success("Availability updated successfully!");
+      return true;
     } else {
       customToast.error(
         response?.data?.message || "Failed to update availability."
       );
+      return false;
     }
   } catch (error) {
     customToast.error("An error occurred while updating availability.");
+    return false;
   }
 };
