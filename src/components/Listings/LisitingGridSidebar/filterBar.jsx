@@ -20,6 +20,7 @@ const HeaderFilterBar = ({
       {
         fields: ["formatted_address"],
         types: ["address"],
+        componentRestrictions: { country: "AU" },
       }
     );
 
@@ -86,7 +87,7 @@ const HeaderFilterBar = ({
             id="location-input"
             type="text"
             className="form-control"
-            placeholder="Your Location"
+            placeholder="Your Location " 
             name="location"
             value={filters?.location}
             onChange={handleChange}
@@ -94,6 +95,8 @@ const HeaderFilterBar = ({
           />
           {/* <i className="feather-map-pin" /> */}
         </div>
+ 
+
 
         <div className="filter-content form-group">
           <select
