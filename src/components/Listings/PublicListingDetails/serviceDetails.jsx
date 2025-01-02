@@ -242,28 +242,19 @@ const ServiceDetails = () => {
                   <div className="lisiting-featues">
                     {listingDetail?.categories &&
                       listingDetail?.categories?.map((item, index) => (
-                        <div className="row" key={index}>
-                          <div className="featureslist d-flex align-items-center col-lg-4 col-md-4">
-                            <div className="feature-img">
+                        <div className="row" key={index} style={{width: "100%"}}>
+                          <div className="featureslist d-flex align-items-center col-lg-6 col-md-4 ml-2">
+                            <div className="feature-img mr-2">
                               <img src={item?.feature_image || ""} alt="" />
-                            </div>
+                            </div> 
                             <div className="featues-info">
                               <h6 style={{ whiteSpace: "nowrap" }}>
-                                {truncateName(item?.name) || "-"}
+                              {item?.name}
+                                {/* {truncateName(item?.name) || "-"} */}
                               </h6>
                             </div>
                           </div>
-                          <div className="featureslist d-flex align-items-center col-lg-4 col-md-4">
-                            <div
-                              className="feature-img"
-                              style={{ marginLeft: "87px" }}
-                            >
-                              <img src={locationBig} alt="" />
-                            </div>
-                            <div className="featues-info">
-                              <h6>{item?.location || "-"}</h6>
-                            </div>
-                          </div>
+                         
                         </div>
                       ))}
                   </div>
