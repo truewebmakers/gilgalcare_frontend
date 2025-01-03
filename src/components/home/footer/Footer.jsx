@@ -9,6 +9,13 @@ const Footer = () => {
     AOS.init({ duration: 1000, once: true });
   }, []);
 
+  const scrollToTop = () => {
+    window.scrollTo({
+      top: 0,
+      behavior: "smooth",
+    });
+  };
+
   return (
     <footer className="footer footer-five">
       <div className="footer-top aos" data-aos="fade-up">
@@ -17,39 +24,19 @@ const Footer = () => {
             <div className="col-lg-3 col-md-6">
               <div className="footer-widget">
                 <div className="footer-logo">
-                  <Link to="#">
+                  <Link to="#" onClick={scrollToTop}>
                     <img src={LogoBGR} alt="logo" />
                   </Link>
                 </div>
                 <div className="footer-content">
                   <p>
-                  Gilgal Provider Finder empowers NDIS participants to connect with trusted, top-quality service providers tailored to their needs. Our user-friendly platform ensures access to reliable support, from daily assistance to specialized therapies, all within your community.{" "}
+                    Gilgal Provider Finder empowers NDIS participants to connect
+                    with trusted, top-quality service providers tailored to
+                    their needs. Our user-friendly platform ensures access to
+                    reliable support, from daily assistance to specialized
+                    therapies, all within your community.{" "}
                   </p>
                 </div>
-                {/* <div className="social-icon">
-                  <ul>
-                    <li>
-                      <Link to="#" target="_blank">
-                        <i className="fab fa-facebook-f"></i>{" "}
-                      </Link>
-                    </li>
-                    <li>
-                      <Link to="#" target="_blank">
-                        <i className="fab fa-twitter"></i>{" "}
-                      </Link>
-                    </li>
-                    <li>
-                      <Link to="#" target="_blank">
-                        <i className="fab fa-instagram"></i>
-                      </Link>
-                    </li>
-                    <li>
-                      <Link to="#" target="_blank">
-                        <i className="fab fa-linkedin-in"></i>
-                      </Link>
-                    </li>
-                  </ul>
-                </div> */}
               </div>
             </div>
             <div className="col-lg-2 col-md-6"></div>
@@ -58,22 +45,34 @@ const Footer = () => {
                 <h2 className="footer-title">Quick Links</h2>
                 <ul>
                   <li>
-                    <Link to="/">Home</Link>
+                    <Link to="/" onClick={scrollToTop}>
+                      Home
+                    </Link>
                   </li>
                   <li>
-                    <Link to="/our-listing">Our Listing</Link>
+                    <Link to="/our-listing" onClick={scrollToTop}>
+                      Our Listing
+                    </Link>
                   </li>
                   <li>
-                    <Link to="/about">About Us</Link>
+                    <Link to="/about" onClick={scrollToTop}>
+                      About Us
+                    </Link>
                   </li>
                   <li>
-                    <Link to="/contact">Contact Us</Link>
+                    <Link to="/contact" onClick={scrollToTop}>
+                      Contact Us
+                    </Link>
                   </li>
                   <li>
-                    <Link to="#">Privacy & Policy</Link>
+                    <Link to="#" onClick={scrollToTop}>
+                      Privacy & Policy
+                    </Link>
                   </li>
                   <li>
-                    <Link to="#">Terms & Conditions</Link>
+                    <Link to="#" onClick={scrollToTop}>
+                      Terms & Conditions
+                    </Link>
                   </li>
                 </ul>
               </div>
@@ -108,7 +107,8 @@ const Footer = () => {
               <div className="col-md-12">
                 <div className="copyright-text text-center">
                   <p className="mb-0">
-                  {new Date().getFullYear()}  &copy; GilgalCareProvider. All rights reserved.
+                    {new Date().getFullYear()} &copy; GilgalCareProvider. All
+                    rights reserved.
                   </p>
                 </div>
               </div>
