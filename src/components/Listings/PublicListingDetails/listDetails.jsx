@@ -13,7 +13,7 @@ export const ListDetails = ({ listingDetail }) => {
   const mapUrl = `https://www.google.com/maps/embed/v1/place?key=${googleMapsApiKey}&q=${mapLat},${mapLong}`;
   return (
     <>
-      <div className="card">
+      <div className="card" id="location-scroll">
         <h4>
           <img
             src={

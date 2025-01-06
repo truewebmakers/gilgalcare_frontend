@@ -73,9 +73,9 @@ export const AddReview = ({ getListingReview, user }) => {
   };
 
   return (
-    <li className="review-box feedbackbox mb-0">
+    <li className="review-box feedbackbox mb-0" id="write-review">
       <div className="review-details">
-        <h6>Leave feedback about this</h6>
+        <h6>Leave feedback about this </h6>
       </div>
       <div className="card-body">
         <form className="">

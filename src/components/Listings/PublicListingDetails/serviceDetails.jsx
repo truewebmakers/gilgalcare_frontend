@@ -32,6 +32,75 @@ const ServiceDetails = () => {
   const [shareUpdated, setShareUpdated] = useState(false);
   const [workingHours, setWorkingHours] = useState([]);
 
+  const [name, setName] = useState("");
+  const [email, setEmail] = useState("");
+  const [message, setMessage] = useState("");
+  const [loading, setLoading] = useState(false);
+  const [responseMessage, setResponseMessage] = useState("");
+  const [formData, setFormData] = useState({
+      first_name: "",
+      // last_name: "",
+      email: "",
+      // subject: "",
+      query: "",
+      // phone: "", // New phone field
+    });
+
+
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setFormData({
+      ...formData,
+      [name]: value,
+    });
+  };
+
+  const handleContactUs = async (e) => {
+    e.preventDefault(); // Prevent form from reloading the page
+    setIsLoading(true);
+    // Destructure form data
+    const { first_name, email,  query } = formData;
+
+    // Validation for required fields
+    if (!first_name  || !email ||  !query ) {
+      customToast.error("Please fill all the required fields.");
+      setIsLoading(false);
+      return;
+    }
+
+    // Validate phone number (should be 10 digits)
+     
+
+    try {
+      // Send the form data to the API
+      const response = await UseApi(
+        apiUrls.contact_us,
+        apiMethods.POST,
+        formData
+      );
+      if (response?.status === 200 || response?.status === 201) {
+        customToast.success("Your message has been sent successfully!");
+        // Optionally reset the form
+        setFormData({
+          first_name: "",
+          // last_name: "",
+          email: "",
+          // subject: "",
+          query: "",
+          // phone: "", // Reset phone field
+        });
+      } else {
+        customToast.error("Something went wrong. Please try again.");
+      }
+    } catch (err) {
+      customToast.error(
+        err?.message || "An error occurred while submitting the form."
+      );
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
   const getListingDetail = async () => {
     try {
       // set headers
@@ -89,7 +158,7 @@ const ServiceDetails = () => {
       {/*Galler Slider Section*/}
       <div className="bannergallery-section">
         <div className="gallery-slider d-flex">
-          <Rooms img={listingDetail?.featured_image || defaultPic} />
+          <Rooms img={listingDetail?.logo || defaultPic} />
         </div>
       </div>
       {/*/Galler Slider Section*/}
@@ -99,7 +168,10 @@ const ServiceDetails = () => {
           <div className="about-details">
             <div className="about-headings">
               <div className="author-img">
-                <img src={listingDetail?.logo || defaultPic} alt="authorimg" />
+                <img
+                  src={listingDetail?.featured_image || defaultPic}
+                  alt="authorimg"
+                />
               </div>
               <div className="authordetails">
                 <h5>
@@ -124,10 +196,18 @@ const ServiceDetails = () => {
               <div className="col-lg-9">
                 <ul>
                   <li>
-                    <span>
-                      <img src={location} alt="" />
+                    <a
+                      href="#location-scroll"
+                      onClick={(e) => {
+                        e.preventDefault(); // Prevents default hash behavior
+                        document
+                          .getElementById("location-scroll")
+                          ?.scrollIntoView({ behavior: "smooth" });
+                      }}
+                    >
+                      <i className="fa fa-map-pin" />{" "}
                       {listingDetail?.address ? listingDetail?.address : "-"}
-                    </span>
+                    </a>
                   </li>
                   <li>
                     <a
@@ -166,10 +246,7 @@ const ServiceDetails = () => {
                     className="btn btn-link"
                   >
                     <span>
-                      <i
-                        className="feather-phone-call"
-                        
-                      />{" "}
+                      <i className="feather-phone-call" />{" "}
                       {listingDetail?.phone ? listingDetail?.phone : "-"}
                     </span>
                   </a>
@@ -242,19 +319,22 @@ const ServiceDetails = () => {
                   <div className="lisiting-featues">
                     {listingDetail?.categories &&
                       listingDetail?.categories?.map((item, index) => (
-                        <div className="row" key={index} style={{width: "100%"}}>
+                        <div
+                          className="row"
+                          key={index}
+                          style={{ width: "100%" }}
+                        >
                           <div className="featureslist d-flex align-items-center col-lg-6 col-md-4 ml-2">
                             <div className="feature-img mr-2">
                               <img src={item?.feature_image || ""} alt="" />
-                            </div> 
+                            </div>
                             <div className="featues-info">
                               <h6 style={{ whiteSpace: "nowrap" }}>
-                              {item?.name}
+                                {item?.name}
                                 {/* {truncateName(item?.name) || "-"} */}
                               </h6>
                             </div>
                           </div>
-                         
                         </div>
                       ))}
                   </div>
@@ -291,15 +371,20 @@ const ServiceDetails = () => {
                   />
                   <div className="card mb-0">
                     <h4>
-                      {" "}
                       <i className="feather-phone-call" /> Contact Business
                     </h4>
-                    <form className="contactbusinessform">
+                    <form
+                      className="contactbusinessform"
+                      onSubmit={handleSubmit}
+                    >
                       <div className="form-group">
                         <input
                           type="text"
                           className="form-control"
                           placeholder="Name"
+                          value={name}
+                          onChange={(e) => setName(e.target.value)}
+                          required
                         />
                       </div>
                       <div className="form-group">
@@ -307,6 +392,9 @@ const ServiceDetails = () => {
                           type="email"
                           className="form-control"
                           placeholder="Email Address"
+                          value={email}
+                          onChange={(e) => setEmail(e.target.value)}
+                          required
                         />
                       </div>
                       <div className="form-group">
@@ -314,18 +402,27 @@ const ServiceDetails = () => {
                           rows={6}
                           className="form-control"
                           placeholder="Message"
-                          defaultValue={""}
+                          value={message}
+                          onChange={(e) => setMessage(e.target.value)}
+                          required
                         />
                       </div>
                       <div className="submit-section">
                         <button
                           className="btn btn-primary submit-btn"
                           type="submit"
+                          disabled={loading} // Disable button while loading
                         >
-                          Send Message
+                          {loading ? "Sending..." : "Send Message"}
                         </button>
                       </div>
                     </form>
+
+                    {responseMessage && (
+                      <div className="response-message">
+                        <p>{responseMessage}</p>
+                      </div>
+                    )}
                   </div>
                 </div>
               </StickyBox>

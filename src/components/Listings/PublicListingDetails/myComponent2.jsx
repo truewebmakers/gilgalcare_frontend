@@ -35,7 +35,7 @@ const Rooms = ({ img }) => {
     <div className="bannergallery-section">
       <div className="gallery-slider d-flex">
         <div
-          className="gallery-widget"
+          className="gallery-widget Test"
           style={{ marginTop: "88px", height: "70%" }}
         >
           <span data-fancybox="gallery1">

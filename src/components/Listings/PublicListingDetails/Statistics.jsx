@@ -50,7 +50,7 @@ export const Statistics = ({ listingDetail, shareUpdated }) => {
             {stats?.page_views ? stats?.page_views : "0"}
           </span>
         </li>
-        <li>
+        {/* <li>
           <div className="statistic-details">
             <span className="icons">
               <i className="feather-star" />
@@ -61,7 +61,7 @@ export const Statistics = ({ listingDetail, shareUpdated }) => {
             {" "}
             {listingDetail?.ratings ? listingDetail?.ratings : "0"}
           </span>
-        </li>
+        </li> */}
         <li>
           <div className="statistic-details">
             <span className="icons">
