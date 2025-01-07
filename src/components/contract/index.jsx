@@ -69,7 +69,7 @@ const Contract = () => {
         apiMethods.POST,
         formData
       );
-      if (response?.status === 200 || response?.status === 201) {
+      if (response?.data?.message === "Email Sent") {
         customToast.success("Your message has been sent successfully!");
         // Optionally reset the form
         setFormData({
@@ -81,7 +81,7 @@ const Contract = () => {
           phone: "", // Reset phone field
         });
       } else {
-        customToast.error("Something went wrong. Please try again.");
+        customToast.error("Something went wrong." + response?.data?.message);
       }
     } catch (err) {
       customToast.error(
@@ -143,54 +143,58 @@ const Contract = () => {
                 <form onSubmit={handleContactUs}>
                   <div className="row">
                     <div className="col-lg-6">
-                    <input
-                      type="text"
-                      className="form-control"
-                      placeholder="Full Name*"
-                      name="first_name"
-                      value={formData.first_name}
-                      onChange={handleChange}
-                      required
-                    />
+                      <input
+                        type="text"
+                        className="form-control"
+                        placeholder="Full Name*"
+                        name="first_name"
+                        value={formData.first_name}
+                        onChange={handleChange}
+                        required
+                        autoComplete="off"
+                      />
                     </div>
                     <div className="col-lg-6">
-                    <input
-                      type="text"
-                      className="form-control"
-                      placeholder="Company Name*"
-                      name="last_name"
-                      value={formData.last_name}
-                      onChange={handleChange}
-                      required
-                    />
-                      </div>
+                      <input
+                        type="text"
+                        className="form-control"
+                        placeholder="Company Name*"
+                        name="last_name"
+                        value={formData.last_name}
+                        onChange={handleChange}
+                        required
+                        autoComplete="off"
+                      />
+                    </div>
                   </div>
                   <div className="row mt-3">
                     <div className="col-lg-6">
-                    <input
-                      type="email"
-                      className="form-control"
-                      placeholder="Email*"
-                      name="email"
-                      value={formData.email}
-                      onChange={handleChange}
-                      required
-                    />
+                      <input
+                        type="email"
+                        className="form-control"
+                        placeholder="Email*"
+                        name="email"
+                        value={formData.email}
+                        onChange={handleChange}
+                        required
+                        autoComplete="off"
+                      />
                     </div>
                     <div className="col-lg-6">
-                    <input
-                      type="text"
-                      className="form-control"
-                      name="phone"
-                      placeholder="Phone Number*"
-                      value={formData.phone}
-                      onChange={handlePhoneChange} // Handle phone input change
-                      maxLength={10} // Limit to 10 digits
-                      required
-                    />
+                      <input
+                        type="text"
+                        className="form-control"
+                        name="phone"
+                        placeholder="Phone Number*"
+                        value={formData.phone}
+                        onChange={handlePhoneChange} // Handle phone input change
+                        maxLength={10} // Limit to 10 digits
+                        required
+                        autoComplete="off"
+                      />
                     </div>
-                    </div>
-                  
+                  </div>
+
                   <div className="form-group mt-3">
                     <input
                       type="text"
@@ -200,6 +204,7 @@ const Contract = () => {
                       value={formData.subject}
                       onChange={handleChange}
                       required
+                      autoComplete="off"
                     />
                   </div>
 
@@ -208,10 +213,11 @@ const Contract = () => {
                       rows={4}
                       className="form-control"
                       placeholder="How Can We Help You?*"
-                      name="How Can We Help You?"
+                      name="query"
                       value={formData.query}
                       onChange={handleChange}
                       required
+                      autoComplete="off"
                     />
                   </div>
 

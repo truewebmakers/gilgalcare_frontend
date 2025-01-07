@@ -23,10 +23,11 @@ import { fetchAvailability } from "../../../services/fetchAvailablity";
 import WorkingHoursModal from "../PublicListingDetails/WorkingHoursModal";
 import { truncateName } from "../../../utils/commonFunctions";
 import { ReviewListingComp } from "../PublicListingDetails/ReviewListingComp";
+import { ContactBusiness } from "../PublicListingDetails/contactBusiness";
 
 const MyListingDetails = () => {
   const parms = useLocation();
-  const id = parms?.state?.id; // Access the state property
+  const id = parms?.pathname?.split("/")?.[2];
   const { user, profileData } = useSelector((state) => state.auth);
   const [listingDetail, setListingDetail] = useState({});
   const [features, setFeatures] = useState([]);
@@ -283,38 +284,7 @@ const MyListingDetails = () => {
                       {" "}
                       <i className="feather-phone-call" /> Contact Business
                     </h4>
-                    <form className="contactbusinessform">
-                      <div className="form-group">
-                        <input
-                          type="text"
-                          className="form-control"
-                          placeholder="Name"
-                        />
-                      </div>
-                      <div className="form-group">
-                        <input
-                          type="email"
-                          className="form-control"
-                          placeholder="Email Address"
-                        />
-                      </div>
-                      <div className="form-group">
-                        <textarea
-                          rows={6}
-                          className="form-control"
-                          placeholder="Message"
-                          defaultValue={""}
-                        />
-                      </div>
-                      <div className="submit-section">
-                        <button
-                          className="btn btn-primary submit-btn"
-                          type="submit"
-                        >
-                          Send Message 
-                        </button>
-                      </div>
-                    </form>
+                    <ContactBusiness />
                   </div>
                 </div>
               </StickyBox>

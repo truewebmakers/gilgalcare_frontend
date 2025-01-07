@@ -12,10 +12,7 @@ import UseApi from "../../../hooks/useApi";
 import { customToast } from "../../common/Toast";
 import mailIcon from "../../../assets/svg/mail.svg";
 import shareIcon from "../../../assets/svg/share-2.svg";
-import location from "../../../assets/svg/map-pin.svg";
 import eye from "../../../assets/svg/eye.svg";
-import locationBig from "../../../assets/svg/locationBig.svg";
-import { truncateName } from "../../../utils/commonFunctions";
 import { ListDetails } from "./listDetails";
 import { Statistics } from "./Statistics";
 import { incrementShares } from "../../../services/incrementShares";
@@ -23,10 +20,11 @@ import BookmarkIcon from "../../../assets/svg/bookmark.svg";
 import { ReviewListingComp } from "./ReviewListingComp";
 import WorkingHoursModal from "./WorkingHoursModal";
 import { fetchAvailability } from "../../../services/fetchAvailablity";
+import { ContactBusiness } from "./contactBusiness";
 
 const ServiceDetails = () => {
   const parms = useLocation();
-  const id = parms?.state?.id;
+  const id = parms?.pathname?.split("/")?.[2];
   const [listingDetail, setListingDetail] = useState({});
   const [features, setFeatures] = useState([]);
   const [shareUpdated, setShareUpdated] = useState(false);
@@ -99,7 +97,10 @@ const ServiceDetails = () => {
           <div className="about-details">
             <div className="about-headings">
               <div className="author-img">
-                <img src={listingDetail?.featured_image || defaultPic} alt="authorimg" />
+                <img
+                  src={listingDetail?.featured_image || defaultPic}
+                  alt="authorimg"
+                />
               </div>
               <div className="authordetails">
                 <h5>
@@ -123,7 +124,6 @@ const ServiceDetails = () => {
             <div className="row">
               <div className="col-lg-9">
                 <ul>
-                   
                   <li>
                     <a
                       href="#location-scroll"
@@ -134,7 +134,8 @@ const ServiceDetails = () => {
                           ?.scrollIntoView({ behavior: "smooth" });
                       }}
                     >
-                      <i className="fa fa-map-pin" /> {listingDetail?.address ? listingDetail?.address : "-"}
+                      <i className="fa fa-map-pin" />{" "}
+                      {listingDetail?.address ? listingDetail?.address : "-"}
                     </a>
                   </li>
                   <li>
@@ -174,10 +175,7 @@ const ServiceDetails = () => {
                     className="btn btn-link"
                   >
                     <span>
-                      <i
-                        className="feather-phone-call"
-                        
-                      />{" "}
+                      <i className="feather-phone-call" />{" "}
                       {listingDetail?.phone ? listingDetail?.phone : "-"}
                     </span>
                   </a>
@@ -250,19 +248,22 @@ const ServiceDetails = () => {
                   <div className="lisiting-featues">
                     {listingDetail?.categories &&
                       listingDetail?.categories?.map((item, index) => (
-                        <div className="row" key={index} style={{width: "100%"}}>
+                        <div
+                          className="row"
+                          key={index}
+                          style={{ width: "100%" }}
+                        >
                           <div className="featureslist d-flex align-items-center col-lg-6 col-md-4 ml-2">
                             <div className="feature-img mr-2">
                               <img src={item?.feature_image || ""} alt="" />
-                            </div> 
+                            </div>
                             <div className="featues-info">
                               <h6 style={{ whiteSpace: "nowrap" }}>
-                              {item?.name}
+                                {item?.name}
                                 {/* {truncateName(item?.name) || "-"} */}
                               </h6>
                             </div>
                           </div>
-                         
                         </div>
                       ))}
                   </div>
@@ -302,38 +303,7 @@ const ServiceDetails = () => {
                       {" "}
                       <i className="feather-phone-call" /> Contact Business
                     </h4>
-                    <form className="contactbusinessform">
-                      <div className="form-group">
-                        <input
-                          type="text"
-                          className="form-control"
-                          placeholder="Name"
-                        />
-                      </div>
-                      <div className="form-group">
-                        <input
-                          type="email"
-                          className="form-control"
-                          placeholder="Email Address"
-                        />
-                      </div>
-                      <div className="form-group">
-                        <textarea
-                          rows={6}
-                          className="form-control"
-                          placeholder="Message"
-                          defaultValue={""}
-                        />
-                      </div>
-                      <div className="submit-section">
-                        <button
-                          className="btn btn-primary submit-btn"
-                          type="submit"
-                        >
-                          Send Message
-                        </button>
-                      </div>
-                    </form>
+                    <ContactBusiness />
                   </div>
                 </div>
               </StickyBox>

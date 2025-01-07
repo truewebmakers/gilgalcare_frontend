@@ -47,7 +47,7 @@ export const myListingColumns = (handleDeleteListing) => [
     render: (text) => (
       <div className="listingtable-rate">
         <Link
-          to={`/edit-listing/${text?.uuid}`}
+          to={`/edit-listing/${text?.id}`}
           state={{ id: text?.id }}
           className="action-btn btn-edit"
         >
@@ -60,7 +60,7 @@ export const myListingColumns = (handleDeleteListing) => [
           <i className="feather-trash-2" />
         </span>
         <Link
-          to={`/my-listing-details/${text?.uuid}`}
+          to={`/my-listing-details/${text?.id}`}
           state={{ id: text?.id }}
           className="action-btn btn-view"
         >
@@ -101,7 +101,7 @@ export const myPlansColumns = (handleDeleteListing) => [
     render: (text) => (
       <div className="listingtable-rate">
         <Link
-          to={`/edit-plans/${text?.uuid}`}
+          to={`/edit-plans/${text?.id}`}
           state={{ id: text?.id }}
           className="action-btn btn-edit"
         >

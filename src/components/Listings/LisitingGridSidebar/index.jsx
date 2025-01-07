@@ -126,7 +126,7 @@ const GridSidebar = () => {
                           <div className="blog-widget">
                             <div className="blog-img">
                               <Link
-                                to={`/listing-details/${item?.uuid}`}
+                                to={`/listing-details/${item?.id}`}
                                 state={{ id: item?.id }}
                               >
                                 <img
@@ -173,7 +173,7 @@ const GridSidebar = () => {
                                 </div>
                                 <h6>
                                   <Link
-                                    to={`/listing-details/${item?.uuid} `}
+                                    to={`/listing-details/${item?.id} `}
                                     state={{ id: item?.id }}
                                   >
                                     {item?.listing_title || "-"}

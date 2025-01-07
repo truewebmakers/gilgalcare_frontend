@@ -57,7 +57,7 @@ export const AddReview = ({ getListingReview, user }) => {
           }
         }
       } else {
-        navigate("/login");
+        customToast.error("Please login to leave review");
       }
     } catch (err) {
       customToast.error(err?.message);

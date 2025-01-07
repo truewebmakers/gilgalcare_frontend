@@ -80,11 +80,15 @@ const Trending5 = () => {
             className="silderBotton business-slider grid-view"
           >
             {trendingData?.map((item, index) => (
-              <div className="card business-card aos" data-aos="fade-up" key={index}>
+              <div
+                className="card business-card aos"
+                data-aos="fade-up"
+                key={index}
+              >
                 <div className="blog-widget">
                   <div className="blog-img">
                     <Link
-                      to={`/listing-details/${item?.uuid}`}
+                      to={`/listing-details/${item?.id}`}
                       state={{ id: item?.id }}
                     >
                       <img
@@ -115,7 +119,7 @@ const Trending5 = () => {
                       </div>
                       <h6>
                         <Link
-                          to={`/listing-details/${item?.uuid}`}
+                          to={`/listing-details/${item?.id}`}
                           state={{ id: item?.id }}
                         >
                           {item?.listing_title
