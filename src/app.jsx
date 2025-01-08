@@ -13,12 +13,15 @@ import Home5 from "./components/home";
 import { useSelector } from "react-redux";
 import ProtectedRoute from "./Routes/ProtectedRoute";
 import { NotLoggedInRoute } from "./Routes/NotLoggedInRoute";
+import ScrollToTop from "./components/ScrollToTop";
 
 export const App = () => {
   const { isLoggedIn } = useSelector((state) => state.auth);
 
   return (
     <BrowserRouter basename={`${config.publicPath}`}>
+      <ScrollToTop />
+
       <Routes>
         <Route path="/" index element={<Home5 />} />
         {FrontendRoute.map((item, key) => {
@@ -37,7 +40,7 @@ export const App = () => {
           );
         })}
       </Routes>
-      
+
       <Routes path="/">
         {NotLoggedInRoute.map((item, key) => {
           return (
@@ -47,7 +50,9 @@ export const App = () => {
               element={
                 !isLoggedIn ? (
                   item.element
-                ) :<Navigate to='/dashboard' replace />
+                ) : (
+                  <Navigate to="/dashboard" replace />
+                )
               }
             />
           );

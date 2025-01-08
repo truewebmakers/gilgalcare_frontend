@@ -56,7 +56,6 @@ export const BasicInfoForm = ({
           onChange={handleChange}
         >
           {/* Ensure all options have value attributes */}
-          <option value="draft">Draft</option>
           <option value="published">Published</option>
           <option value="unpublished">Unpublished</option>
         </select>

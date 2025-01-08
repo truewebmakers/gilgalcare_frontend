@@ -21438,3 +21438,14 @@ i.feather-phone-call:hover {
     width: 100%;
   }
 }
+
+.review-login-button{
+  border: 1px solid white;
+    padding: 7px;
+    width: 27%;
+    border-radius: 11px;
+    /* background: red; */
+    color: white;
+    background-color: #d54a38;
+    font-size: 18px;
+}

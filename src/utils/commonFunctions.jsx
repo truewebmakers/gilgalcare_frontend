@@ -49,3 +49,10 @@ export const truncateName = (name) => {
   const words = name.split(" ");
   return words.length > 3 ? words.slice(0, 3).join(" ") + "..." : name;
 };
+
+export const scrollToTop = () => {
+  window.scrollTo({
+    top: 0,
+    behavior: "smooth",
+  });
+};

@@ -176,7 +176,7 @@ export const initialListingField = {
   // twitter: "",
   // googlePlus: "",
   // instagram: "",
-  status: "",
+  status: "published",
 };
 
 export const galleryImageFields = {

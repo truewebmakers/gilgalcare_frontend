@@ -117,7 +117,7 @@ const UserHeader = () => {
                 <span className="user-type">
                   {profileData?.user_type
                     ? profileData?.user_type?.toLowerCase() === "business"
-                      ? "Providers"
+                      ? "Provider"
                       : profileData?.user_type?.toLowerCase() === "user"
                       ? "Participant"
                       : "-"

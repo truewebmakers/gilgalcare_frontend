@@ -76,12 +76,15 @@ export const fetchAllCategories = async (setCategories = () => {}) => {
 };
 
 export const getCategoryNameById = (id) => {
-   
   let categories = localStorage.getItem("categories");
-  const category =
-    categories?.length &&
-    JSON.parse(categories)?.find((category) => category?.id == id);
-  return category ? category?.name : "-";
+  if (!categories?.length) {
+    fetchAllCategories();
+  } else {
+    const category = JSON.parse(categories)?.find(
+      (category) => category?.id == id
+    );
+    return category ? category?.name : "-";
+  }
 };
 
 export const getCountries = async (setCountryList) => {

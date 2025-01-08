@@ -16,7 +16,6 @@ import { BasicInfoForm } from "./BasicInfoForm";
 import { PriceAndFeaturesForm } from "./Price&FeaturesForm";
 import { LocationForm } from "./LocationForm";
 import { ContactInfoForm } from "./ContactInfoForm";
-import { SocialMediaForm } from "./SocialMediaForm";
 import { ImageForm } from "./ImageForm";
 import {
   isTimeDifferenceValid,
@@ -189,8 +188,9 @@ const AddLisiting = () => {
         ...validateListingFields(key, allFields[key], listingFields),
       };
     }
+
+    setError(newErr);
     if (areAllFieldsFilled(allFields)) {
-      setError(newErr);
       if (!isTimeDifferenceValid(availability, enabledDays)) {
         return;
       } else if (!hasErrors(newErr)) {

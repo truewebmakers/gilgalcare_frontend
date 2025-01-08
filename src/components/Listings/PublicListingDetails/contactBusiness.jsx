@@ -3,6 +3,7 @@ import { customToast } from "../../common/Toast";
 import UseApi from "../../../hooks/useApi";
 import { apiMethods, apiUrls } from "../../../constants/constant";
 import Loader from "../../common/Loader";
+import { useLocation } from "react-router-dom";
 
 export const ContactBusiness = () => {
   const [formData, setFormData] = useState({
@@ -11,6 +12,8 @@ export const ContactBusiness = () => {
     query: "",
   });
   const [isLoading, setIsLoading] = useState(false);
+  const parms = useLocation();
+  const id = parms?.pathname?.split("/")?.[2];
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -36,11 +39,15 @@ export const ContactBusiness = () => {
 
     try {
       // Send the form data to the API
-      const response = await UseApi(apiUrls.contact_us, apiMethods.POST, {
-        first_name: name,
-        email: email,
-        query: query,
-      });
+      const response = await UseApi(
+        apiUrls.contact_us + `?listingid=${id}`,
+        apiMethods.POST,
+        {
+          first_name: name,
+          email: email,
+          query: query,
+        }
+      );
 
       if (response?.data?.message === "Email Sent") {
         customToast.success("Your message has been sent successfully!");
@@ -51,7 +58,7 @@ export const ContactBusiness = () => {
           query: "",
         });
       } else {
-        customToast.error("Something went wrong." + response?.data?.message);
+        customToast.error("Something went wrong." + response?.message);
       }
     } catch (err) {
       customToast.error(

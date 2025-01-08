@@ -14,7 +14,6 @@ export const Ratings = ({ getListingReview = () => {} }) => {
   // Calculate overall rating
   const calculateAverageRating = () => {
     if (reviewList?.length === 0 || !reviewList) return 0;
-
     const totalRating = reviewList?.reduce(
       (sum, review) => sum + review?.rating,
       0
@@ -24,9 +23,11 @@ export const Ratings = ({ getListingReview = () => {} }) => {
 
   // Create rating distribution
   const getRatingDistribution = () => {
-    const distribution = [0, 0, 0, 0, 0]; // Index 0 for 1-star, 4 for 5-star
+    const distribution = [0, 0, 0, 0, 0]; // Initialize with 0 counts for 1-star to 5-star
     reviewList?.forEach((review) => {
-      distribution[review?.rating - 1] += 1;
+      if (review?.rating >= 1 && review?.rating <= 5) {
+        distribution[review.rating - 1] += 1;
+      }
     });
     return distribution;
   };
@@ -83,9 +84,9 @@ export const Ratings = ({ getListingReview = () => {} }) => {
                     {ratingDistribution.map((count, index) => (
                       <tr key={`rating-${index}`}>
                         <td className="star-ratings">
-                          {renderStars(5 - index)}
+                          {renderStars(index + 1)}{" "}
+                          {/* Direct mapping for 1-star to 5-star */}
                         </td>
-
                         <td>{count}</td>
                       </tr>
                     ))}

@@ -72,7 +72,21 @@ export const AddReview = ({ getListingReview, user }) => {
     setAddReview({ ...addReview, [name]: value });
   };
 
-  return (
+  const scrollToTop = () => {
+    navigate("/login");
+    window.scrollTo({
+      top: 0,
+      behavior: "smooth",
+    });
+  };
+
+  return !user?.token ? (
+    <div className="review-details">
+      <button className="review-login-button" onClick={() => scrollToTop()}>
+        Login to Add Review
+      </button>
+    </div>
+  ) : (
     <li className="review-box feedbackbox mb-0" id="write-review">
       <div className="review-details">
         <h6>Leave feedback about this </h6>

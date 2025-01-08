@@ -235,7 +235,7 @@ const SignUp = () => {
                           }
                           onChange={handleChange}
                         />
-                        <label className="form-check-label">Providers</label>
+                        <label className="form-check-label">Provider</label>
                       </div>
                     </div>
                   </div>

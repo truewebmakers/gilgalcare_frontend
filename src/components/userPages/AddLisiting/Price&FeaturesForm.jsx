@@ -70,7 +70,7 @@ export const PriceAndFeaturesForm = ({ basicInfo2, error, handleChange }) => {
                     placeholder="Enter Feature"
                     value={feature}
                     onChange={(e) => handleFeatureChange(index, e.target.value)}
-                    // onBlur={handleFeatureBlur} // Update onBlur
+                    onBlur={handleFeatureBlur} // Update onBlur
                   />
                   {index > 0 && (
                     <button
