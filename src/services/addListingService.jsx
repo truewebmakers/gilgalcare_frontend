@@ -2,7 +2,13 @@ import { customToast } from "../components/common/Toast";
 import { apiMethods, apiUrls } from "../constants/constant";
 import UseApi from "../hooks/useApi";
 
-export const addListingService = async (listingData, token, galleryImage) => {
+export const addListingService = async (
+  listingData,
+  mapLat,
+  mapLong,
+  token,
+  galleryImage
+) => {
   const galleryImageKeys = Object?.keys(galleryImage)?.filter(
     (key) => galleryImage[key]
   );
@@ -29,8 +35,8 @@ export const addListingService = async (listingData, token, galleryImage) => {
     features_information: listingData?.featuresInformation,
     location: null,
     address: listingData?.address,
-    map_lat: listingData?.mapLat,
-    map_long: listingData?.mapLong,
+    map_lat: mapLat,
+    map_long: mapLong,
     email: listingData?.email,
     website: listingData?.website,
     phone: listingData?.phone,

@@ -194,7 +194,7 @@ export const validateListingFields = (name, value, basicInfo2) => {
       newErr[name] =
         value === ""
           ? "Listing title cannot be empty"
-          : value?.length < 5
+          : value?.length < 3
           ? "Listing title is too short"
           : "";
       break;
@@ -203,7 +203,7 @@ export const validateListingFields = (name, value, basicInfo2) => {
       newErr[name] =
         value === ""
           ? "Listing description cannot be empty"
-          : value?.length < 20
+          : value?.length < 10
           ? "Listing description is too short"
           : "";
       break;
@@ -252,18 +252,19 @@ export const validateListingFields = (name, value, basicInfo2) => {
     //   break;
 
     case "address":
+      console.log(value, "valueeeeeee", name);
       newErr[name] = value === "" ? "Address cannot be empty" : "";
       break;
 
-    case "mapLat":
-      newErr[name] =
-        value === "" || value == null ? "Latitude cannot be empty" : "";
-      break;
+    // case "mapLat":
+    //   newErr[name] =
+    //     value === "" || value == null ? "Latitude cannot be empty" : "";
+    //   break;
 
-    case "mapLong":
-      newErr[name] =
-        value === "" || value == null ? "Longitude cannot be empty" : "";
-      break;
+    // case "mapLong":
+    //   newErr[name] =
+    //     value === "" || value == null ? "Longitude cannot be empty" : "";
+    //   break;
 
     case "email":
       newErr[name] =

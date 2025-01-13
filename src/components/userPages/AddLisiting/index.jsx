@@ -174,59 +174,99 @@ const AddLisiting = () => {
   // api handler for add lsiting
   const handleAddListing = async (e) => {
     e.preventDefault();
+    // Destructure relevant fields from listingFields
+    const {
+      listing_title,
+      listingDescription,
+      categoryId,
+      tagline,
+      featuresInformation,
+      address,
+      mapLat,
+      mapLong,
+      status,
+      email,
+      website,
+      phone,
+    } = listingFields;
+
+    // Prepare the payload
     const allFields = {
-      ...listingFields,
+      listing_title,
+      listingDescription,
+      categoryId,
+      tagline,
+      featuresInformation,
+      address,
+      status,
+      email,
+      website,
+      phone,
       ...selectedImage,
       ...uploadPic,
-      addedBy: user?.userInfo?.id, // Add user ID to the listing data
+      addedBy: user?.userInfo?.id,
     };
 
-    let newErr = {};
-    for (let key in allFields) {
-      newErr = {
-        ...newErr,
+    // Validate fields
+    const newErr = Object.keys(allFields).reduce((errors, key) => {
+      return {
+        ...errors,
         ...validateListingFields(key, allFields[key], listingFields),
       };
+    }, {});
+    setError(newErr);
+    // Validation checks
+    if (!areAllFieldsFilled(allFields)) {
+      return customToast.error("Enter all fields");
+    }
+    if (!mapLat || !mapLong) {
+      return customToast.error("Choose a correct address");
+    }
+    if (!isTimeDifferenceValid(availability, enabledDays)) {
+      return;
+    }
+    if (hasErrors(newErr)) {
+      return;
     }
 
-    setError(newErr);
-    if (areAllFieldsFilled(allFields)) {
-      if (!isTimeDifferenceValid(availability, enabledDays)) {
-        return;
-      } else if (!hasErrors(newErr)) {
-        setIsLoading(true);
-        let response = null;
-
-        try {
-          response = id
-            ? await editListingService(allFields, id, user?.token, galleryImage)
-            : await addListingService(allFields, user?.token, galleryImage);
-
-          // Check if `addListingService` returned a listingId
-          if (response?.listing?.id) {
-            // Call the userAvailability API with the listingId
-            const res = await addUserAvailabilityService(
-              response?.listing?.id,
-              user?.token,
-              availability,
-              enabledDays
-            );
-            if (res == true) {
-              navigate("/my-listing");
-            }
-          }
-        } catch (err) {
-          customToast.error(
-            err?.message ||
-              "Encountered some error while adding listing. Please fill all field correctly"
+    // API call logic
+    setIsLoading(true);
+    try {
+      const response = id
+        ? await editListingService(
+            allFields,
+            mapLat,
+            mapLong,
+            id,
+            user?.token,
+            galleryImage
+          )
+        : await addListingService(
+            allFields,
+            mapLat,
+            mapLong,
+            user?.token,
+            galleryImage
           );
-          return err;
-        } finally {
-          setIsLoading(false);
+
+      if (response?.listing?.id) {
+        const res = await addUserAvailabilityService(
+          response.listing.id,
+          user?.token,
+          availability,
+          enabledDays
+        );
+        if (res) {
+          navigate("/my-listing");
         }
       }
-    } else {
-      customToast.error("Enter All fields");
+    } catch (err) {
+      customToast.error(
+        err?.message ||
+          "Encountered some error while adding listing. Please fill all fields correctly."
+      );
+    } finally {
+      setIsLoading(false);
     }
   };
 

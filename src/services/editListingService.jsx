@@ -4,6 +4,8 @@ import UseApi from "../hooks/useApi";
 
 export const editListingService = async (
   listingData,
+  mapLat,
+  mapLong,
   id,
   token,
   galleryImage
@@ -34,8 +36,8 @@ export const editListingService = async (
     features_information: listingData?.featuresInformation,
     location: null,
     address: listingData?.address,
-    map_lat: listingData?.mapLat,
-    map_long: listingData?.mapLong,
+    map_lat: mapLat,
+    map_long: mapLong,
     email: listingData?.email,
     website: listingData?.website,
     phone: listingData?.phone,
