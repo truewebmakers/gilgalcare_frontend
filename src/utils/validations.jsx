@@ -252,7 +252,6 @@ export const validateListingFields = (name, value, basicInfo2) => {
     //   break;
 
     case "address":
-      console.log(value, "valueeeeeee", name);
       newErr[name] = value === "" ? "Address cannot be empty" : "";
       break;
 

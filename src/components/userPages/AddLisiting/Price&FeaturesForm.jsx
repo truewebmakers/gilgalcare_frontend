@@ -1,19 +1,21 @@
 import React, { useEffect, useState } from "react";
 
 export const PriceAndFeaturesForm = ({ basicInfo2, error, handleChange }) => {
-  // Initialize state with one non-deletable input or split comma-separated string from props
   const [features, setFeatures] = useState(
-    basicInfo2?.featuresInformation?.length > 0
-      ? basicInfo2.featuresInformation.split(",")
+    basicInfo2?.featuresInformation?.length > 0 &&
+      basicInfo2?.featuresInformation !== null
+      ? basicInfo2?.featuresInformation
       : [""]
   );
 
   useEffect(() => {
-    // If basicInfo2.featuresInformation is available and a string, split it into an array
-    if (typeof basicInfo2?.featuresInformation === "string") {
-      setFeatures(basicInfo2.featuresInformation.split(","));
+    if (
+      typeof basicInfo2?.featuresInformation === "string" &&
+      basicInfo2?.featuresInformation?.length > 0
+    ) {
+      setFeatures(JSON.parse(basicInfo2?.featuresInformation));
     }
-  }, [basicInfo2.featuresInformation]);
+  }, [basicInfo2?.featuresInformation]);
 
   // Handle adding a new feature input
   const handleAddFeature = () => {
@@ -34,16 +36,11 @@ export const PriceAndFeaturesForm = ({ basicInfo2, error, handleChange }) => {
     setFeatures(updatedFeatures);
   };
 
-  // Handle concatenation and updating state on blur
   const handleFeatureBlur = () => {
-    const concatenatedFeatures = features
-      .filter(Boolean)
-      .map((feature) => feature.replace(/,/g, "\\,")) // Escape any commas inside feature values
-      .join(",");
     handleChange({
       target: {
         name: "featuresInformation",
-        value: concatenatedFeatures,
+        value: features,
         dataset: { handler: "basicInfo2" },
       },
     });
@@ -59,7 +56,7 @@ export const PriceAndFeaturesForm = ({ basicInfo2, error, handleChange }) => {
           <div className="form-group featuresform-list mb-0">
             {/* Render feature inputs */}
             <div className="row">
-              {features.map((feature, index) => (
+              {features?.map((feature, index) => (
                 <div
                   key={index}
                   className="col-md-6 d-flex align-items-center mb-2"

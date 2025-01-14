@@ -65,7 +65,9 @@ const MyListingDetails = () => {
   }, [id]);
 
   useEffect(() => {
-    const listFeatures = listingDetail?.features_information?.split(",");
+    const listFeatures =
+      listingDetail?.features_information?.length &&
+      JSON.parse(listingDetail?.features_information);
     setFeatures(listFeatures);
   }, [listingDetail]);
 
